@@ -1,0 +1,15 @@
+# run webtemp program every 10 minutes:
+*/10 * * * * sudo /home/robin/raspi15_webtemp.py > /dev/null 2>&1
+
+# Turn raspi16 on & off to do backup
+25 7 * * * sudo /home/robin/wiringPi/programs/raspi-gpio-on
+45 7 * * * sudo /home/robin/wiringPi/programs/raspi-gpio-off
+55 11 * * * sudo /home/robin/wiringPi/programs/raspi-gpio-on
+15 12 * * * sudo /home/robin/wiringPi/programs/raspi-gpio-off
+55 19 * * * sudo /home/robin/wiringPi/programs/raspi-gpio-on
+15 20 * * * sudo /home/robin/wiringPi/programs/raspi-gpio-off
+
+# Run raspi15_backup.sh to backup /var/www directory
+28 7 * * * sudo /home/robin/raspi15_backup.sh > /dev/null 2>&1
+58 11 * * * sudo /home/robin/raspi15_backup.sh > /dev/null 2>&1
+58 19 * * * sudo /home/robin/raspi15_backup.sh > /dev/null 2>&1

@@ -1,0 +1,9 @@
+28 7 * * * /bin/bash /home/robin/raspi15_www_backup.sh > /dev/null 2>&1
+30 7 * * * /bin/bash /home/robin/house_stats_backup.sh > /dev/null 2>&1
+0 8 * * * ls -l /home/robin/house_stats_backup | mail -s "Raspi15 Backup" robin.greig@calalta.com
+2 8 * * * df -h | mail -s "Raspi15 Disk Usage" robin.greig@calalta.com
+58 11 * * * /bin/bash /home/robin/raspi15_www_backup.sh > /dev/null 2>&1
+0 12 * * * /bin/bash /home/robin/house_stats_backup.sh > /dev/null 2>&1
+58 19 * * * /bin/bash /home/robin/raspi15_www_backup.sh > /dev/null 2>&1
+0 20 * * * /bin/bash /home/robin/house_stats_backup.sh > /dev/null 2>&1
+
