@@ -1,0 +1,58 @@
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+  <title>View Temps</title>
+  <link rel="stylesheet" type="text/css"  href="default.css">
+</head>
+<body>
+<div style="text-align: center;"><img
+style="width: 125px; height: 125px;" alt="Raspberrypi"
+src="large_logo_pi.png"></div>
+<br>
+
+<a href="index.html">Back</a>
+<span style="font-size:20px;">
+
+<?php
+
+//Connect to MySQL
+mysql_connect('localhost', 'robin', 'raspberry') or die (mysql_error());
+
+//Select database
+mysql_select_db('dms_stats') or die (mysql_error());
+
+//echo "<center>".$mintemp1.$mintemp3['min(dms_temp)'],.PHP_EOL."</center>";
+$mintemp1 = "Minimum DMS Temperature Today = ";
+$mintemp2 = mysql_query("SELECT min(dms_temp),1 FROM dms_temp WHERE date=CURDATE()");
+$mintemp3 = mysql_fetch_assoc($mintemp2);
+$mintemp4 = ROUND($mintemp3['min(dms_temp)'],2);
+echo "<center>".$mintemp1.$mintemp4.PHP_EOL."</center>";
+
+//echo "<center>".$maxtemp1.$maxtemp3['max(dms_temp)'].PHP_EOL."</center>";
+$maxtemp1 = "Maximum DMS Temperature Today = ";
+$maxtemp2 = mysql_query("SELECT max(dms_temp) FROM dms_temp WHERE date=CURDATE()");
+$maxtemp3 = mysql_fetch_assoc($maxtemp2);
+$maxtemp4 = ROUND($maxtemp3['max(dms_temp)'],2);
+echo "<center>".$maxtemp1.$maxtemp4.PHP_EOL."</center>";
+
+$result = mysql_query("SELECT * from dms_temp ORDER BY date DESC, time DESC");
+
+//Table starting tag and header cells
+echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Time</th><th>DMS Temp</th><th>E119 Temp</th></tr>";
+while($row = mysql_fetch_array($result)){
+   //Display the results in different cells
+   echo "<tr><td>" . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['dms_temp'] . "</td><td>" . $row['E119_temp'] . "</td></tr>";
+}
+//Table closing tag
+echo "</table>";
+
+?>
+
+</span>
+
+<br>
+
+</body>
+</html>
+
+
