@@ -18,7 +18,7 @@ import warnings
 dbc = MySQLdb.connect(host= "localhost",
 	user= "robin",
 	passwd= "Micr0s0ft",
-	db= "office_temp")
+	db= "house_stats")
 
 # Prepare a cursor
 cursor = dbc.cursor()
@@ -44,8 +44,7 @@ while(True):
   os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
-#  device_folder1 = glob.glob(base_dir + '*284a')[0]
-  device_folder1 = glob.glob(base_dir + '*2af2')[0]
+  device_folder1 = glob.glob(base_dir + '*27c2')[0]
   device_file1 = device_folder1 + '/w1_slave'
    
   def read_temp_raw1():
@@ -65,17 +64,17 @@ while(True):
           temp_c1 = float(temp_string) / 1000.0
           return temp_c1
 
-  with open('/home/robin/CurrentOfficeTemp', 'w') as f:
-      #f.write (echo(read_temp1()))
-      print >> f,(read_temp1())
+  print "House Temp: ", (read_temp1())
 
-  print "Office Temp: ", (read_temp1())
-    	
+  cht = open("/home/robin/CurrentHouseTemp", "w")
+  cht.write(str(read_temp1()))
+  cht.close()
+  	
   time.sleep(1)
   
   try:
-    cursor.execute("""INSERT INTO office_temp 
-        (date, time, office_temp) 
+    cursor.execute("""INSERT INTO house_temp 
+        (date, time, house_temp) 
 	VALUES 
 	(NOW(),NOW(),%s);""",
 	(read_temp1()))
@@ -84,11 +83,8 @@ while(True):
   except:
     dbc.rollback()
 
+  # Wait 60 seconds before continuing
   print "Wrote a new row to the database"
-  
-#  if read_temp1() > 25:
-#    os.system("echo 'Overtemp!!!' | mail -s 'DMS Overtemp' robin.greig@calalta.com")
-#    print "Sent an alert email"
   sys.exit()
   #time.sleep(10)
 
