@@ -44,7 +44,8 @@ while(True):
   os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
-  device_folder1 = glob.glob(base_dir + '*284a')[0]
+#  device_folder1 = glob.glob(base_dir + '*284a')[0]
+  device_folder1 = glob.glob(base_dir + '*2af2')[0]
   device_file1 = device_folder1 + '/w1_slave'
    
   def read_temp_raw1():
