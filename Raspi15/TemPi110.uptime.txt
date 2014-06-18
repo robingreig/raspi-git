@@ -1,0 +1,30 @@
+Sat Apr 12 17:14:22 MDT 2014
+ 17:14:26 up 1 day,  3:49,  1 user,  load average: 0.01, 0.07, 0.07
+ 00:01:01 up 1 day, 10:36,  0 users,  load average: 0.06, 0.05, 0.05
+Sun Apr 13 00:01:01 MDT 2014
+Mon Apr 14 00:01:01 MDT 2014
+ 00:01:01 up 2 days, 10:36,  0 users,  load average: 0.00, 0.03, 0.05
+ 00:01:01 up 3 days, 12:54,  0 users,  load average: 0.14, 0.06, 0.06
+Mon Jun  9 00:01:01 MDT 2014
+Tue Jun 10 00:01:01 MDT 2014
+ 00:01:01 up  9:01,  0 users,  load average: 0.16, 0.07, 0.06
+ 00:01:01 up 1 day,  9:01,  0 users,  load average: 0.15, 0.08, 0.06
+Wed Jun 11 00:01:01 MDT 2014
+Thu Jun 12 00:01:01 MDT 2014
+ 00:01:01 up 15:58,  0 users,  load average: 0.00, 0.02, 0.05
+Fri Jun 13 00:01:01 MDT 2014
+ 00:01:01 up 1 day, 15:58,  0 users,  load average: 0.15, 0.07, 0.06
+Sat Jun 14 00:01:01 MDT 2014
+ 00:01:01 up 2 days, 15:58,  0 users,  load average: 0.00, 0.01, 0.05
+Sun Jun 15 00:01:01 MDT 2014
+ 00:01:01 up 3 days, 15:58,  0 users,  load average: 0.11, 0.06, 0.05
+Mon Jun 16 00:01:01 MDT 2014
+ 00:01:01 up 4 days, 15:58,  0 users,  load average: 0.10, 0.05, 0.05
+Tue Jun 17 00:01:01 MDT 2014
+ 00:01:01 up 5 days, 15:58,  0 users,  load average: 0.17, 0.09, 0.06
+Wed Jun 18 00:01:01 MDT 2014
+ 00:01:01 up 6 days, 15:58,  0 users,  load average: 0.00, 0.03, 0.05
+
+Wed Jun 18 12:39:56 MDT 2014
+ 12:40:01 up 7 days,  4:37,  1 user,  load average: 0.09, 0.06, 0.05
+

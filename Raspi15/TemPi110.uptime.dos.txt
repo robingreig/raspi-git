@@ -1,0 +1,20 @@
+Sat Jun 14 00:01:01 MDT 2014
+
+ 00:01:01 up 2 days, 15:58,  0 users,  load average: 0.00, 0.01, 0.05
+
+Sun Jun 15 00:01:01 MDT 2014
+
+ 00:01:01 up 3 days, 15:58,  0 users,  load average: 0.11, 0.06, 0.05
+
+Mon Jun 16 00:01:01 MDT 2014
+
+ 00:01:01 up 4 days, 15:58,  0 users,  load average: 0.10, 0.05, 0.05
+
+Tue Jun 17 00:01:01 MDT 2014
+
+ 00:01:01 up 5 days, 15:58,  0 users,  load average: 0.17, 0.09, 0.06
+
+Wed Jun 18 00:01:01 MDT 2014
+
+ 00:01:01 up 6 days, 15:58,  0 users,  load average: 0.00, 0.03, 0.05
+

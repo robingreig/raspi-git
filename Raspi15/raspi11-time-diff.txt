@@ -1,0 +1,18 @@
+
+2014.01.29
+Raspi shows 11:21
+Time is 14:30
+Diff = 3:09
+Did not reset the pi that I can recall
+
+
+2014.01.28
+Raspi shows 03:00
+Time is 7:10
+I did have it shut off when I was working with raspi10 for about 2 hours
+
+2014.01.25
+Raspi shows 5:41
+Time is 7:57
+
+Raspi was started Friday Morning, 2014.01.24
