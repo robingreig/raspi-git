@@ -11,6 +11,9 @@ git commit -m "Commit Message"
 Pushing the changes to the master:
 git push origin master
 
+To sync the master back to raspi
+git pull
+
 good website: rogerdudler.github.io/git-guide
 
 
