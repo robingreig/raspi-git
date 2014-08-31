@@ -89,8 +89,8 @@ def run():
       datastream.update()
     except requests.HTTPError as e:
       print "HTTPError({0}): {1}".format(e.errno, e.strerror)
-
-    time.sleep(600)
+    break
+#    time.sleep(600)
 
 run()
 
