@@ -69,7 +69,7 @@ def main():
         print rc_time(24)
         # This is the value limit between day or night with or LDR sensor and our capacitor.
         # Maybe you need adjust this value.
-        if rc_time(4) > 600:
+        if rc_time(24) > 1600:
             new_lights = off
             print("Lights OFF")
         else:
