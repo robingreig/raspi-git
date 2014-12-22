@@ -14,8 +14,11 @@ scp -q /home/robin/house_stats_backup/`ls -tp /home/robin/house_stats_backup/ | 
 #scp -q /home/robin/raspi15_backup/`ls -tp /home/robin/raspi15_backup/ | grep -v /$ | head -1` robin@192.168.200.14:/home/robin/raspi15_backup/
 #scp -q /home/robin/raspi15_backup/`ls -tp /home/robin/raspi15_backup/ | grep -v /$ | head -1` robin@192.168.200.16:/home/robin/raspi15_backup/
 
-scp -q /home/robin/office_temp_backup/`ls -tp /home/robin/office_temp_backup/ | grep -v /$ | head -1` robin@192.168.200.14:/home/robin/office_temp_backup/
-scp -q /home/robin/office_temp_backup/`ls -tp /home/robin/office_temp_backup/ | grep -v /$ | head -1` robin@192.168.200.16:/home/robin/office_temp_backup/
+#scp -q /home/robin/office_temp_backup/`ls -tp /home/robin/office_temp_backup/ | grep -v /$ | head -1` robin@192.168.200.14:/home/robin/office_temp_backup/
+#scp -q /home/robin/office_temp_backup/`ls -tp /home/robin/office_temp_backup/ | grep -v /$ | head -1` robin@192.168.200.16:/home/robin/office_temp_backup/
+
+scp -q /home/robin/OfficeTempBackup/`ls -tp /home/robin/OfficeTempBackup/ | grep -v /$ | head -1` robin@192.168.200.14:/home/robin/OfficeTempBackup/
+scp -q /home/robin/OfficeTempBackup/`ls -tp /home/robin/OfficeTempBackup/ | grep -v /$ | head -1` robin@192.168.200.16:/home/robin/OfficeTempBackup/
 
 #scp -q /home/robin/raspi15_backup/raspi15-var-www.`date +%F.%H:%M`.tar.gz robin@192.168.200.14:/home/robin/raspi15_backup
 
