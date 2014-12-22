@@ -1,18 +1,21 @@
 To clone a repository:
 git clone https://github.com/robingreig/raspi-git
 
-To add the changes to the Index:
-git add <filename>
-git add *
+1) To check the status of any local changes
+	git status
 
-To commit the changes to the HEAD, but not the remote repository yet:
-git commit -m "Commit Message"
+2) To add the changes to the Index:
+	git add <filename>
+	git add * ... or git add -A
 
-Pushing the changes to the master:
-git push origin master
+3) To commit the changes to the HEAD, but not the remote repository yet:
+	git commit -m "Commit Message"
 
-To sync the master back to raspi
-git pull
+4) Pushing the changes to the master:
+	git push origin master
+
+5) To sync the master back to raspi
+	git pull
 
 good website: rogerdudler.github.io/git-guide
 
