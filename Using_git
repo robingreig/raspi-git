@@ -17,6 +17,8 @@
 	git commit -m "Commit Message"
 
 5) Pushing the changes to the master:
+	git push https://github.com/robingreig/raspi-git.git
+	or
 	git push origin master
 
 6) To sync the master back to raspi
