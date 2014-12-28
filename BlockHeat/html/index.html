@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Block Heater Control</title>
+        <script type="text/javascript" src="/webiopi.js"></script>
+        <script type="text/javascript">
+        webiopi().ready(function() {
+                // Create a "Front" labeled button for GPIO 23
+                var button01 = webiopi().createGPIOButton(23, "Front");
+                // Create a "Back" labeled button for GPIO 24
+                var button02 = webiopi().createGPIOButton(24, "Back");
+
+                // Append button to HTML element with ID="controls" using jQuery
+                $("#controls").append(button01);
+                $("#controls").append(button02);
+
+                // Refresh GPIO buttons
+                // pass true to refresh repeatedly of false to refresh once
+                webiopi().refreshGPIO(true);
+        });
+                
+        </script>
+        <style type="text/css">
+                button {
+                        display: block;
+                        margin: 50px 50px 50px 50px;
+			width: 450px;
+                        height: 150px;
+                        font-size: 36pt;
+                        font-weight: bold;
+                        color: white;
+                }
+                #gpio23.LOW {
+                        background-color: Red;
+                }
+                #gpio24.LOW {
+                        background-color: Red;
+                }
+                
+                #gpio23.HIGH {
+                        background-color: Black;
+                }
+                #gpio24.HIGH {
+                        background-color: Black;
+                }
+        </style>
+</head>
+<body>
+        <div id="controls" align="center"></div>
+</body>
+</html>
