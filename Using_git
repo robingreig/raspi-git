@@ -17,7 +17,10 @@ git clone https://github.com/robingreig/raspi-git
 5) To sync the master back to raspi
 	git pull
 
-good website: rogerdudler.github.io/git-guide
+
+https://help.github.com/articles/adding-a-remote/
+
+##### good website: rogerdudler.github.io/git-guide
 
 
 
