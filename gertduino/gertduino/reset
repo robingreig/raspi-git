@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Resetting the ATmega on standard Gertboard/Gertduino reset pin"
+
+gpio -g mode 8 out
+gpio -g write 8 0
+gpio -g write 8 1
