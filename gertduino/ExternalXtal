@@ -1,0 +1,3 @@
+
+avrdude -qq -c gpio -p atmega328p -U lock:w:0x3F:m -U efuse:w:0x07:m -U lfuse:w:0xE7:m -U hfuse:w:0xD9:m
+
