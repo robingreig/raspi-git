@@ -1,0 +1,21 @@
+PROJECT=main02
+SOURCES=$(PROJECT).c
+MMCU=atmega328p
+F_CPU=1000000
+SERIAL=/dev/ttyUSB0
+
+CFLAGS= -g -mmcu=$(MMCU) -Os
+
+$(PROJECT).out: $(SOURCES)
+	avr-gcc $(CFLAGS) -o $(PROJECT).o $(SOURCES)
+
+$(PROJECT).elf: $(PROJECT).o
+	avr-gcc $(CFLAGS) -o $(PROJECT).elf $(PROJECT).o
+
+$(PROJECT).hex: $(PROJECT).elf
+	avr-objcopy -j .text -O ihex $(PROJECT).elf $(PROJECT).hex
+
+avrdude -p $(MMCU) -c arduino -P $(SERIAL) -b 19200 -vv -U flash:w:$(PROJECT).hex:i
+
+clean:
+	rm $(PROJECT).out $(PROJECT).hex
