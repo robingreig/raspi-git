@@ -20,7 +20,7 @@
 #    along with this.  If not, see <http://www.gnu.org/licenses/>.
 #################################################################################
 
-TARGET=blink
+TARGET=analogue
 
 MCU=atmega328p
 FREWQ=16000000

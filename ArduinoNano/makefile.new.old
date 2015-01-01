@@ -1,0 +1,18 @@
+PROJECT=blink
+SOURCES=$(PROJECT).c
+MMCU=atmega328p
+F_CPU=1000000
+SERIAL=/dev/ttyUSB0
+
+CFLAGS=-mmcu=$(MMCU) -DF_CPU=$(F_CPU) -Os
+
+$(PROJECT).hex: $(PROJECT).out
+	@avr-objcopy -j .text -O ihex $(PROJECT).out $(PROJECT).hex
+
+$(PROJECT).out: $(SOURCES)
+	@avr-gcc $(CFLAGS) -o $(PROJECT).out $(SOURCES)
+
+@avrdude -p $(MMCU) -c arduino -P $(SERIAL) -vv -U flash:w:$(PROJECT).hex
+
+clean:
+	rm $(PROJECT).out $(PROJECT).hex
