@@ -1,0 +1,14 @@
+#!/bin/bash
+# script to program 48pa device using AVRDUDE and a hex file
+if [ "$1" == "" ]; then
+  echo Missing argument
+  exit 1;
+fi
+# if ends in .hex use full argument
+# otherwise add the .hex
+ext=${1:${#1}-4}
+if [ "$ext" == ".hex" ]; then
+  /usr/bin/avrdude -c gpio -p m48pa $1 -Uflash:w:$1
+else
+  /usr/bin/avrdude -c gpio -p m48pa $1.hex -Uflash:w:$1.hex
+fi
