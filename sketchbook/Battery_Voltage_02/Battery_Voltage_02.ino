@@ -74,7 +74,7 @@ void loop() {
     Serial.println(outputValue); // print the results to the serial monitor:
     outputValuePrint = false;
   }
-  // wait 20 milliseconds before flushing 
+  // wait 20 milliseconds before repeating loop 
   delay(20);
 }
 
