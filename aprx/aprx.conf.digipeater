@@ -30,7 +30,7 @@
 # Usable for 99+% of cases.
 #
 
-mycall  VE6RBN-11
+mycall  VE6RBN-1
 
 #
 # Global macro for simplified "my location" definition in
@@ -224,7 +224,7 @@ cycle-size  20m
 #
 #beacon symbol "R&" lat "0000.00N" lon "00000.00E" comment "Rx-only iGate"
 #beacon symbol "R&" $myloc comment "Rx-only iGate"
-beacon symbol "R&" $myloc comment "Raspi-Digipeater"
+beacon symbol "D#" $myloc comment "Raspi-Digipeater"
 #
 #Following are basic options:
 # 'symbol'    no default, must be defined!
