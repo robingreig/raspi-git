@@ -38,7 +38,7 @@ mycall  VE6RBN-1
 # give "my location" reference for "filter m/100".
 #
 #myloc lat ddmm.mmN lon dddmm.mmE
-myloc lat 5119.19N lon 11336.20W
+myloc lat 5119.10N lon 11336.50W
 
 <aprsis>
 # The  aprsis login  parameter: 
