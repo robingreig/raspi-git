@@ -2,19 +2,21 @@
 
 import serial
 import time
+import os
 
 ser = serial.Serial("/dev/ttyAMA0", 9600, timeout=5)
 
 
 DEBUG = 0
 count = 0
+Voltage = 0
 
 while (count < 20):
-  ser.flushInput() # flush the serial input on raspi
-  ser.write("~") # tell gertduino to send Sensor Value
-  print ser.readline()
-  ser.write("+") # tell gertduino to send Output Value
-  print ser.readline()
+#  ser.flushInput() # flush the serial input on raspi
+#  ser.write("~") # tell gertduino to send Sensor Value
+#  print ser.readline()
+#  ser.write("+") # tell gertduino to send Output Value
+#  print ser.readline()
   ser.flushInput()
   ser.write("^") # tell gertduino to send battery voltage
   battVolt = ser.readline()
@@ -47,14 +49,21 @@ while (count < 20):
 	    if DEBUG != 0:
 		print "\nequals_pos: ", (equals_pos)
 		print "\nBattery Voltage: ", (batt_volt_str)
-#            batt_volt = float(batt_volt_str)
-            return batt_volt_str
+	    return batt_volt_str
 
   cht = open("/home/robin/CurrentBatteryVoltage", "w")
   cht.write(str(save_batt_volt()))
   cht.close()
-  print "Count is: ",(count)
-  print "Average Battery Voltage is: ", (save_batt_volt())
 
+#  print "Count is: ",(count)
+
+  Voltage = (float(save_batt_volt()))
+
+#  print "Battery Voltage is: ", (Voltage)
+  print Voltage
+  if Voltage < 12.00:
+    print "Battery LOW!!!!!"
+    print "System will shut down soon!!!!!"
+#    os.system('sudo reboot')
   count = count + 1
   time.sleep(1)

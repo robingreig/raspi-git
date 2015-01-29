@@ -24,9 +24,9 @@
 const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
 const int analogOutPin = 9; // Analog output pin that the LED is attached to
 const int lowVoltLED = 13; // UnderVoltage LED on pin 13 (Gertduino D5)
-const float battVoltMinRange = 11.00; // Minimum range of battery voltage
+const float battVoltMinRange = 10.00; // Minimum range of battery voltage
 const float battVoltMaxRange = 15.00; // Maximum range of battery voltage
-const float battVoltMinValue = 12.9; // Minimum battery voltage for undervoltag led
+const float battVoltMinValue = 14.3; // Minimum battery voltage for undervoltag led
 
 int sensorValue = 0; // value read from the pot
 int outputValue = 0; // value output to the PWM (analog out)
@@ -47,13 +47,14 @@ void loop() {
   // change the analog out value:
   analogWrite(analogOutPin, outputValue); 
   // calculate the battery voltage within the range of 11 - 15 V
-  battVoltNow = (sensorValue - 0) * (battVoltMaxRange - battVoltMinRange) / (1023 - 0) + battVoltMinRange;
+  //battVoltNow = (sensorValue - 0) * (battVoltMaxRange - battVoltMinRange) / (1023 - 0) + battVoltMinRange;
+  battVoltNow = ((sensorValue * .00488759) +9.5);
   battVoltAvg = ((battVoltAvg + battVoltNow) / 2);
   
   // if the result is below 12.9 v, then turn LowVoltageLED on
-  if (battVoltAvg <= 12.9) {
+  if (battVoltAvg <= 14.3) {
     digitalWrite(lowVoltLED, HIGH);
-  } else if (battVoltAvg > 12.9) {
+  } else if (battVoltAvg > 14.4) {
     digitalWrite(lowVoltLED, LOW);
   }  
   // print the results to the serial monitor:
