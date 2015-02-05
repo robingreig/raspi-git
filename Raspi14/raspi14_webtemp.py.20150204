@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import subprocess
 import re
@@ -44,8 +44,7 @@ while(True):
   os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
-#  device_folder1 = glob.glob(base_dir + '*27c2')[0]
-  device_folder1 = glob.glob(base_dir + '*3484')[0]
+  device_folder1 = glob.glob(base_dir + '*27c2')[0]
   device_file1 = device_folder1 + '/w1_slave'
    
   def read_temp_raw1():
@@ -74,7 +73,7 @@ while(True):
   time.sleep(1)
   
   try:
-    cursor.execute("""INSERT INTO house_stats 
+    cursor.execute("""INSERT INTO house_temp 
         (date, time, house_temp) 
 	VALUES 
 	(NOW(),NOW(),%s);""",
