@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# doChip:
+#	name lock efuse lfuse hfuse
+
+doChip()
+{
+  avrdude -i16 -qq -c gpio -p $1	\
+	-U  lock:w:$2:m			\
+	-U efuse:w:$3:m -U lfuse:w:$4:m -U hfuse:w:$5:m
+
+  if [ $? = 0 ]; then
+    echo "Looks all OK - Happy ATmega programming!"
+  else
+    echo "Oops - something went wrong, sorry..."
+  fi
+  exit 0
+}
+
+
+# do48p8:
+#	Use the internal 8MHz RC oscillator with no divide
+
+do48p8 ()
+{
+  echo "Initialising the Piduino ATmega48p  at 8MHz ..."
+  doChip atmega48p 0x3F 0x01 0xE2 0xDF
+}
+
+# do48p1:
+#	Use the internal 8MHz RC oscillator with divide by 8
+
+do48p1 ()
+{
+  echo "Initialising the Piduino ATmega48p  at 1MHz ..."
+  doChip atmega48p 0x3F 0x01 0x62 0xDF
+}
+
+do168 ()
+{
+  echo "Initialising ATmega168 on Gertboard or Gertduino ..."
+  doChip atmega168 0x3F 0x07 0xE7 0xDF
+}
+
+do328 ()
+{
+  echo "Initialising ATmega328p on Gertboard or Gertduino ..."
+  doChip atmega328p 0x3F 0x07 0xE7 0xD9
+}
+
+
+echo    ""
+echo    "Initialising a new ATmega microcontroller for use with the Gertboard"
+echo    "or the Gertduino Raspberry Pi Interface boards."
+
+while true; do
+  echo    ""
+  echo    "Make sure there is a new ATmega chip plugged in, and press"
+  echo    ".. 1 for an ATmega328p,"
+  echo    ".. 2 for an ATmega168,"
+  echo    ".. 3 for the Gertduino ATmega48p at 8MHz,"
+  echo    ".. 4 for the Gertduino ATmega48p at 1MHz,"
+  echo -n ".....Select 1-4: "
+
+  read chip
+
+  case "$chip" in
+    1*)
+      do328
+      ;;
+    2*)
+      do168
+      ;;
+    3*)
+      do48p8
+      ;;
+    4*)
+      do48p1
+      ;;
+    *)
+      echo "Invalid choice"
+      ;;
+  esac
+
+done

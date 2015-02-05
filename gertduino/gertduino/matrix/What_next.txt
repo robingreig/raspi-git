@@ -1,0 +1,13 @@
+The next step is that you could merge the two program.
+Thus you make a program which reads the patterns from a text
+file and immediately displays them.
+
+From there you can change the text file format.
+e.g. you can add commands for loops, inverted patterns
+reverse patterns etc.
+
+In fact you have then writen a small language interpreter
+
+Have fun
+
+-- Gert

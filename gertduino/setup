@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo Settup the Pi for DS1374
+
+gpio load i2c
+
+sudo modprobe rtc-ds1374
+sudo /bin/bash -c "echo ds1374 0x68 > /sys/class/i2c-adapter/i2c-1/new_device"
+
+sudo hwclock -r
