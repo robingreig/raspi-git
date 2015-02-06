@@ -64,22 +64,26 @@ while(True):
           temp_string = lines1[1][equals_pos+2:]
           temp_c1 = float(temp_string) / 1000.0
           return temp_c1
-
-  print "House Temp: ", (read_temp1())
+  
+  HouseTemp = round(read_temp1(),1)
+  #print "House Temp: ", (round(read_temp1()),1)
+  print "House Temp: ", HouseTemp
   #aprs_count = time.localtime(time.time())
   aprs_hour = int(time.strftime("%H"))
   print aprs_hour
   aprs_minute = int(time.strftime("%M"))
   print aprs_minute
-  aprs_time = int((aprs_hour * 15) + (aprs_minute))
-  print int(aprs_time) 
+  aprs_time = int((aprs_hour * 60) + (aprs_minute))
+  aprs_unique = ((aprs_time)/4)
+  print int(aprs_unique)
 
   cht = open("/home/robin/beacon01.txt", "w")
   #cht.write(str(read_temp1()))
   cht.write ("T#")
-  cht.write (str(aprs_time))
+  cht.write (str(aprs_unique))
   cht.write (",")
-  cht.write (str(read_temp1()))
+  #cht.write (str(read_temp1()))
+  cht.write (str(HouseTemp)) 
   cht.write(",0,0,0,0,00000000")
   cht.close()
   	
