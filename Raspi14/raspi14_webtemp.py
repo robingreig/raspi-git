@@ -86,7 +86,11 @@ while(True):
   cht.write (str(HouseTemp)) 
   cht.write(",0,0,0,0,00000000")
   cht.close()
-  	
+  
+  cht = open("/home/robin/CurrentHouseTemp", "w")
+  cht.write (str(HouseTemp))
+  cht.close()
+    	
   time.sleep(1)
   
   try:
