@@ -66,9 +66,21 @@ while(True):
           return temp_c1
 
   print "House Temp: ", (read_temp1())
+  #aprs_count = time.localtime(time.time())
+  aprs_hour = int(time.strftime("%H"))
+  print aprs_hour
+  aprs_minute = int(time.strftime("%M"))
+  print aprs_minute
+  aprs_time = int((aprs_hour * 15) + (aprs_minute))
+  print int(aprs_time) 
 
-  cht = open("/home/robin/CurrentHouseTemp", "w")
-  cht.write(str(read_temp1()))
+  cht = open("/home/robin/beacon01.txt", "w")
+  #cht.write(str(read_temp1()))
+  cht.write ("T#")
+  cht.write (str(aprs_time))
+  cht.write (",")
+  cht.write (str(read_temp1()))
+  cht.write(",0,0,0,0,00000000")
   cht.close()
   	
   time.sleep(1)
