@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import subprocess
 import re
@@ -44,8 +44,7 @@ while(True):
   os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
-#  device_folder1 = glob.glob(base_dir + '*27c2')[0]
-  device_folder1 = glob.glob(base_dir + '*3484')[0]
+  device_folder1 = glob.glob(base_dir + '*27c2')[0]
   device_file1 = device_folder1 + '/w1_slave'
    
   def read_temp_raw1():
@@ -64,37 +63,17 @@ while(True):
           temp_string = lines1[1][equals_pos+2:]
           temp_c1 = float(temp_string) / 1000.0
           return temp_c1
-  
-  HouseTemp = round(read_temp1(),1)
-  #print "House Temp: ", (round(read_temp1()),1)
-  print "House Temp: ", HouseTemp
-  #aprs_count = time.localtime(time.time())
-  aprs_hour = int(time.strftime("%H"))
-  print aprs_hour
-  aprs_minute = int(time.strftime("%M"))
-  print aprs_minute
-  aprs_time = int((aprs_hour * 60) + (aprs_minute))
-  aprs_unique = ((aprs_time)/4)
-  print int(aprs_unique)
 
-  cht = open("/home/robin/beacon01.txt", "w")
-  #cht.write(str(read_temp1()))
-  cht.write ("T#")
-  cht.write (str(aprs_unique))
-  cht.write (",")
-  #cht.write (str(read_temp1()))
-  cht.write (str(HouseTemp)) 
-  cht.write(",0,0,0,0,00000000")
-  cht.close()
-  
+  print "House Temp: ", (read_temp1())
+
   cht = open("/home/robin/CurrentHouseTemp", "w")
-  cht.write (str(HouseTemp))
+  cht.write(str(read_temp1()))
   cht.close()
-    	
+  	
   time.sleep(1)
   
   try:
-    cursor.execute("""INSERT INTO house_stats 
+    cursor.execute("""INSERT INTO house_temp 
         (date, time, house_temp) 
 	VALUES 
 	(NOW(),NOW(),%s);""",

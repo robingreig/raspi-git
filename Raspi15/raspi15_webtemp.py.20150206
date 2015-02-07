@@ -128,11 +128,18 @@ while(True):
 
   print "Garage Desk Temp: ", (round(read_temp1(),1))
   print "Garage Ceiling Temp: ", (round(read_temp2(),1))
-  print "Outside Temp: ", (round(read_temp3(),1))	
+  OutsideTemp = (round(read_temp3(),1))
+  #print "Outside Temp: ", (round(read_temp3(),1))	
+  print "Outside Temp: ", OutsideTemp	
   print "House Temp: ", (round(read_temp5(),1))
   print "Office Temp: ", (round(read_temp6(),1))
   time.sleep(1)
   d = 20.0
+
+  cht = open("/home/robin/CurrentOutsideTemp", "w")
+  cht.write (str(OutsideTemp))
+  cht.close()
+
 
   try:
     cursor.execute("""INSERT INTO garage_temp 
