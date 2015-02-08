@@ -126,20 +126,27 @@ while(True):
 	temp_c6 = float(temp_string)
 	return temp_c6
 
-  print "Garage Desk Temp: ", (read_temp1())
-  print "Garage Ceiling Temp: ", (read_temp2())
-  print "Outside Temp: ", (read_temp3())	
-  print "House Temp: ", (read_temp5())
-  print "Office Temp: ", (read_temp6())
+  print "Garage Desk Temp: ", (round(read_temp1(),1))
+  print "Garage Ceiling Temp: ", (round(read_temp2(),1))
+  OutsideTemp = (round(read_temp3(),1))
+  #print "Outside Temp: ", (round(read_temp3(),1))	
+  print "Outside Temp: ", OutsideTemp	
+  print "House Temp: ", (round(read_temp5(),1))
+  print "Office Temp: ", (round(read_temp6(),1))
   time.sleep(1)
   d = 20.0
+
+  cht = open("/home/robin/CurrentOutsideTemp", "w")
+  cht.write (str(OutsideTemp))
+  cht.close()
+
 
   try:
     cursor.execute("""INSERT INTO garage_temp 
         (date, time, outside_temp, desk_temp, ceiling_temp, attic_temp, house_temp, office_temp) 
 	VALUES 
 	(NOW(),NOW(),%s,%s,%s,%s,%s,%s);""",
-	(read_temp3(), read_temp1(), read_temp2(), d, read_temp5(), read_temp6()))
+	((round(read_temp3(),1)), (round(read_temp1(),1)), (round(read_temp2(),1)), d, (round(read_temp5(),1)), (round(read_temp6(),1))))
 
     dbc.commit()
   except:
