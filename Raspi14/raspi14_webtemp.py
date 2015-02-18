@@ -75,6 +75,20 @@ while(True):
       print "lines3: ", lines3
     return lines3
 
+  def read_CurrentGarageTemp():
+    f = open("/home/robin/CurrentGarageTemp", "r")
+    lines4 = f.read(5)
+    f.close()
+    if DEBUG > 0:
+      print "lines4: ", lines4
+    return lines4
+
+  GarageTemp =str(read_CurrentGarageTemp())
+  GarageTemp = float(GarageTemp)
+  GarageTemp = round(GarageTemp,1)
+  GarageTemp = str(GarageTemp)
+  if DEBUG > 0:
+    print "Garage Temp: ", GarageTemp
   OutsideTemp = str(read_CurrentOutsideTemp())
   if DEBUG > 0:
     print "Outside Temp: ", OutsideTemp  
@@ -110,7 +124,9 @@ while(True):
   cht.write (str(HouseTemp)) 
   cht.write (",")
   cht.write (str(TelemetryTemp))
-  cht.write(",0,0,0,00000000")
+  cht.write (",")
+  cht.write (str(GarageTemp))
+  cht.write(",0,0,00000000")
   cht.close()
   
   cht = open("/home/robin/CurrentHouseTemp", "w")
