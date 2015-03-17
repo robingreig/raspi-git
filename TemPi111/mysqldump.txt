@@ -1,0 +1,9 @@
+To Backup:
+mysqldump -u root -p[root_password] [database_name] > dumpfilename.sql
+
+To Backup & Zip:
+mysqldump -u root -pMicr0s0ft office_temp | gzip> /home/robin/OfficeTempBackup/office_temp-backup.`date +%F.$H-$M`.sql.gz
+
+To Restore:
+If unzipped = mysql -u root -p[root_password] [database_name] < dumpfilename.sql
+If zipped = gunzip < zipfile.sql.gz | mysql -u root -pPassword office_temp
