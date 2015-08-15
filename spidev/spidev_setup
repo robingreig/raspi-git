@@ -1,0 +1,8 @@
+1. install 2014-05-05 wheezy
+2. standard setup ensuring SPI is on
+3. sudo apt-get update
+4. sudo apt-get upgrade
+5. git clone https://github.com/robingreig/raspi-git
+6. git config --global user.name "Robin Greig"
+7. git config --global user.email "robin.greig@calalta.com"
+
