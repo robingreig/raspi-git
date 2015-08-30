@@ -1,0 +1,2 @@
+5 1 * * * /home/robin/Uptime.sh > /dev/null 2>&1
+

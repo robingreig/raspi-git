@@ -23,10 +23,6 @@
 <td>Temps</td>
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="index-temps.html">Temps</a></td>
 </tr>
-<tr>
-<td>Voltages</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="index-voltages.html">Voltages</a></td>
-</tr>
 </tbody>
 </form>
 </table>
