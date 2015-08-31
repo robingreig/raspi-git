@@ -1,0 +1,20 @@
+1. Install 2015-05-05 Wheezy
+2. Usual Setup
+	+ SPI
+	+ I2C
+	- Serial
+3. sudo adduser robin dialout & adm & cdrom & sudo & audio & plugdev & netdev & gpio & i2c & spi & input
++++++ Taskbar flashes on & off, & need to the add the above groups to correct.
+4. sudo apt-get install arduino
+5. startx and verify that I can open arduino IDE
+6. git clone https://github.com/robingreig/raspi-git
+7. copy Uptime.sh & change line to copy this Raspi uptime file to raspi15
+8. Add private key to raspi15
+	ssh-keygen -t dsa
+	chmod ./.ssh/id_dsa.pub
+	cp ./.ssh/id_dsa.pub robin@raspi15.hopto.org:./.ssh/authorized_keys_Raspi103
+	cd .ssh
+	cat authorized_keys_Raspi03 >> authorized_keys
+	Verify that I can login to raspi15 without a password
+9. Run ./Uptime.sh & make sure it copies over properly to raspi15
+. 
