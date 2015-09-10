@@ -4,7 +4,7 @@
   <title>View Temps</title>
   <link rel="stylesheet" type="text/css"  href="default.css">
 <style>
-h1{font-size:600%;}
+h1{font-size:450%;}
 </style>
 <h1>
 <center>
@@ -29,6 +29,26 @@ $housetemp4 = ROUND($housetemp3[house_temp],2);
 echo "<center>".$housetemp1.PHP_EOL;
 echo $housetemp4.PHP_EOL."</center>";
 //echo "<center>".$housetemp1.$housetemp4.PHP_EOL."</center>";
+echo "<br>";
+
+//Current Garage Desk Temperature
+$desktemp1 = "Garage Desk Temp:";
+$desktemp2 = mysql_query("SELECT desk_temp from garage_temp ORDER BY date DESC, time DESC LIMIT 1");
+$desktemp3 = mysql_fetch_assoc($desktemp2);
+$desktemp4 = ROUND($desktemp3[desk_temp],2);
+echo "<center>".$desktemp1.PHP_EOL;
+echo $desktemp4.PHP_EOL."</center>";
+//echo "<center>".$desktemp1.$desktemp4.PHP_EOL."</center>";
+echo "<br>";
+
+//Current Attic Temperature
+$attictemp1 = "Garage Attic Temp:";
+$attictemp2 = mysql_query("SELECT attic_temp from garage_temp ORDER BY date DESC, time DESC LIMIT 1");
+$attictemp3 = mysql_fetch_assoc($attictemp2);
+$attictemp4 = ROUND($attictemp3[attic_temp],2);
+echo "<center>".$attictemp1.PHP_EOL;
+echo $attictemp4.PHP_EOL."</center>";
+//echo "<center>".$attictemp1.$attictemp4.PHP_EOL."</center>";
 echo "<br>";
 
 //Current Outside Temperature
