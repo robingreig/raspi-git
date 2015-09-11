@@ -16,7 +16,8 @@ maxcount = 3
 
 #ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
-ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
+#ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
+ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
 
 #while True:
 while (count < maxcount):
