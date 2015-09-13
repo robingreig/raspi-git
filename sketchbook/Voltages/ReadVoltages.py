@@ -11,7 +11,7 @@ import glob
 # Set Variables
 count = 0
 delay = 2
-DEBUG = 1
+DEBUG = 0
 maxcount = 3
 
 #ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -27,17 +27,15 @@ while (count < maxcount):
   #ok read all Analog
   for i in range(6):
     if DEBUG == 1:
-	print "\ti={0}".format(i)
+	print "\t\ti={0}".format(i)
     ser.write(chr(48+i))
     line = ser.readline()
-    print "\t{0}".format(line),
+#    print "\t{0}".format(line),
     print "\tA{0}=".format(i),
     print "{0}".format(line),
     if i == 0:
       cht = open("/home/robin/ReadVoltage0", "wb")
       cht.write(line);
-      cht.write (str(i));
-      cht.write 
       cht.close()
   count = count +1
   time.sleep(delay)
