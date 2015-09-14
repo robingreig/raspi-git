@@ -24,6 +24,18 @@
 6) To sync the master back to raspi
 	git pull
 
+
+7) to add a ssh key to github
+	goto .ssh directory and copy the id_dsa.pub file
+	login to github.com
+	In the top right hand corner click profile and then settings
+	In the user settings, click SSH keys
+	Click Add SSH Key
+	Insert a title and then paste the id_dsa.pub file in the key
+	If successful, try to ssh -T git@github.com
+	should say "Hi robingreig! You've successfully authenticated 
+		but GitHub does nto provide shell access
+	
 >>>>> https://help.github.com/articles/adding-a-remote/
 
 ***** good website: rogerdudler.github.io/git-guide
