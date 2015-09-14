@@ -1,0 +1,9 @@
+
+make = no upload
+make upload = compile and upload
+make clean = remove all our dependencies
+make depends = update dependencies
+make reset = reset the Arduino by tickling DTR on the serial port
+make raw_upload = upload without first resetting
+make show_boards = list all the boards defined in boards.txt(10868)
+

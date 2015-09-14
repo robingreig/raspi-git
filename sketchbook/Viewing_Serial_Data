@@ -1,0 +1,8 @@
+
+to view the data:
+sudo cat /dev/ttyAMA0
+
+to send data:
+echo "string" >> /dev/ttyAMA0
+
+
