@@ -13,7 +13,7 @@ void sendAnalogValue(byte Channel)
 //  Serial.print(Channel);
 //  Serial.print("=");
 //  Serial.println(valueAD);
-  VoltageA0 = valueAD * (5.0/1023.0)+10;
+  VoltageA0 = valueAD * (5.0/1023.0)+9.52;
   Serial.println(VoltageA0); 
 }
 
