@@ -33,6 +33,10 @@ while (count < maxcount):
       cht = open("/home/robin/ReadVoltage0", "wb")
       cht.write(line);
       cht.close()
+    if i == 1:
+      cht = open("/home/robin/ReadVoltage1", "wb")
+      cht.write(line);
+      cht.close()
 #      if float(line) < 12.00 and float(line) > 11.51:
 #        print "\t\tVoltage is low"
 #      elif float(line) < 11.50 and float(line) > 11.01:
