@@ -40,35 +40,61 @@ time.sleep(10)
 # Continuously append data
 while(True):
 
-  def read_voltage0():
+  def read_AprxVoltage():
+     f = open('/home/robin/AprxVoltage', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+
+  def AprxVoltageRead():
+        lines0 = read_AprxVoltage()
+        temp_string = lines0[0]
+        AprxVoltage = float(temp_string)
+        return AprxVoltage
+
+  def read_BlackTruckVoltage():
      f = open('/home/robin/ReadVoltage0', 'r')
      lines0 = f.readlines()
      f.close()
      return lines0 
 
 
-  def read_voltage00():
-        lines0 = read_voltage0()
+  def BlackTruckRead():
+        lines0 = read_BlackTruckVoltage()
         temp_string = lines0[0]
-        voltage00 = float(temp_string)
-        return voltage00
+        BlackTruckVoltage = float(temp_string)
+        return BlackTruckVoltage
+
+  def read_GreyTruckVoltage():
+     f = open('/home/robin/ReadVoltage1', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+
+  def GreyTruckRead():
+        lines0 = read_GreyTruckVoltage()
+        temp_string = lines0[0]
+        GreyTruckVoltage = float(temp_string)
+        return GreyTruckVoltage
 
  
-  Voltage0 = (round(read_voltage00(),2))
-  print "Voltage0: ", Voltage0
+  Voltage0 = (round(AprxVoltageRead(),2))
+  print "APRX Voltage: ", Voltage0
+  Voltage1 = (round(BlackTruckRead(),2))
+  print "Black Truck Voltage: ", Voltage1
+  Voltage2 = (round(GreyTruckRead(),2))
+  print "Grey Truck Voltage: ", Voltage2
   time.sleep(1)
 
 
-#  cht = open("/home/robin/CurrentOutsideTemp", "w")
-#  cht.write (str(OutsideTemp))
-#  cht.close()
-
   try:
     cursor.execute("""INSERT INTO voltages 
-        (date, time, voltage0) 
+        (date, time, voltage0, voltage1, voltage2) 
 	VALUES 
-	(NOW(),NOW(),%s);""",
-	((round(read_voltage00(),2))))
+	(NOW(),NOW(),%s,%s,%s);""",
+	((round(AprxVoltageRead(),2)), (round(BlackTruckRead(),2)), (round(GreyTruckRead(),2))))
 
     dbc.commit()
   except:

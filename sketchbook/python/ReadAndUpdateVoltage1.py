@@ -46,7 +46,7 @@ while (count < maxcount):
 #    print "\t{0}".format(line),
     print "\tA{0}=".format(i),
     print "{0}".format(line),
-#   If reading Analogue 0 then save the voltage to /home/robin/ReadVoltage0
+#   If reading Analogue 1 then save the voltage to /home/robin/ReadVoltage1
     if i == 1:
       cht = open("/home/robin/ReadVoltage1", "wb")
       cht.write(line);

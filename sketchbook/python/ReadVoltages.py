@@ -8,7 +8,7 @@ import subprocess
 count = 0
 delay = 2
 DEBUG = 0
-maxcount = 5
+maxcount = 2
 
 ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
@@ -31,6 +31,10 @@ while (count < maxcount):
     print "{0}".format(line),
     if i == 0:
       cht = open("/home/robin/ReadVoltage0", "wb")
+      cht.write(line);
+      cht.close()
+    if i == 1:
+      cht = open("/home/robin/ReadVoltage1", "wb")
       cht.write(line);
       cht.close()
 #      if float(line) < 12.00 and float(line) > 11.51:
