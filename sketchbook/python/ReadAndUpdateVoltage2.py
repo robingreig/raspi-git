@@ -15,7 +15,7 @@ import warnings
 #====================================================================
 count = 0
 delay = 2
-DEBUG = 0
+DEBUG = 2
 maxcount = 2
 
 #====================================================================
@@ -47,8 +47,8 @@ while (count < maxcount):
     print "\tA{0}=".format(i),
     print "{0}".format(line),
 #   If reading Analogue 0 then save the voltage to /home/robin/ReadVoltage0
-    if i == 1:
-      cht = open("/home/robin/ReadVoltage1", "wb")
+    if i == 0:
+      cht = open("/home/robin/ReadVoltage0", "wb")
       cht.write(line);
       cht.close()
 #     If the voltage is low on Analogue 0 then print "Low", or "Critical", or shutdown Raspi
@@ -93,7 +93,7 @@ time.sleep(delay)
 while(True):
 
   def read_voltage0():
-     f = open('/home/robin/ReadVoltage1', 'r')
+     f = open('/home/robin/ReadVoltage0', 'r')
      lines0 = f.readlines()
      f.close()
      return lines0 
@@ -117,7 +117,7 @@ while(True):
 
   try:
     cursor.execute("""INSERT INTO voltages 
-        (date, time, voltage2) 
+        (date, time, voltage0) 
 	VALUES 
 	(NOW(),NOW(),%s);""",
 	((round(read_voltage00(),2))))

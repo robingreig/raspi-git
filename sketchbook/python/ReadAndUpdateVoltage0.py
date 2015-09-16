@@ -15,17 +15,17 @@ import warnings
 #====================================================================
 count = 0
 delay = 2
-DEBUG = 0
-maxcount = 1
+DEBUG = 2
+maxcount = 2
 
 #====================================================================
 # Setup Serial Port
 # /tty/AMA0 is used with the GertDuino board
 #====================================================================
-#ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
-ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
+#ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
 
 #====================================================================
 # Send the Analogue Port number to Gertduino & read back the voltage value
@@ -52,13 +52,13 @@ while (count < maxcount):
       cht.write(line);
       cht.close()
 #     If the voltage is low on Analogue 0 then print "Low", or "Critical", or shutdown Raspi
-      if float(line) < 12.00 and float(line) > 11.51:
-        print "\t\tVoltage is low"
-      elif float(line) < 11.50 and float(line) > 11.01:
-        print "\t\tVoltage is CRITICAL"
-      elif float(line) < 11.00:
+#      if float(line) < 12.00 and float(line) > 11.51:
+#        print "\t\tVoltage is low"
+#      elif float(line) < 11.50 and float(line) > 11.01:
+#        print "\t\tVoltage is CRITICAL"
+#      elif float(line) < 11.00:
 #        subprocess.call(["sudo", "shutdown", "-k"])
-        subprocess.call(["sudo", "shutdown", "-k", "now"])
+#        subprocess.call(["sudo", "shutdown", "-k", "now"])
   count = count +1
   time.sleep(delay)
 
@@ -117,7 +117,7 @@ while(True):
 
   try:
     cursor.execute("""INSERT INTO voltages 
-        (date, time, voltage0) 
+        (date, time, voltage1) 
 	VALUES 
 	(NOW(),NOW(),%s);""",
 	((round(read_voltage00(),2))))
