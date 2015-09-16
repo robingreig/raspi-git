@@ -8,7 +8,7 @@ import subprocess
 count = 0
 delay = 2
 DEBUG = 0
-maxcount = 5
+maxcount = 2
 
 ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
