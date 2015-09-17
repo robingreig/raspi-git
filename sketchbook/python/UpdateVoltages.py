@@ -72,12 +72,23 @@ while(True):
      f.close()
      return lines0 
 
-
   def GreyTruckRead():
         lines0 = read_GreyTruckVoltage()
         temp_string = lines0[0]
         GreyTruckVoltage = float(temp_string)
         return GreyTruckVoltage
+
+  def read_Bank1Voltage():
+     f = open('/home/robin/ReadVoltage3', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def Bank1Read():
+        lines0 = read_Bank1Voltage()
+        temp_string = lines0[0]
+        Bank1Voltage = float(temp_string)
+        return Bank1Voltage
 
  
   Voltage0 = (round(AprxVoltageRead(),2))
@@ -86,15 +97,17 @@ while(True):
   print "Black Truck Voltage: ", Voltage1
   Voltage2 = (round(GreyTruckRead(),2))
   print "Grey Truck Voltage: ", Voltage2
+  Voltage3 = (round(Bank1Read(),2))
+  print "Bank 1 Voltage: ", Voltage3
   time.sleep(1)
 
 
   try:
     cursor.execute("""INSERT INTO voltages 
-        (date, time, voltage0, voltage1, voltage2) 
+        (date, time, voltage0, voltage1, voltage2, voltage3) 
 	VALUES 
-	(NOW(),NOW(),%s,%s,%s);""",
-	((round(AprxVoltageRead(),2)), (round(BlackTruckRead(),2)), (round(GreyTruckRead(),2))))
+	(NOW(),NOW(),%s,%s,%s,%s);""",
+	((round(AprxVoltageRead(),2)), (round(BlackTruckRead(),2)), (round(GreyTruckRead(),2)), (round(Bank1Read(),2))))
 
     dbc.commit()
   except:
