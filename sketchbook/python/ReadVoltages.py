@@ -6,7 +6,7 @@ import subprocess
 
 # Set Variables
 count = 0
-delay = 1
+delay = 2
 DEBUG = 0
 maxcount = 2
 
