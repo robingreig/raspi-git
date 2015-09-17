@@ -20,6 +20,10 @@ void sendAnalogValue(byte Channel)
   {
     VoltageA0 = valueAD * (5.0/1023.0)+9.52;
   }
+  else if (valueAD == A3)
+  {
+    VoltageA0 = valueAD * (5.0/1023.0)+23.3;
+  }
   else
   {
     VoltageA0 = valueAD * (5.0/1023.0)+9.42;
