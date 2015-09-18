@@ -1,4 +1,4 @@
-const int AnalogInTable[6]= {A0,A1,A2,A3,A4,A5};
+const int analogInTable[6]= {A0,A1,A2,A3,A4,A5};
 
 char inChar;
 
@@ -7,7 +7,7 @@ void sendAnalogValue(byte Channel)
 
   int valueAD;
   float VoltageA0;
-  valueAD = analogRead(AnalogInTable[Channel]);
+  valueAD = analogRead(analogInTable[Channel]);
   if (Channel == 0)
   {
     VoltageA0 = valueAD * (5.0/1023.0)+9.43;
@@ -22,11 +22,15 @@ void sendAnalogValue(byte Channel)
   }
   else if (Channel == 3)
   {
+    VoltageA0 = valueAD * (5.0/1023.0)+23.13;
+  }
+  else if (Channel == 4)
+  {
     VoltageA0 = valueAD * (5.0/1023.0)+23.33;
   }
   else
   {
-    VoltageA0 = valueAD * (5.0/1023.0)+1.00;
+    VoltageA0 = valueAD * (5.0/1023.0)+23.34;
   }
   Serial.println(VoltageA0);
 }

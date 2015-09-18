@@ -59,7 +59,6 @@ while(True):
      f.close()
      return lines0 
 
-
   def BlackTruckRead():
         lines0 = read_BlackTruckVoltage()
         temp_string = lines0[0]
@@ -90,6 +89,30 @@ while(True):
         Bank1Voltage = float(temp_string)
         return Bank1Voltage
 
+  def read_Bank2Voltage():
+     f = open('/home/robin/ReadVoltage4', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def Bank2Read():
+        lines0 = read_Bank2Voltage()
+        temp_string = lines0[0]
+        Bank2Voltage = float(temp_string)
+        return Bank2Voltage
+
+  def read_Bank3Voltage():
+     f = open('/home/robin/ReadVoltage5', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def Bank3Read():
+        lines0 = read_Bank3Voltage()
+        temp_string = lines0[0]
+        Bank3Voltage = float(temp_string)
+        return Bank3Voltage
+
  
   Voltage0 = (round(AprxVoltageRead(),2))
   print "APRX Voltage: ", Voltage0
@@ -99,15 +122,19 @@ while(True):
   print "Grey Truck Voltage: ", Voltage2
   Voltage3 = (round(Bank1Read(),2))
   print "Bank 1 Voltage: ", Voltage3
+  Voltage4 = (round(Bank2Read(),2))
+  print "Bank 2 Voltage: ", Voltage4
+  Voltage5 = (round(Bank3Read(),2))
+  print "Bank 3 Voltage: ", Voltage5
   time.sleep(1)
 
 
   try:
     cursor.execute("""INSERT INTO voltages 
-        (date, time, voltage0, voltage1, voltage2, voltage3) 
+        (date, time, voltage0, voltage1, voltage2, voltage3, voltage4, voltage5) 
 	VALUES 
-	(NOW(),NOW(),%s,%s,%s,%s);""",
-	((round(AprxVoltageRead(),2)), (round(BlackTruckRead(),2)), (round(GreyTruckRead(),2)), (round(Bank1Read(),2))))
+	(NOW(),NOW(),%s,%s,%s,%s,%s,%s);""",
+	((round(AprxVoltageRead(),2)), (round(BlackTruckRead(),2)), (round(GreyTruckRead(),2)), (round(Bank1Read(),2)), (round(Bank2Read(),2)), (round(Bank3Read(),2))))
 
     dbc.commit()
   except:

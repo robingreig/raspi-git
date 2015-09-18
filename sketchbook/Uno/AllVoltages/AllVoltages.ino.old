@@ -1,5 +1,4 @@
-#include <Arduino.h>
-const int analogInTable[6]= {A0,A1,A2,A3,A4,A5};
+const int AnalogInTable[6]= {A0,A1,A2,A3,A4,A5};
 
 char inChar;
 
@@ -8,7 +7,7 @@ void sendAnalogValue(byte Channel)
 
   int valueAD;
   float VoltageA0;
-  valueAD = analogRead(analogInTable[Channel]);
+  valueAD = analogRead(AnalogInTable[Channel]);
   if (Channel == 0)
   {
     VoltageA0 = valueAD * (5.0/1023.0)+9.43;
@@ -19,7 +18,7 @@ void sendAnalogValue(byte Channel)
   }
   else if (Channel == 2)
   {
-    VoltageA0 = valueAD * (5.0/1023.0)+9.52;
+    VoltageA0 = valueAD * (5.0/1023.0)+1.00;
   }
   else if (Channel == 3)
   {
@@ -29,10 +28,11 @@ void sendAnalogValue(byte Channel)
   {
     VoltageA0 = valueAD * (5.0/1023.0)+23.33;
   }
+//  else if (Channel == 5)
   else
   {
     VoltageA0 = valueAD * (5.0/1023.0)+23.34;
-  }
+  {
   Serial.println(VoltageA0);
 }
 
