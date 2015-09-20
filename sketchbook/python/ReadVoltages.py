@@ -8,12 +8,12 @@ import subprocess
 count = 0
 delay = 2
 DEBUG = 0
-maxcount = 5
+maxcount = 2
 
-#ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
-ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
+#ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
 
 #while True:
 while (count < maxcount):
@@ -33,12 +33,33 @@ while (count < maxcount):
       cht = open("/home/robin/ReadVoltage0", "wb")
       cht.write(line);
       cht.close()
-      if float(line) < 12.00 and float(line) > 11.51:
-        print "\t\tVoltage is low"
-      elif float(line) < 11.50 and float(line) > 11.01:
-        print "\t\tVoltage is CRITICAL"
-      elif float(line) < 11.00:
+    if i == 1:
+      cht = open("/home/robin/ReadVoltage1", "wb")
+      cht.write(line);
+      cht.close()
+    if i == 2:
+      cht = open("/home/robin/ReadVoltage2", "wb")
+      cht.write(line);
+      cht.close()
+    if i == 3:
+      cht = open("/home/robin/ReadVoltage3", "wb")
+      cht.write(line);
+      cht.close()
+    if i == 4:
+      cht = open("/home/robin/ReadVoltage4", "wb")
+      cht.write(line);
+      cht.close()
+    if i == 5:
+      cht = open("/home/robin/ReadVoltage5", "wb")
+      cht.write(line);
+      cht.close()
+
+#      if float(line) < 12.00 and float(line) > 11.51:
+#        print "\t\tVoltage is low"
+#      elif float(line) < 11.50 and float(line) > 11.01:
+#        print "\t\tVoltage is CRITICAL"
+#      elif float(line) < 11.00:
 #        subprocess.call(["sudo", "shutdown", "-k"])
-        subprocess.call(["sudo", "shutdown", "-k", "now"])
+#        subprocess.call(["sudo", "shutdown", "-k", "now"])
   count = count +1
   time.sleep(delay)

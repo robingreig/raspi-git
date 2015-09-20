@@ -35,40 +35,106 @@ warnings.filterwarnings('ignore', category=MySQLdb.Warning)
 # ==========================================================================
 
 # Add a delay for boot
-time.sleep(10)
+#time.sleep(10)
 
 # Continuously append data
 while(True):
 
-  def read_voltage0():
-     f = open('/home/robin/ReadVoltage0', 'r')
+  def read_AprxVoltage():
+     f = open('/home/robin/AprxVoltage', 'r')
      lines0 = f.readlines()
      f.close()
      return lines0 
 
 
-  def read_voltage00():
-        lines0 = read_voltage0()
+  def AprxVoltageRead():
+        lines0 = read_AprxVoltage()
         temp_string = lines0[0]
-        voltage00 = float(temp_string)
-        return voltage00
+        AprxVoltage = float(temp_string)
+        return AprxVoltage
+
+  def read_BlackTruckVoltage():
+     f = open('/home/robin/ReadVoltage0', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def BlackTruckRead():
+        lines0 = read_BlackTruckVoltage()
+        temp_string = lines0[0]
+        BlackTruckVoltage = float(temp_string)
+        return BlackTruckVoltage
+
+  def read_GreyTruckVoltage():
+     f = open('/home/robin/ReadVoltage1', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def GreyTruckRead():
+        lines0 = read_GreyTruckVoltage()
+        temp_string = lines0[0]
+        GreyTruckVoltage = float(temp_string)
+        return GreyTruckVoltage
+
+  def read_Bank1Voltage():
+     f = open('/home/robin/ReadVoltage3', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def Bank1Read():
+        lines0 = read_Bank1Voltage()
+        temp_string = lines0[0]
+        Bank1Voltage = float(temp_string)
+        return Bank1Voltage
+
+  def read_Bank2Voltage():
+     f = open('/home/robin/ReadVoltage4', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def Bank2Read():
+        lines0 = read_Bank2Voltage()
+        temp_string = lines0[0]
+        Bank2Voltage = float(temp_string)
+        return Bank2Voltage
+
+  def read_Bank3Voltage():
+     f = open('/home/robin/ReadVoltage5', 'r')
+     lines0 = f.readlines()
+     f.close()
+     return lines0 
+
+  def Bank3Read():
+        lines0 = read_Bank3Voltage()
+        temp_string = lines0[0]
+        Bank3Voltage = float(temp_string)
+        return Bank3Voltage
 
  
-  Voltage0 = (round(read_voltage00(),2))
-  print "Voltage0: ", Voltage0
+  Voltage0 = (round(AprxVoltageRead(),2))
+  print "APRX Voltage: ", Voltage0
+  Voltage1 = (round(BlackTruckRead(),2))
+  print "Black Truck Voltage: ", Voltage1
+  Voltage2 = (round(GreyTruckRead(),2))
+  print "Grey Truck Voltage: ", Voltage2
+  Voltage3 = (round(Bank1Read(),2))
+  print "Bank 1 Voltage: ", Voltage3
+  Voltage4 = (round(Bank2Read(),2))
+  print "Bank 2 Voltage: ", Voltage4
+  Voltage5 = (round(Bank3Read(),2))
+  print "Bank 3 Voltage: ", Voltage5
   time.sleep(1)
 
 
-#  cht = open("/home/robin/CurrentOutsideTemp", "w")
-#  cht.write (str(OutsideTemp))
-#  cht.close()
-
   try:
     cursor.execute("""INSERT INTO voltages 
-        (date, time, voltage0) 
+        (date, time, voltage0, voltage1, voltage2, voltage3, voltage4, voltage5) 
 	VALUES 
-	(NOW(),NOW(),%s);""",
-	((round(read_voltage00(),2))))
+	(NOW(),NOW(),%s,%s,%s,%s,%s,%s);""",
+	((round(AprxVoltageRead(),2)), (round(BlackTruckRead(),2)), (round(GreyTruckRead(),2)), (round(Bank1Read(),2)), (round(Bank2Read(),2)), (round(Bank3Read(),2))))
 
     dbc.commit()
   except:
