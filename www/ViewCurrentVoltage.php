@@ -21,12 +21,48 @@ mysql_connect('localhost', 'robin', 'Micr0s0ft') or die (mysql_error());
 //Select database
 mysql_select_db('house_stats') or die (mysql_error());
 
-//echo "<center>".$mintemp1.$mintemp3['min(outside_temp)'],.PHP_EOL."</center>";
-///$mintemp1 = "Minimum Outside Temperature Today = ";
-///$mintemp2 = mysql_query("SELECT min(outside_temp),1 FROM garage_temp WHERE date=CURDATE()");
-///$mintemp3 = mysql_fetch_assoc($mintemp2);
-///$mintemp4 = ROUND($mintemp3['min(outside_temp)'],2);
-///echo "<center>".$mintemp1.$mintemp4.PHP_EOL."</center>";
+$minvolt01 = "Minimum Today = ";
+$minvolt02 = mysql_query("SELECT date, min(voltage1),1 FROM voltages WHERE date=CURDATE()");
+$minvolt03 = mysql_fetch_assoc($minvolt02);
+$minvolt04 = ROUND($minvolt03['min(voltage1)'],2);
+echo "<center>".$minvolt01.$minvolt04.PHP_EOL."</center>";
+//echo "<center>".$minvolt03[date].$minvolt01.$minvolt04.PHP_EOL."</center>";
+
+$minvolt11 = " = ";
+$minvolt12 = mysql_query("SELECT date, min(voltage1),1 FROM voltages WHERE date=(CURDATE()-1)");
+$minvolt13 = mysql_fetch_assoc($minvolt12);
+$minvolt14 = ROUND($minvolt13['min(voltage1)'],2);
+echo "<center>".$minvolt13[date].$minvolt11.$minvolt14.PHP_EOL."</center>";
+
+$minvolt21 = " = ";
+$minvolt22 = mysql_query("SELECT date, min(voltage1),1 FROM voltages WHERE date=(CURDATE()-2)");
+$minvolt23 = mysql_fetch_assoc($minvolt22);
+$minvolt24 = ROUND($minvolt23['min(voltage1)'],2);
+echo "<center>".$minvolt23[date].$minvolt21.$minvolt24.PHP_EOL."</center>";
+
+$minvolt31 = " = ";
+$minvolt32 = mysql_query("SELECT date, min(voltage1),1 FROM voltages WHERE date=(CURDATE()-3)");
+$minvolt33 = mysql_fetch_assoc($minvolt32);
+$minvolt34 = ROUND($minvolt33['min(voltage1)'],2);
+echo "<center>".$minvolt33[date].$minvolt31.$minvolt34.PHP_EOL."</center>";
+
+$minvolt41 = " = ";
+$minvolt42 = mysql_query("SELECT date, min(voltage1),1 FROM voltages WHERE date=(CURDATE()-4)");
+$minvolt43 = mysql_fetch_assoc($minvolt42);
+$minvolt44 = ROUND($minvolt43['min(voltage1)'],2);
+echo "<center>".$minvolt43[date].$minvolt41.$minvolt44.PHP_EOL."</center>";
+
+$minvolt51 = " = ";
+$minvolt52 = mysql_query("SELECT date, min(voltage1),1 FROM voltages WHERE date=(CURDATE()-5)");
+$minvolt53 = mysql_fetch_assoc($minvolt52);
+$minvolt54 = ROUND($minvolt53['min(voltage1)'],2);
+echo "<center>".$minvolt53[date].$minvolt51.$minvolt54.PHP_EOL."</center>";
+
+$minvolt61 = " = ";
+$minvolt62 = mysql_query("SELECT date, min(voltage1),1 FROM voltages WHERE date=(CURDATE()-6)");
+$minvolt63 = mysql_fetch_assoc($minvolt62);
+$minvolt64 = ROUND($minvolt63['min(voltage1)'],2);
+echo "<center>".$minvolt63[date].$minvolt61.$minvolt64.PHP_EOL."</center>";
 
 //echo "<center>".$maxtemp1.$maxtemp3['max(outside_temp)'].PHP_EOL."</center>";
 ///$maxtemp1 = "Maximum Outside Temperature Today = ";

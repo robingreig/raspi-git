@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="default.css">
 </head>
 <style>
-h1{font-size:310%;}
+h1{font-size:250%;}
 </style>
 <body>
 <h1>
@@ -31,6 +31,10 @@ h1{font-size:310%;}
 <tr>
 <td></td>
 <td style="text-align: center; font-size: 100% " colspan="2" rowspan="1"><a href="mobile-voltage-brief.php">Voltages:Brief</a></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center; font-size: 100% " colspan="2" rowspan="1"><a href="mobile-truck-voltage.php">Black Truck Volts</a></td>
 </tr>
 </tbody>
 </form>
