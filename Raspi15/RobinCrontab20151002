@@ -21,21 +21,22 @@
 # 
 # m h  dom mon dow   command
 
-#run outside temp copy for raspi14 for aprs.fi
-*/8 * * * * /home/robin/CopyAprsTemps.sh > /dev/null 2>&1
-
 # Run Morning Backup
 0 5 * * * /bin/bash /home/robin/MorningBackup.sh > /dev/null 2>&1
 
 6 5 * * * /bin/bash /home/robin/Uptime.sh > /dev/null 2>&1
 
-7 5 * * * cat uptime.txt | mail -s "Raspi15 Uptime" robin.greig@calalta.com
-8 5 * * * ls -Ggr /home/robin/house_stats_backup | mail -s "House Stats Backup" robin.greig@calalta.com
-9 5 * * * ls -Ggr /home/robin/mediadb_backup | mail -s "Mediadb Backup" robin.greig@calalta.com
-10 5 * * * ls -Ggr /home/robin/OfficeTempBackup | mail -s "Office Temp Backup" robin.greig@calalta.com
-#11 5 * * * ls -Ggr /home/robin/raspi15_backup | mail -s "Raspi15 Backup" robin.greig@calalta.com
-12 5 * * * cat /home/robin/TemPi110.uptime.txt | mail -s "TemPi110 Uptime" robin.greig@calalta.com
-13 5 * * * df -h | mail -s "Raspi15 Disk Usage" robin.greig@calalta.com
+01 03 * * * cat uptime.txt | mail -s "Raspi15 Uptime" robin.greig@calalta.com
+02 03 * * * ls -Ggr /home/robin/house_stats_backup | mail -s "House Stats Backup" robin.greig@calalta.com
+03 03 * * * ls -Ggr /home/robin/mediadb_backup | mail -s "Mediadb Backup" robin.greig@calalta.com
+04 03 * * * ls -Ggr /home/robin/OfficeTempBackup | mail -s "Office Temp Backup" robin.greig@calalta.com
+05 03 * * * df -h | mail -s "Raspi15 Disk Usage" robin.greig@calalta.com
+07 03 * * * cat /home/robin/APRX1.uptime.txt | mail -s "APRX1 Uptime" robin.greig@calalta.com
+08 03 * * * cat /home/robin/Gertduino1.uptime.txt | mail -s "Gertduino1 Uptime" robin.greig@calalta.com
+09 03 * * * cat /home/robin/Gertduino2.uptime.txt | mail -s "Gertduino2 Uptime" robin.greig@calalta.com
+10 03 * * * cat /home/robin/TemPi110.uptime.txt | mail -s "TemPi110 Uptime" robin.greig@calalta.com
+11 03 * * * cat /home/robin/BattMon.uptime.txt | mail -s "BattMon Uptime" robin.greig@calalta.com
+12 03 * * * cat /home/robin/Pi200.uptime.txt | mail -s "Pi200 Uptime" robin.greig@calalta.com
 
 # Copy raspi15_home directory to .14 & .16
 # Backup is done by sudo ./raspi15_backup.sh
