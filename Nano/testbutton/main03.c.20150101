@@ -1,0 +1,22 @@
+// RLG20141229
+
+#include <avr/io.h>
+
+int main(void)
+{
+	DDRB = 0b00000000;
+	DDRB |= (1 << PB5);
+	DDRB |= (1 << PB1);
+	PORTD |= 0b00010000;
+//	PORTD |= (1 << PD4);
+//	PORTC |= (1 << PC2);
+//	PORTC |= (1 << PC3);
+	for(;;) {
+		if (PIND & (1 << PD4)) {
+			PORTB &= ~(1 << PB5);
+		} else {
+			PORTB |= (1 << PB5);
+		}
+	}
+	return 0;
+}
