@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cp ./uptime.txt ./uptime.txt.tmp
-date > ./uptime.txt
+echo > ./uptime.txt
+date >> ./uptime.txt
 uptime >> ./uptime.txt
 head -4 ./uptime.txt.tmp >> ./uptime.txt
 
