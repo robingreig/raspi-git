@@ -32,7 +32,7 @@
 	In the user settings, click SSH keys
 	Click Add SSH Key
 	Insert a title and then paste the id_dsa.pub file in the key
-	If successful, try to ssh -T git@github.com
+	>>> If successful, try to ssh -T git@github.com
 	should say "Hi robingreig! You've successfully authenticated 
 		but GitHub does nto provide shell access
 
