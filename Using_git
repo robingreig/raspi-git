@@ -35,6 +35,9 @@
 	If successful, try to ssh -T git@github.com
 	should say "Hi robingreig! You've successfully authenticated 
 		but GitHub does nto provide shell access
+
+8) To change a remote's URL
+git remote set-url origin git@github.com:robingreig/raspi-git.git
 	
 >>>>> https://help.github.com/articles/adding-a-remote/
 
