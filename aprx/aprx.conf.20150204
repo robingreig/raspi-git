@@ -30,7 +30,7 @@
 # Usable for 99+% of cases.
 #
 
-mycall  VE6RBN-11
+mycall  VE6RBN-1
 
 #
 # Global macro for simplified "my location" definition in
@@ -38,7 +38,7 @@ mycall  VE6RBN-11
 # give "my location" reference for "filter m/100".
 #
 #myloc lat ddmm.mmN lon dddmm.mmE
-myloc lat 5119.19N lon 11336.20W
+myloc lat 5119.10N lon 11336.50W
 
 <aprsis>
 # The  aprsis login  parameter: 
@@ -159,7 +159,8 @@ aprxlog /var/log/aprx/aprx.log
 #   ax25-device   $mycall
     tx-ok        true  # transmitter enable defaults to false
 #   #tx-ok        false  # transmitter enabled
-   #telem-to-is  true # set to 'false' to disable
+#   #telem-to-is  true # set to 'false' to disable
+    telem-to-is  false # set to 'false' to disable
 </interface>
 #</interface>
 
@@ -203,6 +204,16 @@ aprxlog /var/log/aprx/aprx.log
 
 # ***********  Multiple <beacon>  definitions can follow   *********
 <beacon>
+beaconmode both
+cycle-size 5m
+beacon                     file /home/robin/beacon01.txt
+</beacon>
+<beacon>
+beaconmode both
+cycle-size 20m
+beacon symbol "D#" $myloc comment "Raspi-Digipeater"
+</beacon>
+<beacon>
 #
 #  Beacons are sent out to radio transmitters AND/OR APRSIS.
 #  Default is "both", other modes are settable.
@@ -217,14 +228,17 @@ beaconmode both
 #  First beacon is sent out 30 seconds after system start.
 #  Tune the cycle-size to be suitable to your number of defined beacons.
 #
+#cycle-size  3m
+#cycle-size  5m
+#cycle-size  10m
 #cycle-size  20m
-cycle-size  20m
+cycle-size  60m
 #
 # Basic beaconed thing is positional message of type "!":
 #
 #beacon symbol "R&" lat "0000.00N" lon "00000.00E" comment "Rx-only iGate"
 #beacon symbol "R&" $myloc comment "Rx-only iGate"
-beacon symbol "R&" $myloc comment "Raspi-Digipeater"
+#beacon symbol "D#" $myloc comment "Raspi-Digipeater"
 #
 #Following are basic options:
 # 'symbol'    no default, must be defined!
@@ -288,6 +302,10 @@ beacon symbol "R&" $myloc comment "Raspi-Digipeater"
 # Stranger combinations with explicite "transmit this to interface X":
 #
 #beacon                     file /tmp/wxbeacon.txt
+beacon                     file /home/robin/beacon02.txt
+beacon                     file /home/robin/beacon03.txt
+beacon                     file /home/robin/beacon04.txt
+#beacon                     file /home/robin/beacon01.txt
 #beacon interface N0CALL-3 srccall N0CALL-3 \
 #                           raw "!0000.00NR00000.00E&Rx-only iGate"
 #beacon interface N0CALL-3 srccall N0CALL-3 \
