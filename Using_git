@@ -45,3 +45,4 @@ git remote set-url origin git@github.com:robingreig/raspi-git.git
 
 Added BattMon1 to ssh list
 Added Pi200 to ssh list
+Added Gertduino2 to ssh list
