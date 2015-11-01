@@ -43,6 +43,6 @@ git remote set-url origin git@github.com:robingreig/raspi-git.git
 
 ***** good website: rogerdudler.github.io/git-guide
 
-
+Added BattMon1 to ssh list
 
 
