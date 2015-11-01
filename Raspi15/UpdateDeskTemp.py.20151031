@@ -43,8 +43,4 @@ while(True):
   cht.write (str(GarageTemp))
   cht.close()
 
-  cht = open("/home/robin/CurrentAprxGarageTemp", "w")
-  cht.write (str(GarageTemp))
-  cht.close()
-
   break
