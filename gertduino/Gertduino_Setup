@@ -1,0 +1,34 @@
+1) Install Jessie with normal setup
+2) sudo apt-get update
+3) sudo apt-get upgrade
+4) sudo apt-get install arduino
+5) wget -O- http://project-downloads.drogon.net/gertduino/gertduino.tgz | tar xfz -
+6) https://projects.drogon.net/raspberry-pi/gertduino/atmega-setup/
+7) cd gertduino
+
+	cd avrdude
+
+	# Config. files
+
+	sudo cp /etc/avrdude.conf /var/tmp
+	sudo cp avrdude.conf /etc
+
+	sudo cp /usr/share/arduino/hardware/arduino/boards.txt /var/tmp
+	sudo cp boards.txt /usr/share/arduino/hardware/arduino/boards.txt
+
+	sudo cp /usr/share/arduino/hardware/arduino/programmers.txt /var/tmp
+	sudo cp programmers.txt /usr/share/arduino/hardware/arduino/programmers.txt 
+
+	# Binary
+
+	sudo cp /usr/bin/avrdude /var/tmp
+	sudo cp avrdude /usr/bin/avrdude
+
+	# Make avrdude set uid root
+
+	sudo chmod 4755 /usr/bin/avrdude
+
+8) cd back to home
+9) sudo apt-get install arduino-mk
+10) ln -s /usr/share/arduino/Arduino.mk Arduino.mk
+11) 
