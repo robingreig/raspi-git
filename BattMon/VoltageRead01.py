@@ -14,15 +14,15 @@ import warnings
 #====================================================================
 count = 0
 delay = 2
-DEBUG = 1
+DEBUG = 0
 maxcount = 2
 
 #====================================================================
 # Setup Serial Port
 # /tty/AMA0 is used with the GertDuino board
 #====================================================================
-#ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+#ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
 
@@ -56,17 +56,22 @@ while True:
 # Read the voltage back to evaluate it
   def read_CurrentAprxVoltage():
     f = open("/home/robin/AprxVoltage", "r")
-    line1 = f.readlines()
+    volts = f.readlines()
     f.close
-    line2 = line1[0]
-    volts = float(line2)
     return volts
 
-  BattVolts = (round(read_CurrentAprxVoltage(),2))
+# Convert the reading to a float
+  def read_AprxVoltage():
+    line1 = read_CurrentAprxVoltage()
+    line2 = line1[0]
+    line3 = float(line2)
+    return line3
+
+  BattVolts = (round(read_AprxVoltage(),2))
 
   if DEBUG == 1:
-    print "AprxVoltage: ", (round(read_CurrentAprxVoltage(),2))
-    print "BattVolts: ", (round(read_CurrentAprxVoltage(),2))
+    print "AprxVoltage: ", (round(read_AprxVoltage(),2))
+    print "BattVolts: ", (round(read_AprxVoltage(),2))
 
 # If the voltage is low on Analogue 0 then print "Low", or "Critical", or shutdown Raspi
   if BattVolts >= 13.00:
