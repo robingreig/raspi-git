@@ -14,15 +14,15 @@ import warnings
 #====================================================================
 count = 0
 delay = 2
-DEBUG = 1
+DEBUG = 0
 maxcount = 2
 
 #====================================================================
 # Setup Serial Port
 # /tty/AMA0 is used with the GertDuino board
 #====================================================================
-#ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+#ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
 
@@ -77,9 +77,12 @@ while True:
     print "\t\tVoltage is between 12V & 12.5V"
   elif BattVolts < 12.0 and BattVolts >= 11.5:
     print "\t\tVoltage is low (between 11.5V & 12V)"
-  elif BattVolts < 11.50 and BattVolts >= 11.0:
+  elif BattVolts < 11.5 and BattVolts >= 11.0:
     print "\t\tVoltage is CRITICAL (between 11.0V & 11.5V)"
-  elif BattVolts < 11.0:
-#   subprocess.call(["sudo", "shutdown", "-k"])
-    subprocess.call(["sudo", "shutdown", "-k", "now"])
+  elif BattVolts < 11.0 and BattVolts >=10.5:
+    print "\t\tVoltage is CRITICAL (between 10.5V & 11V)"
+  elif BattVolts < 10.5:
+#   subprocess.call(["sudo", "shutdown", "-r", "now"])
+#    subprocess.call(["sudo", "shutdown", "-k", "now"])
+    subprocess.call(["sudo", "poweroff"])
   break
