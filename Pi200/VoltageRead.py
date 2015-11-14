@@ -13,7 +13,7 @@ import warnings
 # Set Variables
 #====================================================================
 count = 0
-delay = 2
+delay = 1
 DEBUG = 0
 maxcount = 2
 
@@ -33,9 +33,10 @@ ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 while True:
   while (count < maxcount):
     ser.flushInput()
-    print "Count= {0}".format(count)
+    print "\nCount= {0}".format(count)
 #     OK read all Analog
-    for i in range(6):
+#    for i in range(6):
+    for i in range(1):
       if DEBUG == 1:
 	print "\ti={0}".format(i)
 #     write the Analogue Port number to GertDuino
@@ -70,21 +71,21 @@ while True:
 
 # If the voltage is low on Analogue 0 then print "Low", or "Critical", or shutdown Raspi
   if BattVolts >= 13.5:
-    print "\t\tVoltage is > 13.5V"
+    print "\tVoltage is > 13.5V"
   elif BattVolts < 13.5 and BattVolts >= 13.0:
-    print "\t\tVoltage is between 13V & 13.5V"
+    print "\tVoltage is between 13V & 13.5V"
   elif BattVolts < 13.0 and BattVolts >= 12.5:
-    print "\t\tVoltage is between 12.5V & 13V"
+    print "\tVoltage is between 12.5V & 13V"
   elif BattVolts < 12.5 and BattVolts >= 12.0:
-    print "\t\tVoltage is between 12V & 12.5V"
+    print "\tVoltage is between 12V & 12.5V"
   elif BattVolts < 12.0 and BattVolts >= 11.5:
-    print "\t\tVoltage is low (between 11.5V & 12V)"
+    print "\tVoltage is low (between 11.5V & 12V)"
   elif BattVolts < 11.5 and BattVolts >= 11.0:
-    print "\t\tVoltage is LOW (between 11.0V & 11.5V)"
+    print "\tVoltage is LOW (between 11.0V & 11.5V)"
   elif BattVolts < 11.0 and BattVolts >=10.5:
-    print "\t\tVoltage is CRITICAL (between 10.5V & 11V)"
+    print "\tVoltage is CRITICAL (between 10.5V & 11V)"
   elif BattVolts < 10.5:
-#    subprocess.call(["sudo", "shutdown", "-r", "now"])
+    subprocess.call(["sudo", "shutdown", "-r", "now"])
 #    subprocess.call(["sudo", "shutdown", "-k", "now"])
-    subprocess.call(["sudo", "poweroff"])
+#    subprocess.call(["sudo", "poweroff"])
   break
