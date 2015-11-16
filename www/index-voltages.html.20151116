@@ -21,14 +21,6 @@
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="View20Voltages.php">View 20</a></td>
 </tr>
 <tr>
-<td>View 50</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="View50Voltages.php">View 50</a></td>
-</tr>
-<tr>
-<td>View 100</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="View100Voltages.php">View 100</a></td>
-</tr>
-<tr>
 <td>View all Today</td>
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="ViewTodayVoltages.php">View all Today</a></td>
 </tr>
