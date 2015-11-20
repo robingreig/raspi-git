@@ -14,7 +14,7 @@ src="large_logo_pi.png"></div>
 <center><a href="index-voltages.html">Back</a></center>
 
 <br>
-<center><font size = "6">Minimum / Maximum Voltages</font></center>
+<center><font size = "6">Daily Minimum / Maximum Voltages</font></center>
 <br>
 
 
@@ -25,25 +25,27 @@ mysql_connect('localhost', 'robin', 'Micr0s0ft') or die (mysql_error());
 
 //Select database
 mysql_select_db('house_stats') or die (mysql_error());
-
-//Display the results in different cells
-// Voltage0 = APRX Battery
-// Voltage1 = Black Truck
-// Voltage2 = Grey Truck
-// Voltage3 = Bank 1
-// Voltage4 = Bank 2
-// Voltage5 = Bank 3
-// Voltage6 = Bank 4
-// Voltage7 = Bank 5
+/*
+Display the results in different cells
+ Voltage0 = APRX Battery
+ Voltage1 = Black Truck
+ Voltage2 = Grey Truck
+ Voltage3 = Bank 1
+ Voltage4 = Bank 2
+ Voltage5 = Bank 3
+ Voltage6 = Bank 4
+ Voltage7 = Bank 5
+*/
 
 //Table starting tag and header cells
 echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>APRX Battery</th><th>Black Truck</th></th><th>Grey Truck</th><th>Bank 1</th><th>Bank 2</th><th>Bank 3</th><th>Bank 4</th></tr>";
 
-for ($i = 0; $i <=10; $i++){
+// For loop to scroll through todays values & 9 previous by incrementing the interval of the CURDATE below
+for ($i = 0; $i <=15; $i++){
 
- $minvolt00 = mysql_query("SELECT date, min(voltage0), min(voltage1), min(voltage2), min(voltage3), min(voltage4), min(voltage5), min(voltage6) FROM voltages WHERE date= (CURDATE()- INTERVAL $i DAY)");
+ $minvolt00 = mysql_query("SELECT date, min(voltage0), min(voltage1), min(voltage2), min(voltage3), min(voltage4), min(voltage5), min(voltage6) FROM voltages WHERE date= (CURDATE() - INTERVAL $i DAY)");
  $maxvolt00 = mysql_query("SELECT date, max(voltage0), max(voltage1), max(voltage2), max(voltage3), max(voltage4), max(voltage5), max(voltage6) FROM voltages WHERE date= (CURDATE() - INTERVAL $i DAY)");
-
+// While loop to pull out the min & max values of each voltage
  while(($row = mysql_fetch_array($minvolt00))and ($row1 = mysql_fetch_array($maxvolt00))){
    $slash = " / ";
    $minvolt0 = ROUND($row['min(voltage0)'],2);
@@ -60,7 +62,7 @@ for ($i = 0; $i <=10; $i++){
    $maxvolt4 = ROUND($row1['max(voltage4)'],2);
    $maxvolt5 = ROUND($row1['max(voltage5)'],2);
    $maxvolt6 = ROUND($row1['max(voltage6)'],2);
-   echo "<tr><td>" . $row['date'] . "</td><td>" . ($minvolt0.$slash.$maxvolt0) . "</td><td>" . ($minvolt1.$slash.$maxvolt1) . "</td><td>" .($minvolt2.$slash.$maxvolt2) . "</td><td>" . ($minvolt3.$slash.$maxvolt3) . "</td><td>" . ($minvolt4.$slash.$maxvolt4) . "</td><td>" . ($minvolt5.$slash.$maxvolt5) . "</td><td>" . ($minvolt6.$slash.$maxvolt6) . "</td></tr>";
+  echo "<tr><td>" . $row['date'] . "</td><td>" . ($minvolt0.$slash.$maxvolt0) . "</td><td>" . ($minvolt1.$slash.$maxvolt1) . "</td><td>" .($minvolt2.$slash.$maxvolt2) . "</td><td>" . ($minvolt3.$slash.$maxvolt3) . "</td><td>" . ($minvolt4.$slash.$maxvolt4) . "</td><td>" . ($minvolt5.$slash.$maxvolt5) . "</td><td>" . ($minvolt6.$slash.$maxvolt6) . "</td></tr>";
  }
 }
 
@@ -74,5 +76,3 @@ echo "</table>";
 
 </body>
 </html>
-
-
