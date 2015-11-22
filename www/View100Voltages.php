@@ -38,7 +38,7 @@ mysql_select_db('house_stats') or die (mysql_error());
 $result = mysql_query("SELECT * from voltages ORDER BY date DESC, time DESC LIMIT 100");
 
 //Table starting tag and header cells
-echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Time</th><th>APRX Battery</th><th>Black Truck</th></th><th>Grey Truck</th><th>Bank 1</th><th>Bank 2</th><th>Bank 3</th><th>Bank 4</th></tr>";
+echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Time</th><th>APRX Battery</th><th>Black Truck</th></th><th>Grey Truck</th><th>Orange 1</th><th>Green 2</th><th>Blue 3</th><th>Bank 4</th></tr>";
 while($row = mysql_fetch_array($result)){
    //Display the results in different cells
    echo "<tr><td>" . $row['date'] . "</td><td>" . $row[time] . "</td><td>" . $row['voltage0'] . "</td><td>" . $row['voltage1'] . "</td><td>" . $row['voltage2'] . "</td><td>" . $row['voltage3'] . "</td><td>" . $row['voltage4'] . "</td><td>" . $row['voltage5'] . "</td><td>" . $row['voltage6']. "</td></tr>";

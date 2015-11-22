@@ -17,10 +17,6 @@
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="ViewCurrentVoltage.php">Current</a></td>
 </tr>
 <tr>
-<td>View Min/Max</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="ViewMinMaxVoltages.php">View Min/Max</a></td>
-</tr>
-<tr>
 <td>View 20</td>
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="View20Voltages.php">View 20</a></td>
 </tr>
