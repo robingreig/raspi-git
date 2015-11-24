@@ -21,7 +21,7 @@ src="large_logo_pi.png"></div>
 <?php
 
 //Connect to MySQL
-mysql_connect('localhost', 'robin', 'Micr0s0ft') or die (mysql_error());
+mysql_connect('raspi15.local', 'robin', 'Micr0s0ft') or die (mysql_error());
 
 //Select database
 mysql_select_db('house_stats') or die (mysql_error());

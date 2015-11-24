@@ -6,7 +6,7 @@
 <?php
 if(isset($_POST['add']))
 {
-$dbhost = 'localhost:3036';
+$dbhost = 'raspi15.local:3036';
 $dbuser = 'robin';
 $dbpass = 'Micr0s0ft';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
