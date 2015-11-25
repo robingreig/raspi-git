@@ -4,7 +4,6 @@ char inChar;
 
 void sendAnalogValue(byte Channel)
 {
-  
   int valueAD;
   float VoltageA0;
   valueAD = analogRead(analogInTable[Channel]);
@@ -16,29 +15,44 @@ void sendAnalogValue(byte Channel)
   Serial.println(VoltageA0); 
 }
 
+int recoverValue = 1;
 void setup() {
   Serial.begin(9600);
   pinMode(13,OUTPUT);
+  pinMode(8,OUTPUT);
+  digitalWrite(8,LOW);
+  digitalWrite(13,HIGH);
 }
 
-void loop() {
+void loop() {  
   int sensorValue = analogRead(A0);
-//  Serial.println(sensorValue);
-  if(sensorValue > 525)
+  if (recoverValue < 1){
+   delay(5000);
+  }
+  if(sensorValue > 250)
     {
-      digitalWrite(13,LOW);
+    digitalWrite(8,LOW);
+    digitalWrite(13,HIGH);
+    recoverValue = 1;
     }
-    else
+  else if(sensorValue > 200)
     {
-      digitalWrite(13,HIGH);
+    digitalWrite(8,LOW);
+    digitalWrite(13,LOW);
+    }
+  else
+    {
+    digitalWrite(8,HIGH);
+    digitalWrite(13,LOW);
+    recoverValue = 0;
+    delay(500);
     }
   if(Serial.available() > 0)
     {
-      
+      digitalWrite(8,LOW);
       inChar = Serial.read(); // read character
-      
       if((inChar>='0') && (inChar <='5'))
          sendAnalogValue(inChar - '0');
     }
-  delay(1);      
+  delay(100);      
 }
