@@ -15,7 +15,7 @@ import warnings
 # ===========================================================================
 
 # Hostname, User, Password, Database
-dbc = MySQLdb.connect(host= "raspi15.local",
+dbc = MySQLdb.connect(host= "192.168.200.15",
 	user= "robin",
 	passwd= "Micr0s0ft",
 	db= "house_stats")
@@ -48,14 +48,10 @@ while(True):
 
 
   def AprxVoltageRead():
-     lines0 = read_AprxVoltage()
-     temp_string = lines0[0]
-     # Test to see if the string is empty, if so, then assign a value of 7.77
-     if temp_string and not temp_string.isspace():
-       AprxVoltage = float(temp_string)
-     else:
-       AprxVoltage = 7.77
-     return AprxVoltage
+        lines0 = read_AprxVoltage()
+        temp_string = lines0[0]
+        AprxVoltage = float(temp_string)
+        return AprxVoltage
 
   def read_BlackTruckVoltage():
      f = open('/home/robin/ReadVoltage0', 'r')
@@ -64,14 +60,10 @@ while(True):
      return lines0 
 
   def BlackTruckRead():
-     lines0 = read_BlackTruckVoltage()
-     temp_string = lines0[0]
-     # Test to see if the string is empty, if so, then assign a value of 7.77
-     if temp_string and not temp_string.isspace():
-       BlackTruckVoltage = float(temp_string)
-     else:
-       BlackTruckVoltage = 7.77
-     return BlackTruckVoltage
+        lines0 = read_BlackTruckVoltage()
+        temp_string = lines0[0]
+        BlackTruckVoltage = float(temp_string)
+        return BlackTruckVoltage
 
   def read_GreyTruckVoltage():
      f = open('/home/robin/ReadVoltage1', 'r')
@@ -80,14 +72,10 @@ while(True):
      return lines0 
 
   def GreyTruckRead():
-     lines0 = read_GreyTruckVoltage()
-     temp_string = lines0[0]
-     # Test to see if the string is empty, if so, then assign a value of 7.77
-     if temp_string and not temp_string.isspace():
-       GreyTruckVoltage = float(temp_string)
-     else:
-       GreyTruckVoltage = 7.77
-     return GreyTruckVoltage
+        lines0 = read_GreyTruckVoltage()
+        temp_string = lines0[0]
+        GreyTruckVoltage = float(temp_string)
+        return GreyTruckVoltage
 
   def read_Bank1Voltage():
      f = open('/home/robin/ReadVoltage3', 'r')
@@ -96,14 +84,10 @@ while(True):
      return lines0 
 
   def Bank1Read():
-     lines0 = read_Bank1Voltage()
-     temp_string = lines0[0]
-     # Test to see if the string is empty, if so, then assign a value of 7.77
-     if temp_string and not temp_string.isspace():
-       Bank1Voltage = float(temp_string)
-     else:
-       Bank1Voltage = 7.77
-     return Bank1Voltage
+        lines0 = read_Bank1Voltage()
+        temp_string = lines0[0]
+        Bank1Voltage = float(temp_string)
+        return Bank1Voltage
 
   def read_Bank2Voltage():
      f = open('/home/robin/ReadVoltage4', 'r')
@@ -112,14 +96,10 @@ while(True):
      return lines0 
 
   def Bank2Read():
-     lines0 = read_Bank2Voltage()
-     temp_string = lines0[0]
-     # Test to see if the string is empty, if so, then assign a value of 7.77
-     if temp_string and not temp_string.isspace():
-       Bank2Voltage = float(temp_string)
-     else:
-       Bank2Voltage = 7.77
-     return Bank2Voltage
+        lines0 = read_Bank2Voltage()
+        temp_string = lines0[0]
+        Bank2Voltage = float(temp_string)
+        return Bank2Voltage
 
   def read_Bank3Voltage():
      f = open('/home/robin/ReadVoltage5', 'r')
@@ -128,14 +108,10 @@ while(True):
      return lines0 
 
   def Bank3Read():
-     lines0 = read_Bank3Voltage()
-     temp_string = lines0[0]
-     # Test to see if the string is empty, if so, then assign a value of 7.77
-     if temp_string and not temp_string.isspace():
-       Bank3Voltage = float(temp_string)
-     else:
-       Bank3Voltage = 7.77
-     return Bank3Voltage
+        lines0 = read_Bank3Voltage()
+        temp_string = lines0[0]
+        Bank3Voltage = float(temp_string)
+        return Bank3Voltage
 
  
   Voltage0 = (round(AprxVoltageRead(),2))
