@@ -1,0 +1,5 @@
+2015.11.20
+Tried to add the averaging factor, but it's not being used in the calculation.
+Still working on it.
+Can't print the data to the python program && to the Serial Monitor.
+
