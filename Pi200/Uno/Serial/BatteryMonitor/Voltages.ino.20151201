@@ -42,7 +42,7 @@ void loop() {
 // Sensor Value 900 = ((5.0/1023)*900)+9.57 = 13.97VDC
 // Sensor Value 950 = ((5.0/1023)*950)+9.57 = 14.21VDC
 // Sensor Value 1000 = ((5.0/1023)*1000)+9.57 = 14.46VDC
-  if(sensorValue > 1000){
+  if(sensorValue > 950){
     digitalWrite(13,HIGH);
   }
 // Sensor Value 395 = ((5.0/1023)*395)+9.57=11.5VDC
