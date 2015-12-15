@@ -24,7 +24,7 @@ void ReadSerial()
 
 void setup() {
   Serial.begin(9600);
-  pinMode(13,OUTPUT); // Relay to turn Battery Charger On & Onboard LED On
+  pinMode(13,OUTPUT); // Relay to turn Battery Charger On & Onboard LED
   pinMode(12,OUTPUT); // Raspberry Pi Relay
   pinMode(8,OUTPUT); // Battery Voltage > 13VDC
   pinMode(7,OUTPUT); // Battery Voltage > 12VDC
@@ -43,12 +43,12 @@ void loop() {
 // Sensor Value 950 = ((5.0/1023)*950)+9.57 = 14.21VDC
 // Sensor Value 1000 = ((5.0/1023)*1000)+9.57 = 14.46VDC
   if(sensorValue > 1000){
-    digitalWrite(13,LOW);
+    digitalWrite(13,HIGH);
   }
 // Sensor Value 395 = ((5.0/1023)*395)+9.57=11.5VDC
 // Sensor Value 498 = ((5.0/1023)*498)+9.57=12.0VDC
   else if(sensorValue < 395){
-    digitalWrite(13,HIGH);
+    digitalWrite(13,LOW);
   }
 
 // LED Voltage Indicator Loops:
