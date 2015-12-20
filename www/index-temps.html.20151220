@@ -17,10 +17,6 @@
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="view1.php">Current</a></td>
 </tr>
 <tr>
-<td>View Min / Max</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="ViewMinMaxTemps.php">View Min/Max</a></td>
-</tr>
-<tr>
 <td>View 20</td>
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="view20.php">View 20</a></td>
 </tr>

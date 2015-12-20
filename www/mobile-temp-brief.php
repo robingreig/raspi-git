@@ -4,9 +4,9 @@
   <title>View Temps</title>
   <link rel="stylesheet" type="text/css"  href="default.css">
 <style>
-h1{font-size:600%;}
+h1{font-size:400%;}
 </style>
-<h1>
+//<h1>
 <center>
 Irricana Temps
 </center>
@@ -55,7 +55,25 @@ $maxtemp2 = mysql_query("SELECT max(outside_temp) FROM garage_temp WHERE date=CU
 $maxtemp3 = mysql_fetch_assoc($maxtemp2);
 $maxtemp4 = ROUND($maxtemp3['max(outside_temp)'],2);
 echo "<center>".$maxtemp1.$maxtemp4.PHP_EOL."</center>";
+echo "<br>";
+
+//Minimum Maple Creek Temperature
+$mintemp5 = "Minimum Maple Creek Temp Today: ";
+$mintemp6 = mysql_query("SELECT min(maple_house),1 FROM garage_temp WHERE date=CURDATE()");
+$mintemp7 = mysql_fetch_assoc($mintemp6);
+$mintemp8 = ROUND($mintemp7['min(maple_house)'],2);
+echo "<center>".$mintemp5.$mintemp8.PHP_EOL."</center>";
+echo "<br>";
+
+//Maximum Maple Creek Temperature
+$maxtemp5 = "Maximum Maple Creek Temp Today: ";
+$maxtemp6 = mysql_query("SELECT max(maple_house) FROM garage_temp WHERE date=CURDATE()");
+$maxtemp7 = mysql_fetch_assoc($maxtemp6);
+$maxtemp8 = ROUND($maxtemp7['max(maple_house)'],2);
+echo "<center>".$maxtemp5.$maxtemp8.PHP_EOL."</center>";
+
 ?>
+
 <center><a href="mobile-menu.php">Back</a></center>
 </h1>
 </body>
