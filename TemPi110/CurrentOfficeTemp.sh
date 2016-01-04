@@ -1,6 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-#scp -q /home/robin/CurrentOfficeTemp robin@192.168.200.15:/home/robin/CurrentOfficeTemp
-scp -q /home/robin/CurrentOfficeTemp robin@50.93.51.6:/home/robin/CurrentOfficeTemp
-
-
+if [ -s ./CurrentOfficeTemp ]
+then
+  echo "CurrentOfficeTemp has data"
+  scp -q /home/robin/CurrentOfficeTemp robin@raspi15.hopto.org:/home/robin/CurrentOfficeTemp
+else
+  echo "CurrentOfficeTemp is empty"
+fi
