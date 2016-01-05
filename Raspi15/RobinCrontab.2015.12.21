@@ -1,0 +1,56 @@
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+
+# Run Update Temp Database every 8 minutes
+*/10 * * * * /home/robin/UpdateTempDatabase.py > /dev/null 2>&1
+*/10 * * * * /home/robin/UpdateAprxTemps.sh > /dev/null 2>&1
+
+# Run Morning Backup
+0 5 * * * /bin/bash /home/robin/MorningBackup.sh > /dev/null 2>&1
+
+00 03 * * * /bin/bash /home/robin/Uptime.sh > /dev/null 2>&1
+01 03 * * * cat uptime.txt | mail -s "Raspi15 Uptime" robin.greig@calalta.com
+02 03 * * * ls -Ggr /home/robin/house_stats_backup | mail -s "House Stats Backup" robin.greig@calalta.com
+03 03 * * * ls -Ggr /home/robin/mediadb_backup | mail -s "Mediadb Backup" robin.greig@calalta.com
+04 03 * * * ls -Ggr /home/robin/OfficeTempBackup | mail -s "Office Temp Backup" robin.greig@calalta.com
+05 03 * * * df -h | mail -s "Raspi15 Disk Usage" robin.greig@calalta.com
+07 03 * * * cat /home/robin/APRX1.uptime.txt | mail -s "APRX1 Uptime" robin.greig@calalta.com
+#08 03 * * * cat /home/robin/Gertduino1.uptime.txt | mail -s "Gertduino1 Uptime" robin.greig@calalta.com
+#09 03 * * * cat /home/robin/Gertduino2.uptime.txt | mail -s "Gertduino2 Uptime" robin.greig@calalta.com
+#10 03 * * * cat /home/robin/Gertduino3.uptime.txt | mail -s "Gertduino3 Uptime" robin.greig@calalta.com
+#11 03 * * * cat /home/robin/Gertduino4.uptime.txt | mail -s "Gertduino4 Uptime" robin.greig@calalta.com
+12 03 * * * cat /home/robin/TemPi110.uptime.txt | mail -s "TemPi110 Uptime" robin.greig@calalta.com
+13 03 * * * cat /home/robin/BattMon.uptime.txt | mail -s "BattMon Uptime" robin.greig@calalta.com
+14 03 * * * cat /home/robin/Pi200.uptime.txt | mail -s "Pi200 Uptime" robin.greig@calalta.com
+15 03 * * * cat /home/robin/Pi201.uptime.txt | mail -s "Pi201 Uptime" robin.greig@calalta.com
+
+# Copy raspi15_home directory to .14 & .16
+# Backup is done by sudo ./raspi15_backup.sh
+# Copy is done here by robin
+10 7 * * 5 /bin/bash /home/robin/raspi15_home_backup.sh > /dev/null 2>&1
+
+# Run Lunchtime Backup
+0 12 * * * /bin/bash /home/robin/LunchBackup.sh > /dev/null 2>&1
+
+# Run Evening Backup
+0 20 * * * /bin/bash /home/robin/NightlyBackup.sh > /dev/null 2>&1
