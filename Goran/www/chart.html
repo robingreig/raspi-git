@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <title>EE building - RPi temperature monitor</title>
+<!--style type="text/css">
+@import url('style.css');
+</style-->
+<link href="test/nv.d3.css" rel="stylesheet" type="text/css">
+<script src="d3/d3.v3.js"></script>
+<script src="test/nv.d3.min.js"></script>
+
+</head>
+<body>
+
+<div id="header">
+    <h1>
+     RaspberryPi Temperature Monitor
+    </h1>
+    <h2>Temperature monitoring for DMS room, E119, and E501.</h2>
+</div>
+
+
+<div id="content">
+<div id="maindata">
+<div id="chart">
+    <svg style='height:600px' />
+</div>
+<p style="font-size: 12px">Wait a bit! Chart will show up very soon, unless you are using IE9 or lower. Please, upgrade your browser. Then click and drag on the bottom chart to get window zoom.</p>
+</div>
+<script>
+d3.json('pulljsondata.php', function(data) {
+  nv.addGraph(function() {
+    var chart = nv.models.lineWithFocusChart()
+                  .margin({left: 80})  //Adjust chart margins to give the x-axis some breathing room.
+                  .x(function(d) { return d[0] })   //We can modify the data accessor functions...
+                  .y(function(d) { return d[1] })
+                  // .color(d3.scale.category10().range())
+                  // .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                  // .showYAxis(true)        //Show the y-axis
+                  // .showXAxis(true)        //Show the x-axis
+                  // .useInteractiveGuideline(true)
+                  ;
+
+    chart.xAxis
+        //.axisLabel('Date/Time')
+        .tickFormat(function(d) { return d3.time.format('%b-%d %H:%M')(new Date(d)) })
+        //.tickFormat(function(d) { return d3.time.format(d).parse(new Date(d)) })
+        ;
+    
+    chart.x2Axis
+        .axisLabel('Date/Time')
+        .tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d)) })
+        //.tickFormat(function(d) { return d3.time.format(d).parse(new Date(d)) })
+        ;
+        
+    chart.yAxis
+        .axisLabel('Temperature [C]')
+        ;
+
+    d3.select('#chart svg')
+        .datum(data)
+        .transition().duration(500)
+        .call(chart);
+
+    //TODO: Figure out a good way to do this automatically
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+});
+</script>
+</div>
+<div id="footer">
+  <p>&copy; SAIT Polytechnic, School of ICT, Technical Services, Electronics shop / E119<br /><a href="mailto:ict.electronics@sait.ca">Contact us by email here!</a></p>
+</div>
+</body>
+</html>

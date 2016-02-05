@@ -6,7 +6,7 @@
 <style>
 h1{font-size:400%;}
 </style>
-//<h1>
+<h1>
 <center>
 Irricana Temps
 </center>
