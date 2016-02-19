@@ -35,7 +35,7 @@ warnings.filterwarnings('ignore', category=MySQLdb.Warning)
 # ==========================================================================
 
 # Add a delay for boot
-time.sleep(10)
+time.sleep(1)
 
 # Continuously append data
 while(True):
