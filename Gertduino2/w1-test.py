@@ -9,6 +9,7 @@ import os
 import glob
 import warnings
 
+DEBUG = 0
 
 # Add a delay for boot
 time.sleep(1)
@@ -42,6 +43,15 @@ while(True):
           temp_string = lines1[1][equals_pos+2:]
           temp_c1 = float(temp_string) / 1000.0
           return temp_c1
+
+  TestTemp = round(read_temp1(),1)
+
+  if DEBUG > 0:
+    print "Test Temp (rounded): ", TestTemp
+  
+  cht = open("/home/robin/CurrentTestTemp", "w")
+  cht.write (str(TestTemp))
+  cht.close()
 
   print "Test Temp: ", (read_temp1())
     	
