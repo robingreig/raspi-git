@@ -58,7 +58,7 @@ while(True):
   if DEBUG > 0:
     print "Basement Temp (rounded): ", BasementTemp
   
-  cht = open("/home/robin/BasementTemp", "w")
+  cht = open("/home/robin/CurrentBasementTemp", "w")
   cht.write (str(BasementTemp))
   cht.close()
 
@@ -66,7 +66,7 @@ while(True):
 
   # Read the Current Basement Temperature
   def read_CurrentBasementTemp():
-    f = open("/home/robin/BasementTemp", "r")
+    f = open("/home/robin/CurrentBasementTemp", "r")
     line1 = f.readlines()
     f.close
     line2 = line1[0]
