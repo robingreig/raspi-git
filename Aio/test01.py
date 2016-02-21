@@ -3,7 +3,7 @@ from Adafruit_IO import Client
 aio = Client('7e01e8b5e56360efc48a27682324fc353e18d14f')
 
 # Send the value 100 to a feed called 'Foo'.
-aio.send('basement-temp', 19.1)
+aio.send('basement-temp', 19.7)
 
 # Retrieve the most recent value from the feed 'Foo'.
 # Access the value by reading the `value` property on the returned Data object.
