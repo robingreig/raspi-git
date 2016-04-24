@@ -5,11 +5,31 @@ import re
 import sys
 import time
 import datetime
+import MySQLdb
 import os
 import glob
 import warnings
 
 DEBUG = 1
+
+# ===========================================================================
+# Open Database Connection
+# ===========================================================================
+
+# Hostname, User, Password, Database
+dbc = MySQLdb.connect(host= "localhost",
+	user= "robin",
+	passwd= "Micr0s0ft",
+	db= "house_stats")
+
+# Prepare a cursor
+cursor = dbc.cursor()
+
+# ==========================================================================
+# Filter Warnings
+# ==========================================================================
+
+warnings.filterwarnings('ignore', category=MySQLdb.Warning)
 
 
 # ==========================================================================
@@ -17,7 +37,7 @@ DEBUG = 1
 # ==========================================================================
 
 # Add a delay for boot
-time.sleep(2)
+time.sleep(5)
 
 # Continuously append data
 while(True):
@@ -54,6 +74,21 @@ while(True):
   cht = open("/home/robin/CurrentHouseTemp", "w")
   cht.write (str(HouseTemp))
   cht.close()
+    	
+  time.sleep(1)
+  
+  try:
+    cursor.execute("""INSERT INTO house_stats 
+        (date, time, house_temp) 
+	VALUES 
+	(NOW(),NOW(),%s);""",
+	(read_temp1()))
 
+    dbc.commit()
+  except:
+    dbc.rollback()
+
+  print "Wrote a new row to the database"
   sys.exit()
 
+dbc.close()
