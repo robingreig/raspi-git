@@ -1,0 +1,11 @@
+#!/bin/bash
+
+/home/robin/officetemp.py
+
+if [ -s ./CurrentOfficeTemp ]
+then
+  echo "CurrentOfficeTemp has data, sending to Raspi15"
+  scp -q /home/robin/CurrentOfficeTemp robin@raspi15.hopto.org:/home/robin/CurrentOfficeTemp
+else
+  echo "CurrentOfficeTemp is empty"
+fi
