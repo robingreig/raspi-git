@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo >> /home/robin/CurrentOfficeTemp.log
+
+date >> /home/robin/CurrentOfficeTemp.log
+
+/home/robin/officetemp.py
+
+if [ -s ./CurrentOfficeTemp ]
+then
+  echo -n "Sending Current Office Temp to Raspi15: "
+  cat /home/robin/CurrentOfficeTemp
+  scp -q /home/robin/CurrentOfficeTemp robin@raspi15.hopto.org:/home/robin/CurrentOfficeTemp
+else
+  echo "CurrentOfficeTemp is empty"
+fi

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import subprocess
 import re
@@ -9,15 +9,10 @@ import os
 import glob
 import warnings
 
-DEBUG = 1
-
-
-# ==========================================================================
-# Insert into table - variable
-# ==========================================================================
+DEBUG = 0
 
 # Add a delay for boot
-time.sleep(2)
+time.sleep(1)
 
 # Continuously append data
 while(True):
@@ -26,8 +21,10 @@ while(True):
   os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
-#  device_folder1 = glob.glob(base_dir + '*27c2')[0]
-  device_folder1 = glob.glob(base_dir + '*3484')[0]
+  device_folder1 = glob.glob(base_dir + '*27c2')[0]
+#  device_folder1 = glob.glob(base_dir + '*284a')[0]
+#  device_folder1 = glob.glob(base_dir + '*2af2')[0]
+#  device_folder1 = glob.glob(base_dir + '*5c8c')[0]
   device_file1 = device_folder1 + '/w1_slave'
    
   def read_temp_raw1():
@@ -47,13 +44,18 @@ while(True):
           temp_c1 = float(temp_string) / 1000.0
           return temp_c1
 
-  HouseTemp = round(read_temp1(),1)
+  BasementTemp = round(read_temp1(),1)
+
   if DEBUG > 0:
-    print "House Temp: ", HouseTemp
+    print "Basement Temp (rounded): ", BasementTemp
   
-  cht = open("/home/robin/CurrentHouseTemp", "w")
-  cht.write (str(HouseTemp))
+  cht = open("/home/robin/BasementTemp", "w")
+  cht.write (str(BasementTemp))
   cht.close()
 
+  print "Basement Temp: ", (read_temp1())
+    	
+  time.sleep(1)
+  
   sys.exit()
 
