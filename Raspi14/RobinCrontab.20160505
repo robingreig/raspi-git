@@ -20,9 +20,9 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-*/8 * * * * sudo /home/robin/raspi14_webtemp.py > /dev/null 2>&1
-*/9 * * * * /bin/bash /home/robin/CurrentHouseTemp.sh > /dev/null 2>&1
-5 1 * * * /home/robin/Uptime.sh > /dev/null 2>&1
-10 1 * * * cat uptime.txt | mail -s "Raspi14 Uptime" robin.greig@calalta.com
-15 1 * * * df -h | mail -s "Raspi14 Disk Usage" robin.greig@calalta.com
-5 4 * * * ls -Ggr /home/robin/house_stats_backup | mail -s "Raspi14 HouseStatsBackup" robin.greig@calalta.com
+
+23 2 * * * /home/robin/Uptime.sh > /dev/null 2&>1
+*/10 * * * * /home/robin/BasementTempAio.py > /dev/null 2&>1
+*/10 * * * * /home/robin/GarageTempAio.py > /dev/null 2&>1
+*/10 * * * * /home/robin/HouseTempAio.py > /dev/null 2&>1
+*/10 * * * * /home/robin/OutsideTempAio.py > /dev/null 2&>1

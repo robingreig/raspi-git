@@ -1,0 +1,19 @@
+
+Thu May  5 02:23:01 MDT 2016
+ 02:23:01 up 2 days,  5:53,  0 users,  load average: 0.00, 0.02, 0.05
+
+Wed May  4 02:23:01 MDT 2016
+ 02:23:01 up 1 day,  5:53,  0 users,  load average: 0.00, 0.01, 0.05
+
+Tue May  3 02:23:01 MDT 2016
+ 02:23:01 up  5:53,  0 users,  load average: 0.00, 0.01, 0.05
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       7.3G 1019M  6.0G  15% /
+devtmpfs        238M     0  238M   0% /dev
+tmpfs           242M     0  242M   0% /dev/shm
+tmpfs           242M  4.4M  237M   2% /run
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           242M     0  242M   0% /sys/fs/cgroup
+/dev/mmcblk0p1   60M   20M   41M  34% /boot
+
