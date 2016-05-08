@@ -1,0 +1,16 @@
+Fri Dec 18 22:26:48 MST 2015
+
+ 22:26:48 up 1 min,  2 users,  load average: 0.06, 0.05, 0.02
+
+wlan0     Link encap:Ethernet  HWaddr 00:e0:4c:10:5f:ca  
+          inet addr:192.168.20.100  Bcast:192.168.20.255  Mask:255.255.255.0
+          inet6 addr: fd04:21f:b50e:1100:b934:1a7c:a504:27d2/64 Scope:Global
+          inet6 addr: fe80::6eb0:b2f6:3fec:b01b/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:522 errors:0 dropped:16 overruns:0 frame:0
+          TX packets:170 errors:0 dropped:1 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:107535 (105.0 KiB)  TX bytes:29706 (29.0 KiB)
+
+
+23.312
