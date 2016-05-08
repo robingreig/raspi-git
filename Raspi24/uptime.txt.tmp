@@ -1,0 +1,28 @@
+
+Sat May  7 08:19:31 MDT 2016
+ 08:19:31 up 6 days, 17:35,  1 user,  load average: 0.00, 0.01, 0.05
+
+Sat Apr 30 15:15:41 MDT 2016
+ 15:15:41 up 31 min,  1 user,  load average: 0.00, 0.01, 0.05
+
+Sat Apr 30 15:14:30 MDT 2016
+ 15:14:30 up 30 min,  1 user,  load average: 0.00, 0.02, 0.05
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        29G  1.4G   26G   5% /
+devtmpfs        459M     0  459M   0% /dev
+tmpfs           463M     0  463M   0% /dev/shm
+tmpfs           463M   18M  446M   4% /run
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           463M     0  463M   0% /sys/fs/cgroup
+/dev/mmcblk0p1   60M   20M   41M  34% /boot
+
+eth0      Link encap:Ethernet  HWaddr b8:27:eb:23:0f:d9  
+          inet addr:192.168.200.24  Bcast:192.168.200.255  Mask:255.255.255.0
+          inet6 addr: fe80::b05a:65b3:8bd2:4610/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:741434 errors:0 dropped:1677 overruns:0 frame:0
+          TX packets:232341 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:673083903 (641.9 MiB)  TX bytes:21287483 (20.3 MiB)
+
