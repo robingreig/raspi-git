@@ -2,7 +2,7 @@
 <br>
 <head>
   <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
-  <title>View Min/Max Temps</title>
+  <title>View Min/Max Voltages</title>
   <link rel="stylesheet" type="text/css"  href="default.css">
 </head>
 <body>
@@ -30,7 +30,7 @@ mysql_select_db('house_stats') or die (mysql_error());
 echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Outside Temp</th><th>Desk Temp</th></th><th>Ceiling Temp</th><th>Attic Temp</th><th>House Temp</th><th>Office Temp</th><th>Maple Creek</th></tr>";
 
 // For loop to scroll through todays values & 9 previous by incrementing the interval of the CURDATE below
-for ($i = 0; $i <=0; $i++){
+for ($i = 0; $i <=4; $i++){
 
  $mintemp00 = mysql_query("SELECT date, min(outside_temp), min(desk_temp), min(ceiling_temp), min(attic_temp), min(house_temp), min(office_temp), min(maple_house) FROM garage_temp WHERE date= (CURDATE() - INTERVAL $i DAY)");
  $maxtemp00 = mysql_query("SELECT date, max(outside_temp), max(desk_temp), max(ceiling_temp), max(attic_temp), max(house_temp), max(office_temp), max(maple_house) FROM garage_temp WHERE date= (CURDATE() - INTERVAL $i DAY)");

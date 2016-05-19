@@ -36,22 +36,6 @@
 <td>View all Temps Today</td>
 <td style="text-align: center;" colspan="2" rowspan="1"><a href="viewtoday.php">View all Today</a></td>
 </tr>
-<tr>
-<td>View all January 2016 Temps</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="viewjan2016.php">View all January 2016</a></td>
-</tr>
-<tr>
-<td>View all February 2016 Temps</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="viewfeb2016.php">View all February 2016</a></td>
-</tr>
-<tr>
-<td>View all March 2016 Temps</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="viewmar2016.php">View all March 2016</a></td>
-</tr>
-<tr>
-<td>View all April 2016 Temps</td>
-<td style="text-align: center;" colspan="2" rowspan="1"><a href="viewapr2016.php">View all April 2016</a></td>
-</tr>
 </tbody>
 </form>
 </table>
