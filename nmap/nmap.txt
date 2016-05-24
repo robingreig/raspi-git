@@ -1,0 +1,16 @@
+
+To run Tcpdump:
+sudo tcpdump host 192.168.200.20 -w ~/scan_results/syn_scan/packets
+
+To run Tcpdump in the background:
+Ctrl-Z to stop it
+bg
+
+To run a full scan:
+sudo nmap -sS -Pn -p- -T4 -vv --reason -oN ~/scan_results/syn_scan/nmap.results 192.168.200.20
+
+Takes anywhere between 1/2 - 1 hour
+
+cat ~/scan_results/syn_scan/nmap.results
+
+
