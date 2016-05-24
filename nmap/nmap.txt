@@ -9,8 +9,43 @@ bg
 To run a full scan:
 sudo nmap -sS -Pn -p- -T4 -vv --reason -oN ~/scan_results/syn_scan/nmap.results 192.168.200.20
 
-Takes anywhere between 1/2 - 1 hour
+-sS: This starts a SYN scan. 
+This is technically the default scan that nmap will perform if no scan type is given, but we will include it here to be explicit.
+
+-Pn: This tells nmap to skip the host discovery step, 
+which would abort the test early if the host doesn't respond to a ping. Since we know that the target is online, we can skip this.
+
+-p-: By default, SYN scans will only try the 1000 most commonly used ports. 
+This tells nmap to check every available port.
+
+-T4: This sets a timing profile for nmap, telling it to speed up the test at the risk of slightly less accurate results. 
+0 is the slowest and 5 is the fastest. Since we're scanning every port, 
+we can use this as our baseline and re-check any ports later that might have been reported incorrectly.
+
+-vv: This increases the verbosity of the output.
+
+--reason: This tells nmap to provide the reason that a port's state was reported a certain way.
+
+-oN: This writes the results to a file that we can use for later analysis.
+
+### Takes anywhere between 1/2 - 1 hour
+
+Once it is done run:
+fg to bring Tcpdump back into the foreground
+Ctrl-C to terminate the process
 
 cat ~/scan_results/syn_scan/nmap.results
+
+To see everything from Tcpdump:
+sudo tcpdump -nn -r ~/scan_results/syn_scan/packets | less
+
+To see just SYN packet responses:
+sudo tcpdump -nn -r ~/scan_results/syn_scan/packets 'src target_ip_addr and tcp[tcpflags] & tcp-syn != 0' | less
+
+To see just traffic sent to the target:
+sudo tcpdump -nn -r ~/scan_results/syn_scan/packets 'dst target_ip_addr' | less
+
+To see just traffic sent from the target:
+sudo tcpdump -nn -r ~/scan_results/syn_scan/packets 'src target_ip_addr' | less
 
 
