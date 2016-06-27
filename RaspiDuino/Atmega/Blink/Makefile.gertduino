@@ -1,0 +1,5 @@
+ARDUINO_DIR = /usr/share/arduino
+BOARD-TAG= gertduino328
+ARDUINO_PORT= 
+ARDUINO_LIBS= 
+include /home/robin/Arduino.mk
