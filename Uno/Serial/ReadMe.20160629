@@ -28,4 +28,4 @@ B1 = Port ? = PC3
 /Uno/Serial/BatteryMonitor/BatteryMonitor06
 
 7) I think that the Uno program on Raspi23 is located at
-~/raspi-git/Uno/Serial/BatteryMonitor.2016
+~/raspi-git/Uno/Serial/BatteryMonitor.2016.06.27/build-uno/Voltages.ino

@@ -1,0 +1,21 @@
+wget -O- http://project-downloads.drogon.net/gertduino/gertduino.tgz | tar xfz -
+
+cd gertduino
+
+cd avrdude
+
+sudo cp /etc/avrdude.conf /var/tmp
+sudo cp avrdude.conf /etc
+
+sudo cp /usr/share/arduino/hardware/arduino/boards.txt /var/tmp
+sudo cp boards.txt /usr/share/arduino/hardware/arduino/boards.txt
+
+sudo cp /usr/share/arduino/hardware/arduino/programmers.txt /var/tmp
+sudo cp programmers.txt /usr/share/arduino/hardware/arduino/programmers.txt 
+
+sudo cp /usr/bin/avrdude /var/tmp
+sudo cp avrdude /usr/bin/avrdude
+
+sudo chmod 4755 /usr/bin/avrdude
+
+

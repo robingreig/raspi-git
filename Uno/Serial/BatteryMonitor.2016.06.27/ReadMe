@@ -1,0 +1,13 @@
+
+2016.06.29
+*** Having to relearn much of this since I haven't used it in quite awhile and I don't recall the Arduino Program used
+
+1) Use nano to modify the .ino file
+
+2) Use arduino-mk to create new .hex file
+2.1) Run make ..not.. make upload
+
+3) To run avrdude:
+3.1) Run from the main directory: avrdude -p atmega328p -c gpio -v -U flash:w:./build-uno/BatteryMonitor.hex:i
+
+
