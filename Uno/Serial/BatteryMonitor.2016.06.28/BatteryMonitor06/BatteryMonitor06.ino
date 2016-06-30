@@ -48,9 +48,6 @@ void loop() {
     if(sensorValue > 712) {
       digitalWrite(5,HIGH);
     }
-    if(sensorValue > 610) {
-      digitalWrite(8,HIGH);
-    }
     if(sensorValue > 508) {
       digitalWrite(3,HIGH);
     }

@@ -1,4 +1,4 @@
-build-uno/Voltages.o: Voltages.ino \
+build-uno/BatteryMonitor.o: BatteryMonitor.ino \
  /usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/binary.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/WCharacter.h \
