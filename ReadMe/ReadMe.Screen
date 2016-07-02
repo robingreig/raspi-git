@@ -11,3 +11,5 @@
 ^A \ = Kill all windows and terminate screen
 
 screen -x to reattach screen session to a new terminal
+
+screen /dev/serial0 9600 = to talk to Gertduino via serial port
