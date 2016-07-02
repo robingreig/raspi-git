@@ -9,7 +9,7 @@ int val = 0; // value of switch
 int sw1 = 2; // Switch 1 is port 2 
 float zener = 9.59; // Zener Voltage Drop
 float multiplier = 4.6; //Multiplier to set digital > analog steps
-const int debug = 1; // If debug = 1 then extra lines printed
+const int debug = 0; // If debug = 1 then extra lines printed
 char inChar;
 
 void sendAnalogValue(byte Channel)
