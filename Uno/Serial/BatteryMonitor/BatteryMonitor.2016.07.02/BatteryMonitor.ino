@@ -7,18 +7,33 @@
 const int analogInTable[6]= {A0,A1,A2,A3,A4,A5};
 int val = 0; // value of switch
 int sw1 = 2; // Switch 1 is port 2 
+float zener = 9.59; // Zener Voltage Drop
+float multiplier = 4.6; //Multiplier to set digital > analog steps
+const int debug = 0; // If debug = 1 then extra lines printed
 char inChar;
 
 void sendAnalogValue(byte Channel)
 {
   int valueAD;
+  float SensorAnalog;
   float BattVolt;
   valueAD = analogRead(analogInTable[Channel]);
-  BattVolt = valueAD * (5.0/1023.0)+9.57;
+  SensorAnalog = (valueAD * (multiplier/1023.0)); // 0-5 V
+  //BattVolt = ((valueAD * (multiplier/1023.0))+zener); // Send back Calculated Battery Voltage
+  BattVolt = (SensorAnalog + zener); // Send back Calculated Battery Voltage
   if (BattVolt <= 9.6){
     BattVolt = 0;
   }
-  Serial.println(BattVolt); 
+  if (debug == 1) {
+    Serial.print("valueAD: ");
+    Serial.println (valueAD);
+    Serial.print("SensorAnalog: ");
+    Serial.println (SensorAnalog);
+    Serial.print("Calculated Battery Voltage: ");
+    Serial.println(BattVolt); 
+  } else {
+    Serial.println(BattVolt); 
+  }
 }
 
 void ReadSerial()
@@ -53,10 +68,13 @@ void setup() {
 void loop() {  
   int sensorValue = analogRead(A0);
 ///// Battery Charger Loop
-// Sensor Value 900 = ((5.0/1023)*900)+9.57 = 13.97VDC
-// Sensor Value 950 = ((5.0/1023)*950)+9.57 = 14.21VDC
-// Sensor Value 1000 = ((5.0/1023)*1000)+9.57 = 14.46VDC
-  if(sensorValue > 1000){
+// Sensor Value 900 = ((4.6/1023)*900)+9.59 = 13.64 VDC
+// Sensor Value 950 = ((4.6/1023)*950)+9.59 = 13.86 VDC
+// Sensor Value 1000 = ((4.6/1023)*1000)+9.59 = 14.08 VDC
+// Sensor Value 1050 = ((4.6/1023)*1000)+9.59 = 14.31 VDC
+// Sensor Value 1060 = ((4.6/1023)*1000)+9.59 = 14.36 VDC
+// Sensor Value 1070 = ((4.6/1023)*1000)+9.59 = 14.4 VDC
+  if(sensorValue > 1050){
     digitalWrite(4,HIGH);
   }
 // Sensor Value 395 = ((5.0/1023)*395)+9.57=11.5VDC
