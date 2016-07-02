@@ -77,3 +77,5 @@ D) Gertduino Switch pinouts:
 22.4) exit & test run ./Uptime.sh
 22.5) crontab -e = 19 2 * * * /home/robin/Uptime.sh > /dev/null 2>&1
 
+23) git config --global user.name "Robin Greig" & git config user.email "robin.greig@calalta.com"
+
