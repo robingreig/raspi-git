@@ -1,0 +1,35 @@
+Uninstall nmap if an older version is already installed:
+sudo apt-get purge nmap
+
+
+Back on your auditing machine, move into your home directory and use wget to download the link you pasted. 
+Make sure to update the link below to reflect the most recent version you copied from the site:
+
+cd ~
+wget https://nmap.org/dist/nmap-6.49BETA4.tar.bz2
+
+
+Decompress the file you downloaded and move into the resulting directory by typing:
+tar xjvf nmap*
+cd nmap*
+
+
+Configure and compile the source code by typing:
+./configure
+make
+
+
+Once the compilation is complete, you can install the resulting executables and supporting files on your system by typing:
+sudo make install
+
+
+Confirm your installation by typing:
+nmap -V
+
+The output should match the version you downloaded from the nmap website:
+Output
+Nmap version 6.49BETA4 ( https://nmap.org )
+Platform: x86_64-unknown-linux-gnu
+Compiled with: nmap-liblua-5.2.3 openssl-1.0.1f nmap-libpcre-7.6 nmap-libpcap-1.7.3 nmap-libdnet-1.12 ipv6
+Compiled without:
+Available nsock engines: epoll poll select
