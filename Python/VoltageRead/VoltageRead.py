@@ -24,7 +24,8 @@ maxcount = 2
 #ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
-ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
+#ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
+ser = serial.Serial('/dev/serial0', 9600, timeout=5)
 
 #====================================================================
 # Send the Analogue Port number to Gertduino & read back the voltage value

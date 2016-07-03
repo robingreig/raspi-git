@@ -8,8 +8,8 @@ const int analogInTable[6]= {A0,A1,A2,A3,A4,A5};
 int val = 0; // value of switch
 int sw1 = 2; // Switch 1 is port 2 
 float zener = 9.59; // Zener Voltage Drop
-float multiplier = 4.6; //Multiplier to set digital > analog steps
-const int debug = 0; // If debug = 1 then extra lines printed
+float multiplier = 4.6; //Multiplier to set digital to analog steps
+const int debug = 0; // If debug > 0 then the extra lines are printed
 char inChar;
 
 void sendAnalogValue(byte Channel)
@@ -24,7 +24,7 @@ void sendAnalogValue(byte Channel)
   if (BattVolt <= 9.6){
     BattVolt = 0;
   }
-  if (debug == 1) {
+  if (debug > 0) {
     Serial.print("valueAD: ");
     Serial.println (valueAD);
     Serial.print("SensorAnalog: ");
@@ -55,8 +55,8 @@ void setup() {
   pinMode(3,OUTPUT);		// Battery Voltage > 13 VDC
   pinMode(5,OUTPUT);		// Battery Voltage > 13.5 VDC
   pinMode(6,OUTPUT);		// Battery Voltage > 14 VDC
-  digitalWrite(4,LOW);
-  digitalWrite(7,HIGH);
+  digitalWrite(4,HIGH);
+  digitalWrite(7,LOW);
   digitalWrite(13,LOW);
   digitalWrite(9,LOW);
   digitalWrite(10,LOW);
@@ -75,12 +75,12 @@ void loop() {
 // Sensor Value 1060 = ((4.6/1023)*1000)+9.59 = 14.36 VDC
 // Sensor Value 1070 = ((4.6/1023)*1000)+9.59 = 14.4 VDC
   if(sensorValue > 1050){
-    digitalWrite(4,HIGH);
+    digitalWrite(4,LOW); // High to charge
   }
 // Sensor Value 395 = ((5.0/1023)*395)+9.57=11.5VDC
 // Sensor Value 498 = ((5.0/1023)*498)+9.57=12.0VDC
   else if(sensorValue < 395){
-    digitalWrite(4,LOW);
+    digitalWrite(4,HIGH);
   }
 
 ///// LED Voltage Indicator Loops:
@@ -122,11 +122,11 @@ void loop() {
 // Raspberry Pi Shutdown Loop
 // Sensor Value 283 = ((5.0/1023)*293)+9.57= 11.0 VDC
   if(sensorValue > 283){
-    digitalWrite(7,HIGH);
+    digitalWrite(7,LOW);
   }
 // Sensor Value 190 = ((5.0/1023)*190)+9.57= 10.5 VDC
   else if(sensorValue < 190){
-    digitalWrite(7,LOW);
+    digitalWrite(7,HIGH);
   }
   if(Serial.available() > 0){
     ReadSerial();

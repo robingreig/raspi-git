@@ -1,0 +1,11 @@
+
+Pi2 = avrdude 6.1 & changed /etc/avrdude.conf to open linuxgpio
+	reset = 8
+	sck = 11
+	MOSI = 10
+	MISO = 9
+
+*** That way the Pi2 works with both the ICSP plug as well as Gertduino board
+*** But Gertduino boards don't reset after uploading code.... unless you reboot raspi
+
+
