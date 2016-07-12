@@ -58,7 +58,7 @@ echo "<center>".$maxtemp1.$maxtemp4.PHP_EOL."</center>";
 echo "<br>";
 
 //Minimum Maple Creek Temperature
-$mintemp5 = "Minimum Maple Creek Temp Today: ";
+$mintemp5 = "Minimum Carefree Temp Today: ";
 $mintemp6 = mysql_query("SELECT min(maple_house),1 FROM garage_temp WHERE date=CURDATE()");
 $mintemp7 = mysql_fetch_assoc($mintemp6);
 $mintemp8 = ROUND($mintemp7['min(maple_house)'],2);
@@ -66,7 +66,7 @@ echo "<center>".$mintemp5.$mintemp8.PHP_EOL."</center>";
 echo "<br>";
 
 //Maximum Maple Creek Temperature
-$maxtemp5 = "Maximum Maple Creek Temp Today: ";
+$maxtemp5 = "Maximum Carefree Temp Today: ";
 $maxtemp6 = mysql_query("SELECT max(maple_house) FROM garage_temp WHERE date=CURDATE()");
 $maxtemp7 = mysql_fetch_assoc($maxtemp6);
 $maxtemp8 = ROUND($maxtemp7['max(maple_house)'],2);

@@ -27,8 +27,9 @@ mysql_connect('raspi15.local', 'robin', 'Micr0s0ft') or die (mysql_error());
 mysql_select_db('house_stats') or die (mysql_error());
 
 //Table starting tag and header cells
-echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Outside Temp</th><th>Desk Temp</th></th><th>Ceiling Temp</th><th>Attic Temp</th><th>House Temp</th><th>Office Temp</th><th>Carefree Temp</th></tr>";
 //echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Outside Temp</th><th>Desk Temp</th></th><th>Ceiling Temp</th><th>Attic Temp</th><th>House Temp</th><th>Office Temp</th></tr>";
+//echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Outside Temp</th><th>Desk Temp</th></th><th>Ceiling Temp</th><th>Attic Temp</th><th>House Temp</th><th>Office Temp</th><th>Carefree Temp</th></tr>";
+echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>Outside Temp</th><th>Desk Temp</th></th><th>Ceiling Temp</th><th>Attic Temp</th><th>House Temp</th><th>Office Temp</th></tr>";
 
 // For loop to scroll through todays values & 9 previous by incrementing the interval of the CURDATE below
 for ($i = 0; $i <=4; $i++){
@@ -52,8 +53,9 @@ for ($i = 0; $i <=4; $i++){
    $maxtemp4 = ROUND($row1['max(house_temp)'],2);
    $maxtemp5 = ROUND($row1['max(office_temp)'],2);
    $maxtemp6 = ROUND($row1['max(maple_house)'],2);
-  echo "<tr><td>" . $row['date'] . "</td><td>" . ($mintemp0.$slash.$maxtemp0) . "</td><td>" . ($mintemp1.$slash.$maxtemp1) . "</td><td>" .($mintemp2.$slash.$maxtemp2) . "</td><td>" . ($mintemp3.$slash.$maxtemp3) . "</td><td>" . ($mintemp4.$slash.$maxtemp4) . "</td><td>" . ($mintemp5.$slash.$maxtemp5) . "</td><td>" . ($mintemp6.$slash.$maxtemp6) . "</td></tr>";
 //  echo "<tr><td>" . $row['date'] . "</td><td>" . ($mintemp0.$slash.$maxtemp0) . "</td><td>" . ($mintemp1.$slash.$maxtemp1) . "</td><td>" .($mintemp2.$slash.$maxtemp2) . "</td><td>" . ($mintemp3.$slash.$maxtemp3) . "</td><td>" . ($mintemp4.$slash.$maxtemp4) . "</td><td>" . ($mintemp5.$slash.$maxtemp5) . "</td></tr>";
+//  echo "<tr><td>" . $row['date'] . "</td><td>" . ($mintemp0.$slash.$maxtemp0) . "</td><td>" . ($mintemp1.$slash.$maxtemp1) . "</td><td>" .($mintemp2.$slash.$maxtemp2) . "</td><td>" . ($mintemp3.$slash.$maxtemp3) . "</td><td>" . ($mintemp4.$slash.$maxtemp4) . "</td><td>" . ($mintemp5.$slash.$maxtemp5) . "</td><td>" . ($mintemp6.$slash.$maxtemp6) . "</td></tr>";
+  echo "<tr><td>" . $row['date'] . "</td><td>" . ($mintemp0.$slash.$maxtemp0) . "</td><td>" . ($mintemp1.$slash.$maxtemp1) . "</td><td>" .($mintemp2.$slash.$maxtemp2) . "</td><td>" . ($mintemp3.$slash.$maxtemp3) . "</td><td>" . ($mintemp4.$slash.$maxtemp4) . "</td><td>" . ($mintemp5.$slash.$maxtemp5) . "</td></tr>";
  }
 }
 
