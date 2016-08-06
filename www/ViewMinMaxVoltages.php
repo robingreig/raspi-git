@@ -38,7 +38,7 @@ Display the results in different cells
 */
 
 //Table starting tag and header cells
-echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>APRX Battery</th><th>Black Truck</th></th><th>Grey Truck</th><th>Orange 1</th><th>Green 2</th><th>Blue 3</th><th>Bank 4</th></tr>";
+echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>APRX Battery</th><th>Black Truck</th></th><th>Grey Truck</th><th>Secondary (Orange)</th><th>Primary (Green)</th><th>12V-1 (Blue)</th><th>12V-2 (Brown)</th></tr>";
 
 // For loop to scroll through todays values & 9 previous by incrementing the interval of the CURDATE below
 for ($i = 0; $i <=0; $i++){
