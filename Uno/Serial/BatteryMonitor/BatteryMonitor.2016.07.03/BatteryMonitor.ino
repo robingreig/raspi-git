@@ -11,11 +11,16 @@ int Pin4 = 4; // Pin 4
 int readPin4 = 0; //value of Pin4
 int Pin7 = 7; // Pin 7
 int readPin7 = 0; //value of Pin7
-float zener = 9.59; // Zener Voltage Drop
-float multiplier = 5; //Multiplier to set digital to analog steps
+//float zener = 9.56; // Zener Voltage Drop //Actual measured, but calculated still too high
+//float zener = 9.4; // Zener Voltage Drop
+float zener = 9.15; // Zener Voltage Drop
+float multiplier = 5.00; //*** Calculated is still a little high (11.72 vs 11.51) 
+//float multiplier = 4.90; //***  *** Multiplier to set digital to analog steps
+//float multiplier = 4.80; //***  *** Multiplier to set digital to analog steps
+//float multiplier = 4.70; //***  Calculated is still a little high (12.96 vs 13.2) 
+//float multiplier = 4.60; //***  *** Multiplier to set digital to analog steps
 const int debug = 1; // If debug > 0 then the extra lines are printed
 char inChar;
-
 
 void sendAnalogValue(byte Channel)
 {
@@ -29,20 +34,23 @@ void sendAnalogValue(byte Channel)
     Serial.println(analogInTable[Channel]);
     Serial.print("valueAD: ");
     Serial.println (valueAD);
+    Serial.print("multiplier: analog > digital: ");
+    Serial.println(multiplier);
     SensorAnalog = (valueAD * (multiplier/1023.0)); // 0-5 V
-    Serial.print("SensorAnalog: ");
+    Serial.print("SensorAnalog (valueAT * (multiplier/1023)): ");
     Serial.println (SensorAnalog);
     Serial.print("Zener Voltage: ");
     Serial.println (zener);
     BattVolt = (SensorAnalog + zener); // Send back Calculated Battery Voltage
-    Serial.print("Calculated Battery Voltage: ");
+    Serial.print("Calculated Battery Voltage (SensorAnalog + zener): ");
     Serial.println(BattVolt);
     readPin4 = digitalRead(Pin4); // assign value of pin 4
-    Serial.print("Pin 4 is: "); 
+    Serial.print("Pin 4 / Battery Charger (High = charge): "); 
     Serial.println(readPin4); 
     readPin4 = digitalRead(Pin7); // assign value of pin 7
-    Serial.print("Pin 7 is: "); 
+    Serial.print("Pin 7 / Raspi power (Low = power on): "); 
     Serial.println(readPin7); 
+    Serial.println(); 
   } else {
     SensorAnalog = (valueAD * (multiplier/1023.0)); // 0-5 V
     //BattVolt = ((valueAD * (multiplier/1023.0))+zener); // Send back Calculated Battery Voltage

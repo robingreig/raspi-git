@@ -70,8 +70,10 @@ while True:
     print "BattVolts: ", (round(read_CurrentAprxVoltage(),2))
 
 # If the voltage is low on Analogue 0 then print "Low", or "Critical", or shutdown Raspi
-  if BattVolts >= 13.5:
-    print "\t\tVoltage is > 13.5V"
+  if BattVolts >= 14.0:
+    print "\t\tVoltage is > 14.0V"
+  if BattVolts <14.0 and BattVolts >= 13.5:
+    print "\t\tVoltage is between 13.5V & 14V"
   elif BattVolts < 13.5 and BattVolts >= 13.0:
     print "\t\tVoltage is between 13V & 13.5V"
   elif BattVolts < 13.0 and BattVolts >= 12.5:
