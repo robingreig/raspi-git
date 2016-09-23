@@ -4,11 +4,9 @@
 
 // Data wire is plugged into port 10 on the Arduino
 #define ONE_WIRE_BUS 10
-#define TEMPERATURE_PRECISION 9
 
 char receivedChar;
 boolean newData = false;
-boolean debug = false;
 
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
@@ -18,7 +16,6 @@ DallasTemperature sensors(&oneWire);
 
 // arrays to hold device addresses
 DeviceAddress insideThermometer, outsideThermometer;
-
 
 void setup(void)
 {
@@ -47,9 +44,6 @@ void setup(void)
   // assigns the seconds address found to outsideThermometer
   if (!oneWire.search(outsideThermometer)) Serial.println("Unable to find address for outsideThermometer");
 
-  // set the resolution to 9 bit per device
-  sensors.setResolution(insideThermometer, TEMPERATURE_PRECISION);
-  sensors.setResolution(outsideThermometer, TEMPERATURE_PRECISION);
 }
 
 
@@ -164,12 +158,9 @@ void loop(void) {
 // Serial.println("DONE");
 
   recvOneChar();
+
   showNewData();
 
-  // print the device information
-//  printData(insideThermometer);
-//  printData(outsideThermometer);
-//  Serial.println();
-  delay (100);
+  delay (10);
 }
 
