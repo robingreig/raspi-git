@@ -128,8 +128,8 @@ void debugCode() {
 // function to show new data
 void showNewData() {
   if (newData == true) {
-    Serial.print("This just in... ");
-    Serial.println(receivedChar);
+//    Serial.print("This just in... ");
+//    Serial.println(receivedChar);
     newData = false;
   }
   if (receivedChar == '1') {
