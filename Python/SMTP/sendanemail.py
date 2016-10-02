@@ -1,8 +1,9 @@
+#!/usr/bin/python
 import smtplib
 
 fromaddrs = 've6rbn@gmail.com'
 toaddrs = 'kananaskis@gmail.com'
-msg = 'Test email from ve6rbn'
+msg = 'Voltage is below 24VDC on Raspi15 Batteries'
 
 # Credentials
 username = 'kananaskis'

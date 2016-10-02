@@ -58,11 +58,12 @@ while True:
 #  elif BattVolts < 25 and BattVolts >= 24:
 #    print "\tBattVolts: ", BattVolts
 #    print "\tVoltage is getting Low"
-  elif BattVolts < 24:
 #  elif BattVolts < 24 and BattVolts >= 23.5:
+  elif BattVolts < 24:
+    os.system("/home/robin/raspi-git/Python/SMTP/sendanemail.py")
+    GPIO.output(pinNum,GPIO.HIGH) # Turn the Battery Charger on
 #    print "\tBattVolts: ", BattVolts
 #    print "\tVoltage is getting too LOW & Battery Charger is turning on"
-    GPIO.output(pinNum,GPIO.HIGH) # Turn the Battery Charger on
 #  elif BattVolts < 23.5 and BattVolts >= 23.0:
 #    print "\tBattVolts: ", BattVolts
 #    print "\tVoltage is CRITICAL & trying to turn Battery Charger on again"
