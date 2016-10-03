@@ -27,6 +27,22 @@ ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 # Send the Analogue Port number to Gertduino & read back the voltage value
 #====================================================================
 
+def read_DallasTemp1():
+  f = open("/home/robin/DallasTemp1", "r")
+  line3 = f.readlines()
+  f.close
+  line4 = line3[0]
+  temp = float(line4)
+  return temp
+
+def read_DallasTemp2():
+  f = open("/home/robin/DallasTemp2", "r")
+  line3 = f.readlines()
+  f.close
+  line4 = line3[0]
+  temp = float(line4)
+  return temp
+
 while (count < maxcount):
   print "Count= {0}".format(count)
 #  write the Port number to Uno
@@ -35,9 +51,10 @@ while (count < maxcount):
   ser.write(chr(49))
   line1 = ser.readline()
   print line1
-  cht = open("/home/robin/DallasTemp1", "wb")
-  cht.write(line1);
-  cht.close()
+#  cht = open("/home/robin/DallasTemp1", "wb")
+#  cht.write(line1);
+#  cht.close()
+  print "DallasTemp1: ", (round(read_DallasTemp1(),2))
   time.sleep(delay)
   ser.flushInput()
   print ("Sending a 2")
@@ -52,20 +69,6 @@ while (count < maxcount):
   count = count +1
   time.sleep(delay)
 # Read the voltage back to evaluate it
-  def read_DallasTemp1():
-    f = open("/home/robin/DallasTemp1", "r")
-    line1 = f.readlines()
-    f.close
-    line2 = line1[0]
-    volts = float(line2)
-    return volts
-  def read_DallasTemp2():
-    f = open("/home/robin/DallasTemp2", "r")
-    line1 = f.readlines()
-    f.close
-    line2 = line1[0]
-    volts = float(line2)
-    return volts
 
   print "DallasTemp1: ", (round(read_DallasTemp1(),2))
   print "DallasTemp2: ", (round(read_DallasTemp2(),2))
