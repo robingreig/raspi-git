@@ -40,15 +40,38 @@ while True:
     print "Battery Voltage: ", (round(read_CurrentBatteryVoltage(),2))
     print "\tBattVolts: ", BattVolts
 
+# If the voltage is low, then print "Low", or "Critical", or shutdown Raspi
+  print "\tBattVolts: ", BattVolts
   if BattVolts >= 27:
+#    print "\tBattVolts: ", BattVolts
+#    print "\tVoltage is near the maximum level, & turning Battery Charger off"
     GPIO.output(pinNum,GPIO.LOW) # Turn the Battery Charger off
+#  elif BattVolts < 28 and BattVolts >= 27:
+#    print "\tBattVolts: ", BattVolts
+#    print "\tVoltage is Normal"
+#  elif BattVolts < 27 and BattVolts >= 26:
+#    print "\tBattVolts: ", BattVolts
+#    print "\tVoltage is Normal"
+#  elif BattVolts < 26 and BattVolts >= 25:
+#    print "\tBattVolts: ", BattVolts
+#    print "\tVoltage is getting Low"
+#  elif BattVolts < 25 and BattVolts >= 24:
+#    print "\tBattVolts: ", BattVolts
+#    print "\tVoltage is getting Low"
+#  elif BattVolts < 24 and BattVolts >= 23.5:
   elif BattVolts < 24:
     os.system("/home/robin/raspi-git/Python/SMTP/sendanemail.py")
     GPIO.output(pinNum,GPIO.HIGH) # Turn the Battery Charger on
-#  elif BattVolts < 23.0:
+#    print "\tBattVolts: ", BattVolts
+#    print "\tVoltage is getting too LOW & Battery Charger is turning on"
+#  elif BattVolts < 23.5 and BattVolts >= 23.0:
+#    print "\tBattVolts: ", BattVolts
+#    print "\tVoltage is CRITICAL & trying to turn Battery Charger on again"
+#    GPIO.output(pinNum,GPIO.HIGH) # Turn the Battery Charger on
+  elif BattVolts < 23.0:
 #    subprocess.call(["sudo", "shutdown", "-r", "now"])
 #    subprocess.call(["sudo", "shutdown", "-k", "now"])
-#    subprocess.call(["sudo", "poweroff"])
+    subprocess.call(["sudo", "poweroff"])
   break
 
 
