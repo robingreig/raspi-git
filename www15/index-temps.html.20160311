@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>Temps Menu</title>
+<link rel="stylesheet" type="text/css" href="default.css">
+</head>
+<body>
+<br>
+<div style="text-align: center;"><img style="width: 125px; height: 125px;" alt="Rpi" src="large_logo_pi.png"><br></div>
+<br>
+<table style="text-align: left; margin-left: auto; margin-right: auto;">
+<form method="post" action="submit.php">
+<center><a href="index.html">Back</a></center>
+<tbody>
+<tr>
+<td>Current Temps</td>
+<td style="text-align: center;" colspan="2" rowspan="1"><a href="view1.php">Current</a></td>
+</tr>
+<tr>
+<td>View Current Min / Max Temps</td>
+<td style="text-align: center;" colspan="2" rowspan="1"><a href="ViewMinMaxTemps.php">View Current Min/Max</a></td>
+</tr>
+<tr>
+<td>View 5 Min / Max Temps</td>
+<td style="text-align: center;" colspan="2" rowspan="1"><a href="ViewMinMax5Temps.php">View 5 Min/Max</a></td>
+</tr>
+<tr>
+<td>View 15 Min / Max Temps</td>
+<td style="text-align: center;" colspan="2" rowspan="1"><a href="ViewMinMax15Temps.php">View 15 Min/Max</a></td>
+</tr>
+<tr>
+<td>View 20 Temps</td>
+<td style="text-align: center;" colspan="2" rowspan="1"><a href="view20.php">View 20</a></td>
+</tr>
+<tr>
+<td>View all Temps Today</td>
+<td style="text-align: center;" colspan="2" rowspan="1"><a href="viewtoday.php">View all Today</a></td>
+</tr>
+</tbody>
+</form>
+</table>
+<center><a href="index.html">Back</a></center>
+<br>
+</body>
+</html>
