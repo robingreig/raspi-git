@@ -21,8 +21,7 @@ src="large_logo_pi.png"></div>
 <?php
 
 //Connect to MySQL
-//mysql_connect('raspi15.local', 'robin', 'Micr0s0ft') or die (mysql_error());
-mysql_connect('raspi34.local', 'robin', 'Micr0s0ft') or die (mysql_error());
+mysql_connect('raspi15.local', 'robin', 'Micr0s0ft') or die (mysql_error());
 
 //Select database
 mysql_select_db('house_stats') or die (mysql_error());
@@ -42,7 +41,7 @@ Display the results in different cells
 echo " <table style='width: 80%; text-align: left; margin-left: auto; margin-right: auto;' border='0' cellpadding='2' cellspacing='2'><tr><th>Date</th><th>APRX Battery</th><th>Blue Truck</th></th><th>Grey Truck</th><th>Secondary (Orange)</th><th>Primary (Green)</th><th>12V-1 (Blue)</th><th>12V-2 (Brown)</th></tr>";
 
 // For loop to scroll through todays values & 9 previous by incrementing the interval of the CURDATE below
-for ($i = 0; $i <=9; $i++){
+for ($i = 0; $i <=0; $i++){
 
  $minvolt00 = mysql_query("SELECT date, min(voltage0), min(voltage1), min(voltage2), min(voltage3), min(voltage4), min(voltage5), min(voltage6) FROM voltages WHERE date= (CURDATE() - INTERVAL $i DAY)");
  $maxvolt00 = mysql_query("SELECT date, max(voltage0), max(voltage1), max(voltage2), max(voltage3), max(voltage4), max(voltage5), max(voltage6) FROM voltages WHERE date= (CURDATE() - INTERVAL $i DAY)");
