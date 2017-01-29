@@ -9,13 +9,13 @@ battery_voltage = 0
 pott_voltage = 1
 
 # Define Delay between readings
-delay = 3
+delay = 2
 
 # Define number of loops through the program before exiting
 count = 0
 
 # Define Decimal places for Rounding Value
-places = 3
+places = 2
 
 # Open SPI Bus
 spi=spidev.SpiDev()
@@ -38,26 +38,30 @@ def ConvertVolts(adcout,places):
     return volts
 
 #while True:
-while (count < 9):
-# Read value of CH0 on MCP3008
+while (count < 2):
+# Read channel value on MCP3008
    batt_value = readadc(battery_voltage)
    pott_value = readadc(pott_voltage)
 # Convert value into voltage
    batt_volts = ((batt_value*3.3)/1024)+10.85
    pott_volts = (pott_value*3.3)/1024
 # Print Battery Values & Voltages
+   print ("-" * 30)
    print "Battery Value = {}".format(batt_value)
    print "Battery Volts = {}".format(batt_volts)
 # Print voltage rounded using ConvertVolts:
-   rounded_batt_volts = ConvertVolts(batt_value,places)
+   rounded_batt_value = round(batt_value,places)
+   print "Rounded Battery Value = {}".format(rounded_batt_value)
+   rounded_batt_volts = ((rounded_batt_value*3.3)/1024)+10.85
+   rounded_batt_volts = round(rounded_batt_volts,2)
    print "Rounded Battery Voltage = {}".format(rounded_batt_volts)
 # Print Pott Values & Voltages
+   print ("-" * 30)
    print "Pott Value = {}".format(pott_value)
    print "Pott Volts = {}".format(pott_volts)
 # Print voltage rounded using ConvertVolts:
    rounded_pott_volts = ConvertVolts(pott_value,places)
    print "Rounded Pott Voltage = {}".format(rounded_pott_volts)
-   print "---------------------------------------------"
    time.sleep(delay)
    count = count + 1
 
