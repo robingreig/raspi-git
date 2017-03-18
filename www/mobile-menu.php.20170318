@@ -30,10 +30,6 @@ h1{font-size:250%;}
 </tr>
 <tr>
 <td></td>
-<td style="text-align: center; font-size: 100% " colspan="2" rowspan="1"><a href="mobile-garden-temp-full.php">Garden Temps</a></td>
-</tr>
-<tr>
-<td></td>
 <td style="text-align: center; font-size: 100% " colspan="2" rowspan="1"><a href="mobile-voltage-brief.php">Voltages:Brief</a></td>
 </tr>
 <tr>
