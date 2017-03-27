@@ -66,6 +66,23 @@ $maxtemp3 = mysql_fetch_assoc($maxtemp2);
 $maxtemp4 = ROUND($maxtemp3['max(outside_temp)'],2);
 echo "<center>".$maxtemp1.$maxtemp4.PHP_EOL."</center>";
 echo "<br>";
+
+//Minimum Garden Temperature
+$mintemp1 = "Minimum Garden Temp Today: ";
+$mintemp2 = mysql_query("SELECT min(garden_temp1),1 FROM garden_temp WHERE date=CURDATE()");
+$mintemp3 = mysql_fetch_assoc($mintemp2);
+$mintemp4 = ROUND($mintemp3['min(garden_temp1)'],2);
+echo "<center>".$mintemp1.$mintemp4.PHP_EOL."</center>";
+echo "<br>";
+
+//Maximum Garden Temperature
+$maxtemp1 = "Maximum Garden Temp Today: ";
+$maxtemp2 = mysql_query("SELECT max(garden_temp1) FROM garden_temp WHERE date=CURDATE()");
+$maxtemp3 = mysql_fetch_assoc($maxtemp2);
+$maxtemp4 = ROUND($maxtemp3['max(garden_temp1)'],2);
+echo "<center>".$maxtemp1.$maxtemp4.PHP_EOL."</center>";
+echo "<br>";
+
 ?>
 <center><a href="mobile-menu.php">Back</a></center>
 </h1>
