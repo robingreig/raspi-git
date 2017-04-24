@@ -10,5 +10,5 @@ ifconfig wlan0>> ./uptime.txt
 echo >> ./uptime.txt
 df -h >> ./uptime.txt
 
-scp /home/robin/uptime.txt robin@raspi15.local:/home/robin/Pi32.uptime.txt
+scp /home/robin/uptime.txt robin@raspi15.local:/home/robin/Raspi32.uptime.txt
 
