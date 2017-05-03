@@ -1,6 +1,6 @@
-BOARD_TAG = Uno
+BOARD_TAG = uno
 ARDUINO_PORT = /dev/ttyACM0
 ARDUINO_LIBS =
 ARDUINO_DIR = /usr/share/arduino
-include /home/robin/Arduino.mk
+include /usr/share/arduino/Arduino.mk
 
