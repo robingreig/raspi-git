@@ -3,9 +3,7 @@
 # Check for input every 0.1 seconds.
 # Treat available input immediately, but do something else if idle.
 
-import sys
-import select
-import time
+import os, select, subprocess, sys, time
 
 # files monitored for input
 read_list = [sys.stdin]
@@ -16,23 +14,33 @@ read_list = [sys.stdin]
 timeout = 0.1 # seconds
 last_work_time = time.time()
 alarm_status = 0
+DEBUG = 1
+os.system("stty -echo")
 
 def treat_input(linein):
   global last_work_time
   global alarm_status
 #  print("Workin' it!", linein, end="")
-  print("linein = ", linein)
-  if int(linein)==8980:
-    if alarm_status == 0:
-      alarm_status = 1
-      print('Alarm Status = ',alarm_status)
-      print('Alarm Armed')
-    else:
-      alarm_status = 0
-      print('Alarm Status = ',alarm_status)
-      print('Alarm Disarmed')
+  if DEBUG > 0:
+    print("linein = ", linein)
+  try:
+    keyboard_press = int(linein)
+    print('Is a number')
+    if int(linein)==1234:
+      subprocess.call(["sudo", "shutdown", "-r", "now"])
+    if int(linein)==8980:
+      if alarm_status == 0:
+        alarm_status = 1
+        print('Alarm Status = ',alarm_status)
+        print('Alarm Armed')
+      else:
+        alarm_status = 0
+        print('Alarm Status = ',alarm_status)
+        print('Alarm Disarmed')
+  except ValueError:
+    print('Incorrect, try again')
   time.sleep(1) # working takes time
-  print('Done')
+#  print('Done')
   last_work_time = time.time()
 
 def idle_work():
@@ -41,7 +49,8 @@ def idle_work():
   # do some other stuff every 2 seconds of idleness
 #  if now - last_work_time > 2:
   if now - last_work_time > 1:
-    print('Idle for too long; doing some other stuff.')
+    if DEBUG > 0:
+      print('Idle for too long; doing some other stuff.')
     last_work_time = now
 
 def main_loop():
@@ -62,4 +71,5 @@ def main_loop():
 try:
     main_loop()
 except KeyboardInterrupt:
+  os.system("stty echo")
   pass
