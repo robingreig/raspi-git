@@ -1,4 +1,5 @@
-raspi10		= OpenVPN
+zero2		= First Pi zero
+breadboard10	= OpenVPN, & breadboard
 aprx11		= APRX
 battmon12 	= Battery Monitor
 gardentemp13	= Garden Temperature Monitor
@@ -6,11 +7,14 @@ adafruitaio14	= Adafruit Temperature Monitor
 raspi15		= MySQL database (old)
 blockheat16 	= BlockHeater
 tempi17		= Office Temperature Monitor
-raspi18		= Office Arduino / Raspi
+arduino18	= Office Arduino / Raspi
 raspi20		= This raspi
 raspi21		= Office Motion Camera
-raspi23		= APRX Battery monitor / Arduino
+arduino23	= APRX Battery monitor / Arduino
 raspi24		= Home Office Temperature monitor
-raspi32		= Downstairs desktop
+alarm31		= CFMF Alarm 1
+desktop32	= Downstairs desktop
+alarm33		= CFMF Alarm 2
 raspi34		= MySQL server (new)
+raspi36		= Arduino... soon to be breadboard36
 
