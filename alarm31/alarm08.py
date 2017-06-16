@@ -19,18 +19,28 @@ read_list = [sys.stdin]
 timeout = 0.1 # seconds
 
 ##### Set time references
-delay_time = time.time() # time for exit or entry delay
-last_code_time = time.time() # timer for keyboard check
+delay_time = time.time()
+# time for exit or entry delay
+last_code_time = time.time()
+# timer for keyboard check
 
 ##### Set Variables
-alarm_time = 60 # how long for alarm to sound before reset
-armed_status = 0 # 0 = disarmed, 1 = armed
-correct_code = 0 # 0 = wrong code, 1 = correct code
-delay_time_count = 30 # amount of entry or exit time
-entry_delay = 0 # 0 = not started or running, 1 = completed
-exit_delay = 0 # 0 = not started or running, 1 = completed
-delay_time_count = 30 # exit or entry delay time
-PIR_sensor = 0 # 0 = no movement, 1 = movement
+alarm_time = 60 
+# alarm_time, how long for alarm to sound before reset
+armed_status = 0 
+# armed_status, 0 = disarmed, 1 = armed
+correct_code = 0
+# correct_code, 0 = wrong code, 1 = correct code
+delay_time_count = 30
+# delay_time_count, amount of entry or exit time
+entry_delay = 0
+# entry_delay, 0 = not started or running, 1 = completed
+exit_delay = 0
+# exit_delay, 0 = not started or running, 1 = completed
+delay_time_count = 30
+# delay_time_count, exit or entry delay time
+PIR_sensor = 0
+# PIR_sensor, 0 = no movement, 1 = movement
 
 ##### For troubleshooting, set DEBUG to 1
 DEBUG = 1
@@ -52,13 +62,21 @@ Siren = 21
 
 ##### Setup GPIO
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM) #numbering scheme that matches Cobbler
-GPIO.setup(Alarm_LED,GPIO.OUT) # Set GPIO to output for Armed_LED
-GPIO.setup(Armed_LED,GPIO.OUT) # Set GPIO to output for Armed_LED
-GPIO.setup(Beeper,GPIO.OUT) # Set GPIO to output for Armed_LED
-GPIO.setup(PIR_Sensor,GPIO.IN) # Set GPIO to input for PIR Sensors
-GPIO.setup(Ready_LED,GPIO.OUT) # Set GPIO to output for Armed_LED
-GPIO.setup(Siren,GPIO.OUT) # Set GPIO to output for Armed_LED
+# Ignore GPIO warnings
+GPIO.setmode(GPIO.BCM)
+#numbering scheme that matches Cobbler
+GPIO.setup(Alarm_LED,GPIO.OUT)
+# Set GPIO to output for Armed_LED
+GPIO.setup(Armed_LED,GPIO.OUT)
+# Set GPIO to output for Armed_LED
+GPIO.setup(Beeper,GPIO.OUT)
+# Set GPIO to output for Armed_LED
+GPIO.setup(PIR_Sensor,GPIO.IN)
+# Set GPIO to input for PIR Sensors
+GPIO.setup(Ready_LED,GPIO.OUT)
+# Set GPIO to output for Armed_LED
+GPIO.setup(Siren,GPIO.OUT)
+# Set GPIO to output for Armed_LED
 
 def treat_input(linein):
   global last_code_time
