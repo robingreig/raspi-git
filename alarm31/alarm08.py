@@ -19,10 +19,8 @@ read_list = [sys.stdin]
 timeout = 0.1 # seconds
 
 ##### Set time references
-# timer for exit or entry delay
-delay_time = time.time()
-# timer to check time for keyboard check
-last_code_time = time.time()
+delay_time = time.time() # time for exit or entry delay
+last_code_time = time.time() # timer for keyboard check
 
 ##### Set Variables
 alarm_time = 60 # how long for alarm to sound before reset
@@ -102,12 +100,12 @@ def treat_input(linein):
   last_code_time = time.time()
 
 def exit_delay():
+  global armed_status
   global exit_delay
   global delay_time_count
-  global armed_status
   now = time.time()
   # do some other stuff every second of idleness
-  if armed_status > 0:
+  if armed_status == 1:
     GPIO.output(Exit_Delay_LED,GPIO.HIGH)
   #  if now - last_code_time > 2:
   if now - exit_delay_time > 1:
