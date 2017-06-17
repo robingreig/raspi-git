@@ -1,9 +1,9 @@
 #! /usr/bin/python3
 
 #-------------------------------------------------------------------
-# Name: alarm08.py
+# Name: alarm09.py
 # Author: Robin Greig
-# Date 2017.06.16
+# Date 2017.06.17
 # Check for input every 0.1 seconds.
 # Respond to an available input immediately, but do something else if idle.
 #-------------------------------------------------------------------
@@ -27,9 +27,9 @@ alarm_time = 60 # how long for alarm to sound before reset
 armed_status = 0 # 0 = disarmed, 1 = armed
 correct_code = 0 # 0 = wrong code, 1 = correct code
 delay_time_count = 5 # amount of entry or exit time
-entry_delay = 0 # 0 = not started or running, 1 = completed
-exit_delay = 0 # 0 = not started or running, 1 = completed
-PIR_sensor = 0 # 0 = no movement, 1 = movement
+entry_delay_status = 0 # 0 = not started or running, 1 = completed
+exit_delay_status = 0 # 0 = not started or running, 1 = completed
+PIR_status = 0 # 0 = no movement, 1 = movement
 
 ##### For troubleshooting, set DEBUG to 1
 DEBUG = 1
@@ -68,6 +68,8 @@ GPIO.output(Siren, GPIO.LOW)
 def treat_input(linein):
   global last_code_time
   global armed_status
+  global delay_time_count
+  global exit_delay_status
 #  print("Workin' it!", linein, end="")
   if DEBUG > 0:
     print("linein = ", linein)
@@ -86,17 +88,23 @@ def treat_input(linein):
     if int(linein)==8980: # correct alarm code
       if armed_status == 0:
         armed_status = 1
+        print('Alarm Armed')
         if DEBUG > 0:
           print('Armed Status = ',armed_status)
-        print('Alarm Armed')
+          print('Delay Time Count = ',delay_time_count)
+          print('Exit Delay Status = ',exit_delay_status)
+          time.sleep(1)
         GPIO.output(Armed_LED, GPIO.HIGH)
         delay_time_count = 5
+        exit_delay_status = 0
       else:
         armed_status = 0
+        print('Alarm Disarmed')
         if DEBUG > 0:
           print('Armed Status = ',armed_status)
-        print('Alarm Disarmed')
+          print('Delay Time Count = ',delay_time_count)
         GPIO.output(Armed_LED, GPIO.LOW)
+        delay_time_count = 5
   except ValueError:
     pass
     if DEBUG > 0:
@@ -104,50 +112,48 @@ def treat_input(linein):
   time.sleep(1) # working takes time
   last_code_time = time.time()
 
-#def exit_delay(armed_status, exit_delay, delay_time, delay_time_count):
-def exit_delay():
-  global armed_status
-  global exit_delay
-  global delay_time
+def entry_delay():
   global delay_time_count
+  global entry_delay_status
   if DEBUG > 0:
-    print('Armed Status: ',armed_status)
-    print('Exit Delay: ',exit_delay)
-    print('Delay Time: ',delay_time)
-    print('Delay Time Count: ',delay_time_count)
-    time.sleep(5)
-  now = time.time()
+    print('Running entry_delay function')
+  if delay_time_count%2 == 0:
+    GPIO.output(Beeper,GPIO.HIGH)
+  else:
+    GPIO.output(Beeper,GPIO.LOW)
+  delay_time_count = delay_time_count - 1
+  if DEBUG > 0:
+    print('End of entry_delay function')
+  time.sleep(1)
+
+def exit_delay():
+  global delay_time_count
+  global exit_delay_status
   if DEBUG > 0:
     print('Running exit_delay function')
-  while ((armed_status == 1) & (delay_time_count > 0)):
-    if now - delay_time > 1:
-      if DEBUG > 0:
-        print('In delay_time loop')
-        print('delay_time = ',delay_time)
-        print('now = ',now)
-        print('delay_time_count = ',delay_time_count)
-        time.sleep(5)
-      if delay_time_count%2 == 0:
-        GPIO.output(Beeper,GPIO.HIGH)
-      else:
-        GPIO.output(Beeper,GPIO.LOW)
-      delay_time_count = delay_time_count - 1
-      time.sleep(1)
-      delay_time = now
-      now = time.time()
+  if delay_time_count%2 == 0:
+    GPIO.output(Beeper,GPIO.HIGH)
+  else:
+    GPIO.output(Beeper,GPIO.LOW)
+  delay_time_count = delay_time_count - 1
+  if delay_time_count == 0:
+    exit_delay_status = 1
+  if DEBUG > 0:
+    print('delay_time_count: ',delay_time_count)
+    print('exit_delay_status: ',exit_delay_status)
     print('End of exit_delay function')
+  time.sleep(1)
 
 def monitor_PIR():
   global last_code_time
-  global armed_status
+  global PIR_status
   now = time.time()
   # do some other stuff every second of idleness
-  if armed_status > 0:
-    GPIO.output(Exit_Delay_LED,GPIO.HIGH)
-  #  if now - last_code_time > 2:
   if now - last_code_time > 1:
     if DEBUG > 0:
-      print('do other stuff.')
+      print('Monitor PIR')
+      print('PIR Status: ',PIR_status)
+      time.sleep(1)
     last_code_time = now
 
 def main_loop():
@@ -159,15 +165,11 @@ def main_loop():
   while read_list:
     ready = select.select(read_list, [], [], timeout)[0]
     if not ready:
-#      print('main_loop ... not ready')
-#      if (armed_status == 1 and exit_delay == 0 and delay_time_count > 0):
-      if (armed_status == 1 and delay_time_count > 0):
+      if (armed_status == 1 and delay_time_count > 0 and exit_delay_status == 0):
         print('main_loop > exit_delay')
-        time.sleep(2)
         exit_delay()
-#      if (armed_status > 0 and delay_time_count > 30):
-#        monitor_PIR()      
-#      idle_work()
+      if (armed_status == 1 and exit_delay_status == 1):
+        monitor_PIR()      
     else:
       for file in ready:
         line = file.readline()
