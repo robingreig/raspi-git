@@ -26,10 +26,9 @@ last_code_time = time.time() # timer for keyboard check
 alarm_time = 60 # how long for alarm to sound before reset
 armed_status = 0 # 0 = disarmed, 1 = armed
 correct_code = 0 # 0 = wrong code, 1 = correct code
-delay_time_count = 30 # amount of entry or exit time
+delay_time_count = 5 # amount of entry or exit time
 entry_delay = 0 # 0 = not started or running, 1 = completed
 exit_delay = 0 # 0 = not started or running, 1 = completed
-delay_time_count = 30 # exit or entry delay time
 PIR_sensor = 0 # 0 = no movement, 1 = movement
 
 ##### For troubleshooting, set DEBUG to 1
@@ -51,19 +50,24 @@ Ready_LED = 18
 Siren = 21
 
 ##### Setup GPIO
-GPIO.setwarnings(False) # Ignore GPIO warnings
+#GPIO.setwarnings(False) # Ignore GPIO warnings
 GPIO.setmode(GPIO.BCM) # numbering scheme that matches Cobbler
 GPIO.setup(Alarm_LED,GPIO.OUT) # Set GPIO to output for Armed_LED
+GPIO.output(Alarm_LED, GPIO.LOW)
 GPIO.setup(Armed_LED,GPIO.OUT) # Set GPIO to output for Armed_LED
+GPIO.output(Armed_LED, GPIO.LOW)
 GPIO.setup(Beeper,GPIO.OUT) # Set GPIO to output for Armed_LED
+GPIO.output(Beeper, GPIO.LOW)
 GPIO.setup(PIR_Sensor,GPIO.IN) # Set GPIO to input for PIR Sensors
 GPIO.setup(Ready_LED,GPIO.OUT) # Set GPIO to output for Armed_LED
+GPIO.output(Ready_LED, GPIO.LOW)
 GPIO.setup(Siren,GPIO.OUT) # Set GPIO to output for Armed_LED
+GPIO.output(Siren, GPIO.LOW)
+
 
 def treat_input(linein):
   global last_code_time
   global armed_status
-  global Armed_LED
 #  print("Workin' it!", linein, end="")
   if DEBUG > 0:
     print("linein = ", linein)
@@ -73,11 +77,11 @@ def treat_input(linein):
       print('Is a number')
     if int(linein)==4038197350: # exit progrm
        os.system("stty echo")
-       GPIO.output(Armed_LED, GPIO.LOW)
+       GPIO.cleanup()
        sys.exit()
     if int(linein)==4032572556: # shutdown raspi
        os.system("stty echo")
-       GPIO.output(Armed_LED, GPIO.LOW)
+       GPIO.cleanup()
        subprocess.call(["sudo", "shutdown", "-h", "now"])
     if int(linein)==8980: # correct alarm code
       if armed_status == 0:
@@ -86,8 +90,9 @@ def treat_input(linein):
           print('Armed Status = ',armed_status)
         print('Alarm Armed')
         GPIO.output(Armed_LED, GPIO.HIGH)
+        delay_time_count = 5
       else:
-        alarm_status = 0
+        armed_status = 0
         if DEBUG > 0:
           print('Armed Status = ',armed_status)
         print('Alarm Disarmed')
@@ -99,19 +104,37 @@ def treat_input(linein):
   time.sleep(1) # working takes time
   last_code_time = time.time()
 
-def exit_delay():
-  global armed_status
-  global exit_delay
-  global delay_time_count
+def exit_delay(armed_status, exit_delay, delay_time, delay_time_count):
+#  global armed_status
+#  global exit_delay
+#  global delay_time
+#  global delay_time_count
+  if DEBUG > 0:
+    print('Armed Status: ',armed_status)
+    print('Exit Delay: ',exit_delay)
+    print('Delay Time: ',delay_time)
+    print('Delay Time Count: ',delay_time_count)
+    time.sleep(5)
   now = time.time()
-  # do some other stuff every second of idleness
-  if armed_status == 1:
-    GPIO.output(Exit_Delay_LED,GPIO.HIGH)
-  #  if now - last_code_time > 2:
-  if now - exit_delay_time > 1:
-    if DEBUG > 0:
-      print('Running Delay Timer function')
-    exit_delay_time = now
+  if DEBUG > 0:
+    print('Running exit_delay function')
+  while ((armed_status == 1) & (delay_time_count > 0)):
+    if now - delay_time > 1:
+      if DEBUG > 0:
+        print('In delay_time loop')
+        print('delay_time = ',delay_time)
+        print('now = ',now)
+        print('delay_time_count = ',delay_time_count)
+        time.sleep(5)
+      if delay_time_count%2 == 0:
+        GPIO.output(Beeper,GPIO.HIGH)
+      else:
+        GPIO.output(Beeper,GPIO.LOW)
+      delay_time_count = delay_time_count - 1
+      time.sleep(1)
+      delay_time = now
+      now = time.time()
+    print('End of exit_delay function')
 
 def monitor_PIR():
   global last_code_time
@@ -128,14 +151,17 @@ def monitor_PIR():
 
 def main_loop():
   global read_list
+  global delay_time_count
   # while still waiting for input on at least one file
   while read_list:
     ready = select.select(read_list, [], [], timeout)[0]
     if not ready:
-      if (armed_status > 0 and delay_time_count < 30):
-        delay_timer()
-      if (armed_status > 0 and delay_time_count > 30):
-        monitor_PIR()      
+      print('main_loop ... not ready')
+      if (armed_status == 1 and delay_time_count  > 0):
+        print('main_loop > exit_delay')
+        exit_delay(armed_status, exit_delay, delay_time, delay_time_count)
+#      if (armed_status > 0 and delay_time_count > 30):
+#        monitor_PIR()      
 #      idle_work()
     else:
       for file in ready:
@@ -150,4 +176,5 @@ try:
 except KeyboardInterrupt:
   GPIO.output(Armed_LED, GPIO.LOW)
   os.system("stty echo")
+  GPIO.cleanup()
   pass
