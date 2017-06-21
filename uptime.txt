@@ -1,19 +1,19 @@
 
-Mon Jun 19 10:23:44 MDT 2017
- 10:23:44 up 2 days,  2:38,  1 user,  load average: 0.25, 0.22, 0.19
+Tue Jun 20 08:16:52 MDT 2017
+ 08:16:52 up 3 days, 31 min,  2 users,  load average: 0.18, 0.18, 0.18
 
-Mon Jun 19 10:23:34 MDT 2017
- 10:23:34 up 2 days,  2:38,  1 user,  load average: 0.30, 0.23, 0.20
+Tue Jun 20 07:57:30 MDT 2017
+ 07:57:30 up 3 days, 12 min,  2 users,  load average: 0.19, 0.20, 0.18
 
 
 eth0      Link encap:Ethernet  HWaddr b8:27:eb:8d:ef:88  
           inet addr:192.168.100.102  Bcast:192.168.100.255  Mask:255.255.255.0
           inet6 addr: fe80::1b8a:3495:ad33:5bb5/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1492  Metric:1
-          RX packets:24047 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:18470 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:55326 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:39087 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:2008768 (1.9 MiB)  TX bytes:2463341 (2.3 MiB)
+          RX bytes:4251241 (4.0 MiB)  TX bytes:5305437 (5.0 MiB)
 
 
 Filesystem      Size  Used Avail Use% Mounted on
