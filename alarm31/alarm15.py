@@ -26,16 +26,16 @@ last_code_time = time.time() # timer for keyboard check
 alarm_time = 60 # how long for alarm to sound before reset
 armed_status = 0 # 0 = disarmed, 1 = armed
 correct_code = 0 # 0 = wrong code, 1 = correct code
-entry_time = 10 # amount of entry time
+entry_time = 16 # amount of entry time
 entry_delay_time = entry_time # entry delay time variable
-exit_time = 10 # amount of exit time
+exit_time = 16 # amount of exit time
 exit_delay_time = exit_time # exit delay time variable
 entry_delay_status = 0 # 0 = not started or running, 1 = completed
 exit_delay_status = 0 # 0 = not started or running, 1 = completed
 PIR_status = 0 # 0 = no movement, 1 = movement
 
 ##### For troubleshooting, set DEBUG to 1
-DEBUG = 0
+DEBUG = 1
 debug_time = 1
 
 ##### Don't echo password to screen
@@ -59,20 +59,19 @@ GPIO.setmode(GPIO.BCM) # numbering scheme that matches Cobbler
 GPIO.setup(Armed_LED,GPIO.OUT) # Set GPIO to output for Armed_LED
 GPIO.output(Armed_LED, GPIO.LOW)
 GPIO.setup(Beeper,GPIO.OUT) # Set GPIO to output for Beeper_LED
-GPIO.output(Beeper, GPIO.LOW)
+GPIO.output(Beeper, GPIO.HIGH)
 GPIO.setup(Delay_LED,GPIO.OUT) # Set GPIO to output for Delay_LED
 GPIO.output(Delay_LED, GPIO.LOW)
 GPIO.setup(PIR_Sensor,GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set GPIO to input for PIR Sensors
 GPIO.setup(Ready_LED,GPIO.OUT) # Set GPIO to output for Ready_LED
 GPIO.output(Ready_LED, GPIO.HIGH)
 GPIO.setup(Siren,GPIO.OUT) # Set GPIO to output for Siren
-GPIO.output(Siren, GPIO.LOW)
+GPIO.output(Siren, GPIO.HIGH)
 
 def my_callback_one(PIR_Sensor):
   global PIR_status
   print('******************************************Callback One')
   PIR_status =1
-#  entry_delay()
 
 GPIO.add_event_detect(PIR_Sensor, GPIO.FALLING, callback=my_callback_one, bouncetime=200)
 
@@ -91,22 +90,26 @@ def treat_input(linein):
     keyboard_press = int(linein)
     if DEBUG > 0:
       print('Is a number')
-    if int(linein)==4038197350: # exit progrm
-       os.system("stty echo")
-       GPIO.cleanup()
-       sys.exit()
     if int(linein)==4032572556: # shutdown raspi
        os.system("stty echo")
        GPIO.cleanup()
        subprocess.call(["sudo", "shutdown", "-h", "now"])
-    if int(linein)==8980: # correct alarm code
+    if int(linein)==4033998788: # reboot raspi
+       os.system("stty echo")
+       GPIO.cleanup()
+       subprocess.call(["sudo", "reboot", "-h", "now"])
+    if int(linein)==4038197350: # exit progrm
+       os.system("stty echo")
+       GPIO.cleanup()
+       sys.exit()
+    if int(linein)==2486: # correct alarm code
       if armed_status == 0:
         armed_status = 1
-        print('Alarm Armed')
+        print('Running alarm_armed()')
         alarm_armed()
       else:
         armed_status = 0
-        print('Alarm Disarmed')
+        print('Running alarm_disarmed()')
         alarm_disarmed()
   except ValueError:
     pass
@@ -116,13 +119,17 @@ def treat_input(linein):
   last_code_time = time.time()
 
 def alarm_activated():
-  GPIO.output(Siren, GPIO.HIGH)
+  GPIO.output(Siren, GPIO.LOW)
   if DEBUG > 0:
     print('******************* ALARM!!!!')
 #    time.sleep(debug_time)
 
 def alarm_armed():
+  global entry_delay_time
+  global exit_delay_time
+  global exit_delay_status
   if DEBUG > 0:
+    print('Running alarm_armed function')
     print('Armed Status = ',armed_status)
     print('Exit Delay Time: ',exit_delay_time)
     print('Exit Delay Status: ',exit_delay_status)
@@ -132,14 +139,19 @@ def alarm_armed():
   exit_delay_status = 0
 
 def alarm_disarmed():
+  global entry_delay_time
+  global exit_delay_time
+  global exit_delay_status
+  global PIR_status
   if DEBUG > 0:
+    print('Running alarmed_disarmed function')
     print('Armed Status = ',armed_status)
     print('Exit Delay Time: ',exit_delay_time)
   GPIO.output(Armed_LED, GPIO.LOW)
   GPIO.output(Delay_LED, GPIO.LOW)
   GPIO.output(Ready_LED, GPIO.HIGH)
-  GPIO.output(Beeper, GPIO.LOW)
-  GPIO.output(Siren, GPIO.LOW)
+  GPIO.output(Beeper, GPIO.HIGH)
+  GPIO.output(Siren, GPIO.HIGH)
   entry_delay_time = entry_time
   exit_delay_time = exit_time
   exit_delay_status = 0
@@ -153,10 +165,9 @@ def entry_delay():
   if DEBUG > 0:
     print('Running entry_delay function')
   if entry_delay_time%2 == 0:
-    GPIO.output(Beeper,GPIO.HIGH)
-  else:
     GPIO.output(Beeper,GPIO.LOW)
-  print('Running entry_delay function')
+  else:
+    GPIO.output(Beeper,GPIO.HIGH)
   entry_delay_time = entry_delay_time - 1
   time.sleep(debug_time)
   if DEBUG > 0:
@@ -171,10 +182,9 @@ def exit_delay():
   if DEBUG > 0:
     print('Running exit_delay function')
   if exit_delay_time%2 == 0:
-    GPIO.output(Beeper,GPIO.HIGH)
-  else:
     GPIO.output(Beeper,GPIO.LOW)
-  print('Running exit_delay function')
+  else:
+    GPIO.output(Beeper,GPIO.HIGH)
   exit_delay_time = exit_delay_time - 1
   time.sleep(debug_time)
   if exit_delay_time == 0:
@@ -191,13 +201,10 @@ def monitor_PIR():
   global PIR_Sensor
   if DEBUG > 0:
     print('Monitor PIR Loop running')
+    print('Monitor PIR')
     print('Exit_Delay_Status: ', exit_delay_status)
   if (GPIO.input(PIR_Sensor) > 0 and exit_delay_status == 1):
     PIR_status == 1
-    if DEBUG > 0:
-      print('Monitor PIR')
-      print('PIR Status: ',PIR_status)
-      time.sleep(debug_time)
 
 def main_loop():
   global armed_status
