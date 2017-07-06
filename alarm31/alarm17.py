@@ -1,9 +1,9 @@
 #! /usr/bin/python3
 
 #-------------------------------------------------------------------
-# Name: alarm16.py
+# Name: alarm17.py
 # Author: Robin Greig
-# Date 2017.07.03
+# Date 2017.07.04
 # Check for input every 0.1 seconds.
 # Respond to an available input immediately, but do something else if idle.
 #-------------------------------------------------------------------
@@ -64,7 +64,7 @@ GPIO.setup(Delay_LED,GPIO.OUT) # Set GPIO to output for Delay_LED
 GPIO.output(Delay_LED, GPIO.HIGH)
 GPIO.setup(PIR_Sensor,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set GPIO Pull Up to UP for PIR Sensors
 GPIO.setup(Ready_LED,GPIO.OUT) # Set GPIO to output for Ready_LED
-GPIO.output(Ready_LED, GPIO.HIGH)
+GPIO.output(Ready_LED, GPIO.LOW)
 GPIO.setup(Siren,GPIO.OUT) # Set GPIO to output for Siren
 GPIO.output(Siren, GPIO.HIGH)
 
