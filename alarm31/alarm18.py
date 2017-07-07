@@ -4,8 +4,9 @@
 # Name: alarm18.py
 # Author: Robin Greig
 # Date 2017.07.05
-# Check for input every 0.1 seconds.
-# Respond to an available input immediately, but do something else if idle.
+# Monitor Keypad for correct code
+# Respond to PIR motion sensor input immediately
+# Utilize Entry and Exit delays
 #-------------------------------------------------------------------
 import os, select, subprocess, sys, time
 import RPi.GPIO as GPIO
@@ -34,7 +35,7 @@ exit_delay_status = 0 # 0 = not started, 1 = running, 2 = completed
 PIR_status = 0 # 0 = no movement, 1 = movement
 
 ##### For troubleshooting, set DEBUG to 1
-DEBUG = 1
+DEBUG = 0
 
 ##### Don't echo password to screen
 os.system("stty -echo")
@@ -73,6 +74,7 @@ def PIR_Movement(PIR_Sensor):
   time.sleep(0.5)
   if GPIO.input(PIR_Sensor) == 1:
     PIR_status = 1
+    print('PIR Movement')
     if DEBUG > 0:
       print('********************** Time Delay 0.5 and input is still high')
 
@@ -119,42 +121,39 @@ def treat_input(linein):
          while (count < 20):
            print('***** Exiting Program!!! *****')
            count = count + 1
-         time.sleep(2.0)
        sys.exit()
     if int(linein)==8788: # correct alarm code
       if armed_status == 0: # If alarm disarmed, start exit delay
         armed_status = 1
-        print('Correct Code and Running Exit Delay')
       else:
         alarm_disarmed()
         
   except ValueError:
     pass
-    if DEBUG > 0:
-      print('Incorrect, try again')
-      time.sleep(0.1) # working takes time
+    print('Incorrect Entry')
   last_code_time = time.time()
 
 def alarm_activated():
   GPIO.output(Siren, GPIO.LOW)
   GPIO.output(Beeper, GPIO.LOW)
-  if DEBUG > 0:
-    print('******************* ALARM!!!!')
+  print('*** ALARM ***')
 
 def alarm_armed():
   global armed_status
   global entry_delay_status
   global exit_delay_status
+  entry_delay_time = entry_time
+  exit_delay_time = exit_time
+  GPIO.output(Armed_LED, GPIO.LOW)
+  GPIO.output(Delay_LED, GPIO.HIGH)
+  GPIO.output(Ready_LED, GPIO.HIGH)
+  print('Alarm Armed')
   if DEBUG > 0:
     print('Running alarm_armed function')
     print('Armed Status = ',armed_status)
     print('Entry Delay Status: ',entry_delay_status)
     print('Exit Delay Status: ',exit_delay_status)
     time.sleep(0.5)
-  entry_delay_time = entry_time
-  exit_delay_time = exit_time
-  GPIO.output(Armed_LED, GPIO.LOW)
-  GPIO.output(Delay_LED, GPIO.HIGH)
 
 def alarm_disarmed():
   global armed_status
@@ -176,6 +175,7 @@ def alarm_disarmed():
   exit_delay_time = exit_time
   exit_delay_status = 0
   PIR_status = 0
+  print('Alarm Disarmed')
   if DEBUG > 0:
     print('Running alarm_disarmed function')
     print('Armed Status = ',armed_status)
@@ -200,6 +200,7 @@ def entry_delay():
     entry_delay_status = 1
   if entry_delay_time == 0:
     entry_delay_status = 2
+  print('Entry Delay')
   if DEBUG > 0:
     print('Running entry_delay function')
     print('Armed Status: ', armed_status)
@@ -227,6 +228,7 @@ def exit_delay():
     exit_delay_status = 2
     armed_status = 2
     PIR_status = 0
+  print('Exit Delay')
   if DEBUG > 0:
     print('Running exit_delay function')
     print('Armed_Status: ',armed_status)
