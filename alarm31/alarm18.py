@@ -99,7 +99,7 @@ def treat_input(linein):
          while (count < 20):
            print('***** Raspberry Pi Shutting Down!!! *****')
            count = count + 1
-           time.sleep(2.0)
+         time.sleep(2.0)
        subprocess.call(["sudo", "shutdown", "-h", "now"])
     if int(linein)==4033998788: # reboot raspi
        count = 0
@@ -109,7 +109,7 @@ def treat_input(linein):
          while (count < 20):
            print('***** Raspberry Pi Rebooting!!! *****')
            count = count + 1
-           time.sleep(2.0)
+         time.sleep(2.0)
        subprocess.call(["sudo", "reboot", "-h", "now"])
     if int(linein)==4038197350: # exit program
        count = 0
@@ -119,7 +119,7 @@ def treat_input(linein):
          while (count < 20):
            print('***** Exiting Program!!! *****')
            count = count + 1
-           time.sleep(2.0)
+         time.sleep(2.0)
        sys.exit()
     if int(linein)==8788: # correct alarm code
       if armed_status == 0: # If alarm disarmed, start exit delay
