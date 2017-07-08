@@ -1,9 +1,9 @@
 #! /usr/bin/python3
 
 #-------------------------------------------------------------------
-# Name: alarm19.py
+# Name: alarm20.py
 # Author: Robin Greig
-# Date 2017.07.07
+# Date 2017.07.08
 # Monitor Keypad for correct code
 # Respond to PIR motion sensor input immediately
 # Utilize Entry and Exit delays
@@ -104,7 +104,7 @@ def treat_input(linein):
            count = count + 1
          time.sleep(2.0)
        subprocess.call(["sudo", "shutdown", "-h", "now"])
-    if int(linein)==4033998788: # reboot raspi
+    elif int(linein)==4033998788: # reboot raspi
        count = 0
        os.system("stty echo")
        GPIO.cleanup()
@@ -114,7 +114,7 @@ def treat_input(linein):
            count = count + 1
          time.sleep(2.0)
        subprocess.call(["sudo", "reboot", "-h", "now"])
-    if int(linein)==4038197350: # exit program
+    elif int(linein)==4038197350: # exit program
        count = 0
        os.system("stty echo")
        GPIO.cleanup()
@@ -123,15 +123,16 @@ def treat_input(linein):
            print('***** Exiting Program!!! *****')
            count = count + 1
        sys.exit()
-    if int(linein)==8788: # correct alarm code
+    elif int(linein)==8788: # correct alarm code
       if armed_status == 0: # If alarm disarmed, start exit delay
         armed_status = 1
       else:
         alarm_disarmed()
-        
+    else:
+      print('Incorrect Entry')
   except ValueError:
     pass
-    print('Incorrect Entry')
+    print('Non-Char Input')
   last_code_time = time.time()
 
 def alarm_activated():
