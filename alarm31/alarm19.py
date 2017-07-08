@@ -25,7 +25,6 @@ last_code_time = time.time() # timer for keyboard check
 
 ##### Set Variables
 armed_status = 0 # 0 = disarmed, 1 = entry or exit delay, 2 = armed
-correct_code = 0 # 0 = wrong code, 1 = correct code
 entry_time = 16 # amount of entry time
 entry_delay_time = entry_time # entry delay time variable
 exit_time = 16 # amount of exit time
@@ -48,8 +47,8 @@ if DEBUG > 0:
 Armed_LED = 24 # Green
 Beeper = 17 # Brown
 Delay_LED = 23 # Green/White
-PIR_Sensor = 22 # Orange
-Ready_LED = 18 # Orange/White
+PIR_Sensor = 22 # Blue
+Ready_LED = 18 # Blue/White
 Siren = 27 # Brown/White
 
 ##### Setup GPIO
@@ -67,12 +66,12 @@ GPIO.output(Ready_LED, GPIO.LOW)
 GPIO.setup(Siren,GPIO.OUT) # Set GPIO to output for Siren
 GPIO.output(Siren, GPIO.HIGH)
 
-def PIR_Movement(PIR_Sensor):
+def PIR_Movement(PIR_Sensor): # Detect movement from PIR sensor
   global PIR_status
-  if DEBUG > 0:
+  if DEBUG > 0: # PIR sensor very sensitive
     print('**************************** PIR Movement Function called')
-  time.sleep(0.5)
-  if GPIO.input(PIR_Sensor) == 1:
+  time.sleep(0.5) # Wait 0.5 seconds and see if the sensor is still high to minimize false signals
+  if GPIO.input(PIR_Sensor) == 1: # if sensor is still high, then set PIR status to 1
     PIR_status = 1
     print('PIR Movement')
     if DEBUG > 0:
@@ -86,7 +85,6 @@ def treat_input(linein):
   global exit_delay_time
   global exit_delay_status
   global last_code_time
-#  print("Workin' it!", linein, end="")
   if DEBUG > 0:
     print("linein = ", linein)
   try:
@@ -139,11 +137,11 @@ def alarm_activated():
   GPIO.output(Armed_LED, GPIO.LOW)
   GPIO.output(Delay_LED, GPIO.LOW)
   GPIO.output(Ready_LED, GPIO.LOW)
-  time.sleep(0.5)
+  time.sleep(0.3)
   GPIO.output(Armed_LED, GPIO.HIGH)
   GPIO.output(Delay_LED, GPIO.HIGH)
   GPIO.output(Ready_LED, GPIO.HIGH)
-  time.sleep(0.5)
+  time.sleep(0.3)
   print('*** ALARM ***')
 
 def alarm_armed():
@@ -177,6 +175,13 @@ def alarm_disarmed():
   GPIO.output(Ready_LED, GPIO.LOW)
   GPIO.output(Beeper, GPIO.HIGH)
   GPIO.output(Siren, GPIO.HIGH)
+  GPIO.output(Beeper, GPIO.LOW)
+  time.sleep(0.3)
+  GPIO.output(Beeper, GPIO.HIGH)
+  time.sleep(0.3)
+  GPIO.output(Beeper, GPIO.LOW)
+  time.sleep(0.3)
+  GPIO.output(Beeper, GPIO.HIGH)
   armed_status = 0
   entry_delay_time = entry_time
   entry_delay_status = 0
@@ -250,7 +255,7 @@ def main_loop():
   global exit_delay_status
   global read_list
   global PIR_status
-  # while still waiting for input on at least one file
+  # while still waiting for input
   while read_list:
     ready = select.select(read_list, [], [], timeout)[0]
     if not ready:
@@ -274,7 +279,7 @@ def main_loop():
 try:
     main_loop()
 except KeyboardInterrupt:
-  GPIO.output(Armed_LED, GPIO.HIGH)
+  alarm_disarmed()
   os.system("stty echo")
   GPIO.cleanup()
   pass
