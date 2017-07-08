@@ -132,7 +132,7 @@ def treat_input(linein):
       print('Incorrect Entry')
   except ValueError:
     pass
-    print('Non-Char Input')
+    print('Non-Number Input')
   last_code_time = time.time()
 
 def alarm_activated():
