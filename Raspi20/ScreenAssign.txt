@@ -17,4 +17,5 @@ desktop32	= Downstairs desktop
 alarm33		= CFMF Alarm 2
 raspi34		= MySQL server (new)
 raspi36		= Arduino... soon to be breadboard36
+raspi36		= Raspi38 at MakerSpace
 
