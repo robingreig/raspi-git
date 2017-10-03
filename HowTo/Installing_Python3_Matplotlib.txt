@@ -1,0 +1,10 @@
+sudo apt-get install python3-matplotlib
+sudo apt-get install python3-cairocffi
+sudo apt-get install python3-gi-cairo
+
+This throws an error when trying to print to the screen, but seems to save the .png fine
+
+Adding mysql & python support:
+sudo apt-get install mysql-client && sudo apt-get install mysql-server && sudo apt-get install python-mysqldb
+
+
