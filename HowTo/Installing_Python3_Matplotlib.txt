@@ -7,4 +7,14 @@ This throws an error when trying to print to the screen, but seems to save the .
 Adding mysql & python support:
 sudo apt-get install mysql-client && sudo apt-get install mysql-server && sudo apt-get install python-mysqldb
 
+Mariadb doesn't ask for a password when installing, so you have to run:
+mysql_secure_installation
+
+login as root 
+mysql -uroot -pPassword mysql
+
+Add user robin
+CREATE USER robin IDENTIFIED BY 'Password';
+GRANT ALL ON *.* TO robin@localhost IDENTIFIED BY 'Password';
+
 
