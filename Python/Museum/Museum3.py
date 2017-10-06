@@ -44,11 +44,26 @@ bus.write_byte_data(DEVICE,IODIRA,0x00)
 # Set output all 7 output bits to 0
 bus.write_byte_data(DEVICE,OLATA,0)
 
-for MyData in range (1,64):
+for MyData in range (1,4):
   # Count from 1 to 8 which in binary will 
   # count from 001 to 111
-  bus.write_byte_data(DEVICE,OLATA,MyData)
-  print(MyData)
+  bus.write_byte_data(DEVICE,OLATA,0)
+  bus.write_byte_data(DEVICE,OLATA,1)
+  time.sleep(1)
+  bus.write_byte_data(DEVICE,OLATA,0)
+  bus.write_byte_data(DEVICE,OLATA,2)
+  time.sleep(1)
+  bus.write_byte_data(DEVICE,OLATA,0)
+  bus.write_byte_data(DEVICE,OLATA,4)
+  time.sleep(1)
+  bus.write_byte_data(DEVICE,OLATA,0)
+  bus.write_byte_data(DEVICE,OLATA,8)
+  time.sleep(1)
+  bus.write_byte_data(DEVICE,OLATA,0)
+  bus.write_byte_data(DEVICE,OLATA,16)
+  time.sleep(1)
+  bus.write_byte_data(DEVICE,OLATA,0)
+  bus.write_byte_data(DEVICE,OLATA,32)
   time.sleep(1)
 
 # Set all bity to zero

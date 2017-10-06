@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 #-------------------------------------------------------------------
-# Name: museum1.py
+# Name: museum2.py
 # Author: Robin Greig
 # Date 2017.10.06
 # Email: robin.greig@calalta.com
@@ -44,13 +44,14 @@ bus.write_byte_data(DEVICE,IODIRA,0x00)
 # Set output all 7 output bits to 0
 bus.write_byte_data(DEVICE,OLATA,0)
 
-for MyData in range (1,64):
-  # Count from 1 to 8 which in binary will 
-  # count from 001 to 111
-  bus.write_byte_data(DEVICE,OLATA,MyData)
-  print(MyData)
+#for MyData in range (1,64,8):
+my_list = [1,2,4,8,16,32,64]
+my_list_len = len(my_list)
+for i in range(0,my_list_len):
+  bus.write_byte_data(DEVICE,OLATA,[i])
+  print ([i])
   time.sleep(1)
 
-# Set all bity to zero
+# Set all bits to zero
 bus.write_byte_data(DEVICE,OLATA,0)
 
