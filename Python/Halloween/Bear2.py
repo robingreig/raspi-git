@@ -25,16 +25,18 @@ PIR_Sensor_2 = 25
 #GPIO.setwarnings(False) # Ignore GPIO warnings
 GPIO.setmode(GPIO.BCM) # numbering scheme that matches Cobbler
 GPIO.setup(PIR_Sensor_1,GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set GPIO to input for PIR Sensors
+#GPIO.setup(PIR_Sensor_1,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set GPIO to input for PIR Sensors
 GPIO.setup(PIR_Sensor_2,GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set GPIO to input for PIR Sensors
+#GPIO.setup(PIR_Sensor_2,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set GPIO to input for PIR Sensors
 
 #GPIO.add_event_detect(PIR_Sensor, GPIO.FALLING, callback=my_callback_one, bouncetime=200)
 
 os.system('amixer cset numid=3 1')
 
 #def main_loop():
-#  while True:
-#    os.system('mpg123 /home/robin/beargrowl1.mp3')
-os.system('mpg123 /home/robin/beargrowl1.mp3')
+while True:
+  if (GPIO.input(PIR_Sensor_1)):
+    os.system('mpg123 /home/robin/beargrowl1.mp3')
 
 #try:
 #  main_loop()
