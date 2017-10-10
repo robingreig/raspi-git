@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 #-------------------------------------------------------------------
-# Name: bear1.py
+# Name: bear3.py
 # Author: Robin Greig
 # Date 2017.10.06
 # Check for input every 0.1 seconds
