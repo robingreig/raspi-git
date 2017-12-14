@@ -55,7 +55,7 @@ bus.write_byte_data(DEVICE0,IODIRB,0x00)
 bus.write_byte_data(DEVICE0,OLATA,0)
 bus.write_byte_data(DEVICE0,OLATB,0)
 
-while cycles > True:
+while True:
   if(GPIO.input(PIR_Sensor_1)):
     while cycles > 0:
       os.system('mpg123 /home/robin/raspi-git/Audio/6leds.mp3 &')
