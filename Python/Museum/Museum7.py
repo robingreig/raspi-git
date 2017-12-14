@@ -1,13 +1,14 @@
 #! /usr/bin/python3
 
 #-------------------------------------------------------------------
-# Name: museum6.py
+# Name: museum7.py
 # Author: Robin Greig
-# Date 2017.12.08
+# Date 2017.12.13
 # Email: robin.greig@calalta.com
 # Check for input every 0.1 seconds
 # Respond to input by playing sound & turning on all 16 outputs 
-# one second at a time and then turning all off after 60 seconds
+# one second at a time and then turning all off after 180 seconds
+# Then cycling through that process 10 times
 #-------------------------------------------------------------------
 import os, subprocess, sys, time, smbus
 import RPi.GPIO as GPIO
@@ -17,8 +18,8 @@ DEBUG = 0
 debug_time = 1
 
 ##### Set Variables
-cycles = 1
-HoldTime = 600
+cycles = 20
+HoldTime = 240
 
 ##### Set GPIO pins
 PIR_Sensor_1 = 24
@@ -54,47 +55,48 @@ bus.write_byte_data(DEVICE0,IODIRB,0x00)
 bus.write_byte_data(DEVICE0,OLATA,0)
 bus.write_byte_data(DEVICE0,OLATB,0)
 
-while True:
+while cycles > True:
   if(GPIO.input(PIR_Sensor_1)):
-#    os.system('mpg123 /home/robin/raspi-git/Audio/6leds.mp3 &')
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,1)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,3)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,7)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,15)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,31)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,63)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,127)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATA,255)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,1)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,3)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,7)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,15)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,31)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,63)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,127)
-    time.sleep(1)
-    bus.write_byte_data(DEVICE0,OLATB,255)
-    time.sleep(HoldTime)
-    bus.write_byte_data(DEVICE0,OLATA,0)
-    bus.write_byte_data(DEVICE0,OLATB,0)
-#    break
-  if(GPIO.input(PI_Off)):
-    subprocess.call(["sudo", "poweroff"])
+    while cycles > 0:
+      os.system('mpg123 /home/robin/raspi-git/Audio/6leds.mp3 &')
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,1)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,3)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,7)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,15)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,31)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,63)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,127)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATA,255)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,1)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,3)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,7)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,15)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,31)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,63)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,127)
+      time.sleep(1)
+      bus.write_byte_data(DEVICE0,OLATB,255)
+      time.sleep(HoldTime)
+      bus.write_byte_data(DEVICE0,OLATA,0)
+      bus.write_byte_data(DEVICE0,OLATB,0)
+      cycles = cycles -1
+      if(GPIO.input(PI_Off)):
+        subprocess.call(["sudo", "poweroff"])
 
 # Set all bits to zero
 bus.write_byte_data(DEVICE0,OLATA,0)
