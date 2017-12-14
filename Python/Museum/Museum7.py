@@ -18,8 +18,8 @@ DEBUG = 0
 debug_time = 1
 
 ##### Set Variables
-cycles = 20
-HoldTime = 240
+# cycles = 20
+HoldTime = 180
 
 ##### Set GPIO pins
 PIR_Sensor_1 = 24
@@ -56,6 +56,7 @@ bus.write_byte_data(DEVICE0,OLATA,0)
 bus.write_byte_data(DEVICE0,OLATB,0)
 
 while True:
+  cycles = 5
   if(GPIO.input(PIR_Sensor_1)):
     while cycles > 0:
       os.system('mpg123 /home/robin/raspi-git/Audio/6leds.mp3 &')
