@@ -16,7 +16,7 @@ import RPi.GPIO as GPIO
 ##### For troubleshooting:
 ##### Set DEBUG to 0 for normal operation
 ##### Set DEBUG to 1 for single run through then exit program
-DEBUG = 1
+DEBUG = 0
 
 ##### Set GPIO pins
 English = 24
@@ -91,6 +91,8 @@ while True:
     subprocess.call(["sudo", "poweroff"])
   if(GPIO.input(English)):
     os.system('mpg123 /home/robin/Desktop/Track1.mp3 &')
+  elif(GPIO.input(French)):
+    os.system('mpg123 /home/robin/Desktop/Track2.mp3 &')
     time.sleep(2)
     if(DEBUG > 0):
       print ("Device1, Bank A started")
@@ -299,23 +301,8 @@ while True:
     bus.write_byte_data(DEVICE7,OLATA,63)
     time.sleep(1.8)
     bus.write_byte_data(DEVICE7,OLATA,127)
-    time.sleep(1.8)
-#    if(DEBUG > 0):
-#      print ("Device7, Bank B started")
-#    bus.write_byte_data(DEVICE7,OLATB,1)
-#    time.sleep(.1)
-#    bus.write_byte_data(DEVICE7,OLATB,3)
-#    time.sleep(.1)
-#    bus.write_byte_data(DEVICE7,OLATB,7)
-#    time.sleep(.1)
-#    bus.write_byte_data(DEVICE7,OLATB,39)
-#    time.sleep(.1)
-#    bus.write_byte_data(DEVICE7,OLATB,55)
-#    time.sleep(.1)
-#    bus.write_byte_data(DEVICE7,OLATB,63)
-#    time.sleep(.1)
-#    bus.write_byte_data(DEVICE7,OLATB,127)
-#    time.sleep(.1)
+    time.sleep(3)
+    # Set all bits to zero
     bus.write_byte_data(DEVICE1,OLATA,0)
     bus.write_byte_data(DEVICE1,OLATB,0)
     bus.write_byte_data(DEVICE2,OLATA,0)
@@ -330,8 +317,6 @@ while True:
     bus.write_byte_data(DEVICE6,OLATB,0)
     bus.write_byte_data(DEVICE7,OLATA,0)
     bus.write_byte_data(DEVICE7,OLATB,0)
-#    if(DEBUG > 0):
-#      break
 
 # Set all bits to zero
 bus.write_byte_data(DEVICE1,OLATA,0)
