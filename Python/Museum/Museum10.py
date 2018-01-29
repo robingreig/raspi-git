@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 #-------------------------------------------------------------------
-# Name: museum9.py
+# Name: museum10.py
 # Author: Robin Greig
 # Date 2018.02.13
 # Email: robin.greig@calalta.com
@@ -17,8 +17,6 @@ import RPi.GPIO as GPIO
 ##### Set DEBUG to 0 for normal operation
 ##### Set DEBUG to 1 for single run through then exit program
 DEBUG = 0
-EnglishChoice = 0
-FrenchChoice = 0
 
 ##### Set GPIO pins
 English = 24
@@ -29,10 +27,13 @@ PI_Off = 18
 #GPIO.setwarnings(False) # Ignore GPIO warnings
 GPIO.setmode(GPIO.BCM) # numbering scheme that matches Cobbler
 GPIO.setup(English,GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set GPIO to input for English pushbutton
-if DEBUG > 0:
-  GPIO.setup(English,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set English to HIGH to automatically start sequence for Debugging
+#GPIO.setup(English,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set GPIO to input for English pushbutton
+#if DEBUG > 0:
+#  GPIO.setup(English,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set English to HIGH to automatically start sequence for Debugging
 GPIO.setup(French,GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set GPIO to input for French pushbutton
+#GPIO.setup(French,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set GPIO to input for French pushbutton
 GPIO.setup(PI_Off,GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set GPIO to input for PI Off button
+#GPIO.setup(PI_Off,GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set GPIO to input for PI Off button
 
 bus = smbus.SMBus(1) # Rev 2 Pi uses 1
 os.system('amixer cset numid=3 1')
@@ -314,6 +315,216 @@ def EnglishLED():
     bus.write_byte_data(DEVICE7,OLATB,0)
     return
 
+def EnglishLED():
+    if(DEBUG > 0):
+      print ("Device1, Bank A started")
+    bus.write_byte_data(DEVICE1,OLATA,1)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATA,3)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATA,7)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATA,39)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATA,55)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATA,63)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATA,127)
+    time.sleep(2)
+    if(DEBUG > 0):
+      print ("Device1, Bank B started")
+    bus.write_byte_data(DEVICE1,OLATB,1)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATB,3)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATB,7)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATB,39)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATB,55)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATB,63)
+    time.sleep(2)
+    bus.write_byte_data(DEVICE1,OLATB,127)
+    time.sleep(2)
+    if(DEBUG > 0):
+      print ("Device2, Bank A started")
+    bus.write_byte_data(DEVICE2,OLATA,1)
+    time.sleep(1)
+    bus.write_byte_data(DEVICE2,OLATA,3)
+    time.sleep(1)
+    bus.write_byte_data(DEVICE2,OLATA,7)
+    time.sleep(1)
+    bus.write_byte_data(DEVICE2,OLATA,15)
+    time.sleep(1)
+    bus.write_byte_data(DEVICE2,OLATA,31)
+    time.sleep(1)
+    bus.write_byte_data(DEVICE2,OLATA,63)
+    time.sleep(1)
+    bus.write_byte_data(DEVICE2,OLATA,127)
+    time.sleep(0.2)
+    if(DEBUG > 0):
+      print ("Device2, Bank B started")
+    bus.write_byte_data(DEVICE2,OLATB,1)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE2,OLATB,3)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE2,OLATB,7)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE2,OLATB,39)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE2,OLATB,55)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE2,OLATB,63)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE2,OLATB,127)
+    time.sleep(0.2)
+    if(DEBUG > 0):
+      print ("Device3, Bank A started")
+    bus.write_byte_data(DEVICE3,OLATA,1)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE3,OLATA,3)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE3,OLATA,7)
+    time.sleep(0.2)
+    bus.write_byte_data(DEVICE3,OLATA,39)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATA,55)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATA,63)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATA,127)
+    time.sleep(0.5)
+    if(DEBUG > 0):
+      print ("Device3, Bank B started")
+    bus.write_byte_data(DEVICE3,OLATB,1)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATB,3)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATB,7)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATB,39)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATB,55)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATB,63)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE3,OLATB,127)
+    time.sleep(0.5)
+    if(DEBUG > 0):
+      print ("Device4, Bank A started")
+    bus.write_byte_data(DEVICE4,OLATA,1)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATA,3)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATA,7)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATA,39)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATA,55)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATA,63)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATA,127)
+    time.sleep(0.5)
+    if(DEBUG > 0):
+      print ("Device4, Bank B started")
+    bus.write_byte_data(DEVICE4,OLATB,1)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATB,3)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATB,7)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATB,39)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATB,55)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATB,63)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE4,OLATB,127)
+    time.sleep(0.5)
+    if(DEBUG > 0):
+      print ("Device5, Bank A started")
+    bus.write_byte_data(DEVICE5,OLATA,1)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATA,3)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATA,7)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATA,39)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATA,55)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATA,63)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATA,127)
+    time.sleep(0.5)
+    if(DEBUG > 0):
+      print ("Device5, Bank B started")
+    bus.write_byte_data(DEVICE5,OLATB,1)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATB,3)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATB,7)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATB,39)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATB,55)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATB,63)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE5,OLATB,127)
+    time.sleep(0.5)
+    if(DEBUG > 0):
+      print ("Device6, Bank A started")
+    bus.write_byte_data(DEVICE6,OLATA,1)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE6,OLATA,3)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE6,OLATA,7)
+    time.sleep(0.5)
+    bus.write_byte_data(DEVICE6,OLATA,39)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATA,55)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATA,63)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATA,127)
+    time.sleep(1.8)
+    if(DEBUG > 0):
+      print ("Device6, Bank B started")
+    bus.write_byte_data(DEVICE6,OLATB,1)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATB,3)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATB,7)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATB,15)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATB,31)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATB,63)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE6,OLATB,127)
+    time.sleep(1.8)
+    if(DEBUG > 0):
+      print ("Device7, Bank A started")
+    bus.write_byte_data(DEVICE7,OLATA,1)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE7,OLATA,3)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE7,OLATA,7)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE7,OLATA,39)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE7,OLATA,55)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE7,OLATA,63)
+    time.sleep(1.8)
+    bus.write_byte_data(DEVICE7,OLATA,127)
+    time.sleep(3)
+
 def ZeroBits():
     # Set all bits to zero
     bus.write_byte_data(DEVICE1,OLATA,0)
@@ -336,22 +547,20 @@ while True:
   if(GPIO.input(PI_Off)):
     subprocess.call(["sudo", "poweroff"])
   if(GPIO.input(English)):
-    EnglishChoice = 1
-    FrenchChoice = 0
-  elif(GPIO.input(French)):
-    FrenchChoice = 1
-    EnglishChoice = 0
-  if EnglishChoice > 0:
+    print("English Track Started") 
+    time.sleep(1)
     os.system('mpg123 /home/robin/Desktop/Track1.mp3 &')
-    EnglishLED()
-    EnglishChoice = 0
-    FrenchChoice = 0
     time.sleep(1)
-  if FrenchChoice > 0:
+    EnglishLED()
+    time.sleep(1)
+    print("English Track Finished")
+  if(GPIO.input(French)):
+    print("French Track Started")
+    time.sleep(1)
     os.system('mpg123 /home/robin/Desktop/Track2.mp3 &')
-    EnglishLED()
-    EnglishChoice = 0
-    FrenchChoice = 0
     time.sleep(1)
+    EnglishLED()
+    time.sleep(1)
+    print("French Track Finished")
 
 
