@@ -8,3 +8,7 @@ sudo fail2ban-client reload
 Unban an IP
 sudo fail2ban-client set ssh unbanip 142.110.227.97
 
+Whitelist an IP
+sudo fail2ban-client set ssh addignoreip 123.45.67.89
+
+
