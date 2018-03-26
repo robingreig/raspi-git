@@ -1,0 +1,10 @@
+Check on the status of the ssh jail
+sudo fail2ban-client status ssh
+
+Reload the jail files (configuration files)
+***** Will reset the jail counters to zero
+sudo fail2ban-client reload
+
+Unban an IP
+sudo fail2ban-client set ssh unbanip 142.110.227.97
+
