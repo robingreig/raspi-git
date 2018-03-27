@@ -1,0 +1,14 @@
+
+sudo apt-get install ntp
+
+sudo sysemctl enable ntp
+
+update ntp.conf for SAIT's timeservers
+
+# You do need to talk to an NTP server or two (or three).
+#server ntp.your-provider.example
+server 10.197.2.9 iburst
+server 10.197.3.9 iburst
+
+sudo timedatectl set-ntp 1 (or true)
+
