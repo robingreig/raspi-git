@@ -1,5 +1,15 @@
+Try:
+/etc/systemd/timesyncd.conf
 
-sudo apt-get install ntp
+[Time]
+NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+
+#### Try NTP=0.time1.sait.ca 2.time2.sait.ca
+
+and if not......
+
+sudo apt install ntp
 
 sudo sysemctl enable ntp
 
@@ -11,4 +21,11 @@ server 10.197.2.9 iburst
 server 10.197.3.9 iburst
 
 sudo timedatectl set-ntp 1 (or true)
+
+ntpq -p should give the following:
+
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
++time1.sait.ca   .GPS.            1 u   41   64    7    2.992   -3.940   1.714
+*time2.sait.ca   .GPS.            1 u   44   64    7    3.012   -3.843   1.845
 
