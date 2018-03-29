@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------
 # Name: museum10.py
 # Author: Robin Greig
-# Date 2018.02.13
+# Date 2018.03.16
 # Email: robin.greig@calalta.com
 # Check for input every 0.1 seconds
 # Respond to input by playing sound & turning on all 91 outputs
