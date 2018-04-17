@@ -6,6 +6,7 @@
 
 # Import standard python modules.
 import sys
+import RPi.GPIO as GPIO
 
 # Import Adafruit IO MQTT client.
 from Adafruit_IO import MQTTClient
@@ -19,6 +20,12 @@ ADAFRUIT_IO_USERNAME = 'robingreig'  # See https://accounts.adafruit.com
 # Set to the ID of the feed to subscribe to for updates.
 #FEED_ID = 'Lamp'
 FEED_ID = 'blockheat01'
+
+# Setup GPIO
+outputNum = 24
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(outputNum,GPIO.OUT)
 
 
 # Define callback functions which will be called when certain events happen.
@@ -41,7 +48,10 @@ def message(client, feed_id, payload):
     # The feed_id parameter identifies the feed, and the payload parameter has
     # the new value.
     print 'Feed {0} received new value: {1}'.format(feed_id, payload)
-
+    if payload == "1":
+      GPIO.output(outputNum,GPIO.HIGH)
+    else:
+      GPIO.output(outputNum,GPIO.LOW)
 
 # Create an MQTT client instance.
 client = MQTTClient(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
