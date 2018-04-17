@@ -26,7 +26,7 @@ def connected(client):
     # calls against it easily.
     print 'Connected to Adafruit IO!  Listening for Lamp changes...'
     # Subscribe to changes on a feed named Lamp
-    client.subscribe('Lamp')
+    client.subscribe('blockheat01')
 
 def disconnected(client):
     # Disconnected function will be called when the client disconnects.
