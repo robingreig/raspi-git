@@ -1,0 +1,7 @@
+
+gpio readall 
+- Will display status of all gpio pins
+
+pinout
+- Will display a graphical representation of the raspi with version #, etc.
+
