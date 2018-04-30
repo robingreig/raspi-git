@@ -5,3 +5,7 @@ gpio readall
 pinout
 - Will display a graphical representation of the raspi with version #, etc.
 
+HDMI on & off
+sudo /opt/vc/bin/tvservice -o (or -p to turn it back on)
+
+
