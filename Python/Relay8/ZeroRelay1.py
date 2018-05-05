@@ -25,14 +25,15 @@ FEED_ID = 'blockheat01'
 # Setup GPIO
 last = 0
 inputNum = 23
-outputNum = 24
 relay1 = 11
+relay2 = 12
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(inputNum,GPIO.IN)
-GPIO.setup(outputNum,GPIO.OUT)
 GPIO.setup(relay1,GPIO.OUT)
-
+GPIO.output(relay2,GPIO.OUT)
+GPIO.setup(relay1,GPIO.LOW)
+GPIO.output(relay2,GPIO.LOW)
 
 # Define callback functions which will be called when certain events happen.
 def connected(client):
@@ -55,11 +56,9 @@ def message(client, feed_id, payload):
     # the new value.
     print 'Feed {0} received new value: {1}'.format(feed_id, payload)
     if payload == "1":
-      GPIO.output(outputNum,GPIO.HIGH)
-      GPIO.output(relay1,GPIO.HIGH)
-    else:
-      GPIO.output(outputNum,GPIO.LOW)
       GPIO.output(relay1,GPIO.LOW)
+    else:
+      GPIO.output(relay1,GPIO.HIGH)
 
 # Create an MQTT client instance.
 client = MQTTClient(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
