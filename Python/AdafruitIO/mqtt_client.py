@@ -62,8 +62,8 @@ client.loop_background()
 print 'Publishing a new message every 10 seconds (press Ctrl-C to quit)...'
 while True:
     value = random.randint(0, 1)
-    print 'Publishing {0} to Lamp.'.format(value)
-    client.publish('Lamp', value)
+    print 'Publishing {0} to Door State.'.format(value)
+    client.publish('doorstate', value)
     time.sleep(10)
 
 # Another option is to pump the message loop yourself by periodically calling
