@@ -16,21 +16,27 @@ from Adafruit_IO import MQTTClient
 # Set to your Adafruit IO key & username below.
 ADAFRUIT_IO_KEY      = '7e01e8b5e56360efc48a27682324fc353e18d14f'
 ADAFRUIT_IO_USERNAME = 'robingreig'  # See https://accounts.adafruit.com
-                                                    # to find your username.
 
 # Set to the ID of the feed to subscribe to for updates.
 #FEED_ID = 'Lamp'
-FEED_ID = 'blockheat01'
+FEED_ID1 = 'blockheat01'
+FEED_ID2 = 'blockheat02'
 
 # Setup GPIO
 last = 0
 inputNum = 23
 relay1 = 11
+relay2 = 12
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(inputNum,GPIO.IN)
 GPIO.setup(relay1,GPIO.OUT)
-GPIO.output(relay1,GPIO.LOW)
+GPIO.setup(relay2,GPIO.OUT)
+GPIO.output(relay1,GPIO.HIGH)
+GPIO.output(relay2,GPIO.HIGH)
+
+# Set Debug Varialble, 0 = off & 1 = on
+Debug = 1
 
 # Define callback functions which will be called when certain events happen.
 def connected(client):
@@ -38,9 +44,12 @@ def connected(client):
     # This is a good place to subscribe to feed changes.  The client parameter
     # passed to this function is the Adafruit IO MQTT client so you can make
     # calls against it easily.
-    print 'Connected to Adafruit IO!  Listening for {0} changes...'.format(FEED_ID)
+    if Debug > 0:
+      print 'Connected to Adafruit IO!  Listening for {0} changes...'.format(FEED_ID1)
+      print 'Connected to Adafruit IO!  Listening for {0} changes...'.format(FEED_ID2)
     # Subscribe to changes on a feed named DemoFeed.
-    client.subscribe(FEED_ID)
+    client.subscribe(FEED_ID1)
+    client.subscribe(FEED_ID2)
 
 def disconnected(client):
     # Disconnected function will be called when the client disconnects.
@@ -51,11 +60,27 @@ def message(client, feed_id, payload):
     # Message function will be called when a subscribed feed has a new value.
     # The feed_id parameter identifies the feed, and the payload parameter has
     # the new value.
-    print 'Feed {0} received new value: {1}'.format(feed_id, payload)
-    if payload == "1":
-      GPIO.output(relay1,GPIO.LOW)
-    else:
-      GPIO.output(relay1,GPIO.HIGH)
+    if Debug > 0:
+      print 'Feed {0} received new value: {1}'.format(feed_id, payload)
+    if feed_id == FEED_ID1:
+      if payload == "1":
+        GPIO.output(relay1,GPIO.LOW)
+        if Debug > 0:
+          print ("Relay 1 is ON")
+      else:
+        GPIO.output(relay1,GPIO.HIGH)
+        if Debug > 0:
+          print ("Relay 1 is OFF")
+    if feed_id == FEED_ID2:
+      if payload == "1":
+        GPIO.output(relay2,GPIO.LOW)
+        if Debug > 0:
+          print ("Relay 2 is ON")
+      else:
+        GPIO.output(relay2,GPIO.HIGH)
+        if Debug > 0:
+          print ("Relay 2 is OFF")
+
 
 # Create an MQTT client instance.
 client = MQTTClient(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
