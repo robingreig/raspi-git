@@ -66,7 +66,8 @@ def connected(client):
 def disconnected(client):
     # Disconnected function will be called when the client disconnects.
     print 'Disconnected from Adafruit IO!'
-    sys.exit(1)
+    client.connect()
+    #sys.exit(1)
 
 def message(client, feed_id, payload):
     # Message function will be called when a subscribed feed has a new value.
@@ -126,18 +127,5 @@ client.connect()
 # Start a message loop that blocks forever waiting for MQTT messages to be
 # received.  Note there are other options for running the event loop like doing
 # so in a background thread--see the mqtt_client.py example to learn more.
-client.loop_blocking()
-
-# Pump the Light Switch loop
 #client.loop_background()
-#while True:
-#  if (time.time() - last) >= 5:
-#    state = GPIO.input(inputNum)
-#    if (state):
-#      print('Doorstate = 1')
-#      client.publish('doorstate',1) 
-#    else:
-#      print('Doorstate = 0')
-#      client.publish('doorstate',0)
-#    last = time.time()
-
+client.loop_blocking()
