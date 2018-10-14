@@ -26,6 +26,10 @@ def my_callback(channel):
     time.sleep(2)
     GPIO.output(Relay01, GPIO.HIGH)
     time.sleep(0.5)
+    # Relay 2 to start bear
+    GPIO.output(Relay02, GPIO.LOW)
+    time.sleep(.5)
+    GPIO.output(Relay02, GPIO.HIGH)
 
 try:
     GPIO.add_event_detect(Sensor01 , GPIO.RISING, callback=my_callback, bouncetime=5000)
