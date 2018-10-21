@@ -15,8 +15,8 @@ SleepTime2 = 0.5
 Debug = 1
 
 GPIO.setmode(GPIO.BCM)
-#GPIO.setup(Sensor01, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(Sensor01, GPIO.IN)
+GPIO.setup(Sensor01, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+#GPIO.setup(Sensor01, GPIO.IN)
 GPIO.setup(Relay01, GPIO.OUT, initial=GPIO.HIGH)
 GPIO.setup(Relay02, GPIO.OUT, initial=GPIO.HIGH)
 GPIO.setup(Relay03, GPIO.OUT, initial=GPIO.HIGH)

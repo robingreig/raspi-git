@@ -4,14 +4,15 @@ import RPi.GPIO as GPIO
 import time, os
 
 Sensor01 = 17 # Motion Sensor
-Relay01 = 24 # Strobe Lights
-Relay02 = 27 # Bear
-Relay03 = 22 # LED lights
-Relay04 = 23 # LED lights
+Relay01 = 27
+Relay02 = 22
+Relay03 = 23
+Relay04 = 24
 
 Test = 0
-
 Debug = 0
+SleepTime1 = 0.5
+SleepTime2 = 1.0
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(Sensor01, GPIO.IN)
@@ -27,28 +28,28 @@ def my_callback(channel):
     Test = 1
     print('Test: ',Test)
     global count
-    count = 3
+    count = 1
     if (Debug > 0):
         print('There was a movement!')
         print('Test: ',Test)
     # Relay 1 to start strobe lights
     while (count > 0):
       GPIO.output(Relay01, GPIO.LOW)
-      time.sleep(0.5)
+      time.sleep(SleepTime1)
       GPIO.output(Relay01, GPIO.HIGH)
-      time.sleep(0.5)
+      time.sleep(SleepTime2)
       GPIO.output(Relay02, GPIO.LOW)
-      time.sleep(0.5)
+      time.sleep(SleepTime1)
       GPIO.output(Relay02, GPIO.HIGH)
-      time.sleep(0.5)
+      time.sleep(SleepTime2)
       GPIO.output(Relay03, GPIO.LOW)
-      time.sleep(0.5)
+      time.sleep(SleepTime1)
       GPIO.output(Relay03, GPIO.HIGH)
-      time.sleep(0.5)
+      time.sleep(SleepTime2)
       GPIO.output(Relay04, GPIO.LOW)
-      time.sleep(0.5)
+      time.sleep(SleepTime1)
       GPIO.output(Relay04, GPIO.HIGH)
-      time.sleep(0.5)
+      time.sleep(SleepTime2)
       count = count - 1
     # Play Audio Growl
     # Relay 2 to start bear
