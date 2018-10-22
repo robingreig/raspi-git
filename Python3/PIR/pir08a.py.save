@@ -23,15 +23,24 @@ GPIO.setup(Relay02, GPIO.OUT, initial=GPIO.HIGH)
 GPIO.setup(Relay03, GPIO.OUT, initial=GPIO.HIGH)
 GPIO.setup(Relay04, GPIO.OUT, initial=GPIO.HIGH)
 
-#def my_callback(channel):
+
 def my_callback(channel):
-    # Here, alternatively, an application / command etc. can be started.
-    global Test
-    Test = 1
-    print('Test: ',Test)
-    if (Debug > 0):
-        print('There was a movement!')
-        print('Test: ',Test)
+
+try:
+    GPIO.add_event_detect(Sensor01 , GPIO.RISING, callback=my_callback, bouncetime=1000)
+    while True:
+        if (Test < 1):
+            os.system('mpg123 /home/robin/raspi-git/Python3/Sounds/thunder.mp3')
+            os.system('mpg123 /home/robin/raspi-git/Python3/Sounds/thunder2.mp3')
+            GPIO.output(Relay02, GPIO.LOW)
+        if Sensor01:
+          global Test
+          Test = 1
+          print('Test: ',Test)
+          global count
+         if (Debug > 0):
+           print('There was a movement!')
+          print('Test: ',Test)
     # Relay 1 to start bear
     GPIO.output(Relay01, GPIO.LOW)
     os.system('mpg123 /home/robin/raspi-git/Python3/Sounds/bear2.mp3')
@@ -58,17 +67,7 @@ def my_callback(channel):
     if (Debug > 0):
         print('Bear should be going back in')
     GPIO.output(Relay01, GPIO.HIGH)
-    global Test
-    Test = 0
 
-try:
-    GPIO.add_event_detect(Sensor01 , GPIO.RISING, callback=my_callback, bouncetime=10000)
-    while True:
-        if (Test < 1):
-            os.system('mpg123 /home/robin/raspi-git/Python3/Sounds/thunder.mp3')
-            os.system('mpg123 /home/robin/raspi-git/Python3/Sounds/thunder2.mp3')
-            GPIO.output(Relay02, GPIO.LOW)
-            if (Debug > 0):
               print('Test: ',Test)
 except KeyboardInterrupt:
     print('\nDebug: ',Debug)
