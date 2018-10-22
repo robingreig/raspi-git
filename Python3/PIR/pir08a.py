@@ -14,7 +14,7 @@ Test = 0
 Debug = 1
 SleepTime1 = 1.0
 SleepTime2 = 10
-SleepTime3 = 16
+SleepTime3 = 10 # Bear out timing shortened because of length of growls
 SleepTime4 = 60
 
 GPIO.setmode(GPIO.BCM)
@@ -34,6 +34,7 @@ try:
       if GPIO.event_detected(Sensor01):
         Test = 0
         Count = 0
+        GPIO.output(Relay02, GPIO.HIGH)
         GPIO.output(Relay03, GPIO.LOW)
         GPIO.output(Relay01, GPIO.LOW)
         os.system('mpg123 /home/robin/raspi-git/Python3/Sounds/bear2.mp3')
