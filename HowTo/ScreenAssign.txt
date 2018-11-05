@@ -8,6 +8,7 @@ raspi15		= MySQL database (old)
 blockheat16 	= BlockHeater
 tempi17		= Office Temperature Monitor
 arduino18	= Office Arduino / Raspi
+raspi19		= Raspi19
 raspi20		= This raspi
 raspi21		= Office Motion Camera
 arduino23	= APRX Battery monitor / Arduino
@@ -17,6 +18,6 @@ desktop32	= Downstairs desktop
 alarm33		= CFMF Alarm 2
 raspi34		= MySQL server (new)
 alarm35		= CFMF Alarm 3
-raspi36		= Arduino... soon to be breadboard36
+breadboard36	= Arduino... soon to be breadboard36
 raspi37		= Raspi37 at MakerSpace
 
