@@ -5,7 +5,29 @@
 5. git clone https://github.com/robingreig/raspi-git
 6. git config --global user.name "Robin Greig"
 7. git config --global user.email "robin.greig@calalta.com"
-8. sudo apt-get install python-dev
-9. sudo apt-get install python-pip
-10. sudo pip install spidev
-11. 
+8. sudo apt-get install autossh wiringpi python3-rpi.gpio python-mysqldb python3-spidev
+9. To confirm spi is enabled via raspi-config:
+	> lsmod | grep -i spi should show spi_bcm2835 or spi_bcm2807
+	> ls -l /dev/spi* should show /dev/spi0.0 & /dev/spi0.1
+10. To troubleshoot, cd /tmp
+	> git clone https://github.com/rm-hull/spidev-test
+	> cd spidev-test
+	> gcc spidev_test.c -o spidev_test
+	> connect MISO & MOSI together and both should be the same
+		what is transmitted is also received if all is OK 	
+	> run with command ./spidev_test -v
+		If received data is all zero, then pins may not be connected?
+	> ./spidev_test -? will show all available options
+11. Hooking up the MCP3008
+	> Pins 1-8 are inputs 0 - 7 and should all be tied high?
+	> Pin 9, DGND is the digital ground pin for the chip.
+	> Pin 10, CS is the chip select connected to GPIO8, Pin 24, CE0 of Raspi.
+	> Pin 11, DIN is the data in from the Raspi, GPIO10, Pin 19, MOSI
+	> Pin 12, DOUT is the data out pin, connected toGPIO9, Pin 21, MISO
+	> Pin 13, CLK is the clock pin, connected to GPIO11, Pin 23, SCLK
+	> Pin 14, AGND is the analog ground and connects to ground with pin 9
+	> Pin 15, VREF is the analog reference voltage.
+		 You can change this if you want to change the scale.
+		 You probably want to keep it the same so keep this as 3v3.
+	> Pin 16, VDD is the positive power pin for the chip 3v3, tied with Pin 15
+12. run /home/robin/raspi-git/spidev/mcp3008Test02.py to show voltages on each pin 
