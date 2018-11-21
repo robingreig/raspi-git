@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+from os import system
+import time
+import RPi.GPIO as gpio
+Debug = 0
+while True:
+    name = input("\n\n\n\n\033[5;30;47m\n\n\n\n\n\n\n\n\n\n\n\n\n                           MakerSpace Key Access System, What is your ID number? \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\033[0;37;40m")
+    if Debug > 0:
+        print("Your ID number is: "+ name +"!")
+    if name == "000008329":
+#        print("You are authorized")
+#        print("\033[5;32;40m You are authorized\033[0;37;40m \n")
+#        print("\033[5;30;42m                                                                     \033[0;37;40m")
+#        print("\033[5;30;42m                                                                     \033[0;37;40m")
+        print("\n\n\n\n\033[5;30;42m\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                          Hi Robin, You are authorized to sign out the key \n\n\n\n\n\n\n\n\n\n\n\n\n\n          \033[0;37;40m")
+        time.sleep(5)
+#        system('clear')
+
+    else:
+#        print("You are NOT authorized")
+        print("\n\n\n\n\033[5;30;41m\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                            Hi "+name+" You are NOT authorized to sign out the key \n\n\n\n\n\n\n\n\n\n\n\n\n       \033[0;37;40m")
+        time.sleep(5)
+#        system('clear')
+
