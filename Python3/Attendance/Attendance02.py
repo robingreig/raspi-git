@@ -39,8 +39,9 @@ while True:
         time.sleep(delay2)
     if waiverSign > 0:
         try:
-            print("Your SAIT ID: ",sait)
-            time.sleep(delay1)
+            if debug > 0:
+                print("Your SAIT ID: ",sait)
+                time.sleep(delay1)
             cursor.execute("""INSERT into attendance
                (date, timeIN,userID)
                VALUES
@@ -49,9 +50,10 @@ while True:
             print("Error: {}".format(error))
 
         mariadb_connection.commit()
-        print ("Database Updated")
-        print ("The last inserted ID was: ", cursor.lastrowid)
-        time.sleep(delay1)
+        if debug > 0:
+            print ("Database Updated")
+            print ("The last inserted ID was: ", cursor.lastrowid)
+            time.sleep(delay1)
 
 mariadb_connection.close()
 
