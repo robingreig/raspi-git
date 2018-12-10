@@ -6,11 +6,11 @@ import os
 
 mariadb_connection = mariadb.connect(user='robin', password='Micr0s0ft', database='makerspace')
 # To debug program debug > 0
-debug = 1
+debug = 0
 # Time Delay for authorized messages
-delay1 = 2
+delay1 = 3
 # Time Delay for rejection messages
-delay2 = 3
+delay2 = 5
 # Did they sign a waiver? waiverSign == 1
 waiverSign = 0
 # Did they sign in today?
@@ -26,7 +26,7 @@ while True:
     waiverSign = 0
     signIn = 0
 #	 Scan SAIT Barcode
-    sait =  int(input("\n\n\nPlease scan your SAIT ID: "))
+    sait =  input("\n\n\nPlease scan your SAIT ID: ")
     if debug > 0:
         print("\nYour SAIT ID: ",sait)
 
@@ -36,11 +36,11 @@ while True:
         cursor.execute("SELECT firstName, lastName from users where waiver = 1 and saitID = '%s'"%(sait))
         for firstName, lastName in cursor:
             print ("\nWelcome to the MakerSpace ""%s"%firstName + " %s"%lastName+"!")
+            time.sleep(delay1)
             if debug > 0:
                 print("\nRowcount returned from checking if they are in the system: ", cursor.rowcount)
                 print("\nsignIn value: ",signIn)
                 time.sleep(delay2)
-            time.sleep(delay1)
             waiverSign = 1
         if waiverSign == 0:
             print("\nI cannot find you in our list? Did you sign the waiver?")
@@ -101,6 +101,8 @@ while True:
                 print("\nUpdate the record that was previously selected")
             cursor.execute("UPDATE attendance set timeOUT = NOW() where attendID = '%s'"%(results))
             mariadb_connection.commit()
+            print("\nThanks for signing OUT of the MakerSpace today!")
+            time.sleep(delay1)
             signIn = 0
             if debug > 0:
                 print ("\nDatabase Updated")
@@ -126,6 +128,8 @@ while True:
                VALUES
                (NOW(),NOW(),'%s');""" % (sait))
             mariadb_connection.commit()
+            print("\nThanks for signing IN to the MakerSpace today!")
+            time.sleep(delay1)
             if debug > 0:
                 print ("\nDatabase Updated")
                 print ("\nThe last inserted ID was: ", cursor.lastrowid)
