@@ -4,17 +4,18 @@ import mysql.connector as mariadb
 import time
 import os
 
-mariadb_connection = mariadb.connect(user='robin', password='Micr0s0ft', database='makerspace')
+mariadb_connection = mariadb.connect(user='robin', password='Micr0s0ft', database='makerspace', host='localhost')
 # To debug program debug > 0
 debug = 0
-# Time Delay for welcome message
+
+# Short Delay
 delay1 = 2
-# Time Delay for authorized messages
-delay2 = 3
-# Time Delay for rejection messages
-delay3 = 5
+# Long Delay
+delay2 = 5
+
 # Did they sign a waiver? waiverSign == 1
 waiverSign = 0
+
 # Did they sign in today?
 #  0 = Not signed in
 #  1 = Signed in but not signed out
@@ -37,8 +38,8 @@ while True:
         cursor = mariadb_connection.cursor()
         cursor.execute("SELECT firstName, lastName from users where waiver = 1 and saitID = '%s'"%(sait))
         for firstName, lastName in cursor:
-            print ("\nWelcome to the MakerSpace ""%s"%firstName + " %s"%lastName+"!")
-            time.sleep(delay1)
+#            print ("\nWelcome to the MakerSpace ""%s"%firstName + " %s"%lastName+"!")
+#            time.sleep(delay1)
             if debug > 0:
                 print("\nRowcount returned from checking if they are in the system: ", cursor.rowcount)
                 print("\nsignIn value: ",signIn)
@@ -46,7 +47,7 @@ while True:
             waiverSign = 1
         if waiverSign == 0:
             print("\nI cannot find you in our list?    Did you sign the waiver?")
-            time.sleep(delay3)
+            time.sleep(delay2)
     except mariadb.Error as error:
         print("\nError#1: {}".format(error))
     finally:
@@ -106,7 +107,7 @@ while True:
             cursor.execute("UPDATE attendance set timeOUT = NOW() where attendID = '%s'"%(results))
             mariadb_connection.commit()
             print("\n",firstName,lastName," Thanks for signing OUT of the MakerSpace today!")
-            time.sleep(delay3)
+            time.sleep(delay2)
             signIn = 0
             if debug > 0:
                 print ("\nDatabase Updated")
@@ -133,7 +134,7 @@ while True:
                (NOW(),NOW(),'%s');""" % (sait))
             mariadb_connection.commit()
             print("\n",firstName,lastName," Thanks for signing IN to the MakerSpace today!")
-            time.sleep(delay3)
+            time.sleep(delay2)
             if debug > 0:
                 print ("\nDatabase Updated")
                 print ("\nThe last inserted ID was: ", cursor.lastrowid)
