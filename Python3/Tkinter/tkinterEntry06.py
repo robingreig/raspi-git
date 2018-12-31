@@ -1,40 +1,57 @@
 #!/usr/bin/python3
 
 from tkinter import *
+import tkinter.font as font
+import mysql.connector as mariadb
+import time
 
-def login():
-    usr=user.get()
-    pas=password.get()
-    connection = pymysql.connect(host='localhost', user='root', password='', db='login')
+# Set Variables
+debug = 1
+delay1 = 1
+delay2 = 2
+signIn = 0
+
+
+
+def login(event):
+    # Set mariadb connection
+    connection = mariadb.connect(host='localhost', user='robin', password='Micr0s0ft', database='makerspace')
     cursor = connection.cursor()
-    q=("select username from user where username=%s")
 
+    #	Check to see if they in the users list?
+    usr=user.get()
+    entry.delete(0,END)
+    try:
+        cursor.execute("SELECT firstName, lastName from users where waiver = 1 and saitID = '%s'"%(usr))
+        for firstName, lastName in cursor:
 
-    q1 = ("select pass from user where pass=%s")
-    if cursor.execute(q,usr) and cursor.execute(q1, pas):
-        postlogin()
-    else:
-        print("Try again")
+            if debug > 0:
+                print ("\nWelcome to the MakerSpace ""%s"%firstName + " %s"%lastName+"!")
+                print("\nRowcount returned from checking if they are in the system: ", cursor.rowcount)
+                print("\nsignIn value: ",signIn)
+                time.sleep(delay1)
+            waiverSign = 1
+        if waiverSign == 0:
+            print("\nI cannot find you in our list?    Did you sign the waiver?")
+            time.sleep(delay2)
+    except mariadb.Error as error:
+        print("\nError#1: {}".format(error))
+    finally:
+        cursor.close()
 
     connection.commit()
     connection.close()
+    
 root=Tk()
-user=StringVar()
-password=StringVar()
-sec=StringVar()
-name=StringVar()
-regno=StringVar()
-att=StringVar()
-tp=Frame(root,width=800,height=600)
-tp.pack()
-l1=Label(tp,text="Username")
-l1.grid(row=0,column=0)
-e1=Entry(tp,textvariable=user).grid(row=0,column=1,columnspan=4)
+font.nametofont('TkDefaultFont').configure(size=24)
+root.title("Login to SAIT MakerSpace"), 
+root.geometry('600x300')
+user = StringVar()
 
-l2=Label(tp,text="Password")
-l2.grid(row=1,column=0)
-e2=Entry(tp,textvariable=password).grid(row=1,column=1,columnspan=4)
-
-submit=Button(tp,text="Login",command=login).grid(row=2,column=2)
+Label(root, text="Please scan your SAIT ID: ").pack()
+entry = Entry(root, textvariable=user)
+entry.focus_set()
+entry.bind("<Return>", login)
+entry.pack(pady=10, padx=10)
 
 root.mainloop()
