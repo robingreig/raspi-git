@@ -1,0 +1,10 @@
+http://thinkingtkinter.sourceforge.net/all_programs.html
+
+https://www.python-course.eu/tkinter_entry_widgets.php
+
+http://effbot.org/tkinterbook/tkinter-hello-tkinter.htm
+
+https://pythonspot.com/tag/tkinter/
+
+https://stackoverflow.com/questions/44282757/how-do-i-get-the-value-of-an-entry-and-enter-it-in-ssol-txt?noredirect=1&lq=1
+
