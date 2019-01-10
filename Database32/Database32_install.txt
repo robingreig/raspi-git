@@ -1,0 +1,8 @@
+1) update & upgrade
+2) change pi password, hostname, etc
+3) sudo apt install mariadb-server python3-mysql.connector -y
+4) sudo mariadb
+5) GRANT ALL ON *.* TO 'robin'@'localhost' IDENTIFIED BY 'Micr0s0ft';
+6) flush privileges;
+7) Test mysql -urobin -pMicr0s0ft
+8) sudo mysql_secure_installation & follow default prompts
