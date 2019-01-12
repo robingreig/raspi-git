@@ -8,3 +8,12 @@ https://pythonspot.com/tag/tkinter/
 
 https://stackoverflow.com/questions/44282757/how-do-i-get-the-value-of-an-entry-and-enter-it-in-ssol-txt?noredirect=1&lq=1
 
+after in ebook
+https://riptutorial.com/tkinter/example/30023/getting-int-from-entry-widget
+
+https://www.edureka.co/blog/tkinter-tutorial/
+
+Dynamic Content
+https://www.python-course.eu/tkinter_labels.php
+
+
