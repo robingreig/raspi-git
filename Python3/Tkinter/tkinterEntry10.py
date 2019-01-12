@@ -10,7 +10,7 @@ debug = 0
 delay1 = 1
 delay2 = 2
 signIn = 0
-seconds = 6
+seconds = 5
 # waiverSign, signed=1, not signed=0
 waiverSign = 0
 
@@ -28,39 +28,32 @@ def login(event):
     try:
         cursor.execute("SELECT firstName, lastName from users where waiver = 1 and saitID = '%s'"%(usr))
         for firstName, lastName in cursor:
+            # refresh_res1 funcion updates the display (label1) to read Please Scan or Welcome 
             def refresh_res1():
                 global seconds
                 seconds -=1
-                #res.configure(text = "Welcome to the SAIT MakerSpace ""%s"%firstName +" %s"%lastName)
                 label1.configure(text = "Welcome to the SAIT MakerSpace ""%s"%firstName +" %s"%lastName)
-                if seconds < 3:
-                    label1.configure(text="Please scan your SAIT ID: ")
-                    #label1.configure(text=())
-                if seconds > 2:
+                if seconds > 0:
                     res.after(1000, refresh_res1)
                 else:
-                    seconds = 6
+                    label1.configure(text="Please scan your SAIT ID: ")
+                    seconds = 5
                 print("Seconds: "+str(seconds))
-            res.after(1, refresh_res1)
-            if debug > 0:
-                print ("\nWelcome to the MakerSpace ""%s"%firstName + " %s"%lastName+"!")
-                print("\nRowcount returned from checking if they are in the system: ", cursor.rowcount)
-                print("\nsignIn value: ",signIn)
-                time.sleep(delay1)
+            res.after(100, refresh_res1)
             waiverSign = 1
         if waiverSign == 0:
+            # refresh_res2 function updates the display (label1) to read Please Scan or Didn't find you
             def refresh_res2():
                 global seconds
                 seconds -=1
-                res.configure(text="\nI cannot find you in our list?    Did you sign the waiver?")
-                if seconds < 3:
-                    res.configure(text=())
-                if seconds > 2:
+                label1.configure(text="I cannot find you in our list?    Did you sign the waiver?")
+                if seconds > 0:
                     res.after(1000, refresh_res2)
                 else:
-                    seconds = 6
+                    label1.configure(text="Please scan your SAIT ID: ")
+                    seconds = 5
                 print("Seconds: "+str(seconds))
-            res.after(1000, refresh_res2)
+            res.after(100, refresh_res2)
     except mariadb.Error as error:
         print("\nError#1: {}".format(error))
     finally:
