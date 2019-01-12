@@ -16,7 +16,7 @@ $dbname = "makerspace";
 // Create Connection
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    foreach($conn->query('SELECT * from attendance where attendID = 111') as $row) {
+    foreach($conn->query('SELECT * from attendance where attendID = 112') as $row) {
         print_r($row);
 //        print($row);
     }
