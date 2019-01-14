@@ -18,6 +18,7 @@ def login(event):
     # set local variables
     waiverSign = 0
     print("Beginning of login loop: "+str(waiverSign))
+    label1.configure(text="Please scan your SAIT ID: ")
     # Set mariadb connection
     connection = mariadb.connect(host='localhost', user='robin', password='Micr0s0ft', database='makerspace')
     cursor = connection.cursor()
@@ -30,9 +31,11 @@ def login(event):
             def refresh_res1():
                 global seconds
                 seconds -=1
-                res.configure(text = "Welcome to the SAIT MakerSpace ""%s"%firstName +" %s"%lastName)
+                #res.configure(text = "Welcome to the SAIT MakerSpace ""%s"%firstName +" %s"%lastName)
+                label1.configure(text = "Welcome to the SAIT MakerSpace ""%s"%firstName +" %s"%lastName)
                 if seconds < 3:
-                    res.configure(text=())
+                    label1.configure(text="Please scan your SAIT ID: ")
+                    #label1.configure(text=())
                 if seconds > 2:
                     res.after(1000, refresh_res1)
                 else:
@@ -72,7 +75,10 @@ root.title("Login to SAIT MakerSpace"),
 root.geometry('600x300')
 user = StringVar()
 
-Label(root, text="Please scan your SAIT ID: ").pack()
+label1 = Label(root)
+label1.pack()
+
+#Label(root, text="Please scan your SAIT ID: ").pack()
 entry = Entry(root, textvariable=user)
 entry.focus_set()
 print("WaiverSign before entry.bind: "+str(waiverSign))
