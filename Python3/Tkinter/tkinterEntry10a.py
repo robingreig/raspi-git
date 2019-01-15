@@ -15,10 +15,11 @@ seconds = 5
 waiverSign = 0
 
 def login(event):
-    # set local variables
-    waiverSign = 0
-    print("Beginning of login loop: "+str(waiverSign))
-    #label1.configure(text="Please scan your SAIT ID: ")
+    # set global variables
+    global waiverSign, debug, seconds
+    if debug > 0:
+        print("waiverSign at beginning of login loop: "+str(waiverSign))
+        print("debug variable at beginning of login loop: "+str(debug))
     # Set mariadb connection
     connection = mariadb.connect(host='localhost', user='robin', password='Micr0s0ft', database='makerspace')
     cursor = connection.cursor()
@@ -28,19 +29,21 @@ def login(event):
     try:
         cursor.execute("SELECT firstName, lastName from users where waiver = 1 and saitID = '%s'"%(usr))
         for firstName, lastName in cursor:
-            # refresh_res1 funcion updates the display (label1) to read Please Scan or Welcome 
-            def refresh_res1():
-                global seconds
+            # refresh_res1 funcion updates the display (label1) to read Please Scan or Welcome to the MakerSpace
+            print("Seconds before the refresh_res1 function definition= "+str(seconds))
+            def refresh_res1(seconds):
+#                global seconds
                 seconds -=1
                 label1.configure(text = "Welcome to the SAIT MakerSpace ""%s"%firstName +" %s"%lastName)
                 if seconds > 0:
-                    res.after(1000, refresh_res1)
+                    label1.after(1000, refresh_res1)
                 else:
                     label1.configure(text="Please scan your SAIT ID: ")
                     seconds = 5
                 print("Seconds: "+str(seconds))
-            res.after(100, refresh_res1)
+            label1.after(100, refresh_res1)
             waiverSign = 1
+            print("waiverSign inside refresh_res1= "+str(waiverSign))
         if waiverSign == 0:
             # refresh_res2 function updates the display (label1) to read Please Scan or Didn't find you
             def refresh_res2():
@@ -58,7 +61,10 @@ def login(event):
         print("\nError#1: {}".format(error))
     finally:
         cursor.close()
-    print("End of login loop: "+str(waiverSign))
+    if debug > 0:
+        print("waiverSign at end of login loop: "+str(waiverSign))
+        print("debug at end of login loop: "+str(debug))
+    return waiverSign
     connection.commit()
     connection.close()
 
@@ -72,13 +78,9 @@ label1 = Label(root)
 label1.configure(text="Please scan your SAIT ID: ")
 label1.pack()
 
-#Label(root, text="Please scan your SAIT ID: ").pack()
 entry = Entry(root, textvariable=user)
 entry.focus_set()
 entry.bind("<Return>", login)
 entry.pack(pady=10, padx=10)
-
-res = Label(root)
-res.pack()
 
 root.mainloop()
