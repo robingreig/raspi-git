@@ -1,14 +1,20 @@
 Check on the status of the ssh jail
-sudo fail2ban-client status ssh
+sudo fail2ban-client status sshd
 
 Reload the jail files (configuration files)
 ***** Will reset the jail counters to zero
 sudo fail2ban-client reload
 
+Enable fail2ban
+sudo systemctl enable fail2ban
+
+Restart fail2ban
+sudo systemctl restart fail2ban
+
 Unban an IP
-sudo fail2ban-client set ssh unbanip 142.110.227.97
+or sudo fail2ban-client set sshd unbanip 142.110.227.97
 
 Whitelist an IP
-sudo fail2ban-client set ssh addignoreip 123.45.67.89
+sudo fail2ban-client set sshd addignoreip 123.45.67.89
 
 
