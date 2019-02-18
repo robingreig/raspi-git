@@ -24,8 +24,7 @@ maxcount = 2
 #ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=5)
 #ser = serial.Serial('/dev/ttyUSB1', 9600, timeout=5)
-#ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
-ser = serial.Serial('/dev/serial0', 9600, timeout=5)
+ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=5)
 
 #====================================================================
 # Send the Analogue Port number to Gertduino & read back the voltage value
@@ -70,10 +69,8 @@ while True:
     print "BattVolts: ", (round(read_CurrentAprxVoltage(),2))
 
 # If the voltage is low on Analogue 0 then print "Low", or "Critical", or shutdown Raspi
-  if BattVolts >= 14.0:
-    print "\t\tVoltage is > 14.0V"
-  if BattVolts <14.0 and BattVolts >= 13.5:
-    print "\t\tVoltage is between 13.5V & 14V"
+  if BattVolts >= 13.5:
+    print "\t\tVoltage is > 13.5V"
   elif BattVolts < 13.5 and BattVolts >= 13.0:
     print "\t\tVoltage is between 13V & 13.5V"
   elif BattVolts < 13.0 and BattVolts >= 12.5:
