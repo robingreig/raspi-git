@@ -1,0 +1,2 @@
+SELECT firstName, lastName, email1, email2 INTO OUTFILE '/tmp/user20190219.csv' FIELDS TERMINATED BY ',' 
+OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' from users;
