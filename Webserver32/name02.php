@@ -35,8 +35,8 @@ function test_input($data) {
   <br><br>
   <input type="submit" name="submit" value="Submit">  
 </form>
+<a href="name01.php">Back</a>
 <br>
-
 </body>
 </html>
 <?php
