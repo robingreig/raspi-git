@@ -4,18 +4,18 @@
 
 <?php
 // define variables and set to empty values
-$firstNameErr = $lastNameErr= "";
-$firstName = $lastName = "";
+$saitIDErr = "";
+$saitID = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["firstName"])) {
-    $firstNameErr = "First Name is required";
+  if (empty($_POST["saitID"])) {
+    $firstNameErr = "SAIT ID is required";
   } else {
-    $firstName = test_input($_POST["firstName"]);
+    $saitID = test_input($_POST["saitID"]);
     // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
-      $firstNameErr = "Only letters and white space allowed in first name"; 
-      $firstName = "";
+    if (!preg_match("/^[0-9]*$/",$saitID)) {
+      $saitIDErr = "Only numbers allowed in first name"; 
+      $saitID = "";
     }
   }
 }
@@ -30,8 +30,8 @@ function test_input($data) {
 
 <p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  First Name: <input type="text" name="firstName" value="<?php echo $firstName;?>">
-  <span class="error">* <?php echo $firstNameErr;?></span>
+  SAIT ID: <input type="text" name="saitID" value="<?php echo $saitID;?>">
+  <span class="error">* <?php echo $saitIDErr;?></span>
   <br><br>
   <input type="submit" name="submit" value="Submit">  
 </form>
@@ -53,7 +53,7 @@ if ($conn->connect_error) {
 } 
 
 //$sql = "SELECT userID, firstName, lastname FROM users where firstName = 'Robin'";
-$sql = "SELECT * FROM users where firstName = '$firstName'";
+$sql = "SELECT * FROM users where saitID = '$saitID'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
