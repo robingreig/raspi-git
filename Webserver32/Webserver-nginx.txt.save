@@ -1,0 +1,44 @@
+sudo apt update
+sudo apt upgrade
+sudo apt remove apache2 (didn't have it on Stretch middle)
+sudo apt install nginx
+Should be able to see the homepage @ 127.0.0.1
+sudo apt install php7.0-fpm
+sudo apt install php-mysql
+sudo phpenmod mysqli
+sudo reboot
+
+sudo nano /etc/nginx/sites-enabled/default
+     add index.php after index.html
+
+     uncomment:
+     location ~ \.php$ {
+		include snippets/fastcgi-php.conf
+
+
+
+		fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+
+		}
+
+sudo systemctyl reload nginx
+
+sudo nano /var/www/html/index.php
+<?php
+phpinfo()
+?>
+
+test webpage at 127.0.0.1/index.php
+reboot
+
+sudo apt install mariadb-server
+sudo mysql_secure_installation
+sudo login to mariadb & create user 'robin'@'localhost' identified by 'Micr0s0ft';
+grant all privileges on *.* to 'robin'@'localhost' identifed by 'Micr0s0ft';
+create database makerspace;
+scp makerspace to this system
+gunzip < ./makerspace_backup.2019-03-30.sql.gz | mysql -urobin -pMicr0s0ft makerspace
+login and test that the data is there "select * from users"
+
+
+
