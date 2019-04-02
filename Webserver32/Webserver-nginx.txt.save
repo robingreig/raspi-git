@@ -33,10 +33,12 @@ reboot
 
 sudo apt install mariadb-server
 sudo mysql_secure_installation
-login to mariadb & create user 'robin'@'localhost' identified by 'Micr0s0ft';
+sudo login to mariadb & create user 'robin'@'localhost' identified by 'Micr0s0ft';
 grant all privileges on *.* to 'robin'@'localhost' identifed by 'Micr0s0ft';
 create database makerspace;
 scp makerspace to this system
-gunzip < ./makerspace_backup.2019-03-30.sql.gz | mysql -urobin -pMicr0s0ft
+gunzip < ./makerspace_backup.2019-03-30.sql.gz | mysql -urobin -pMicr0s0ft makerspace
 login and test that the data is there "select * from users"
+
+
 
