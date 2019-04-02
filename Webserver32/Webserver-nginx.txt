@@ -5,6 +5,7 @@ sudo apt install nginx
 Should be able to see the homepage @ 127.0.0.1
 sudo apt install php7.0-fpm
 sudo apt install php-mysql
+sudo apt install python3-mysqldb
 sudo phpenmod mysqli
 sudo reboot
 
@@ -39,4 +40,8 @@ create database makerspace;
 scp makerspace to this system
 gunzip < ./makerspace_backup.2019-03-30.sql.gz | mysql -urobin -pMicr0s0ft
 login and test that the data is there "select * from users"
+
+git clone https://github.com/robingreig/raspi-git
+copy web files from ./raspi-git/Webserver32 to /var/www/html/
+test index links
 
