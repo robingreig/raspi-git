@@ -1,6 +1,33 @@
+<html>
+<br>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>View All</title>
+  <link rel="stylesheet" type="text/css" href="default.css">
+</head>
+<body>
+<div style="text-align: center;">
+<img style="width: 125px; height: 125px;" alt="Raspberrypi"
+src="large_logo_pi.png"></div>
+<br>
+<center><a href="index-sait.html">Back</a></center>
+
 <style>
 .error {color: #FF0000;}
 </style>
+
+<p><span class="error">* required field</span></p>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+  SAIT ID: <input type="text" name="saitID" value="<?php echo $saitID;?>">
+  <span class="error">* <?php echo $saitIDErr;?></span>
+  <br><br>
+  <input type="submit" name="submit" value="Submit">  
+</form>
+<a href="index-sait.html">Back</a>
+<br>
+</body>
+</html>
+
 
 <?php
 // define variables and set to empty values
@@ -28,17 +55,6 @@ function test_input($data) {
 }
 ?>
 
-<p><span class="error">* required field</span></p>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  SAIT ID: <input type="text" name="saitID" value="<?php echo $saitID;?>">
-  <span class="error">* <?php echo $saitIDErr;?></span>
-  <br><br>
-  <input type="submit" name="submit" value="Submit">  
-</form>
-<a href="attend01.php">Back</a>
-<br>
-</body>
-</html>
 <?php
 $servername = "localhost";
 $username = "robin";
@@ -60,11 +76,10 @@ if ($result->num_rows > 0) {
     // output Welcome
     $row = mysqli_fetch_assoc($result);
       printf ("<h1>Welcome to the SAIT MakerSpace %s %s</h1>",$row['firstName'],$row['lastName']);
-      sleep(2);
-      exit();
+      sleep(1);
 } else {
     echo "<h1>I cannot find you, please check with the MakerSpace volunteers</h1>";
-    sleep(2);
+    sleep(1);
 }
 $conn->close();
 

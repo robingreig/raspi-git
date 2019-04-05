@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<script>
+function myFunction() {
+  newWindow.close();
+}
+let newWindow = open('/', 'example', 'width=800, height=300')
+newWindow.onload = function() {
+setTimeout(myFunction,3000);
+};
+</script>
+
+</body>
+</html>
