@@ -12,6 +12,8 @@ import sys
 import time
 import os
 import RPi.GPIO as GPIO
+global var1
+var1 =1
 
 # This example uses the MQTTClient instead of the REST client
 from Adafruit_IO import MQTTClient
@@ -50,6 +52,7 @@ def message(client, feed_id, payload):
     the new value.
     """
     print('Feed {0} received new value: {1}'.format(feed_id, payload))
+    global var1
     var1 = payload
     print('Var1 = ',var1)
 
@@ -68,7 +71,8 @@ print('Ctrl-C to exit')
 
 # The first option is to run a thread in the background so you can continue
 # doing things in your program.
-client.loop_blocking()
+#client.loop_background()
+#client.loop_blocking()
 
 
 pinNum = 26
@@ -77,10 +81,11 @@ GPIO.setmode(GPIO.BCM) #numbering scheme that corresponds to breakout board and 
 GPIO.setup(pinNum,GPIO.OUT) #replace pinNum with whatever pin you used, this sets up that pin as$
 
 while True:
+    client.loop()
     if var1 == 1:
         print('Received <- ON\n')
     elif var1 == 0:
         print('Received <- OFF\n')
-
+    time.sleep(2)
 #GPIO.output(pinNum,GPIO.HIGH) #set GPIO High
 #GPIO.cleanup()
