@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #====================================================================
 # Import subfiles
@@ -15,7 +15,7 @@ import warnings
 
 # Import library and create instance of REST client.
 from Adafruit_IO import Client
-aio = Client('7e01e8b5e56360efc48a27682324fc353e18d14f')
+aio = Client('robingreig', '7e01e8b5e56360efc48a27682324fc353e18d14f')
 
 # Set Variables
 DEBUG = 1
@@ -40,8 +40,8 @@ while(True):
   HouseTempRound = (round(read_CurrentHouseTemp(),2))
 
   if DEBUG > 0:
-    print "House Temp File reads: ", read_CurrentHouseTemp()
-    print "House Temp Rounded: ", HouseTempRound
+    print ("House Temp File reads: ", read_CurrentHouseTemp())
+    print ("House Temp Rounded: ", HouseTempRound)
 
   # Send the value 100 to a feed called 'Foo'.
   #aio.send('basement-temp', 19.8)
