@@ -1,0 +1,7 @@
+1) 2019-04-11 Raspbian Stretch basic
+2) raspi-config, password, enable ssh & w1
+3) adduser robin
+4) update & upgrade
+5) install git, python3-pip, autossh
+6) pip3 install adafruit-io
+7) Had to update Aio files for python3

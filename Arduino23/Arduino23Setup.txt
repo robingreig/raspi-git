@@ -1,0 +1,14 @@
+1) 2019-04-11 Stretch Basic
+2) raspi-config - ssh 
+3) adduser robin & ensure all groups (dialout)
+4) install arduino & arduino-mk
+5) check makefile, path to /usr/share/arduino/ardiono.mk
+6) To see if arduino responds, sudo avrdude -p atmega328p -c linuxgpio -v
+7) To modify a file and download to arduino:
+	a) have a new directory with makefile and .ino file
+	b) nano ./BatteryMonitor.2019.04.23.ino
+	c) make
+	d) sudo avrdude -p atmega328p -c linuxgpio -v -U flash:w:./build-uno/BatteryMonitor.2019.04.23.hex:i
+	e) test with VoltageRead.py
+
+

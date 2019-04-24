@@ -1,0 +1,9 @@
+1) 2019-04-11 Stretch Basic
+2) Update & Upgrade
+3) raspi-config & enable ssh & w1
+4) Install git, python3-pip & autossh
+5) adduser robin
+6) pip3 install adafruit-io
+7) copy over python files from ./raspi-git/adafruitaio14
+***** updated them to python3 2019-04-23
+

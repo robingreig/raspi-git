@@ -1,0 +1,3 @@
+/bin/bash
+
+scp /home/robin/AprxVoltage robin@battmon.local:/home/robin/AprxVoltage
