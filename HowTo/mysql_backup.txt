@@ -1,14 +1,21 @@
 to backup a database:
-mysqldump -urobin -pMicr0s0ft makerspace > /path/to/file.sql
+mysqldump -urobin -pPassword makerspace > /path/to/file.sql
 
 to backup & zip a database:
-mysqldump -urobin -pMicr0s0ft makerspace > /path/to/file.sql | gzip > /home/robin/mariadb/makerspace_backup.`date+%F`.sql.gz
+mysqldump -urobin -pPassword makerspace > /path/to/file.sql | gzip > /home/robin/mariadb/makerspace_backup.`date+%F`.sql.gz
 
 to restore a database:
 # you have to have that database in the new mariadb (CREATE DATABASE IF NOT EXISTS makerspace)
-mysql -urobin -pMicr0s0ft makerspace < /path/to/file.sql
+mysql -urobin -pPassword makerspace < /path/to/file.sql
 
 to restore a zipped database:
 gunzip < zipfile.sql.gz | mysql -urobin -pPassword makerspace
 or
 zcat makerspace_backup.2019-09-11.sql.gz | mysql -urobin -pPassword makerspace
+
+*** The first time you import a database, you have to have a copy on the system
+> mysql -u robin -p 
+> create database if not exists DBname;
+- Then use the import command
+
+
