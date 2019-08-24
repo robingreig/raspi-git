@@ -1,0 +1,1 @@
+[{"id":"d92ac786.23cb58","type":"exec","z":"ec157607.557008","command":"/opt/vc/bin/vcgencmd","addpay":true,"append":"measure_temp","useSpawn":"false","timer":"","oldrc":false,"name":"Read CPU Temperature","x":290,"y":480,"wires":[["44bfae2e.e997a","157bba8d.7e40d5"],[],[]]}]
