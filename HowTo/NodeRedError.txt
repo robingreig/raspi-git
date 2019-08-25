@@ -1,0 +1,30 @@
+1) sudo update
+2) sudo upgrade
+3) adduser robin & added to groups & logged in as robin
+4) ran node-red from desktop and received the following message,
+	along with an error message about the pallette nodes not loading
+	because npm is not installed
+
+
+    npm is not installed, it is recommended       
+    to install the latest by running:             
+        update-nodejs-and-nodered                 
+                                                  
+ 
+Start Node-RED
+ 
+Once Node-RED has started, point a browser at http://192.168.200.23:1880
+On Pi Node-RED works better with the Firefox or Chrome browser
+ 
+Use   node-red-stop                          to stop Node-RED
+Use   node-red-start                         to start Node-RED again
+Use   node-red-log                           to view the recent log output
+Use   sudo systemctl enable nodered.service  to autostart Node-RED at every boot
+Use   sudo systemctl disable nodered.service to disable autostart on boot
+ 
+To find more nodes and example flows - go to http://flows.nodered.org
+
+5) ran sudo update-nodejs-and-nodered, which also installed npm
+6) sudo reboot
+7) started node-red as a service with sudo systemctl enable nodered.service
+
