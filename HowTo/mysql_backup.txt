@@ -9,5 +9,6 @@ to restore a database:
 mysql -urobin -pMicr0s0ft makerspace < /path/to/file.sql
 
 to restore a zipped database:
-gunzip < zipfile.sql.gz | mysql -urobin -pMicr0s0ft makerspace
-
+gunzip < zipfile.sql.gz | mysql -urobin -pPassword makerspace
+or
+zcat makerspace_backup.2019-09-11.sql.gz | mysql -urobin -pPassword makerspace
