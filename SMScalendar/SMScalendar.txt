@@ -1,12 +1,18 @@
 1) Install stretch lite
 2) raspi-config for password / boot options console autologin / timezone / location / keyboard / ssh
-3) update wpa_config file for sait-secure
+3) update wpa_supplicant.conf file for sait-secure (pi zero, otherwise use eth0)
 4) update & upgrade
 5) sudo nano /etc/systemd/timesyncd.conf & add NTP=10.197.2.9 10.197.3.9
 6) sudo apt install git
-7) sudo apt install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox
-8) sudo apt install --no-install-recommends chromium-browser
-9) sudo nano /etc/xdg/openbox/autostart
+7) git clone https://github.com/robingreig/raspi-git
+8) git config --global user.name Robin Greig
+9) git config --global user.email robin.greig@calalta.com
+10) Copy wpa_supplicant.conf / update username & password
+11) sudo systemctl daemon-reload
+12) sudo systemctl restart dhcpcd
+13) sudo apt install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox -y
+14) sudo apt install --no-install-recommends chromium-browser -y
+15) sudo cp /home/pi/raspi-git/SMScalendar/autostart /etc/xdg/openbox/autostart
 
 #
 # These things are run when an Openbox X Session is started.
@@ -41,14 +47,22 @@ setxkbmap -option terminate:ctrl_alt_bksp
 #sed -i 's/"exit_type":"Crashed":"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
 #sed -i `s/"exited_cleanly":false/"exited_cleanly":true/` /home/pi/.config/chromium/Default/Preferences
 #sed -i `s/"exit_type":"Crashed":"exit_type":"Normal"/` /home/pi/.config/chromium/Default/Preferences
-chromium-browser --noerrdialogs --disable-infobars --kiosk --app=https://calendar.google.com/calendar/r?cid=bWFrZXJzcGFjZS5zYWl0QGdtYWlsLmNvbQ
+chromium-browser https://calendar.google.com/calendar/r?cid=bWFrZXJzcGFjZS5zYWl0QGdtYWlsLmNvbQ
+#chromium-browser --noerrdialogs --disable-infobars --kiosk --app=https://calendar.google.com/calendar/r?cid=bWFrZXJzcGFjZS5zYWl0QGdtYWlsLmNvbQ
 #chromium-browser --noerrdialogs --disable-infobars --start-fullscreen --kiosk https://calendar.google.com/calendar/r/week?tab=oc&pli=1
 #chromium-browser --noerrdialogs --disable-infobars --kiosk https://calendar.google.com/calendar?cid=bWFrZXJzcGFjZS5zYWl0QGdtYWlsLmNvbQ
 #chromium-browser --disable-infobars --kiosk https://calendar.google.com/calendar?cid=bWFrZXJzcGFjZS5zYWl0QGdtYWlsLmNvbQ
 #chromium-browser --disable-infobars --restore-session-state --kiosk  
 #chromium-browser --disable-infobars --incognito 
 
-10) test with startx -- -nocursor
-11) nano /home/pi/.bash_profile
-	[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor
+16) Uncomment in /etc/xdg/openbox/autostart (first chromium line) chromium-browser https://
+17) test with startx
+18) Login to makerspace.sait@gmail.com
+19) Install auto refresh extension
+20) Reduce to the one page directing to the calendar and setup auto refresh for 15 mins
+21) Close chromium properly
+22) reboot to make sure it comes up properly
+23) startx to test once again
+24) sudo chattr +i /home/pi/.config/chromium/Default/Preferences (to lock the Preferences file in case raspi crashes)
+25) set to autorun at startup by nano /home/pi/.bash_profile     [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor
 
