@@ -1,0 +1,10 @@
+serv16makerspace01	MkSP@1601	
+serv16makerspace02	MkSP@1602	
+serv16makerspace03	MkSP@1603	
+serv16makerspace04	MkSP@1604	
+serv16makerspace05	MkSP@1605	
+serv16makerspace06	MkSP@1606	
+serv16makerspace07	MkSP@1607	Raspi32		10.248.128.5	p22232
+serv16makerspace08	MkSP@1608	Desktop40	10.248.128.29	p22240
+serv16makerspace09	MkSP@1609	SMScalendar	10.248.128.33	p22201
+serv16makerspace010	MkSP@16010	SMSdatabase	10.248.128.31	p22202
