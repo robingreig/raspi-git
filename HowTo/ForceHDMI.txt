@@ -1,0 +1,5 @@
+sudo nano /boot/config.txt
+
+Uncomment hemi_force_hotplug=1
+
+For audio on HDMI also uncomment hdmi_drive=2
