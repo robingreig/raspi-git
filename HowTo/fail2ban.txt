@@ -1,5 +1,7 @@
 Check on the status of the ssh jail
 sudo fail2ban-client status sshd
+Full page(s)
+sudo fail2ban-client status sshd | more
 
 Reload the jail files (configuration files)
 ***** Will reset the jail counters to zero
