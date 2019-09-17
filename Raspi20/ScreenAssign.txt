@@ -1,5 +1,6 @@
 zero2		= First Pi zero
-breadboard10	= OpenVPN, & breadboard
+
+breadboard10	= Raspi1 on Breadboard in toolbox
 aprx11		= APRX
 battmon12	= Battery Monitor
 gardentemp13	= Garden Temperature Monitor
@@ -8,7 +9,7 @@ raspi15		= MySQL database (old)
 blockheat16	= BlockHeater
 tempi17		= Office Temperature Monitor
 arduino18	= Raspi 1 @ SAIT, Arduino / Raspi
-raspi19		= Raspi19
+
 raspi20		= This raspi
 raspi21		= With wifi dongle
 arduino23	= APRX Battery monitor / Arduino
@@ -16,14 +17,14 @@ raspi24		= Home Office Temperature monitor
 
 raspi31		= Home node.js & javascript developer
 
-#alarm31		= CFMF Alarm 1
-#database32	= Downstairs database developer
-#alarm33		= CFMF Alarm 2
-#raspi34		= MySQL server
+###alarm31		= CFMF Alarm 1
+raspi32		= Raspi 3B @ SAIT
+###alarm33		= CFMF Alarm 2
+raspi34		= MySQL server
 
 backupcam34	= backup camera for truck
 
-#alarm35		= CFMF Alarm 3
+###alarm35		= CFMF Alarm 3
 
 breadboard36	= breadboard36 with Pi3+
 raspi37		= Raspi37 at MakerSpace
