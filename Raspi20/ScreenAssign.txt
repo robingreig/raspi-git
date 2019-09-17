@@ -23,9 +23,9 @@ backupcam34	= P3B backup camera for truck
 breadboard36	= P3B+ Breadboard Toe Kick lights
 desktop39	= P3B+ Desktop downstairs
 
-raspi40		= Pi 4 development
+raspi40		= Pi 4 development -p22240 (10.248.128.29)
 
-zero2		= ZeroW First Pi zero
+zero2		= ZeroW First Pi zero -p22203 (10.248.128.1)
 
 SMSCalendar	= Pi Zero @ SAIT -p22201 (10.248.128.33)
 SMSDatabase	= SMS Database @ SAIT -p22202 (10.248.128.31)
