@@ -13,15 +13,18 @@ raspi21		= P2 With wifi dongle
 arduino23	= P2 APRX Battery monitor / Arduino
 raspi24		= P2 Home Office Temperature monitor
 
+##alarm31,33,35	= P3B CFMF Alarms
+30?
 raspi31		= P3B Home node.js & javascript developer
-###alarm31		= P3B CFMF Alarm 1
 raspi32		= P3B @ SAIT
-###alarm33		= P3B CFMF Alarm 2
+33?
 backupcam34	= P3B backup camera for truck
-###alarm35		= P3B CFMF Alarm 3
 
+sprog35		= P3B+ Sprog Model Train
 breadboard36	= P3B+ Breadboard Toe Kick lights
-desktop39	= P3B+ Desktop downstairs
+desktop37	= P3B+ Desktop downstairs
+38?
+39?
 
 raspi40		= Pi 4 development -p22240 (10.248.128.29)
 
