@@ -1,31 +1,20 @@
-#!/usr/bin/python3
-
-# smtplib module send mail
-
+#!/usr/bin/python
 import smtplib
 
-TO = 'robin.greig@sait.ca'
-SUBJECT = 'TEST MAIL'
-TEXT = 'Here is a message from python.'
+fromaddrs = 've6rbn@gmail.com'
+#toaddrs = 'kananaskis@gmail.com'
+toaddrs = 'robin.greig@sait.ca'
+SUBJECT = 'Raspi15 Voltage Low'
+TEXT = 'Voltage is below 24VDC on Raspi15 Batteries'
+msg = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
 
-# Gmail Sign In
-gmail_sender = 'kananaskis@gmail.com'
-gmail_passwd = 'glza pvgu riwj qfur'
+# Credentials
+username = 'kananaskis'
+password = 'glza pvgu riwj qfur'
 
-server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-#server.ehlo()
-#server.starttls()
-server.login(gmail_sender, gmail_passwd)
-
-BODY = '\r\n'.join(['To: %s' % TO,
-                    'From: %s' % gmail_sender,
-                    'Subject: %s' % SUBJECT,
-                    '', TEXT])
-
-try:
-    server.sendmail(gmail_sender, [TO], BODY)
-    print ('email sent')
-except:
-    print ('error sending mail')
-
+# The actual mail send
+server = smtplib.SMTP('smtp.gmail.com:587')
+server.starttls()
+server.login(username,password)
+server.sendmail(fromaddrs, toaddrs, msg)
 server.quit()
