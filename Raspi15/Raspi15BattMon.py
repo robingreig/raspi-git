@@ -1,10 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #====================================================================
 # Import subfiles
 #====================================================================
 import datetime
-import subprocess
 import sys
 import time
 import os
@@ -37,13 +36,14 @@ while True:
   BattVolts = (round(read_CurrentBatteryVoltage(),2))
 
   if DEBUG == 1:
-    print "Battery Voltage: ", (round(read_CurrentBatteryVoltage(),2))
-    print "\tBattVolts: ", BattVolts
-
+    print ("Battery Voltage: ", (round(read_CurrentBatteryVoltage(),2)))
+    print ("\tBattVolts: ", BattVolts)
+    os.system("/home/robin/raspi-git/Python3/SMTP/sendanemail3.py")
   if BattVolts >= 27:
     GPIO.output(pinNum,GPIO.LOW) # Turn the Battery Charger off
+    os.system("/home/robin/raspi-git/Python3/SMTP/Raspi15BattHigh.py")
   elif BattVolts < 24:
-#    os.system("/home/robin/raspi-git/Python/SMTP/sendanemail.py")
+    os.system("/home/robin/raspi-git/Python3/SMTP/Raspi15BattLow.py")
     GPIO.output(pinNum,GPIO.HIGH) # Turn the Battery Charger on
 #  elif BattVolts < 23.0:
 #    subprocess.call(["sudo", "shutdown", "-r", "now"])

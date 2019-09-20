@@ -4,9 +4,11 @@
 
 import smtplib
 
+DEBUG = 0
+
 TO = 'robin.greig@sait.ca'
-SUBJECT = 'Raspi15 Battery Voltage Monitor!'
-TEXT = 'The Battery Voltage program on Raspi15 has run'
+SUBJECT = 'Raspi15 Battery Voltage HIGH!'
+TEXT = 'The Battery Voltage is above 27VDC on Raspi15 & charger is turning off'
 
 # Gmail Sign In
 gmail_sender = 'kananaskis@gmail.com'
@@ -22,8 +24,10 @@ BODY = '\r\n'.join(['To: %s' % TO,
 
 try:
     server.sendmail(gmail_sender, [TO], BODY)
-    print ('email sent')
+    if DEBUG == 1:
+      print ('email sent')
 except:
-    print ('error sending mail')
+    if DEBUG == 1:
+      print ('error sending mail')
 
 server.quit()
