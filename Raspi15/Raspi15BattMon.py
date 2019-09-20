@@ -14,7 +14,7 @@ import warnings
 #====================================================================
 # Set Variables
 #====================================================================
-DEBUG = 0
+DEBUG = 1
 pinNum = 23
 GPIO.setwarnings(False) # Don't display the warnings
 GPIO.setmode(GPIO.BCM) # Numbering scheme that corresponds to breakout board and pin layout
@@ -43,7 +43,7 @@ while True:
   if BattVolts >= 27:
     GPIO.output(pinNum,GPIO.LOW) # Turn the Battery Charger off
   elif BattVolts < 24:
-    os.system("/home/robin/raspi-git/Python/SMTP/sendanemail.py")
+#    os.system("/home/robin/raspi-git/Python/SMTP/sendanemail.py")
     GPIO.output(pinNum,GPIO.HIGH) # Turn the Battery Charger on
 #  elif BattVolts < 23.0:
 #    subprocess.call(["sudo", "shutdown", "-r", "now"])
