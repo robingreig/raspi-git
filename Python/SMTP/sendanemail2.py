@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import smtplib
 
 fromaddrs = 've6rbn@gmail.com'

@@ -5,16 +5,14 @@
 import smtplib
 
 TO = 'robin.greig@sait.ca'
-SUBJECT = 'TEST MAIL'
-TEXT = 'Here is a message from python.'
+SUBJECT = 'Raspi15 Battery Voltage LOW!'
+TEXT = 'The Battery Voltage is below 24VDC on Raspi15'
 
 # Gmail Sign In
 gmail_sender = 'kananaskis@gmail.com'
-gmail_passwd = 'glza pvgu riwj qfur'
+gmail_passwd = 'glzapvguriwjqfur'
 
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-#server.ehlo()
-#server.starttls()
 server.login(gmail_sender, gmail_passwd)
 
 BODY = '\r\n'.join(['To: %s' % TO,
