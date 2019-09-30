@@ -2,6 +2,9 @@
 Scan for networks:
 sudo iwlist wlan0 scan
 
+See which network you are on
+iwgetid
+
 If you change wpa_config:
 sudo systemctl daemon-reload
 sudo systemctl restart dhcpcd
