@@ -48,5 +48,5 @@ while(True):
   cht.close()
 
   aio = Client('robingreig', 'd0c57dc7661d4b2e8a1868133f9e162c')
-  aio.send('garage-temp', GarageTemp)
+
   break
