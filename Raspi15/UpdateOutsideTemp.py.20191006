@@ -1,18 +1,22 @@
 #!/usr/bin/python3
 
+#import subprocess
+#import re
+#import sys
+#import time
+#import datetime
 import os
 import glob
 import warnings
 from Adafruit_IO import Client
 
 # Run DEBUG parts of program when DEBUG > 0
-DEBUG = 0
+DEBUG = 1
 
 while(True):
 
-# Should be able to enable 1 wire in raspi-config and not use
-#  os.system('modprobe w1-gpio')
-#  os.system('modprobe w1-therm')
+  os.system('modprobe w1-gpio')
+  os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
 #  device_folder3 = glob.glob(base_dir + '*41a4')[0]
@@ -33,8 +37,7 @@ while(True):
           time.sleep(0.2)
           lines3 = read_temp_raw3()
       equals_pos = lines3[1].find('t=')
-      if DEBUG > 0:
-        print ("lines3 after while= ", lines3)
+      print ("lines3 after while= ", lines3)
       if equals_pos != -1:
           temp_string = lines3[1][equals_pos+2:]
           if DEBUG > 0:
@@ -52,6 +55,6 @@ while(True):
   cht.write (str(OutsideTemp))
   cht.close()
   
-  aio = Client('robingreig', 'd0c57dc7661d4b2e8a1868133f9e162c')
-  aio.send('outside-temp', OutsideTemp)
+#  aio = Client('robingreig', 'd0c57dc7661d4b2e8a1868133f9e162c')
+#  aio.send('outside-temp', OutsideTemp)
   break
