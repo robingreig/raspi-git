@@ -2,6 +2,7 @@
 
 import os
 import glob
+import time
 import warnings
 from Adafruit_IO import Client
 
@@ -46,7 +47,7 @@ while(True):
 
   OutsideTemp = (round(read_temp3(),1))
   if DEBUG > 0:
-    print ("Outside Temp: ", OutsideTemp)
+    print ("Outside Temp sent to aio: ", OutsideTemp)
 
   cht = open("/home/robin/CurrentOutsideTemp", "w")
   cht.write (str(OutsideTemp))
@@ -54,4 +55,12 @@ while(True):
   
   aio = Client('robingreig', 'd0c57dc7661d4b2e8a1868133f9e162c')
   aio.send('outside-temp', OutsideTemp)
+# Retrieve the most recent value from the feed 'Foo'.
+# Access the value by reading the `value` property on the returned Data object.
+# Note that all values retrieved from IO are strings so you might need to convert
+# them to an int or numeric type if you expect a number.
+  if DEBUG > 0:
+    data = aio.receive('outside-temp')
+    print('Received value: {0}'.format(data.value))
+
   break

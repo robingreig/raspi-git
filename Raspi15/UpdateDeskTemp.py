@@ -2,10 +2,11 @@
 
 import os
 import glob
+import time
 import warnings
 from Adafruit_IO import Client
 
-# Run DEBUG parts of program if > 0
+# Run DEBUG portions of program if > 0
 DEBUG = 0
 
 while(True):
@@ -43,15 +44,22 @@ while(True):
             print("temp_c = ", temp_c)
           return temp_c
 
-  CeilingTemp = (round(read_temp(),1))
+  DeskTemp = (round(read_temp(),1))
   if DEBUG > 0:
-    print ("Garage Ceiling Temp: ", CeilingTemp)
+    print ("Garage Desk Temp sent to aio: ", DeskTemp)
 
-  cht = open("/home/robin/CurrentCeilingTemp", "w")
-  cht.write (str(CeilingTemp))
+  cht = open("/home/robin/CurrentGarageTemp", "w")
+  cht.write (str(DeskTemp))
   cht.close()
 
   aio = Client('robingreig', 'd0c57dc7661d4b2e8a1868133f9e162c')
-  aio.send('ceiling-temp', CeilingTemp)
+  aio.send('garage-temp', DeskTemp)
+# Retrieve the most recent value from the feed 'Foo'.
+# Access the value by reading the `value` property on the returned Data object.
+# Note that all values retrieved from IO are strings so you might need to convert
+# them to an int or numeric type if you expect a number.
+  if DEBUG > 0:
+    data = aio.receive('garage-temp')
+    print('Received value from aio: {0}'.format(data.value))
 
   break
