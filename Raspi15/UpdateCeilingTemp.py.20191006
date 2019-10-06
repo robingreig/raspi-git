@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 
+import subprocess
+import re
+import sys
+import time
+import datetime
 import os
 import glob
 import warnings
 from Adafruit_IO import Client
 
-DEBUG = 1
-
 while(True):
 
-# Should be able to enable 1 wire from raspi-config
-#  os.system('modprobe w1-gpio')
-#  os.system('modprobe w1-therm')
+  os.system('modprobe w1-gpio')
+  os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
   device_folder2 = glob.glob(base_dir + '*533e')[0]
@@ -25,26 +27,17 @@ while(True):
 
   def read_temp2():
       lines2 = read_temp_raw2()
-      if DEBUG > 0:
-        print("lines2 before while = ", lines2)
       while lines2[0].strip()[-3:] != 'YES':
           time.sleep(0.2)
           lines2 = read_temp_raw2()
-      if DEBUG > 0:
-        print("lines2 after while = ", lines2)
       equals_pos = lines2[1].find('t=')
       if equals_pos != -1:
           temp_string = lines2[1][equals_pos+2:]
-          if DEBUG > 0:
-            print("temp_string = ", temp_string)
           temp_c2 = float(temp_string) / 1000.0
-          if DEBUG > 0:
-            print("temp_c2 = ", temp_c2)
           return temp_c2
 
   CeilingTemp = (round(read_temp2(),1))
-  if DEBUG > 0:
-    print ("Garage Ceiling Temp: ", CeilingTemp)
+  print ("Garage Ceiling Temp: ", CeilingTemp)
 
   cht = open("/home/robin/CurrentCeilingTemp", "w")
   cht.write (str(CeilingTemp))
