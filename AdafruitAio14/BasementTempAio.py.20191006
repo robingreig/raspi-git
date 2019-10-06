@@ -3,23 +3,29 @@
 #====================================================================
 # Import subfiles
 #====================================================================
+import datetime
 import glob
 import os
+import re
+#import serial
 import subprocess
 import sys
+import time
 import warnings
 
 # Import library and create instance of REST client.
 from Adafruit_IO import Client
 aio = Client('robingreig', 'd0c57dc7661d4b2e8a1868133f9e162c')
 
-# Run DEBUG portions if DEBUG > 0
+# Set Variables
 DEBUG = 1
+
+# Add a delay for boot
+time.sleep(1)
 
 # Continuously append data
 while(True):
 
-# shouldn't need this if w1 support enabled in raspi-config
 #  os.system('modprobe w1-gpio')
 #  os.system('modprobe w1-therm')
  
@@ -55,8 +61,9 @@ while(True):
   cht = open("/home/robin/CurrentBasementTemp", "w")
   cht.write (str(BasementTemp))
   cht.close()
+  time.sleep(1)
 
-# Read the Current Basement Temperature
+  # Read the Current Basement Temperature
   def read_CurrentBasementTemp():
     f = open("/home/robin/CurrentBasementTemp", "r")
     line1 = f.readlines()
@@ -71,16 +78,16 @@ while(True):
     print ("Basement Temp File reads: ", read_CurrentBasementTemp())
     print ("Basement Temp Rounded: ", BasementTempRound)
 
-# Send the value 100 to a feed called 'Foo'.
-#aio.send('basement-temp', 19.8)
+  # Send the value 100 to a feed called 'Foo'.
+  #aio.send('basement-temp', 19.8)
   aio.send('basement-temp', BasementTempRound)
 
-# Retrieve the most recent value from the feed 'Foo'.
-# Access the value by reading the `value` property on the returned Data object.
-# Note that all values retrieved from IO are strings so you might need to convert
-# them to an int or numeric type if you expect a number.
+  # Retrieve the most recent value from the feed 'Foo'.
+  # Access the value by reading the `value` property on the returned Data object.
+  # Note that all values retrieved from IO are strings so you might need to convert
+  # them to an int or numeric type if you expect a number.
+  data = aio.receive('basement-temp')
   if DEBUG > 0:
-    data = aio.receive('basement-temp')
     print('Received value: {0}'.format(data.value))
   sys.exit()
 

@@ -1,0 +1,5 @@
+1) Stretch lite & raspi-config
+2) update && upgrade -y
+3) sudo apt install git authssh python3-pip -y
+4) pip3 install adafruit-io
+
