@@ -11,3 +11,11 @@
 $i++;
 $cfg['Servers'][$i]['host'] = '10.248.128.3';
 
+***** If you have an error that phpmyadmin@localhost doesn't have permission:
+sudo mysql
+use mysql;
+CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+quit
+
