@@ -1,5 +1,7 @@
-goto: https://nodered.org/docs/getting-started/raspberrypi
-click on the bash line & copy to terminal window & run it
+To update / install node-RED on the raspberry Pi
+
+1) goto: https://nodered.org/docs/getting-started/raspberrypi
+2) Copy the bash line to terminal window & run it
 bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
 
 Stop Node-RED 
@@ -21,7 +23,10 @@ You can start Node-RED with the command node-red-start or using the icon under M
 Then point your browser to localhost:1880 or https://yourpiaddress:1880
 
 To install node-red-dashboard
-1) Run node-red-start and stop (?)
-2) cd to ./.node-red
-3) npm install node-red-dashboard
-4) sudo reboot
+1) cd to ./.node-red (hidden directory, note the . in front of node-red)
+2) npm install node-red-dashboard
+  should return a couple of warnings, but should be successful
+3) sudo reboot
+4) node-red-start in a terminal window or click on the icon
+5) In a separate terminal window, sudo systemctl enable nodered.service
+
