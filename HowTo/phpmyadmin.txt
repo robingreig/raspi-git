@@ -1,7 +1,7 @@
 1) sudo apt install mariadb-server (to install database)
 2) sudo mysql_secure_installation (to secure it & set the root password)
 3) sudo mysql -u root -p
-4) GRANT ALL PRIVILEGES ON *.* to 'robin'@'localhost' IDENTIFIED BY 'Anc1p1tal';
+4) GRANT ALL PRIVILEGES ON *.* to 'robin'@'localhost' IDENTIFIED BY 'password';
 5) try to login using robin
 6) sudo apt install phpmyadmin (will ask apache or lighttp & password)
 7) verify you can access phpmyadmin by opening a web browser to localhost/phpmyadmin
