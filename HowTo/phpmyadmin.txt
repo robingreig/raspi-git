@@ -1,13 +1,15 @@
-1) sudo apt install mariadb-server (to install database)
+1) sudo apt install mariadb-server -y (to install database)
 2) sudo mysql_secure_installation (to secure it & set the root password)
 3) sudo mysql -u root -p
-4) GRANT ALL PRIVILEGES ON *.* to 'robin'@'localhost' IDENTIFIED BY 'password';
-5) try to login using robin
-6) sudo apt install phpmyadmin (will ask apache or lighttp & password)
-7) verify you can access phpmyadmin by opening a web browser to localhost/phpmyadmin
-8) sudo cp /etc/phpmyadmin/config.inc.php /etc/phpmyadmin/config.inc.php.orig
-9) sudo nano /etc/phpmyadmin/config.inc.php
-10) add the following lines to the end of the config file
+4) use mysql
+5) GRANT ALL PRIVILEGES ON *.* to 'robin'@'localhost' IDENTIFIED BY 'password';
+6) try to login using robin
+7) sudo apt install phpmyadmin -y (will ask apache or lighttp & password)
+8) verify you can access phpmyadmin by opening a web browser to localhost/phpmyadmin
+***** For phpmyadmin at SAIT to access Database in Attendance Pi
+9) sudo cp /etc/phpmyadmin/config.inc.php /etc/phpmyadmin/config.inc.php.orig
+10) sudo nano /etc/phpmyadmin/config.inc.php
+11) add the following lines to the end of the config file
 $i++;
 $cfg['Servers'][$i]['host'] = '10.248.128.3';
 
