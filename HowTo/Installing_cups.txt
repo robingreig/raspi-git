@@ -1,0 +1,10 @@
+sudo apt install cups
+sudo usermod -aG lpadmin robin
+sudo reboot
+webrowser to localhost:631
+Add printer
+Have to login
+Install Samsung_SCX-4x28 printer
+Model: Samsung CLP-660ND - CUPS+Gutenprint v5.3.1 (en)
+Maintenance > Test Print
+
