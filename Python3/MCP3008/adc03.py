@@ -33,4 +33,7 @@ while True:
   input1 = analogInput(1) # Reading from CH1
   input1_volts = Volts(input1)
   print("Input 1: {} ({} Bits) ({}V)".format(timestamp, input1,input1_volts))
+  input2 = analogInput(2) # Reading from CH2
+  input2_volts = Volts(input2)
+  print("Input 2: {} ({} Bits) ({}V)".format(timestamp, input2,input2_volts))
   sleep(5)
