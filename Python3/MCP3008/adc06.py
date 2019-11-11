@@ -29,7 +29,7 @@ while True:
   input0 = analogInput(0) # Reading from CH0
   input0_volts = Volts(input0)
   timestamp = datetime.datetime.now()
-  print("Input 0: {} ({} Bits) ({}V)".format(timestamp, input0,input0_volts))
+  print("\nInput 0: {} ({} Bits) ({}V)".format(timestamp, input0,input0_volts))
   input1 = analogInput(1) # Reading from CH1
   input1_volts = Volts(input1)
   print("Input 1: {} ({} Bits) ({}V)".format(timestamp, input1,input1_volts))
