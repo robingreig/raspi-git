@@ -7,6 +7,8 @@ import datetime
 
 # Variables
 DEBUG = 1
+sleepTime = 1
+repeat = 3
 
 # Start SPI connection
 spi = spidev.SpiDev() # Created an object
@@ -24,8 +26,7 @@ def Volts(data):
   volts = (data * 3.3) / float(1023)
   volts = round(volts, 2) # Round off to 2 decimal places
   return volts
- 
-while True:
+while repeat > 0:
   input0 = analogInput(0) # Reading from CH0
   input0_volts = Volts(input0)
   timestamp = datetime.datetime.now()
@@ -45,4 +46,5 @@ while True:
   input5 = analogInput(5) # Reading from CH5
   input5_volts = Volts(input5)
   print("Input 5: {} ({} Bits) ({}V)".format(timestamp, input5,input5_volts))
-  sleep(5)
+  sleep(sleepTime)
+  repeat = repeat - 1
