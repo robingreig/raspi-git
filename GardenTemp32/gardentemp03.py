@@ -83,9 +83,19 @@ cursor.execute('''SELECT currentdate, currentime, insidetemp, outsidetemp FROM c
 for row in cursor:
     # row[0] returns the first column in the query (name), row[1] returns email column.
     print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+
 print ()
 print ("Display last row")
 for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentime desc limit 1"):
     print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+print ()
+print ("Display temp rows using select *")
+for row in cursor.execute("Select * from coldframe order by currentime desc limit 1"):
+    temp1 = row[1]
+    print ("temp1 = ",temp1)
+    temp2 = row[2]
+    print ("temp2 = ",temp2)
+
+
 
 db.close()

@@ -21,21 +21,21 @@ def getData():
 	curs=conn.cursor()
 
 	for row in curs.execute("SELECT * FROM coldframe ORDER BY currentime DESC LIMIT 1"):
-		time = str(row[0])
-		temp = row[1]
-		hum = row[2]
+		time = str(row[4])
+		temp1 = str(row[1])
+		temp2 = str(row[2])
 	conn.close()
-	return time, temp, hum
+	return time, temp1, temp2
 
 # main route 
 @app.route("/")
 def index():
 	
-	time, temp, hum = getData()
+	time, temp1, temp2 = getData()
 	templateData = {
 	  'time'	: time,
-      'temp'	: temp,
-      'hum'		: hum
+      'temp1'	: temp1,
+      'temp2'		: temp2
 	}
 	return render_template('index.html', **templateData)
 
