@@ -22,11 +22,12 @@ backupcam34	= P3B backup camera for truck
 
 sprog35		= P3B+ Sprog Model Train
 breadboard36	= P3B+ Breadboard Toe Kick lights
-desktop37	= P3B+ Desktop downstairs
+desktop37	= P3B+ 
 38?
 39?
 
 raspi40		= Pi 4 development -p22240 (10.248.128.29)
+Desktop41	= Pi 4 Desktop Downstairs
 
 zero2		= ZeroW First Pi zero -p22203 (10.248.128.1)
 
