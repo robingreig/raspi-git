@@ -22,7 +22,7 @@ backupcam34	= P3B backup camera for truck
 
 sprog35		= P3B+ Sprog Model Train
 breadboard36	= P3B+ Breadboard Toe Kick lights
-desktop37	= P3B+ 
+irricana37	= P3B+ Controller for Irricana House
 38?
 39?
 
