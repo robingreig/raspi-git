@@ -21,8 +21,8 @@ raspi32		= P3B @ SAIT
 backupcam34	= P3B backup camera for truck
 
 sprog35		= P3B+ Sprog Model Train
-breadboard36	= P3B+ Breadboard Toe Kick lights
-irricana37	= P3B+ Controller for Irricana House
+irricana36	= P3B+ Controller for Irricana House
+breadboard37	= P3B+ Breadboard
 38?
 39?
 
