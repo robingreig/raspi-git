@@ -47,7 +47,8 @@ def set_timer(hours, minutes, seconds):
     write_time_to_clock(ALARM1_SECONDS_REG, hours, minutes, seconds)
     # set the alarm to match hours minutes and seconds
     # need to set some flags
-    set_alarm1_mask_bits((True, False, False, False))
+#    set_alarm1_mask_bits((True, False, False, False))
+    set_alarm1_mask_bits((True, True, True, False))
     enable_alarm1()
     clear_alarm1_flag()
 
@@ -55,4 +56,4 @@ def set_timer(hours, minutes, seconds):
 # Your sensor behaviour goes here
 print("Program Running")
 #
-set_timer(1,30,0)
+set_timer(0,0,5)
