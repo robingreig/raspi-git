@@ -1,13 +1,8 @@
 
+to show the properties of a table:
+describe table_name;
+
 to show the number of rows from the command line:
 sudo mysqlshow -u robin -pPassword --count database_name
-
-To Show:
-tables:				show tables;
-properties of a table:		describe table_name;
-columns				show columns from makerspace.users;
-indexes				show index from makerspace.users;
-remove index			alter table makerspace.users drop index phone;
-
 
 

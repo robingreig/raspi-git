@@ -1,15 +1,10 @@
 1) To clone a repository:
 	git clone https://github.com/robingreig/raspi-git
 
-2) To add a new respository:
-	git remote add origin https://github.com/robingreig/sandbox.git
-	Then Verify
-	git remote -v
-
-3) To check the status of any local changes
+2) To check the status of any local changes
 	git status
 
-4) To add the changes to the Index:
+3) To add the changes to the Index:
 	git add .
 	or
 	git add <filename>
@@ -18,21 +13,19 @@
 	or
 	git add -A
 
-5) To commit the changes to the HEAD, but not the remote repository yet:
+4) To commit the changes to the HEAD, but not the remote repository yet:
 	git commit -m "Commit Message"
 
-6) Pushing the changes to the master:
+5) Pushing the changes to the master:
 	git push https://github.com/robingreig/raspi-git.git
 	or
 	git push origin master
 
-7) If it is a new respository:
-	git push -u origin master
-
-8) To sync the master back to raspi
+6) To sync the master back to raspi
 	git pull
 
-9) to add a ssh key to github
+
+7) to add a ssh key to github
 	goto .ssh directory and copy the id_dsa.pub file
 	login to github.com
 	In the top right hand corner click profile and then settings
@@ -43,12 +36,14 @@
 	should say "Hi robingreig! You've successfully authenticated 
 		but GitHub does nto provide shell access
 
-10) To change a remote's URL
+8) To change a remote's URL
 git remote set-url origin git@github.com:robingreig/raspi-git.git
-
 	
 >>>>> https://help.github.com/articles/adding-a-remote/
 
 ***** good website: rogerdudler.github.io/git-guide
 
-
+Added BattMon1 to ssh list
+Added Pi200 to ssh list
+* had to change the remote url
+Added Gertduino2 to ssh list

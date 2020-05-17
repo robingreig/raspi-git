@@ -1,0 +1,17 @@
+1) Put this line at the bottom of /boot/config.txt
+dtovrlay=i2c-rtc,ds3231
+
+2) edit /lib/udev/hwclock-set and comment out
+
+if [ -e /run/systemd/system ] ; then
+	exit 0
+fi
+
+3) After reboot you can test by
+sudo hwclock -r; date
+to compare and if you want verbose add v to the -r
+
+to set th hardware clock
+sudo hwclock -w
+
+
