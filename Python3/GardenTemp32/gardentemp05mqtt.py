@@ -1,5 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
+import paho.mqtt.client as mqtt
 import time
 import datetime
 import sqlite3
@@ -63,8 +64,8 @@ def read_temp2():
         temp_c2 = float(temp_string) / 1000.0
         return temp_c2
 
-print "Black Temp: ", (read_temp1())
-print "Red Temp: ", (read_temp2())
+print ("Black Temp: ", (read_temp1()))
+print ("Red Temp: ", (read_temp2()))
   	
 time.sleep(1)
   
@@ -75,11 +76,43 @@ try:
 except:
   db.rollback()
 
-print "Wrote a new row to the database"
-
-cursor.execute('''SELECT insidetemp, outsidetemp, currentdate, currentime FROM coldframe''')
+print ("Wrote a new row to the database")
 for row in cursor:
-    # row[0] returns the first column in the query (name), row[1] returns email column.
-    print('{0} : {1}, {2}, {3}'.format(row[0], row[1], row[2], row[3]))
+    # row[0] returns the first column in the query = currentdate?, row[1] returns currentime?.
+    print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+
+print ()
+print ("Display last row")
+for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentdate desc, currentime desc limit 1"):
+    print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+print ()
+print ("Display temp rows using select *")
+for row in cursor.execute("Select * from coldframe order by currentdate desc, currentime desc limit 1"):
+    temp1 = row[1]
+    print ("temp1 = Black Temp = insidetemp = ",temp1)
+    temp2 = row[2]
+    print ("temp2 = Red Temp = outsidetemp= ",temp2)
+
+#### upload temps to mqtt broker
+def on_message(client, userdata, message):
+    print("Message received = ", str(message.payload.decode("utf-8")))
+    print("Message topic = ", message.topic)
+    print("Message qos = ", message.qos)
+    print("Message retain flag = ", message.retain)
+
+def on_log(client, userdata, level, buf):
+    print("log: ",buf)
+
+broker_address = "192.168.200.137"
+print("Creating new instance")
+client = mqtt.Client("P1") # create a new instance
+print("Display log entries")
+client.on_log = on_log # display log entries
+client.on_message = on_message # attach function to callback
+print("Connecting to broker")
+client.connect(broker_address) # connect to broker
+print("Publishing message to topic, OutTemp")
+client.publish("OutTemp", temp1)
+
 
 db.close()

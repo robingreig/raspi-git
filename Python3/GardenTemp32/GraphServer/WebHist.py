@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  appDHT_v1.py
@@ -59,8 +59,8 @@ def maxRowsTable():
 #initialize global variables
 global numSamples
 numSamples = maxRowsTable()
-if (numSamples > 101):
-	numSamples = 100
+if (numSamples > 151):
+	numSamples = 150
 	
 	
 # main route 

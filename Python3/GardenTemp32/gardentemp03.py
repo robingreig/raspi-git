@@ -10,7 +10,7 @@ import glob
 # Open Database Connection
 # ===========================================================================
 
-db = sqlite3.connect('gardentemp.db')
+db = sqlite3.connect('/home/robin/gardentemp.db')
 
 # Prepare a cursor
 cursor = db.cursor()
@@ -86,11 +86,11 @@ for row in cursor:
 
 print ()
 print ("Display last row")
-for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentime desc limit 1"):
+for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentdate desc, currentime desc limit 1"):
     print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
 print ()
 print ("Display temp rows using select *")
-for row in cursor.execute("Select * from coldframe order by currentime desc limit 1"):
+for row in cursor.execute("Select * from coldframe order by currentdate desc, currentime desc limit 1"):
     temp1 = row[1]
     print ("temp1 = ",temp1)
     temp2 = row[2]

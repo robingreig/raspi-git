@@ -19,6 +19,6 @@ client.loop_start() # start the loop
 print("Subscribing to topic, OutTemp")
 client.subscribe("OutTemp")
 print("Publishing message to topic", "OutTemp")
-client.publish("OutTemp","25")
+client.publish("OutTemp","28")
 time.sleep(4) # wait
 client.loop_stop() # stop the loop

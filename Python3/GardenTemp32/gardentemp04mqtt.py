@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import time
 import datetime
@@ -63,8 +63,8 @@ def read_temp2():
         temp_c2 = float(temp_string) / 1000.0
         return temp_c2
 
-print "Black Temp: ", (read_temp1())
-print "Red Temp: ", (read_temp2())
+print ("Black Temp: ", (read_temp1()))
+print ("Red Temp: ", (read_temp2()))
   	
 time.sleep(1)
   
@@ -75,11 +75,23 @@ try:
 except:
   db.rollback()
 
-print "Wrote a new row to the database"
-
-cursor.execute('''SELECT insidetemp, outsidetemp, currentdate, currentime FROM coldframe''')
+print ("Wrote a new row to the database")
 for row in cursor:
-    # row[0] returns the first column in the query (name), row[1] returns email column.
-    print('{0} : {1}, {2}, {3}'.format(row[0], row[1], row[2], row[3]))
+    # row[0] returns the first column in the query = currentdate?, row[1] returns currentime?.
+    print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+
+print ()
+print ("Display last row")
+for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentdate desc, currentime desc limit 1"):
+    print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+print ()
+print ("Display temp rows using select *")
+for row in cursor.execute("Select * from coldframe order by currentdate desc, currentime desc limit 1"):
+    temp1 = row[1]
+    print ("temp1 = Black Temp = insidetemp = ",temp1)
+    temp2 = row[2]
+    print ("temp2 Red Temp = outsidetemp= ",temp2)
+
+
 
 db.close()
