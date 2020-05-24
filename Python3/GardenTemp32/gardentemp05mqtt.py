@@ -112,7 +112,7 @@ client.on_message = on_message # attach function to callback
 print("Connecting to broker")
 client.connect(broker_address) # connect to broker
 print("Publishing message to topic, OutTemp")
-client.publish("OutTemp", temp1)
+client.publish("OutTemp", temp2)
 
 
 db.close()
