@@ -16,13 +16,13 @@ raspi24		= P2 Home Office Temperature monitor
 ##alarm31,33,35	= P3B CFMF Alarms
 30?
 raspi31		= P3B Home node.js & javascript developer
-raspi32		= P3B @ SAIT
+gardentemp32	= P3B New Gardentemp Pi with mqtt feed to raspi37
 33?
 backupcam34	= P3B backup camera for truck
 
 sprog35		= P3B+ Sprog Model Train
 irricana36	= P3B+ Controller for Irricana House
-breadboard37	= P3B+ Breadboard
+mqtt37		= P3B+ MQTT Mosquitto broker & node-red
 38?
 39?
 

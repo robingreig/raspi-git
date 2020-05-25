@@ -1,0 +1,8 @@
+1) Buster Lite
+2) standard raspi-config
+3) sudo apt update && sudo apt upgrade -y
+4) sudo apt install git
+5) git clone https://github.com/robingreig/raspi-git
+6) sudo apt install python3-pip
+7) pip3 install adafruit-io
+
