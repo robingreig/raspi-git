@@ -4,10 +4,12 @@ sudo iwlist wlan0 scan
 
 See which network you are on
 iwgetid
+iwconfig
 
 If you change wpa_config:
 sudo systemctl daemon-reload
 sudo systemctl restart dhcpcd
+or sudo wpa_cli -i wlan0 reconfigure
 
 To dealy wlan0 via bash:
 sudo ifconfig wlan0 down
