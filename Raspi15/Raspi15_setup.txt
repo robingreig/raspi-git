@@ -6,3 +6,8 @@
 6) sudo apt install python3-pip
 7) pip3 install adafruit-io
 
+> UpdateAtticTemp.py
+> UpdateCeilingTemp.py
+> UpdateDeskTemp.py (feed is garage-temp
+> UpdateOutsideTemp.py
+
