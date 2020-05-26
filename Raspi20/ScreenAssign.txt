@@ -11,7 +11,7 @@ arduino18	= PB Arduino / Raspi @ SAIT
 raspi20		= P2 This raspi
 raspi21		= P2 With wifi dongle
 arduino23	= P2 APRX Battery monitor / Arduino
-raspi24		= P2 Home Office Temperature monitor
+battmon24	= P2 Garage Battery Monitor
 
 ##alarm31,33,35	= P3B CFMF Alarms
 30?
@@ -21,7 +21,7 @@ gardentemp32	= P3B New Gardentemp Pi with mqtt feed to raspi37
 backupcam34	= P3B backup camera for truck
 
 sprog35		= P3B+ Sprog Model Train
-irricana36	= P3B+ Controller for Irricana House
+breadboard36	= P3B+ Controller for Irricana House - rename to irricana36?
 mqtt37		= P3B+ MQTT Mosquitto broker & node-red
 38?
 39?
