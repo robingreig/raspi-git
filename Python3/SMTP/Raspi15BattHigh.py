@@ -6,7 +6,7 @@ import smtplib
 
 DEBUG = 0
 
-TO = 'robin.greig@sait.ca'
+TO = 'robin.greig@calalta.com'
 SUBJECT = 'Raspi15 Battery Voltage HIGH!'
 TEXT = 'The Battery Voltage is above 27VDC on Raspi15 & charger is turning off'
 
