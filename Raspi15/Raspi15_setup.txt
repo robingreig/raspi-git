@@ -5,6 +5,7 @@
 5) git clone https://github.com/robingreig/raspi-git
 6) sudo apt install python3-pip
 7) pip3 install adafruit-io
+8) pip3 install RPi.GPIO
 
 > UpdateAtticTemp.py
 > UpdateCeilingTemp.py
