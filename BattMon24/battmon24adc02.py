@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+    #!/usr/bin/env python3
 
 # Importing modules
 import spidev # To communicate with SPI devices
@@ -28,17 +28,20 @@ def analogInput(channel):
   data = ((adc[1]&3) << 8) + adc[2]
   return data
 
-# Below function will convert data to max 15VDC
-def Volts24(data):
+def Volts12(data): # Convert data from 12VDC batteries
+  volts = (data * 0.014662756) # 15VDC / 1023 = 0.014662756
+#  volts = (data * 0.015640273) # 16VDC / 1023 = 0.015640273
+  volts = round(volts, 2) # Round off to 2 decimal places
+  return volts
+
+def Volts24(data): # Convert data from 24VDC battery banks
 #  volts = (data * 3.3) / float(1023)
-  volts = (data * 0.026392961)
+  volts = (data * 0.026392961) # 27VDC / 1023 = 0.026392961
+#  volts = (data * 0.027370478) # 28VDC / 1023 = 0.027370478
+#  volts = (data * 0.028347996) # 29VDC / 1023 = 0.028347996
   volts = round(volts, 2) # Round off to 2 decimal places
   return volts
-# Below function will convert data to max 27VDC
-def Volts12(data):
-  volts = (data * 0.014662756)
-  volts = round(volts, 2) # Round off to 2 decimal places
-  return volts
+
 while repeat > 0:
   input0 = analogInput(0) # Reading from CH0
   input0_volts = Volts24(input0)

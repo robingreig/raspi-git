@@ -2,7 +2,18 @@
 2) make sure spi is on for MCP3008
 3) Install node-red
 bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
-4) Install dashboard from within the ./.node-red directory
+4) To start node-red: node-red-start / stop / restart / log
+5) Install dashboard from within the ./.node-red directory
 npm -i node-red-dashboard
+6) node-red-restart
+7) sudo sytemctl enable nodered.service
+8) sudo reboot
+
+Install mosquitto client
+sudo apt install mosquitto-clients -y
+
+Install paho-mqtt
+pip3 install paho-mqtt
+
 
 
