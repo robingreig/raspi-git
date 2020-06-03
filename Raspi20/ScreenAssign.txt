@@ -21,9 +21,9 @@ gardentemp32	= P3B New Gardentemp Pi with mqtt feed to raspi37
 backupcam34	= P3B backup camera for truck
 
 sprog35		= P3B+ Sprog Model Train
-breadboard36	= P3B+ Controller for Irricana House - rename to irricana36?
+breadboard36	= P3B+ Controller for Irricana House
 mqtt37		= P3B+ MQTT Mosquitto broker & node-red
-38?
+irricana38	= P3B+ Irricana House Node-Red controller
 39?
 
 raspi40		= Pi 4 development -p22240 (10.248.128.29)
