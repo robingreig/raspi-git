@@ -4,7 +4,11 @@
 4) git config
 5) sudo apt install cups
 6) sudo usermod -aG lpadmin robin
-7) download arduino execuatable from arduino.cc
-8) unzip file in Downloads folder
-9) move to directory and sudo install.sh
-
+7) localhost:631 and install printer & test page
+8) download arduino execuatable from arduino.cc
+9) unzip file in Downloads folder
+10) move to directory and sudo install.sh
+11) ssh-keygen
+12) ssh-copy-id robin@raspi20.local
+13) install node-red from website
+14) cd ./.node-red & npm i node-red-dashboard
