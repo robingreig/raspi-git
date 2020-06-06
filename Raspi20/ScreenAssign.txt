@@ -26,8 +26,9 @@ mqtt37		= P3B+ MQTT Mosquitto broker & node-red
 irricana38	= P3B+ Irricana House Node-Red controller
 39?
 
-raspi40		= Pi 4 development -p22240 (10.248.128.29)
-Desktop41	= Pi 4 Desktop Downstairs
+raspi40		= Pi 4, 4GB development -p22240 (10.248.128.29)
+raspi41		= Pi 4, 4GB Was old downstairs Desktop
+desktop42	= Pi 4, 8GB new downstairs Desktop
 
 zero2		= ZeroW First Pi zero -p22203 (10.248.128.1)
 
