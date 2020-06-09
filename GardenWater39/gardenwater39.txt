@@ -1,0 +1,8 @@
+1) standard install 2020.05.15
+2) make sure spi is on for MCP3008
+3) Install node-red
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+4) Install dashboard from within the ./.node-red directory
+npm -i node-red-dashboard
+
+
