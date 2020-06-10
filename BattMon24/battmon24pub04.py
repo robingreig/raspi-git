@@ -58,7 +58,7 @@ client.publish("HamBatt", Adc2)
 time.sleep(1)
 print("Publishing message to topic, SpareBatt") # Spare Battery is Adc3
 client.publish("SpareBatt", Adc3)
-#print("Publishing message to topic, SolarBatt") # Solar Batteries are Adc4
+#print("Publishing message to topic, Batt04") # Batteries are Adc4
 #client.publish("SolarBatt", Adc0)
-#print("Publishing message to topic, SolarBatt") # Solar Batteries are Adc0
+#print("Publishing message to topic, Batt05") # Batteries are Adc5
 #client.publish("SolarBatt", Adc0)
