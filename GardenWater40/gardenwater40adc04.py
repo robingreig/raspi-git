@@ -9,7 +9,7 @@ import os
 # Variables
 DEBUG = 1
 sleepTime = 1
-ports = 2 # Number of ports being read
+ports = 1 # Number of ports being read
 
 
 # Start SPI connection
@@ -34,7 +34,7 @@ def water(data):
 
 for i in range(ports):
   inputAvg = 0
-  for j in range(3):
+  for j in range(3): # Take 3 samples to average out
     input = analogInput(i) # Reading from port number
     if DEBUG > 0:
       print("Port Number = %d"%i)
@@ -42,10 +42,13 @@ for i in range(ports):
       inputAvg = inputAvg + input # Add all 3 entries
   inputAvg = inputAvg / 3 # Average all 3 entries
   inputAvg = round(inputAvg,0) # Round Average
-  if inputAvg < 470:
-    inputAvg = 470
-  percentAvg = ((inputAvg - 470) / 4)
-  percentAvg = (100 - percentAvg)
+  if inputAvg < 470: # if inputAvg < 470, probe is saturated
+    inputAvg = 470 # Zero it to 470, fully wet
+  # Range is 470 (wet) & 870 (dry)
+  percentAvg = ((inputAvg - 470) / 4) # Range - 470 / 4 will give percent dry
+  percentAvg = (100 - percentAvg) # Reverse % to show how % wet
+  if percentAvg < 0: # if percentAvg is negative, units > 870
+    percentAvg = 0
   if DEBUG > 0:
     print("inputAvg = %d"%inputAvg)
     timestamp = datetime.datetime.now()
