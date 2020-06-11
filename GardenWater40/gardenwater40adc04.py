@@ -9,7 +9,7 @@ import os
 # Variables
 DEBUG = 1
 sleepTime = 1
-ports = 1 # Number of ports being read
+ports = 2 # Number of ports being read
 
 
 # Start SPI connection
@@ -25,7 +25,9 @@ def analogInput(channel):
 
 # Below function will convert data to percentage
 def water(data):
-  water = ((data / 870) * 100) # convert to percentage
+  if data < 470:
+    data = 470
+  water = (((data - 470) / 400) * 100) # convert to percentage
   water = (100 - water) # reverse percentage
   return water
 
@@ -39,15 +41,21 @@ for i in range(ports):
       print("Port value = %d"%input)
       inputAvg = inputAvg + input # Add all 3 entries
   inputAvg = inputAvg / 3 # Average all 3 entries
+  inputAvg = round(inputAvg,0) # Round Average
+  if inputAvg < 470:
+    inputAvg = 470
+  percentAvg = ((inputAvg - 470) / 4)
+  percentAvg = (100 - percentAvg)
   if DEBUG > 0:
     print("inputAvg = %d"%inputAvg)
     timestamp = datetime.datetime.now()
     print("\nInput 0: {} ({} Bits) ({} Average Percent)".format(timestamp, input,inputAvg))
+    print("Percent Adjusted Average = %d"%percentAvg)
   file_name = '/home/robin/CurrentADC{}'.format(i)
   if DEBUG > 0:
     print(file_name)
   cht = open(file_name, "w")
-  cht.write (str(inputAvg))
+  cht.write (str(percentAvg))
   cht.close()
   sleep(sleepTime)
 
