@@ -9,7 +9,7 @@ import os
 # Variables
 DEBUG = 0
 sleepTime = 1
-ports = 2 # Number of ports being read
+ports = 1 # Number of ports being read
 
 
 # Start SPI connection
