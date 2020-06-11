@@ -25,23 +25,29 @@ def analogInput(channel):
 
 # Below function will convert data to percentage
 def water(data):
-  water = ((data / 870 * 100) # convert to percentage
-  water = 100 - water # reverse percentage
+  water = ((data / 870) * 100) # convert to percentage
+  water = (100 - water) # reverse percentage
   return water
 
 
 for i in range(ports):
-  input = analogInput(ports) # Reading from port number
-  print("Port value = %d"%input)
-#  input0Avg = input0Avg + input0 # Average all 3 entries
-#  timestamp = datetime.datetime.now()
-#  print("\nInput 0: {} ({} Bits) ({} Bits Average)".format(timestamp, input0,input0Avg))
-#  if repeat == 1:
-#    input0Avg = input0Avg / 3
-#    input0Avg = round(input0Avg, 2) # Round off to 2 decimal places
-#    print("\nInput 0: {} ({} Bits) ({} Bits Average) ".format(timestamp, input0,input0Avg))
-#    cht = open("/home/robin/CurrentAdc0", "w")
-#    cht.write (str(input0Avg))
-#    cht.close()
-#  sleep(sleepTime)
-#  repeat = repeat - 1
+  inputAvg = 0
+  for j in range(3):
+    input = analogInput(i) # Reading from port number
+    if DEBUG > 0:
+      print("Port Number = %d"%i)
+      print("Port value = %d"%input)
+      inputAvg = inputAvg + input # Add all 3 entries
+  inputAvg = inputAvg / 3 # Average all 3 entries
+  if DEBUG > 0:
+    print("inputAvg = %d"%inputAvg)
+    timestamp = datetime.datetime.now()
+    print("\nInput 0: {} ({} Bits) ({} Average Percent)".format(timestamp, input,inputAvg))
+  file_name = '/home/robin/CurrentADC{}'.format(i)
+  if DEBUG > 0:
+    print(file_name)
+  cht = open(file_name, "w")
+  cht.write (str(inputAvg))
+  cht.close()
+  sleep(sleepTime)
+
