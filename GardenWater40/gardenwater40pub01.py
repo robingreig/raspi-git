@@ -4,6 +4,7 @@ import os
 import time
 import paho.mqtt.client as mqtt
 
+time.sleep(1)
 ch0 = open("/home/robin/CurrentADC0", "r")
 Adc0 = ch0.read()
 ch0.close()
