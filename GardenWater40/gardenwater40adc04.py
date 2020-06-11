@@ -7,9 +7,9 @@ import datetime
 import os
 
 # Variables
-DEBUG = 1
+DEBUG = 0
 sleepTime = 1
-ports = 1 # Number of ports being read
+ports = 2 # Number of ports being read
 
 
 # Start SPI connection
@@ -23,15 +23,6 @@ def analogInput(channel):
   data = ((adc[1]&3) << 8) + adc[2]
   return data
 
-# Below function will convert data to percentage
-def water(data):
-  if data < 470:
-    data = 470
-  water = (((data - 470) / 400) * 100) # convert to percentage
-  water = (100 - water) # reverse percentage
-  return water
-
-
 for i in range(ports):
   inputAvg = 0
   for j in range(3): # Take 3 samples to average out
@@ -39,7 +30,7 @@ for i in range(ports):
     if DEBUG > 0:
       print("Port Number = %d"%i)
       print("Port value = %d"%input)
-      inputAvg = inputAvg + input # Add all 3 entries
+    inputAvg = inputAvg + input # Add all 3 entries
   inputAvg = inputAvg / 3 # Average all 3 entries
   inputAvg = round(inputAvg,0) # Round Average
   if inputAvg < 470: # if inputAvg < 470, probe is saturated
