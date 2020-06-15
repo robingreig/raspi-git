@@ -1,0 +1,6 @@
+1) Standard lite install & enable SSH & SPI
+2) sudo apt install git & git clone
+3) sudo apt install python3-pip
+4) pip3 install spidev
+5) pip3 install paho-mqtt
+
