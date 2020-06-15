@@ -13,12 +13,12 @@ raspi21		= P2 With wifi dongle
 arduino23	= P2 APRX Battery monitor / Arduino
 battmon24	= P2 Garage Battery Monitor
 
-##alarm31,33,35	= P3B CFMF Alarms
 30?
-raspi31		= P3B Home node.js & javascript developer
+alarm31		= P3B CFMF Alarm
 gardentemp32	= P3B New Gardentemp Pi with mqtt feed to raspi37
-33?
+alarm33		= P3B CFMF Alarm
 backupcam34	= P3B backup camera for truck
+alarm35		= P3B CFMF Alarm
 
 sprog35		= P3B+ Sprog Model Train
 breadboard36	= P3B+ Controller for Irricana House
@@ -26,7 +26,7 @@ mqtt37		= P3B+ MQTT Mosquitto broker & node-red
 irricana38	= P3B+ Irricana House Node-Red controller
 39?
 
-raspi40		= Pi 4, 4GB development -p22240 (10.248.128.29)
+breadboard40	= Pi 4, 4GB Breadboard
 raspi41		= Pi 4, 4GB Was old downstairs Desktop
 desktop42	= Pi 4, 8GB new downstairs Desktop
 
