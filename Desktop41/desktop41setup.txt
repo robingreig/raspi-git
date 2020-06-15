@@ -1,0 +1,12 @@
+1) Buster 2019-09-08
+2) update & upgrade
+3) adduser robin & groups
+4) login as robin
+5) git clone all
+6) node-RED upgrade
+7) install node-red-dashboard & test
+8) install cups & test
+9) download makerspace database
+10) install phpmyadmin & test
+
+
