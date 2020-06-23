@@ -21,7 +21,7 @@ backupcam34	= P3B backup camera for truck
 alarm35		= P3B CFMF Alarm
 
 sprog35		= P3B+ Sprog Model Train
-breadboard36	= P3B+ Controller for Irricana House
+breadboard36	= P3B+ Breadboard
 mqtt37		= P3B+ MQTT Mosquitto broker & node-red
 raspi38		= P3B+ 
 39?
@@ -30,7 +30,7 @@ breadboard40	= Pi 4, 4GB Breadboard
 raspi41		= Pi 4, 4GB Was old downstairs Desktop
 desktop42	= Pi 4, 8GB new downstairs Desktop
 
-zero2		= ZeroW First Pi zero -p22203 (10.248.128.1)
+mqtt50		= ZeroW, GardenWater Monitor
 
 SMSCalendar	= Pi Zero @ SAIT -p22201 (10.248.128.33)
 SMSDatabase	= SMS Database @ SAIT -p22202 (10.248.128.31)
