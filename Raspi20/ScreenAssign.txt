@@ -28,7 +28,7 @@ raspi38		= P3B+
 
 breadboard40	= Pi 4, 4GB Breadboard
 raspi41		= Pi 4, 4GB Was old downstairs Desktop
-desktop42	= Pi 4, 8GB new downstairs Desktop
+desktop49	= Pi 4, 8GB new downstairs Desktop
 
 mqtt50		= ZeroW, GardenWater Monitor
 
