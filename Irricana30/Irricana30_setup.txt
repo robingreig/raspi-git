@@ -1,0 +1,40 @@
+1) standard install
+2) sudo usermod -a -G group1,group2 robin
+3) update && upgrade
+4) unselect auto login as pi
+5) login as robin
+6) git clone repository
+	+ git config --global user.name & email
+7) Install node-red
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+
+8) Autostart nodered service, sudo systemctl enable nodered.service
+
+9) Install Dashboard, in ./.node-red = npm i node-red-dashboard
+
+10) Reboot & test that node-red is running
+
+12) Copy over flow & confirm that it works
+
+
+FET 1	Pin 11	GPIO 17	Main Bathroom
+FET 2	Pin 12	GPIO 18	Small Bathroom
+FET 3	Pin 29	GPIO 05	Sink Toekick
+FET 4	Pin 31	GPIO 06	Island Toekick
+FET 5	Pin 33	GPIO 13	Oven Toekick
+Relay 7	Pin 36	GPIO 16	Furnace Fan
+Relay 8	Pin 37	GPIO 26	Spare
+
+
+
+   
+
+
+*) install barrier
+	+ sudo apt install barrier
+	+ client to 192.168.200.149
+	+ right mouse setup check minimize to system tray & hide on startup
+	+ quit to save config
+	+ nano ./.profile and at end barrier &
+	+ after good login as robin select autologin
+	+ reboot & should be able to auto login with barrier on
