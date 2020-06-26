@@ -39,7 +39,7 @@ def on_message(client, userdata, message):
 def on_log(client, userdata, level, buf):
     print("log: ",buf)
 
-broker_address = "192.168.200.137"
+broker_address = "192.168.200.37"
 print("Creating new instance")
 client = mqtt.Client("P1") # create a new instance
 print("Display log entries")
@@ -48,16 +48,16 @@ client.on_message = on_message # attach function to callback
 print("Connecting to broker")
 client.connect(broker_address) # connect to broker
 print("Publishing message to topic, SolarBatt") # Solar Batteries are Adc0
-client.publish("SolarBatt", Adc0, qos=2)
-time.sleep(2)
+client.publish("SolarBatt", Adc0, qos=1)
+time.sleep(5)
 print("Publishing message to topic, GarageBatt") # Garage Batteries are Adc1
-client.publish("GarageBatt", Adc1, qos=2)
-time.sleep(2)
+client.publish("GarageBatt", Adc1, qos=1)
+time.sleep(5)
 print("Publishing message to topic, HamBatt") # Ham Battery is Adc2
-client.publish("HamBatt", Adc2, qos=2)
-time.sleep(2)
+client.publish("HamBatt", Adc2, qos=1)
+time.sleep(5)
 print("Publishing message to topic, SpareBatt") # Spare Battery is Adc3
-client.publish("SpareBatt", Adc3, qos=2)
+client.publish("SpareBatt", Adc3, qos=1)
 #print("Publishing message to topic, Batt04") # Batteries are Adc4
 #client.publish("SolarBatt", Adc0)
 #print("Publishing message to topic, Batt05") # Batteries are Adc5
