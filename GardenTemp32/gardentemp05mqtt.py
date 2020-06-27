@@ -82,7 +82,7 @@ for row in cursor:
     print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
 
 print ()
-print ("Display last row")
+print ("Display last row using select individual columns")
 for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentdate desc, currentime desc limit 1"):
     print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
 print ()
@@ -103,7 +103,7 @@ def on_message(client, userdata, message):
 def on_log(client, userdata, level, buf):
     print("log: ",buf)
 
-broker_address = "192.168.200.137"
+broker_address = "192.168.200.37"
 print("Creating new instance")
 client = mqtt.Client("P1") # create a new instance
 print("Display log entries")
@@ -112,9 +112,9 @@ client.on_message = on_message # attach function to callback
 print("Connecting to broker")
 client.connect(broker_address) # connect to broker
 print("Publishing message to topic, OutTemp")
-client.publish("OutTemp", temp2)
+client.publish("OutTemp", temp2, qos=1)
 print("Publishing message to topic, InTemp")
-client.publish("InTemp", temp1)
+client.publish("InTemp", temp1, qos=1)
 
 
 db.close()
