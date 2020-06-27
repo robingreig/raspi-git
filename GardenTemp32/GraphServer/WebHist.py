@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  appDHT_v1.py
@@ -19,41 +19,48 @@ from flask import Flask, render_template, send_file, make_response, request
 app = Flask(__name__)
 
 import sqlite3
-conn=sqlite3.connect('gardentemp.db', check_same_thread=False)
-curs=conn.cursor()
 
 # Retrieve LAST data from database
 def getLastData():
-	for row in curs.execute("SELECT * FROM coldframe ORDER BY currentime DESC LIMIT 1"):
-		time = str(row[0])
+	conn=sqlite3.connect('gardentemp.db', check_same_thread=False)
+	curs=conn.cursor()
+	for row in curs.execute("SELECT * FROM coldframe ORDER BY currentdate DESC, currentime DESC  LIMIT 1"):
+		time = str(row[4])
+		print (time)
 		temp = row[1]
 		hum = row[2]
-	#conn.close()
+	conn.close()
 	return time, temp, hum
 
 
 def getHistData (numSamples):
-	curs.execute("SELECT * FROM coldframe ORDER BY currentime DESC LIMIT "+str(numSamples))
+	conn=sqlite3.connect('gardentemp.db', check_same_thread=False)
+	curs=conn.cursor()
+	curs.execute("SELECT * FROM coldframe ORDER BY currentdate DESC, currentime DESC LIMIT "+str(numSamples))
 	data = curs.fetchall()
 	dates = []
 	temps = []
 	hums = []
 	for row in reversed(data):
-		dates.append(row[0])
+		dates.append(row[3])
 		temps.append(row[1])
 		hums.append(row[2])
+	conn.close()
 	return dates, temps, hums
 
 def maxRowsTable():
+	conn=sqlite3.connect('gardentemp.db', check_same_thread=False)
+	curs=conn.cursor()
 	for row in curs.execute("select COUNT(insidetemp) from  coldframe"):
 		maxNumberRows=row[0]
+	conn.close()
 	return maxNumberRows
 
 #initialize global variables
 global numSamples
 numSamples = maxRowsTable()
-if (numSamples > 101):
-	numSamples = 100
+if (numSamples > 151):
+	numSamples = 150
 	
 	
 # main route 
@@ -95,7 +102,7 @@ def plot_temp():
 	ys = temps
 	fig = Figure()
 	axis = fig.add_subplot(1, 1, 1)
-	axis.set_title("Temperature [°C]")
+	axis.set_title("Inside Temperature [°C]")
 	axis.set_xlabel("Samples")
 	axis.grid(True)
 	xs = range(numSamples)
@@ -113,7 +120,7 @@ def plot_hum():
 	ys = hums
 	fig = Figure()
 	axis = fig.add_subplot(1, 1, 1)
-	axis.set_title("Humidity [%]")
+	axis.set_title("Outside Temperature [°C]")
 	axis.set_xlabel("Samples")
 	axis.grid(True)
 	xs = range(numSamples)

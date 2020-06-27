@@ -20,7 +20,7 @@ def getData():
 	conn=sqlite3.connect('/home/robin/gardentemp.db')
 	curs=conn.cursor()
 
-	for row in curs.execute("SELECT * FROM coldframe ORDER BY currentime DESC LIMIT 1"):
+	for row in curs.execute("SELECT * FROM coldframe ORDER BY currentdate DESC, currentime desc LIMIT 1"):
 		time = str(row[4])
 		temp1 = str(row[1])
 		temp2 = str(row[2])

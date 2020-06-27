@@ -10,7 +10,7 @@ import glob
 # Open Database Connection
 # ===========================================================================
 
-db = sqlite3.connect('gardentemp.db')
+db = sqlite3.connect('/home/robin/gardentemp.db')
 
 # Prepare a cursor
 cursor = db.cursor()
