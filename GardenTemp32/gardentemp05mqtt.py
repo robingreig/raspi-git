@@ -92,6 +92,10 @@ for row in cursor.execute("Select * from coldframe order by currentdate desc, cu
     print ("temp1 = Black Temp = insidetemp = ",temp1)
     temp2 = row[2]
     print ("temp2 = Red Temp = outsidetemp= ",temp2)
+    curr1 = row[4]
+    print ("Time= ",curr1)
+    curr2 = row[3]
+    print ("Date= ",curr2)
 
 #### upload temps to mqtt broker
 def on_message(client, userdata, message):
@@ -111,8 +115,10 @@ client.on_log = on_log # display log entries
 client.on_message = on_message # attach function to callback
 print("Connecting to broker")
 client.connect(broker_address) # connect to broker
+time.sleep(1)
 print("Publishing message to topic, OutTemp")
 client.publish("OutTemp", temp2, qos=1)
+time.sleep(1)
 print("Publishing message to topic, InTemp")
 client.publish("InTemp", temp1, qos=1)
 
