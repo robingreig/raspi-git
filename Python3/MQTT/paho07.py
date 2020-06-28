@@ -21,9 +21,9 @@ print("Connecting to broker")
 client.connect(broker_address) # connect to broker
 client.loop_start() # start the loop
 print("Subscribing to topic, TestTemp")
-client.subscribe("TestTemp")
-time.sleep(4)
+client.subscribe("TestTemp", qos = 2)
+time.sleep(1)
 print("Publishing message to topic", "TestTemp")
-client.publish("TestTemp","25")
+client.publish("TestTemp","25", qos = 2)
 time.sleep(4) # wait
 client.loop_stop() # stop the loop
