@@ -62,16 +62,16 @@ while not client.connected_flag:
 
 print("In Main Loop")
 print("Publishing message to topic, SolarBatt") # Solar Batteries are Adc0
-client.publish("SolarBatt", Adc0, qos=1)
+client.publish("SolarBatt", Adc0, qos=2)
 time.sleep(1)
 print("Publishing message to topic, GarageBatt") # Garage Batteries are Adc1
-client.publish("GarageBatt", Adc1, qos=1)
+client.publish("GarageBatt", Adc1, qos=2)
 time.sleep(1)
 print("Publishing message to topic, HamBatt") # Ham Battery is Adc2
-client.publish("HamBatt", Adc2, qos=1)
+client.publish("HamBatt", Adc2, qos=2)
 time.sleep(1)
 print("Publishing message to topic, SpareBatt") # Spare Battery is Adc3
-client.publish("SpareBatt", Adc3, qos=1)
+client.publish("SpareBatt", Adc3, qos=2)
 #time.sleep(1)
 #print("Publishing message to topic, Batt04") # Batteries are Adc4
 #client.publish("SolarBatt", Adc0)
