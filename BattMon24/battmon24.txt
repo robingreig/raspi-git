@@ -32,8 +32,10 @@ every publish and it seems to be working OK
 for the connect method?
 > Keepalive is only the time period for the pings
 > So I kept reading and read about the loop() function.
-> I updated battmon24pub05.py to battmon24pub06.py using the 
-loop funtion and mqtt37.local rather than ip address
+> I updated battmon24pub05.py to battmon24pub06.py
+     > using the loop funtion
+     > mqtt37.local rather than ip address
+     > changed back to qos = 2 and seems to be working OK
 
 
 
