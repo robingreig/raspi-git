@@ -93,7 +93,7 @@ if DEBUG > 0:
   print ("Display temp rows using select *")
 for row in cursor.execute("Select * from coldframe order by currentdate desc, currentime desc limit 1"):
   temp1 = row[1]
-  print ("temp1 = Black Temp = insidetemp = ",temp1)
+  print ("\ntemp1 = Black Temp = insidetemp = ",temp1)
   temp2 = row[2]
   print ("temp2 = Red Temp = outsidetemp= ",temp2)
   curr1 = row[4]
@@ -104,8 +104,8 @@ for row in cursor.execute("Select * from coldframe order by currentdate desc, cu
 #### upload temps to mqtt broker
 
 
-#broker_address = "mqtt37.local"
-broker_address = "192.168.200.37"
+broker_address = "mqtt37.local"
+#broker_address = "192.168.200.37"
 print("Creating new instance & starting logging")
 logging.basicConfig(level=logging.INFO) # use DEBUG, INFO, WARNING
 
