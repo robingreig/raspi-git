@@ -3,6 +3,7 @@
 import os
 import time
 import paho.mqtt.client as mqtt
+import planterMoistureADC01
 
 time.sleep(1)
 ch0 = open("/home/robin/CurrentADC0", "r")
