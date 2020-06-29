@@ -115,7 +115,7 @@ mqtt.Client.connected_flag=False # create flag in class
 
 broker_address = "mqtt37.local"
 print("Creating new instance")
-client = mqtt.Client("P1") # create a new instance
+client = mqtt.Client("P1") # create a new instance for first topic
 print("Display log entries")
 client.on_log = on_log # display log entries
 client.on_connect = on_connect # bind callback function
@@ -131,7 +131,32 @@ while not client.connected_flag:
 print("In Main Loop")
 print("Publishing message to topic, OutTemp")
 client.publish("OutTemp", temp2, qos=2)
-time.sleep(5)
+#time.sleep(5)
+#print("Publishing message to topic, InTemp")
+#client.publish("InTemp", temp1, qos=2)
+
+print("Stopping the loop")
+client.loop_stop() # stop the loop
+print("Disconnecting")
+client.disconnect() # disconnect
+
+client = mqtt.Client("P2") # create a new instance
+print("Display log entries")
+client.on_log = on_log # display log entries
+client.on_connect = on_connect # bind callback function
+
+client.loop_start() # start the loop
+print("Connecting to broker:",broker_address)
+client.connect(broker_address) # connect to broker
+
+while not client.connected_flag:
+  print("In Wait Loop")
+  time.sleep(1)
+
+print("In Main Loop")
+#print("Publishing message to topic, OutTemp")
+#client.publish("OutTemp", temp2, qos=2)
+#time.sleep(5)
 print("Publishing message to topic, InTemp")
 client.publish("InTemp", temp1, qos=2)
 
