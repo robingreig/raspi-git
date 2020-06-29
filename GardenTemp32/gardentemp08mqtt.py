@@ -23,6 +23,7 @@ cursor = db.cursor()
 
 # Add a delay for boot
 time.sleep(1)
+DEBUG = 0
 
 # Assign one wire devices
 base_dir = '/sys/bus/w1/devices/'
@@ -65,11 +66,12 @@ def read_temp2():
         temp_c2 = round((float(temp_string) / 1000.0),2)
         return temp_c2
 
-print ("Black Temp: ", (read_temp1()))
-print ("Red Temp: ", (read_temp2()))
-  	
+if DEBUG > 0:
+  print ("Black Temp: ", (read_temp1()))
+  print ("Red Temp: ", (read_temp2()))
+
 time.sleep(1)
-  
+
 try:
   cursor.execute('''INSERT INTO coldframe(insidetemp, outsidetemp, currentdate, currentime)
 	VALUES(?,?,date('now'), time('now'))''', (read_temp1(), read_temp2()))
@@ -77,32 +79,34 @@ try:
 except:
   db.rollback()
 
-print ("Wrote a new row to the database")
-for row in cursor:
-    # row[0] returns the first column in the query = currentdate?, row[1] returns currentime?.
-    print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+if DEBUG > 0:
+  print ("Wrote a new row to the database")
+  for row in cursor:
+      # row[0] returns the first column in the query = currentdate?, row[1] returns currentime?.
+      print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
 
-print ()
-print ("Display last row using select individual columns")
-for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentdate desc, currentime desc limit 1"):
-    print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
-print ()
-print ("Display temp rows using select *")
+  print ()
+  print ("Display last row using select individual columns")
+  for row in cursor.execute("Select currentdate, currentime, insidetemp, outsidetemp from coldframe order by currentdate desc, currentime desc limit 1"):
+      print('{0} : {1} : {2} : {3}'.format(row[0], row[1], row[2], row[3]))
+  print ()
+  print ("Display temp rows using select *")
 for row in cursor.execute("Select * from coldframe order by currentdate desc, currentime desc limit 1"):
-    temp1 = row[1]
-    print ("temp1 = Black Temp = insidetemp = ",temp1)
-    temp2 = row[2]
-    print ("temp2 = Red Temp = outsidetemp= ",temp2)
-    curr1 = row[4]
-    print ("Time= ",curr1)
-    curr2 = row[3]
-    print ("Date= ",curr2)
+  temp1 = row[1]
+  print ("temp1 = Black Temp = insidetemp = ",temp1)
+  temp2 = row[2]
+  print ("temp2 = Red Temp = outsidetemp= ",temp2)
+  curr1 = row[4]
+  print ("Time= ",curr1)
+  curr2 = row[3]
+  print ("Date= ",curr2)
 
 #### upload temps to mqtt broker
 
 
-broker_address = "mqtt37.local"
-print("Creating new instance")
+#broker_address = "mqtt37.local"
+broker_address = "192.168.200.37"
+print("Creating new instance & starting logging")
 logging.basicConfig(level=logging.INFO) # use DEBUG, INFO, WARNING
 
 def on_log(client, userdata, level, buf):
@@ -130,25 +134,25 @@ client.on_connect = on_connect # bind callback function
 client.on_disconnect = on_disconnect # bind callback function
 client.on_publish = on_publish # bind callback function
 
-print("Connecting to broker:",broker_address)
+#logging.info("Connecting to broker:",broker_address)
+logging.info("Connecting to broker: "+str(broker_address))
 client.connect(broker_address) # connect to broker
 
 client.loop_start() # start the loop
 
 while not client.connected_flag:
-  print("In Wait Loop")
+  logging.info("In Wait Loop")
   time.sleep(1)
 
-print("In Main Loop")
-print("Publishing message to topic, OutTemp")
+logging.info("In Main Loop")
+logging.info("Publishing message to topic, OutTemp")
 client.publish("OutTemp", temp2, qos=2)
-time.sleep(1)
-print("Publishing message to topic, InTemp")
+time.sleep(2)
+logging.info("Publishing message to topic, InTemp")
 client.publish("InTemp", temp1, qos=2)
-
-print("Stopping the loop")
+time.sleep(2)
+logging.info("Stopping the loop")
 client.loop_stop() # stop the loop
-print("Disconnecting")
 client.disconnect() # disconnect
 
 db.close()
