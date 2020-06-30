@@ -53,9 +53,10 @@ print("Display log entries")
 client.on_log = on_log # display log entries
 client.on_connect=on_connect # bind callback function
 
-client.loop_start() # start the loop
 print("Connecting to broker ",broker_address)
 client.connect(broker_address) # connect to broker
+
+client.loop_start() # start the loop
 
 while not client.connected_flag:
   print("In Wait Loop")
@@ -64,13 +65,13 @@ while not client.connected_flag:
 print("In Main Loop")
 print("Publishing message to topic, SolarBatt") # Solar Batteries are Adc0
 client.publish("SolarBatt", Adc0, qos=2)
-time.sleep(1)
+time.sleep(5)
 print("Publishing message to topic, GarageBatt") # Garage Batteries are Adc1
 client.publish("GarageBatt", Adc1, qos=2)
-time.sleep(1)
+time.sleep(5)
 print("Publishing message to topic, HamBatt") # Ham Battery is Adc2
 client.publish("HamBatt", Adc2, qos=2)
-time.sleep(1)
+time.sleep(5)
 print("Publishing message to topic, SpareBatt") # Spare Battery is Adc3
 client.publish("SpareBatt", Adc3, qos=2)
 #time.sleep(1)
