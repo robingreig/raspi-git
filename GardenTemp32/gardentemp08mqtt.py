@@ -134,7 +134,6 @@ client.on_connect = on_connect # bind callback function
 client.on_disconnect = on_disconnect # bind callback function
 client.on_publish = on_publish # bind callback function
 
-#logging.info("Connecting to broker:",broker_address)
 logging.info("Connecting to broker: "+str(broker_address))
 client.connect(broker_address) # connect to broker
 
@@ -146,10 +145,12 @@ while not client.connected_flag:
 
 logging.info("In Main Loop")
 logging.info("Publishing message to topic, OutTemp")
-client.publish("OutTemp", temp2, qos=2)
+ret=client.publish("OutTemp", temp2, qos=2)
+logging.info("Published return: "+str(ret))
 time.sleep(2)
 logging.info("Publishing message to topic, InTemp")
-client.publish("InTemp", temp1, qos=2)
+ret=client.publish("InTemp", temp1, qos=2)
+logging.info("Published return:"+str(ret))
 time.sleep(2)
 logging.info("Stopping the loop")
 client.loop_stop() # stop the loop
