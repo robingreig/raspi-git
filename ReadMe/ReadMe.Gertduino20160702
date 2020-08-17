@@ -1,8 +1,0 @@
-1) Moved all Battery Monitor files into their own BatteryMonitor directory
-1.1) Copied BatteryMonitor.2016.06.30 to BatteryMonitor.2016.07.02
-1.2) Reversed the polarity on the Battery Charger relay since I want it to charge when N/C or LOW
-
-2) Measure the current flow for Raspi model 1 & Gertduino ~ 500mA (450 - 480 mA)
-
-
-
