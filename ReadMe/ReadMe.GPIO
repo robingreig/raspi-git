@@ -1,7 +1,0 @@
-/usr/bin/gpio -g write 17 0 # Make sure it's off
-
-/usr/bin/gpio -g mode 17 out # Set to output mode
-
-/usr/bin/gpio -g write 17 1 # Turn on at 8am
-
-0 20 0 0 0 root /usr/bin/gpio -g write 17 0 # Turn off at 8pm
