@@ -1,8 +1,0 @@
-
-to show the properties of a table:
-describe table_name;
-
-to show the number of rows from the command line:
-sudo mysqlshow -u robin -pPassword --count database_name
-
-
