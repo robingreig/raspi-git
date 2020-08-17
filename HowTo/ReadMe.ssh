@@ -1,0 +1,7 @@
+1) To generate keys:
+	ssh-keygen
+
+2) To copy keys to another machine:
+	ssh-copy-id robin@raspi20.local
+
+
