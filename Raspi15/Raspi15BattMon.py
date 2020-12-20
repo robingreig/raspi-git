@@ -61,7 +61,3 @@ while True:
     print('Received value: {0}'.format(data.value))
 
   break
-
-
-
-
