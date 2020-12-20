@@ -25,7 +25,7 @@ GPIO.setup(pinNum,GPIO.OUT) # Replace pinNum with whatever pin you used, this se
 #====================================================================
 
 while True:
-# Read the Battery Voltage from BattMon1
+# Read the Battery Voltage from BattMon24
   def read_CurrentBatteryVoltage():
     f = open("/home/robin/Raspi15BatteryVoltage", "r")
     line1 = f.readlines()
