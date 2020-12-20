@@ -10,7 +10,7 @@ TEXT = 'The Battery Voltage program on Raspi15 has run'
 
 # Gmail Sign In
 gmail_sender = 'kananaskis@gmail.com'
-gmail_passwd = 'glzapvguriwjqfur'
+gmail_passwd = 'gjodocqcmaqozrgq'
 
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.login(gmail_sender, gmail_passwd)
