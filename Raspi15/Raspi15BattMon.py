@@ -14,7 +14,7 @@ from Adafruit_IO import Client
 #====================================================================
 # Set Variables
 #====================================================================
-DEBUG = 1
+DEBUG = 0
 pinNum = 23
 GPIO.setwarnings(False) # Don't display the warnings
 GPIO.setmode(GPIO.BCM) # Numbering scheme that corresponds to breakout board and pin layout
