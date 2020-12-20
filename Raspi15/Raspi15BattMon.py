@@ -55,7 +55,7 @@ while True:
   aio.send('raspi15-voltage', BattVolts)
   if DEBUG > 0:
     print('Raspi15 Battery Voltage sent to aio: ', BattVolts)
-# Receive data back from Adafruit AIO to confirm
+# Receive data back from Adafruit AIO to verify send
   if DEBUG > 0:
     data = aio.receive('raspi15-voltage')
     print('Received value: {0}'.format(data.value))
