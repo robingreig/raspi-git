@@ -43,7 +43,4 @@ git remote set-url origin git@github.com:robingreig/raspi-git.git
 
 ***** good website: rogerdudler.github.io/git-guide
 
-Added BattMon1 to ssh list
-Added Pi200 to ssh list
-* had to change the remote url
-Added Gertduino2 to ssh list
+
