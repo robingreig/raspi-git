@@ -50,14 +50,12 @@ while True:
 #    subprocess.call(["sudo", "shutdown", "-r", "now"])
 #    subprocess.call(["sudo", "shutdown", "-k", "now"])
 #    subprocess.call(["sudo", "poweroff"])
+# Send voltage to Adafruit AIO
   aio = Client('robingreig', 'd0c57dc7661d4b2e8a1868133f9e162c')
   aio.send('raspi15-voltage', BattVolts)
   if DEBUG > 0:
     print('Raspi15 Battery Voltage sent to aio: ', BattVolts)
-# Retrieve the most recent value from the feed 'Foo'.
-# Access the value by reading the `value` property on the returned Data object.
-# Note that all values retrieved from IO are strings so you might need to convert
-# them to an int or numeric type if you expect a number.
+# Receive data back from Adafruit AIO to confirm
   if DEBUG > 0:
     data = aio.receive('raspi15-voltage')
     print('Received value: {0}'.format(data.value))
