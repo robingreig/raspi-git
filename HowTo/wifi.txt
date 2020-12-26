@@ -16,3 +16,6 @@ sudo ifconfig wlan0 down
 sleep 30
 sudo ifconfig wlan0 up
 
+to scan for all networks and return them and signal strength
+sudo iw dev wlan0 scan | egrep "signal:|SSID:" | sed -e "s/\tsignal: //" -e "s/\tSSID: //" | awk '{ORS = (NR % 2 == 0)? "\n" : " "; print}' | sort
+
