@@ -11,4 +11,7 @@ sudo systemctl enable nodered.service
 
 npm install node-red-dashboard
 
+pip3 install paho-mqtt
+In order to send temps to mqtt37.local
+
 
