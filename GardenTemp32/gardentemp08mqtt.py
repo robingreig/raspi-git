@@ -82,7 +82,7 @@ time.sleep(1)
 
 try:
   cursor.execute('''INSERT INTO coldframe(insidetemp, outsidetemp, currentdate, currentime)
-	VALUES(?,?,date('now'), time('now'))''', (read_temp1(), read_temp2()))
+	VALUES(?,?,date('now'), time('now', 'localtime'))''', (read_temp1(), read_temp2()))
   db.commit()
 except:
   db.rollback()
