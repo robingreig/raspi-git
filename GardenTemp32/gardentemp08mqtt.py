@@ -23,7 +23,15 @@ cursor = db.cursor()
 
 # Add a delay for boot
 time.sleep(1)
+# DEBUG = 0 is no debugging or logging
+# DEBUG > 0 is output
 DEBUG = 0
+# LOG = 0 is no logging
+# LOG > 0 is logging
+LOG = 0
+# Setup logging
+logging.basicConfig(filename='/home/robin/logfile.log', level=logging.INFO) # use DEBUG, INFO, WARNING
+
 
 # Assign one wire devices
 base_dir = '/sys/bus/w1/devices/'
@@ -79,7 +87,7 @@ try:
 except:
   db.rollback()
 
-if DEBUG > 0:
+if DEBUG > 1:
   print ("Wrote a new row to the database")
   for row in cursor:
       # row[0] returns the first column in the query = currentdate?, row[1] returns currentime?.
@@ -92,39 +100,51 @@ if DEBUG > 0:
   print ()
   print ("Display temp rows using select *")
 for row in cursor.execute("Select * from coldframe order by currentdate desc, currentime desc limit 1"):
-  temp1 = row[1]
-  print ("\ntemp1 = Black Temp = insidetemp = ",temp1)
-  temp2 = row[2]
-  print ("temp2 = Red Temp = outsidetemp= ",temp2)
-  curr1 = row[4]
-  print ("Time= ",curr1)
   curr2 = row[3]
-  print ("Date= ",curr2)
+  if LOG > 0:
+    logging.info("")
+    logging.info("Date = "+str(curr2))
+    print ("Date= ",curr2)
+  curr1 = row[4]
+  if LOG > 0:
+    logging.info("Time = "+str(curr1))
+    print ("Time= ",curr1)
+  temp1 = row[1]
+  if LOG > 0:
+    print ("\ntemp1 = Black Temp = insidetemp = ",temp1)
+    logging.info("temp1 = Black Temp = insidetemp = "+str(temp1))
+  temp2 = row[2]
+  if LOG > 0:
+    print ("temp2 = Red Temp = outsidetemp= ",temp2)
+    logging.info("temp2 = Red Temp = outsidetemp = "+str(temp2))
 
 #### upload temps to mqtt broker
 
 
 broker_address = "mqtt37.local"
 #broker_address = "192.168.200.37"
-print("Creating new instance & starting logging")
-logging.basicConfig(level=logging.INFO) # use DEBUG, INFO, WARNING
 
 def on_log(client, userdata, level, buf):
-  logging.info(buf)
+  if LOG > 0:
+    logging.info(buf)
 
 def on_connect(client, userdata, flags, rc):
   if rc==0:
     client.connected_flag=True # set flag
-    logging.info("connected OK")
+    if LOG > 0:
+      logging.info("connected OK")
   else:
-    logging.info("Bad Connection Returned Code = "+str(rc))
+    if LOG > 0:
+      logging.info("Bad Connection Returned Code = "+str(rc))
     client.loop_stop()
 
 def on_disconnect(client, userdata, rc):
-  logging.info("client disconnected OK")
+  if LOG > 0:
+    logging.info("client disconnected OK")
 
 def on_publish(client, userdata, mid):
-  logging.info("In on_pub callback mid = " +str(mid))
+  if LOG > 0:
+    logging.info("In on_pub callback mid = " +str(mid))
 
 mqtt.Client.connected_flag=False # create flag in class
 
@@ -133,26 +153,31 @@ client.on_log = on_log # display log entries
 client.on_connect = on_connect # bind callback function
 client.on_disconnect = on_disconnect # bind callback function
 client.on_publish = on_publish # bind callback function
-
-logging.info("Connecting to broker: "+str(broker_address))
+if LOG > 0:
+  logging.info("Connecting to broker: "+str(broker_address))
 client.connect(broker_address) # connect to broker
 
 client.loop_start() # start the loop
 
 while not client.connected_flag:
-  logging.info("In Wait Loop")
+  if LOG > 0:
+    logging.info("In Wait Loop")
   time.sleep(1)
-
-logging.info("In Main Loop")
-logging.info("Publishing message to topic, OutTemp")
+if LOG > 0:
+  logging.info("In Main Loop")
+  logging.info("Publishing message to topic, OutTemp")
 ret=client.publish("OutTemp", temp2, qos=2)
-logging.info("Published return: "+str(ret))
+if LOG > 0:
+  logging.info("Published return: "+str(ret))
 time.sleep(2)
-logging.info("Publishing message to topic, InTemp")
+if LOG > 0:
+  logging.info("Publishing message to topic, InTemp")
 ret=client.publish("InTemp", temp1, qos=2)
-logging.info("Published return:"+str(ret))
+if LOG > 0:
+  logging.info("Published return:"+str(ret))
 time.sleep(2)
-logging.info("Stopping the loop")
+if LOG > 0:
+  logging.info("Stopping the loop")
 client.loop_stop() # stop the loop
 client.disconnect() # disconnect
 
