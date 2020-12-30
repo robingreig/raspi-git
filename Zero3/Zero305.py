@@ -37,8 +37,8 @@ client.on_message=on_message # attach function to callback
 print("Connecting to broker")
 client.connect(broker_address) # connect to broker
 #client.loop_start() # start the loop
-print("Subscribing to topic, LED01")
-client.subscribe("LED01", qos = 2)
+print("Subscribing to topic, Irricana/StoveFan")
+client.subscribe("Irricana/StoveFan", qos = 2)
 time.sleep(1)
 #client.loop_stop() # stop the loop
 client.loop_forever() # start the loop
