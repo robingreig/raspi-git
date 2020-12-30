@@ -1,0 +1,8 @@
+In crontab
+
+@reboot
+
+To sleep first
+@reboot sleep 60 && run program
+
+
