@@ -15,11 +15,11 @@ GPIO.output(pinNum,GPIO.LOW) # set pinNum low to ensure fan off
 def on_message(client, userdata, message):
     print("Message received ", str(message.payload.decode("utf-8")))
     if str(message.payload.decode("utf-8")) == "true":
-      print("********** Fan is on")
-      GPIO.output(pinNum,GPIO.HIGH) # turn GPIO On & Fan On
-    if str(message.payload.decode("utf-8")) == "false":
       print("********** Fan is off")
       GPIO.output(pinNum,GPIO.LOW) # turn GPIO Off & Fan Off
+    if str(message.payload.decode("utf-8")) == "false":
+      print("********** Fan is on")
+      GPIO.output(pinNum,GPIO.HIGH) # turn GPIO On & Fan On
     print("Message topic = ", message.topic)
     print("Message qos = ", message.qos)
     print("Message retain flag = ", message.retain)

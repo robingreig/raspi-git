@@ -1,0 +1,19 @@
+1) Standard lite install & enable SSH & SPI
+2) sudo apt install git & git clone
+3) sudo apt install python3-pip -y
+4) pip3 install spidev
+5) pip3 install paho-mqtt
+6) sudo apt install wiringpi -y to enable gpio readall
+7) sudo pip3 install gpiozero to enable pinout
+8) sudo apt install mosquitto-clients -y
+
+Stop Bluetooth
+sudo nano /boot/config.txt
+dtoverlay=pi3-disable-bt
+
+sudo systemctl disable hciuart.service
+sudo systemctl disable bluealsa.service
+(responded bluealsa.service not found)
+sudo systemctl disable bluetooth.service
+
+
