@@ -1,0 +1,13 @@
+1) 2020.12.20 Lite
+2) sudo raspi-conf for password, keyboard, time, wifi, ssh
+3) ifconfig to check mac b8:27:eb:ce:9d:da
+4) sudo apt update && sudo apt upgrade -y
+5) set dhcp reservation and check after reboot
+6) sudo adduser robin
+7) sudo usermod -aG group,group robin
+8) turn off & unplug keyboard
+9) ssh-keygen & copy to github
+10) sudo apt install git python3-pip
+11) git config --global user.name & email
+12) pip3 install paho-mqtt
+
