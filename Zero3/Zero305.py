@@ -9,17 +9,17 @@ pinNum = 24
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM) # numbering scheme for breakout board
 GPIO.setup(pinNum,GPIO.OUT) # set pinNum as output
-GPIO.output(pinNum,GPIO.HIGH) # set pinNum high to ensure fan off
+GPIO.output(pinNum,GPIO.LOW) # set pinNum low to ensure fan off
 
 #####
 def on_message(client, userdata, message):
     print("Message received ", str(message.payload.decode("utf-8")))
     if str(message.payload.decode("utf-8")) == "true":
-      print("********** Fan is off")
-      GPIO.output(pinNum,GPIO.HIGH) # turn GPIO On & Fan Off
-    if str(message.payload.decode("utf-8")) == "false":
       print("********** Fan is on")
-      GPIO.output(pinNum,GPIO.LOW) # turn GPIO Off & Fan On
+      GPIO.output(pinNum,GPIO.HIGH) # turn GPIO On & Fan On
+    if str(message.payload.decode("utf-8")) == "false":
+      print("********** Fan is off")
+      GPIO.output(pinNum,GPIO.LOW) # turn GPIO Off & Fan Off
     print("Message topic = ", message.topic)
     print("Message qos = ", message.qos)
     print("Message retain flag = ", message.retain)
