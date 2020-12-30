@@ -8,7 +8,7 @@ blockheat16	= PB BlockHeater
 tempi17		= PB Office Temperature Monitor @ SAIT
 arduino18	= PB Arduino / Raspi @ SAIT
 
-raspi20		= P2 This raspi
+raspi20		= P2 ssh gateway
 raspi21		= P2 With wifi dongle
 arduino23	= P2 APRX Battery monitor / Arduino
 battmon24	= P2 Garage Battery Monitor
@@ -27,10 +27,14 @@ raspi38		= P3B+
 39?
 
 breadboard40	= Pi 4, 4GB Breadboard
-raspi41		= Pi 4, 4GB Was old downstairs Desktop
+blockheat41	= Pi 4, 4GB New Blockheater
 desktop49	= Pi 4, 8GB new downstairs Desktop
+pi400		= Pi400 Desktop
 
-mqtt50		= ZeroW, GardenWater Monitor
+zero2		= old mqtt50 = ZeroW, GardenWater Monitor
+zero3		= Stove Fan mqtt
+zero4		= Tiffany Lamp mqtt
+
 
 SMSCalendar	= Pi Zero @ SAIT -p22201 (10.248.128.33)
 SMSDatabase	= SMS Database @ SAIT -p22202 (10.248.128.31)
