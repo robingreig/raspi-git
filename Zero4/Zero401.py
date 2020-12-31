@@ -29,7 +29,7 @@ def on_log(client, userdata, level, buf):
     print("log: ",buf)
 #####
 
-broker_address = "192.168.200.37"
+broker_address = "192.168.200.21"
 print("Creating new instance")
 client = mqtt.Client("Z4") # create a new instance
 client.on_log=on_log
@@ -37,8 +37,8 @@ client.on_message=on_message # attach function to callback
 print("Connecting to broker")
 client.connect(broker_address) # connect to broker
 #client.loop_start() # start the loop
-print("Subscribing to topic, Garden/Pump1")
-client.subscribe("Garden/Pump1", qos = 2)
+print("Subscribing to topic, Irricana/TiffanyLamp")
+client.subscribe("Irricana/TiffanyLamp", qos = 2)
 time.sleep(1)
 #client.loop_stop() # stop the loop
 client.loop_forever() # start the loop
