@@ -45,10 +45,10 @@ def on_connect(client, userdata, flags, rc):
 
 mqtt.Client.connected_flag=False # create flag in class
 
-#broker_address = "192.168.200.37"
-broker_address = "mqtt37.local"
+broker_address = "192.168.200.21"
+#broker_address = "mqtt21.local"
 print("Creating new instance")
-client = mqtt.Client("P1") # create a new instance
+client = mqtt.Client("BM24") # create a new instance
 print("Display log entries")
 client.on_log = on_log # display log entries
 client.on_connect=on_connect # bind callback function
