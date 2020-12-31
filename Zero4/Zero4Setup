@@ -11,4 +11,7 @@
 11) git config --global user.name & email
 12) git remote set-url origin git@github.com:robingreig/raspi-git.git
 13) pip3 install paho-mqtt
+14) pip3 install rpi.gpio
+15) ssh-copy-id from pi400
+16) 
 
