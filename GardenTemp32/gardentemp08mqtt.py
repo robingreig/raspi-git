@@ -121,8 +121,8 @@ for row in cursor.execute("Select * from coldframe order by currentdate desc, cu
 #### upload temps to mqtt broker
 
 
-broker_address = "mqtt37.local"
-#broker_address = "192.168.200.37"
+#broker_address = "mqtt21.local"
+broker_address = "192.168.200.21"
 
 def on_log(client, userdata, level, buf):
   if LOG > 0:
