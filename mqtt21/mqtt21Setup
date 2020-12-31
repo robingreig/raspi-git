@@ -1,4 +1,8 @@
 1) 2020.12.20 Raspbian mid setup
 2) Install Node-Red & Dashboard
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+cd ./.node-red
+npm install node-red-dashboard
 3) sudo apt install mosquitto mosquitto-clients
+
 4) 
