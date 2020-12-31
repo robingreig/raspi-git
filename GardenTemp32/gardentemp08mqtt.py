@@ -165,14 +165,14 @@ while not client.connected_flag:
   time.sleep(1)
 if LOG > 0:
   logging.info("In Main Loop")
-  logging.info("Publishing message to topic, OutTemp")
-ret=client.publish("OutTemp", temp2, qos=2)
+  logging.info("Publishing message to topic, Garden/OutTemp")
+ret=client.publish("Garden/OutTemp", temp2, qos=2)
 if LOG > 0:
   logging.info("Published return: "+str(ret))
 time.sleep(2)
 if LOG > 0:
-  logging.info("Publishing message to topic, InTemp")
-ret=client.publish("InTemp", temp1, qos=2)
+  logging.info("Publishing message to topic, Garden/InTemp")
+ret=client.publish("Garden/InTemp", temp1, qos=2)
 if LOG > 0:
   logging.info("Published return:"+str(ret))
 time.sleep(2)
