@@ -1,0 +1,4 @@
+to install the paho-mqtt client:
+pip3 install paho-mqtt
+
+
