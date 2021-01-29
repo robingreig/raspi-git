@@ -29,7 +29,7 @@ def on_log(client, userdata, level, buf):
     print("log: ",buf)
 #####
 
-broker_address = "192.168.200.37"
+broker_address = "192.168.200.21"
 print("Creating new instance")
 client = mqtt.Client("Z3") # create a new instance
 client.on_log=on_log

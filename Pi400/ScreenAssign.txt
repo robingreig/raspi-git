@@ -31,9 +31,9 @@ blockheat41	= Pi 4, 4GB New Blockheater
 desktop49	= Pi 4, 8GB new downstairs Desktop
 pi400		= Pi400 Desktop
 
-zero2		= old mqtt50 = ZeroW, GardenWater Monitor
-zero3		= Stove Fan mqtt
-zero4		= Tiffany Lamp mqtt
+zero2		= ZeroW, GardenWater Monitor
+zero3		= ZeroW, Stove Fan mqtt
+zero4		= ZeroW, Tiffany Lamp mqtt
 
 
 SMSCalendar	= Pi Zero @ SAIT -p22201 (10.248.128.33)
