@@ -6,7 +6,7 @@ import smtplib
 
 TO = 'robin.greig@calalta.com'
 SUBJECT = 'House Temp LOW'
-TEXT = 'The House Temp is below 15C'
+TEXT = 'The House Temp is below 10C'
 
 # Gmail Sign In
 gmail_sender = 'kananaskis@gmail.com'
