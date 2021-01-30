@@ -119,7 +119,7 @@ for row in cursor.execute("Select * from coldframe order by currentdate desc, cu
     logging.info("temp2 = Red Temp = outsidetemp = "+str(temp2))
 
 if temp2 < 20:
-  os.system("/home/robin/raspi-git/Python3/SMTP/sendanemail3.py")
+  os.system("/home/robin/raspi-git/Python3/SMTP/HouseTempLow.py")
 
 #### upload temps to mqtt broker
 
