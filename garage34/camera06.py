@@ -11,7 +11,7 @@ button = Button(23)
 
 # Debug = 0 to stop test messages, Debug = 1 to print
 Debug = 1
-Num_Pics = 1
+Num_Pics = 10
 Camera_Sleep = 1
 Picture_Cycle = 5
 
