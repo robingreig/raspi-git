@@ -8,16 +8,22 @@ from gpiozero import Button
 camera = PiCamera()
 button = Button(23)
 
-camera.start_preview()
-sleep(2)
+Debug = 0
+Camera_Sleep = 2
+Picture_Cycle = 5
+
+if Debug > 0:
+    camera.start_preview()
+
+sleep(Camera_Sleep)
 
 while True:
     try:
         button.wait_for_release()
-        for i in range(5):
+        for i in range(10):
             now = datetime.datetime.now()
-            camera.capture('/home/robin/Desktop/image,%s.jpg' % now)
-        sleep(5)
+            camera.capture('/home/robin/Pictures/image,%s.jpg' % now)
+        sleep(Picture_Cycle)
     except KeyboardInterrupt:
         camera.stop_preview()
         break
