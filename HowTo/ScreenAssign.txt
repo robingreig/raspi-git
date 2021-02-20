@@ -1,4 +1,6 @@
 zero2		= First Pi zero
+zero3		= Stove Fan / Office Light
+zero4		= Tiffany Lamp
 breadboard10	= OpenVPN, & breadboard
 aprx11		= APRX
 battmon12 	= Battery Monitor
@@ -20,4 +22,5 @@ raspi34		= MySQL server (new)
 alarm35		= CFMF Alarm 3
 breadboard36	= Arduino... soon to be breadboard36
 raspi37		= Raspi37 at MakerSpace
+blockheat41	= BlockHeater (new)
 
