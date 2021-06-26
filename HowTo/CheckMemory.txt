@@ -1,0 +1,6 @@
+free -h will show status of RAM
+Pi 4 1GB = 4HBMGCJ
+Pi 4 2GB = D9WHZ or SEC940
+Pi 4 4GB = D9WHV
+Pi 4 8GB = D9ZCL
+
