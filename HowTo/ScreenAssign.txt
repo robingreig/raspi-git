@@ -12,7 +12,7 @@ tempi17		= Office Temperature Monitor
 arduino18	= Office Arduino / Raspi
 raspi19		= Raspi19
 raspi20		= This raspi
-raspi21		= Office Motion Camera
+mqtt21		= Mosquitto mqtt server for house
 arduino23	= APRX Battery monitor / Arduino
 battmon24	= Battery Monitor (new)
 alarm31		= CFMF Alarm 1
@@ -21,6 +21,6 @@ alarm33		= CFMF Alarm 2
 garage34	= Camera in garage
 alarm35		= CFMF Alarm 3
 breadboard36	= Arduino... soon to be breadboard36
-raspi37		= Raspi37 at MakerSpace
+raingauge37	= Raingauge, was Raspi37 at MakerSpace
 blockheat41	= BlockHeater (new)
 
