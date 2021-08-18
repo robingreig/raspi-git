@@ -1,0 +1,10 @@
+if you need to open the database
+> .open database
+
+.headers on
+.mode csv
+.output 'Filename.csv'
+select * from raincount;
+.exit
+
+
