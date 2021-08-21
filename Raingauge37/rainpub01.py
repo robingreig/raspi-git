@@ -12,7 +12,7 @@ count = file.read()
 file.close()
 print("Raincount = ", count)
 print("count type = ",type(count))
-amount = int(count) * 0.245
+amount = round((int(count) * 0.245),2)
 print("Rain amount = ",amount)
 
 #### upload voltages to mqtt broker
