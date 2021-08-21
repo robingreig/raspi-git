@@ -1,0 +1,10 @@
+> raingauge03.py to read the toggles from the raingauge and store it in the sqlite3 database in my home directory
+
+> raincoount01.py queries the sqlite3 database and counts the number of toggles per day and store that count in raincount.txt
+
+> rainpub01.py takes the count * 0.245 and publishes it to mqtt topic Weather/Raingauge on mqtt21
+
+* Had to sudo apt install mosquitto-clients -y
+* and pip3 install paho-mqtt
+
+  
