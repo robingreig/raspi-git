@@ -4,7 +4,7 @@
 
 import smtplib
 
-TO = 'robin.greig@sait.ca'
+TO = 'robin.greig@calalta.com'
 SUBJECT = 'Raspi15 Battery Voltage Monitor!'
 TEXT = 'The Battery Voltage program on Raspi15 has run'
 

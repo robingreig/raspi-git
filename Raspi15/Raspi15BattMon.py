@@ -14,7 +14,7 @@ from Adafruit_IO import Client
 #====================================================================
 # Set Variables
 #====================================================================
-DEBUG = 0
+DEBUG = 1
 pinNum = 23
 GPIO.setwarnings(False) # Don't display the warnings
 GPIO.setmode(GPIO.BCM) # Numbering scheme that corresponds to breakout board and pin layout
@@ -39,7 +39,7 @@ while True:
   if DEBUG > 0:
     print ("Battery Voltage: ", (round(read_CurrentBatteryVoltage(),2)))
     print ("\tBattVolts: ", BattVolts)
-    os.system("/home/robin/raspi-git/Python3/SMTP/sendanemail3.py")
+  os.system("/home/robin/raspi-git/Python3/SMTP/sendanemail3.py")
   if BattVolts >= 27:
     GPIO.output(pinNum,GPIO.LOW) # Turn the Battery Charger off
     os.system("/home/robin/raspi-git/Python3/SMTP/Raspi15BattHigh.py")
