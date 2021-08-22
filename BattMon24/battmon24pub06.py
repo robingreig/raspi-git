@@ -63,23 +63,23 @@ while not client.connected_flag:
   time.sleep(1)
 
 print("In Main Loop")
-print("Publishing message to topic, Garage/SolarBatt") # Solar Batteries are Adc0
-client.publish("Garage/SolarBatt", Adc0, qos=2)
+print("Publishing message to topic, BlueOrange") # Adc0 = Blue CAT5 / Orange Wire = Solar Batteries
+client.publish("Garage/BlueOrange", Adc0, qos=2)
 time.sleep(5)
-print("Publishing message to topic, Garage/GarageBatt") # Garage Batteries are Adc1
-client.publish("Garage/GarageBatt", Adc1, qos=2)
+print("Publishing message to topic, BlueBlue") # Adc1 = Blue CAT5 / Blue Wire = Garage Batteries
+client.publish("Garage/BlueBlue", Adc1, qos=2)
 time.sleep(5)
-print("Publishing message to topic, Garage/HamBatt") # Ham Battery is Adc2
-client.publish("Garage/HamBatt", Adc2, qos=2)
+print("Publishing message to topic, WhiteBrown") # Adc2 = White CAT5 / Brown Wire = Ham Battery
+client.publish("Garage/WhiteBrown", Adc2, qos=2)
 time.sleep(5)
-print("Publishing message to topic, Garage/SpareBatt") # Spare Battery is Adc3
-client.publish("Garage/SpareBatt", Adc3, qos=2)
-#time.sleep(1)
-#print("Publishing message to topic, Batt04") # Batteries are Adc4
-#client.publish("SolarBatt", Adc0)
-#time.sleep(1)
-#print("Publishing message to topic, Batt05") # Batteries are Adc5
-#client.publish("SolarBatt", Adc0)
+print("Publishing message to topic, WhiteOrange") # Adc3 = White CAT5 / Orange Wire = Trailer Batteries
+client.publish("Garage/WhiteOrange", Adc3, qos=2)
+time.sleep(1)
+print("Publishing message to topic, WhiteGreen") # Adc4 = White CAT5 / Green Wire = 
+client.publish("Garage/WhiteGreen", Adc4, qos=2)
+time.sleep(1)
+print("Publishing message to topic, WhiteBlue") # Adc5 = White CAT5 / Blue Wire = 
+client.publish("Garage/WhiteBlue", Adc5, qos=2)
 print("Stopping the loop")
 client.loop_stop() # stop the loop
 print("Disconnecting")
