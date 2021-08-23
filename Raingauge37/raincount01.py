@@ -15,7 +15,7 @@ c = conn.cursor()
 
 #t = datetime.date.today()
 #print(t)
-c.execute("SELECT COUNT(*) from raincount where currentdate = date('now','localtime')")
+c.execute("SELECT COUNT(*) from raincount where currentdate = date('now','localtime','-1 day')")
 #c.execute("SELECT COUNT(*) from raincount where currentdate = %s" %(t))
 #c.execute("SELECT COUNT(*) from raincount where currentdate = '2021-08-19'")
 myresult = c.fetchone()
