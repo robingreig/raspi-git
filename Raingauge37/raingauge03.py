@@ -13,8 +13,8 @@ GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Debug = 0 to stop test messages, Debug = 1 to print
 Debug = 1
-# Reset counter to zero for raingauge count
-count = 0
+# Reset counter to one for raingauge count
+count = 1
 
 #conn = sqlite3.connect('rainguage.db')
 #c = conn.cursor()
