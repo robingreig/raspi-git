@@ -5,4 +5,5 @@ describe table_name;
 to show the number of rows from the command line:
 sudo mysqlshow -u robin -pPassword --count database_name
 
-
+to show records on a certain day between 2 times:
+select * from raincount where currentdate = date('now','localtime','-1 day') and currenttime between '00:00:01' and '06:00:00';
