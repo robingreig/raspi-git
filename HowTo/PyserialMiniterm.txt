@@ -1,0 +1,4 @@
+
+python -m serial.tools.miniterm /dev/ttyACM0
+
+Or just enter the command and chooses which port to access
