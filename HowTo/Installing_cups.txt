@@ -4,7 +4,13 @@ sudo reboot
 webrowser to localhost:631
 Add printer
 Have to login
+
 Install Samsung_SCX-4x28 printer
 Model: Samsung CLP-660ND - CUPS+Gutenprint v5.3.1 (en)
 Maintenance > Test Print
 
+Install Brother MFC-L8610CDW_series (first one)
+Model: Brother MFC-L8610CDW series, driverless, cups-filters 1.21.6 (en)
+
+No Banner
+Maintenance > Test Print
