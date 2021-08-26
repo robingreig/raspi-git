@@ -1,0 +1,5 @@
+1) Standard install
+2) Adduser Robin
+3) ssh-keygen
+4) add ket to github.com & change remote
+5) 
