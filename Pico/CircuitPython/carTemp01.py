@@ -1,19 +1,11 @@
 import board
-import time
 import busio
 import displayio
 import adafruit_displayio_ssd1306
 from adafruit_display_text import label
 from adafruit_bitmap_font import bitmap_font
-from adafruit_onewire.bus import OneWireBus
-from adafruit_ds18x20 import DS18X20
-
-
-# Initialize one-wire bus on board pin D5.
-ow_bus = OneWireBus(board.GP22)
-
-# Scan for sensors and grab the first one found.
-ds18 = DS18X20(ow_bus, ow_bus.scan()[0])
+import machine, onewire, ds18x20, time
+#import ssd1306py as lcd
 
 displayio.release_displays()
 
@@ -25,16 +17,34 @@ display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=64)
 
 font_file = "fonts/Roboto48.bdf"
 
-# Main loop to print the temperature every second.
+ds_pin = machine.Pin(22)
+ds_sensor = ds18x20.DS18X20(onewire.OneWire(ds_pin))
+ 
+roms = ds_sensor.scan()
+print('Found a ds18x20 device')
+
+# Draw a label
+#text = "32"
+#font = bitmap_font.load_font(font_file)
+#color=0xFFFF00
+#text_area = label.Label(font, text=text, color=color, x=25, y=25)
+
+#display.show(text_area)
+
 while True:
-    #print("Temperature: {0:0.1f}C".format(ds18.temperature))
-    temp = (ds18.temperature)
-    #print (temp)
+    #pass
+  ds_sensor.convert_temp()
+  time.sleep_ms(750)
+  lcd.init_i2c(27, 26, 128, 64, 1)
+  for rom in roms:
+    #print(ds_sensor.read_temp(rom))
+    temp = (ds_sensor.read_temp(rom))
+    print (temp)
     nofloat = ('%.0f' %temp)
     #print('%.0f' %temp)
-    #print(nofloat)
+    print(nofloat)
     font = bitmap_font.load_font(font_file)
     color=0xFFFF00
     text_area = label.Label(font, text=nofloat, color=color, x=25, y=25)
     display.show(text_area)
-    time.sleep(10)
+  time.sleep(2)

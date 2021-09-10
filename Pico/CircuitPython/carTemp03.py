@@ -37,4 +37,4 @@ while True:
     color=0xFFFF00
     text_area = label.Label(font, text=nofloat, color=color, x=25, y=25)
     display.show(text_area)
-    time.sleep(10)
+    time.sleep(2.0)
