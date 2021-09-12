@@ -17,7 +17,8 @@ ds18 = DS18X20(ow_bus, ow_bus.scan()[0])
 
 displayio.release_displays()
 
-i2c = busio.I2C (scl=board.GP5, sda=board.GP4) # This RPi Pico way to call I2C
+#i2c = busio.I2C (scl=board.GP5, sda=board.GP4) # This RPi Pico way to call I2C
+i2c = busio.I2C (scl=board.GP27, sda=board.GP26) # This RPi Pico way to call I2C
 
 display_bus = displayio.I2CDisplay (i2c, device_address = 0x3C) # The address of my Board
 
@@ -37,4 +38,4 @@ while True:
     color=0xFFFF00
     text_area = label.Label(font, text=nofloat, color=color, x=25, y=25)
     display.show(text_area)
-    time.sleep(10)
+    time.sleep(30)
