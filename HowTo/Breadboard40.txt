@@ -1,0 +1,47 @@
+1) Install raspbian & enable i2c & spi
+
+2) git clone raspi-git
+
+3) ssh-keygen to generate private keys
+
+4) follow ./raspi-git/HowTo/Using_git to add ssh key & change remote URL
+
+5) robin@breadboard40:~ $ sudo pip3 install --upgrade setuptools
+[sudo] password for robin: 
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Collecting setuptools
+  Downloading https://files.pythonhosted.org/packages/c4/c1/aed7dfedb18ea73d7713bf6ca034ab001a6425be49ffa7e79bbd5999f677/setuptools-58.0.4-py3-none-any.whl (816kB)
+    100% |████████████████████████████████| 819kB 527kB/s 
+Installing collected packages: setuptools
+  Found existing installation: setuptools 40.8.0
+    Not uninstalling setuptools at /usr/lib/python3/dist-packages, outside environment /usr
+    Can't uninstall 'setuptools'. No files were found to uninstall.
+Successfully installed setuptools-58.0.4
+
+6) robin@breadboard40:~ $ sudo pip3 install --upgrade adafruit-python-shell
+[sudo] password for robin: 
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Collecting adafruit-python-shell
+  Downloading https://www.piwheels.org/simple/adafruit-python-shell/adafruit_python_shell-1.3.3-py3-none-any.whl
+Collecting clint (from adafruit-python-shell)
+  Downloading https://www.piwheels.org/simple/clint/clint-0.5.1-py3-none-any.whl
+Collecting Adafruit-PlatformDetect (from adafruit-python-shell)
+  Downloading https://www.piwheels.org/simple/adafruit-platformdetect/Adafruit_PlatformDetect-3.15.3-py3-none-any.whl
+Collecting args (from clint->adafruit-python-shell)
+  Downloading https://www.piwheels.org/simple/args/args-0.1.0-py3-none-any.whl
+Installing collected packages: args, clint, Adafruit-PlatformDetect, adafruit-python-shell
+Successfully installed Adafruit-PlatformDetect-3.15.3 adafruit-python-shell-1.3.3 args-0.1.0 clint-0.5.1
+
+7) robin@breadboard40:~ $ wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
+--2021-09-19 10:58:26--  https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.111.133, 185.199.108.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.110.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4588 (4.5K) [text/plain]
+Saving to: ‘raspi-blinka.py’
+
+raspi-blinka.py     100%[===================>]   4.48K  --.-KB/s    in 0.004s  
+
+2021-09-19 10:58:26 (1.10 MB/s) - ‘raspi-blinka.py’ saved [4588/4588]
+
+8) sudo python3 raspi-blinka.py ***** after install will ask to reboot *****
