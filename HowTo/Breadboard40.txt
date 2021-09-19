@@ -45,3 +45,11 @@ raspi-blinka.py     100%[===================>]   4.48K  --.-KB/s    in 0.004s
 2021-09-19 10:58:26 (1.10 MB/s) - ‘raspi-blinka.py’ saved [4588/4588]
 
 8) sudo python3 raspi-blinka.py ***** after install will ask to reboot *****
+
+9) follow adafruit pdf: Adafruit 4-Channel ADC Breakouts
+robin@breadboard40:~ $ sudo pip3 install adafruit-circuitpython-ads1x15
+
+10) didn't run and so I had to run sudo i2cdetect -y 1 & found nothing. Replaced jumpers and saw 0x48
+
+11) 
+ 
