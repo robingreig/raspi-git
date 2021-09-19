@@ -1,0 +1,16 @@
+Just a quick post to let you know that you’ll need a new wiringPi for the Raspberry Pi 4B.
+
+To upgrade:
+
+cd /tmp
+wget https://project-downloads.drogon.net/wiringpi-latest.deb
+sudo dpkg -i wiringpi-latest.deb
+
+Check with:
+
+gpio -v
+and make sure it’s version 2.52. I’ll push the updated sources shortly.
+
+It will hopefully be part of the official release soon, but for now this will do.
+
+-Gordon
