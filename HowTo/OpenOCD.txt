@@ -1,0 +1,3 @@
+
+openocd -f interface/raspberrypi-swd.cfg -f target/rp2040.cfg -c "program serial03/build/serial03.elf verify reset exit"
+
