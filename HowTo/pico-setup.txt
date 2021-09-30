@@ -1,0 +1,13 @@
+sudo apt update && sudo apt upgrade -y
+
+wget https://raw.githubusercontent.com/raspberrypi/pico-setup/master/pico_setup.sh
+
+chmod +x ./pico_setup.sh
+
+./pico_setup.sh
+
+git  clone https://github.com/robingreig/raspi-git
+
+ssh-keygen - to generate key pairs
+
+
