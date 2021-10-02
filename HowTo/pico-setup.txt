@@ -10,4 +10,16 @@ git  clone https://github.com/robingreig/raspi-git
 
 ssh-keygen - to generate key pairs
 
+git config --global user.email "robin.greig@calalta.com"
+
+git config --global user.name "Robin Greig"
+
+git remote set-url origin git@github.com:robingreig/raspi-git.git
+
+add something to raspi-git and 
+	git add *
+	git commit -m "updated"
+	git push origin master
+And make sure this pi can update raspi-git
+
 
