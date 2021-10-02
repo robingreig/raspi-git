@@ -40,7 +40,8 @@ int main() {
           //printf("Voltage: %f V\n", result * conversion_factor);
 	  voltage0 = result * conversion_factor;
 	  //printf("Voltage variable: %f V\n", voltage);
-	  printf("%f V\n", voltage0);
+	  //printf("%f V\n", voltage0);
+	  printf("%f", voltage0);
 	}
 	//if (strcmp(buffer,"B") == 0) {
 	//  printf("4.54");
@@ -53,7 +54,8 @@ int main() {
           //printf("Voltage: %f V\n", result * conversion_factor);
 	  voltage1 = result * conversion_factor;
 	  //printf("Voltage variable: %f V\n", voltage);
-	  printf("%f V\n", voltage1);
+	  //printf("%f V\n", voltage1);
+	  printf("%f", voltage1);
 	}
 	if (strcmp(buffer, "C") == 0) {
           // Select ADC input 2 (GPIO27)
@@ -63,7 +65,8 @@ int main() {
           //printf("Voltage: %f V\n", result * conversion_factor);
 	  voltage2 = result * conversion_factor;
 	  //printf("Voltage variable: %f V\n", voltage);
-	  printf("%f V\n", voltage2);
+	  //printf("%f V\n", voltage2);
+	  printf("%f", voltage2);
 	}
         sleep_ms(500);
     }

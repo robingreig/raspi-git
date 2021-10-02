@@ -913,9 +913,9 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
  .data          0x00000000        0x0 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
  .bss           0x00000000        0x0 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
- .text          0x00000000        0x0 /tmp/cc8tq5zv.o
- .data          0x00000000        0x0 /tmp/cc8tq5zv.o
- .bss           0x00000000        0x0 /tmp/cc8tq5zv.o
+ .text          0x00000000        0x0 /tmp/ccCVo62a.o
+ .data          0x00000000        0x0 /tmp/ccCVo62a.o
+ .bss           0x00000000        0x0 /tmp/ccCVo62a.o
  .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
  .text          0x00000000       0x10 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-atexit.o)
@@ -1103,7 +1103,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
 .boot2          0x10000000      0x100
                 0x10000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 /tmp/cc8tq5zv.o
+ .boot2         0x10000000      0x100 /tmp/ccCVo62a.o
                 0x10000100                __boot2_end__ = .
                 0x00000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -1610,26 +1610,27 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
 .rodata         0x10006cd8      0x354
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .rodata*)
  .rodata.main.str1.4
-                0x10006cd8       0x12 CMakeFiles/serial04.dir/serial04.c.obj
- *fill*         0x10006cea        0x6 
+                0x10006cd8        0xe CMakeFiles/serial04.dir/serial04.c.obj
+ *fill*         0x10006ce6        0x2 
  .rodata.at_the_end_of_time
-                0x10006cf0        0x8 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x10006cf0                at_the_end_of_time
+                0x10006ce8        0x8 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x10006ce8                at_the_end_of_time
  .rodata.hardware_alarm_claim.str1.4
-                0x10006cf8       0x22 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- *fill*         0x10006d1a        0x2 
+                0x10006cf0       0x22 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ *fill*         0x10006d12        0x2 
  .rodata.hard_assertion_failure.str1.4
-                0x10006d1c        0xc CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10006d14        0xc CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .rodata.panic.str1.4
-                0x10006d28       0x10 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                                 0x12 (size before relaxing)
+                0x10006d20       0x12 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+ *fill*         0x10006d32        0x2 
  .rodata._vsnprintf
-                0x10006d38      0x1e0 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10006d34      0x1e0 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .rodata._etoa.part.0.str1.4
-                0x10006f18        0x9 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- *fill*         0x10006f21        0x3 
+                0x10006f14        0x9 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ *fill*         0x10006f1d        0x3 
  .rodata._ftoa.str1.4
-                0x10006f24        0xc CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10006f20        0xc CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ *fill*         0x10006f2c        0x4 
  .rodata.pow10.5382
                 0x10006f30       0x50 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .rodata.__bi_44
@@ -1941,7 +1942,7 @@ LOAD CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_standa
 LOAD CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
 LOAD CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
 LOAD CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
-LOAD /tmp/cc8tq5zv.o
+LOAD /tmp/ccCVo62a.o
 LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libm.a
 START GROUP
@@ -2034,7 +2035,7 @@ OUTPUT(serial04.elf elf32-littlearm)
  .ARM.attributes
                 0x0000064e       0x32 CMakeFiles/serial04.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_adc/adc.c.obj
  .ARM.attributes
-                0x00000680       0x22 /tmp/cc8tq5zv.o
+                0x00000680       0x22 /tmp/ccCVo62a.o
  .ARM.attributes
                 0x000006a2       0x1e /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
