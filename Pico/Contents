@@ -1,0 +1,9 @@
+Adafruit in Circuit Python directory
+Micro Python directory for others (car temperature sensor) using display
+C has software for ADC for battery charger, etc
+C/serial01 first try
+C/serial02 second try
+C/serial03 A & B preset numbers & C is ADC input
+C/serial04 works with all 3 analogue inputs
+C/serial05 will be GPIO output if ADC voltage falls below a preset level based on serial03
+
