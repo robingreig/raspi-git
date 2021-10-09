@@ -1,0 +1,10 @@
+2021.10.09
+I'm gong to add the PI Thermostat  & a LED light to the camera in the garage
+So I'll need a double relay, 1 for the therostat and 1 for the LED light
+
+
+> Install Raspbian middle, full without all the extras
+> usual install, add robin, location, etc
+> update && upgrade
+> git clone & setup to upload git changes (add private key & git config)
+> 
