@@ -1,0 +1,2 @@
+# m h  dom mon dow   command
+@reboot /home/robin/raspi-git/garage34/camera06.py > /dev/null 2>&1 &
