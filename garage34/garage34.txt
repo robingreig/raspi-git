@@ -7,4 +7,6 @@ So I'll need a double relay, 1 for the therostat and 1 for the LED light
 > usual install, add robin, location, etc
 > update && upgrade
 > git clone & setup to upload git changes (add private key to git & git config)
-> 
+> Installed a DS18B20 on GPIO04
+> pip3 install paho-mqtt
+> Copied Blockheat > mqtt program over and modified it

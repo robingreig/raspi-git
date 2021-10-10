@@ -25,7 +25,7 @@ while True:
         os.system("/home/robin/raspi-git/Python3/SMTP/Garage34Door.py")
         for i in range(Num_Pics):
             now = datetime.datetime.now()
-            camera.capture('/home/robin/Pictures/image,%s.jpg' % now)
+            camera.capture('/home/robin/Pictures/%s.jpg' % now)
         for j in range(60):
             if button.is_pressed:
                 if Debug > 0:
