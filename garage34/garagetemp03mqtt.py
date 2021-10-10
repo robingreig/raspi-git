@@ -6,10 +6,18 @@ import datetime
 import os
 import glob
 import logging
+import RPi.GPIO as GPIO
+import warnings
 
 # Add a delay for boot
 time.sleep(1)
 DEBUG = 1
+
+# Setup GPIO24 as relay output
+relay = 24
+GPIO.setwarnings(False) # Don't display the warnings
+GPIO.setmode(GPIO.BCM) # Numbering scheme that corresponds to breakout board and pin layout
+GPIO.setup(relay,GPIO.OUT) # Sets up variable relay as an output
 
 # Assign one wire devices
 base_dir = '/sys/bus/w1/devices/'
@@ -71,8 +79,9 @@ def on_message(client, userdata, message):
           "topic:",message.topic,"qos:", message.qos, "retained:",message.retain)
     if message.retain==1:
         print("This is a retained message")
-    temperature = str(message.payload.decode("utf-8"))
-    print("Garage Thermostat setting is: ",temperature)
+    global thermostat
+    thermostat = str(message.payload.decode("utf-8"))
+    print("Garage Thermostat setting is: ",thermostat)
 
 mqtt.Client.connected_flag=False # create flag in class
 
@@ -110,3 +119,14 @@ time.sleep(2)
 logging.info("Stopping the loop")
 client.loop_stop() # stop the loop
 client.disconnect() # disconnect
+print("*******")
+print("Garage Thermostat setting is: ",thermostat)
+print("Garage Temperature is: ", temp1)
+thermostatFloat = float(thermostat)
+print("thermostatFloat: ", thermostatFloat)
+if thermostatFloat > temp1: # If garage temp < garage thermostat
+  GPIO.output(relay,GPIO.HIGH) # Turn the relay on and start the furnace
+  print("Turning Furnace on")
+else:
+  GPIO.output(relay,GPIO.LOW) # Turn the relay off and stop the furnace
+  print("Turning Furnace off")
