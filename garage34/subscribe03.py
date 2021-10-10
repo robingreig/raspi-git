@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt # import the client 1
 import time
 #####
 def on_message(client, userdata, message):
-    print("Message received ", str(message.payload.decode("utf-8")),"topic = ", message.topic,"qos = ", message.qos,"retained  = ", message.retain)
+    print("Message received: ", str(message.payload.decode("utf-8")),"topic: ", message.topic,"qos: ", message.qos,"retained: ", message.retain)
     if message.retain==1:
         print("This is a retained message")
 #    print("Message received ", str(message.payload.decode("utf-8")))
