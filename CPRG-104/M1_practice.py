@@ -50,7 +50,6 @@ class car:
             
 
 civic = car("toyota","civic",2020,4)
-rambler = car("rambler","standard",1960,4)
 
 print("company_name: ", civic.get_company_name())
 print("model_name: ",civic.get_model_name())
@@ -63,4 +62,3 @@ civic.accelerate()
 civic.accelerate()
 civic.brake()
 print("current_speed: ",civic.get_speed())
-print("company_name: ",rambler.get_company_name())

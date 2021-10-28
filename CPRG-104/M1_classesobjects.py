@@ -33,7 +33,7 @@ class student:
 
 
 print(student.getProfession()) #invoke static method
-#print(student.__profession)  #access private 
+print(student.__profession)  #access private 
                             #static attribute
                             #lead to error
 
