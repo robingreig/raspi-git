@@ -14,12 +14,13 @@ class Zoo:
     animalCount = 0 # number of animals in the zoo
     birdCount = 0 # number of birds in the zoo
     
+    #def __init__(self, name):
     def __init__(self):
+        #self.name = name
         pass
 
     def add(self, name):
-        if (self.name) == "Tiger":
-            print("Tiger")
+        print("Zoo Name = "+str(self.name))
         if Zoo.animalCount > 1:
             print("Zoo full for Animals")
         else:    
