@@ -9,7 +9,7 @@ class animal:
         self.name = name
     
     def walk(self):
-        print("Animal is walking")
+        print("Animal is walking, "+self.name)
     
     def run(self):
         print("Animal is running")

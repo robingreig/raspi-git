@@ -13,6 +13,9 @@ class animal:
     
     def run(self):
         print("Animal is running")
+        
+    def getName(self):
+        print(self.__name)
     
 
 class dog(animal):
@@ -23,11 +26,13 @@ class dog(animal):
     def bark(self):
         print("Dog is barking")
         
-    def getName(self):
-        print(self.__name)
+#    def getName(self):
+#        print(self.__name)
     
     
 tom = dog("Tom","Labrador")
 tom.getName()
+tom.run()
+tom.walk()
 
 
