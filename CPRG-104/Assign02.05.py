@@ -4,8 +4,8 @@
 Class: CPRG-104
 Instructor: Hamdy Ibrahim
 Student: Robin Greig
-Created on 2021/10/28 19:02:01  
-Filename: Assignment02.04.py
+Created on 2021/10/29 13:44:14  
+Filename: Assignment02.05.py
 
 """
 class Zoo:
@@ -13,29 +13,62 @@ class Zoo:
     
     animalCount = 0 # number of animals in the zoo
     birdCount = 0 # number of birds in the zoo
+    Animal1 = '' # type of first animal in zoo
+    Animal2 = '' # type of second animal in zoo
+    Bird = '' # type of bird in zoo
     
-    #def __init__(self, name):
     def __init__(self):
-        self.name = ''
-
-#    def getName(self):
-#        print('getName() called')
-#        print(self.__name)
-#        return self.__name
+        self.__name = ''
 
     def add(self, name):
-        self.name = name
-        print('add() called')
-        print(self.name)
-        self.name = Tiger()
+        self.__name = name
+        if isinstance(self.__name, Animal):
+            if Zoo.animalCount == 2:
+                print('Zoo is full of animals')
+            elif Zoo.animalCount == 1:
+                print('Animal Added')
+                Zoo.animalCount += 1
+                if isinstance(self.__name, Tiger):
+                    Zoo.Animal2 = "Tiger"
+                elif isinstance(self.__name, WildCat):
+                    Zoo.Animal2 = "WildCat"
+                else:
+                    Zoo.Animal2 = "Wolf"
+                print('Zoo.Animal2: '+Zoo.Animal2)
+            elif Zoo.animalCount == 0:
+                print('Animal Added')
+                Zoo.animalCount += 1
+                if isinstance(self.__name, Tiger):
+                    Zoo.Animal1 = "Tiger"
+                elif isinstance(self.__name, WildCat):
+                    Zoo.Animal1 = "WildCat"
+                else:
+                    Zoo.Animal1 = "Wolf"
+                print('Zoo.Animal1: '+Zoo.Animal1)
+        if isinstance(self.__name, Bird):
+            if Zoo.birdCount > 0:
+                print('Zoo is full of birds')
+            else:
+                print('Bird Added')
+                Zoo.birdCount +=1
+                if isinstance(self.__name, Eagle):
+                    Zoo.Bird = "Eagle"
+                else:
+                    Zoo.Bird = "FlightBird"
+    
+    def looking(self):
+        print('Running looking()')
+        print('Zoo.animalCount: '+str(Zoo.animalCount))
+        if Zoo.animalCount == 0 and Zoo.birdCount == 0:
+            print('Zoo is empty')
+        elif Zoo.animalCount == 1:
+            print('Zoo has 1 animal and it is a '+Zoo.Animal1)
+        else:
+            print('zooAnimal1: '+Zoo.Animal1)
+            print('zooAnima12: '+Zoo.Animal2)
+        if Zoo.birdCount > 0:
+            print('Zoo has a bird and it is a '+Zoo.Bird)
 
-#        print("Zoo Name = ",getName())
-#        if Zoo.animalCount > 1:
-#            print("Zoo full for Animals")
-#        else:    
-#            print("Animal Added")
-#            Zoo.animalCount += 1
-#            print("animalCount = ",Zoo.animalCount)
 
 class Animal(Zoo):
     ''' This is the parent class for Canines & Felines '''
@@ -148,18 +181,12 @@ class Eagle(FlightBird):
 
 zoo=Zoo()
 zoo.add(Tiger())
-print(isinstance(Tiger, Zoo))
-print(isinstance(Tiger, Animal))
-print(isinstance(Tiger, Feline))
-print(isinstance(Tiger, Tiger))
-#print(zoo.getName())
-#zoo.add(Wolf())
-#Zoo.add(WildCat())
-#Zoo.add(Eagle())
+zoo.add(Wolf())
+zoo.add(WildCat())
+zoo.add(Eagle())
+zoo.looking()
+
 #WildCat.getAttribute()
-#WildCat.getNumLegs()
+Tiger.getNumLegs()
 #Eagle.getAttribute()
 #FlightBird.getAttribute1()
-#print(issubclass(Wolf, Canine))
-#print(issubclass(Tiger, Feline))
-#print(issubclass(Eagle, Bird))
