@@ -1,0 +1,11 @@
+scrot to take a screen shot
+
+scrot -d 5 to delay 5 seconds, -c to display countdown
+
+scrot -s to select which window to take a screenshot
+
+scrot -q to change quality 1-100, default is 75
+
+scrot -u to select currently focused window
+
+
