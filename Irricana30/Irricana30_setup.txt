@@ -25,7 +25,9 @@ FET 5	Pin 33	GPIO 13	Oven Toekick
 Relay 7	Pin 36	GPIO 16	Furnace Fan
 Relay 8	Pin 37	GPIO 26	Spare
 
-
+Zero2 is the RainbowLamp
+Zero3 is the StoveFan
+Zero4 is the TiffanyLamp
 
    
 
