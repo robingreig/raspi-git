@@ -1,5 +1,6 @@
 Regular Install
 sudo apt install git -y
+git clone
 sudo apt install python3-pip -y
 pip3 install paho-mqtt
 pip3 install RPi.GPIO
