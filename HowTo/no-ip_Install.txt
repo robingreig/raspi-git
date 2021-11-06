@@ -1,3 +1,8 @@
+raspi15 running for kananaskis@gmail.com
+
+battmon24 running for ve6rbn@gmail.com
+
+
 mkdir /home/robin/noip
 
 cd /home/robin/noip
