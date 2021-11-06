@@ -1,0 +1,21 @@
+mkdir /home/robin/noip
+
+cd /home/robin/noip
+
+wget https://www.noip.com/client/linux/noip-duc-linux.tar.gz
+
+tar vzxf noip-duclinux.tar.gz
+
+cd noip-2.1.9-1
+
+sudo make
+
+sudo make install
+
+After typing sudo make install you will be prompted to login with your No-IP account username and password
+
+
+to change: sudo /usr/local/bin/noip2
+
+
+to conrfirm that the serive is working properly: sudo noip2 -S
