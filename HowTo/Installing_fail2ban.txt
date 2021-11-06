@@ -1,0 +1,15 @@
+1) Standard install on Raspi20
+2) ssh-keygen
+3) git clone and config git
+4) sudo apt install fail2ban
+5) sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+6) sudo nano /etc/fail2ban/jail.local
+	ingnoreip = 127.0.0.1/8 ::1
+	bantime = 86400m
+	maxretry = 3
+  [sshd]
+  enabled = true
+  filter = sshd
+
+
+
