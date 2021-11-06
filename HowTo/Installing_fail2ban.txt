@@ -11,5 +11,22 @@
   enabled = true
   filter = sshd
 
+7) sudo service fail2ban stop
+
+8) update iptables (should already be installed):
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+sudo iptables -A INPUT -p tcp -m multiport --dports 80,443 -j ACCEPT
+sudo iptables -A INPUT -j DROP
+
+9) sudo apt install iptables-persistent
+	Pop up should ask if you want to keep the existing rules (yes)
+
+10) sudo dpkg-reconfigure iptables-persistent
+	generates the pop up you should have seen when iptables-persistent was installed
+
+11) sudo service fail2ban start
+
 
 
