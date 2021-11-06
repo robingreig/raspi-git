@@ -1,5 +1,5 @@
-zero2		= First Pi zero
-zero3		= Stove Fan / Office Light
+zero2		= Rainbow Light
+zero3		= Stove Fan
 zero4		= Tiffany Lamp
 breadboard10	= OpenVPN, & breadboard
 aprx11		= APRX
