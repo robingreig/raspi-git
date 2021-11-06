@@ -18,4 +18,7 @@ After typing sudo make install you will be prompted to login with your No-IP acc
 to change: sudo /usr/local/bin/noip2
 
 
-to conrfirm that the serive is working properly: sudo noip2 -S
+to conrfirm that the serive is working properly: 
+sudo noip2 -S
+or 
+sudo /usr/local/bin/noip2 -S
