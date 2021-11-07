@@ -24,4 +24,5 @@ alarm35		= CFMF Alarm 3
 breadboard36	= Arduino... soon to be breadboard36
 raingauge37	= Raingauge, was Raspi37 at MakerSpace
 blockheat41	= BlockHeater (new)
+raspi42		= Pico programmer
 
