@@ -26,7 +26,7 @@ while True:
         for i in range(Num_Pics):
             now = datetime.datetime.now()
             camera.capture('/home/robin/PicsTemp/%s.jpg' % now)
-	os.system("/home/robin/raspi-git/garage34/movePics.sh")
+        os.system("/home/robin/raspi-git/garage34/movePics.sh")
         for j in range(60):
             if button.is_pressed:
                 if Debug > 0:
