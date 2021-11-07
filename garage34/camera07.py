@@ -4,16 +4,23 @@
 # Author: Robin Greig
 # Filename: camera07.py
 # 2021.11.07.7:02
+# 1) If the garage mandoor is opened
+# 2) Turn on the LED light
+# 3) Take 10 pics (Num_Pics)
 ##########
 
 from picamera import PiCamera
 from time import sleep
 import datetime
-from gpiozero import Button
+from gpiozero import Button, LED
 import os
 
+# Assign variable 'camera' to the Pi Camera
 camera = PiCamera()
-button = Button(23)
+# Assign variable 'door' as an input (Button) on GPIO23
+door = Button(23)
+# Assign variable 'light' as an output (LED) on GPIO25
+light = LED(25)
 
 # Debug = 0 to stop test messages, Debug = 1 to print
 Debug = 1
@@ -28,7 +35,7 @@ sleep(Camera_Sleep)
 
 while True:
     try:
-        button.wait_for_release() # Door opened
+        door.wait_for_release() # Door opened
         if Debug > 0:
             print("Door Opened!")
 # Send email that door is opened
@@ -39,7 +46,7 @@ while True:
 # Send a copy of the pics to battmon24
         os.system("/home/robin/raspi-git/garage34/movePics.sh")
         for j in range(60):
-            if button.is_pressed:
+            if door.is_pressed:
                 if Debug > 0:
                     print("Door is closed")
                 break
