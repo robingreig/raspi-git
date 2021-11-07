@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+##########
+# Author: Robin Greig
+# Filename: camera07.py
+# 2021.11.07.7:02
+##########
+
 from picamera import PiCamera
 from time import sleep
 import datetime
@@ -11,21 +17,26 @@ button = Button(23)
 
 # Debug = 0 to stop test messages, Debug = 1 to print
 Debug = 1
+# Number of pics to be taken each time door is opened
 Num_Pics = 10
+# Delay between pics taken
 Camera_Sleep = 1
+# Delay x 60 before additional sets of pics taken if door isn't closed
 Picture_Cycle = 5
 
 sleep(Camera_Sleep)
 
 while True:
     try:
-        button.wait_for_release()
+        button.wait_for_release() # Door opened
         if Debug > 0:
             print("Door Opened!")
+# Send email that door is opened
         os.system("/home/robin/raspi-git/Python3/SMTP/Garage34Door.py")
         for i in range(Num_Pics):
             now = datetime.datetime.now()
             camera.capture('/home/robin/PicsTemp/%s.jpg' % now)
+# Send a copy of the pics to battmon24
         os.system("/home/robin/raspi-git/garage34/movePics.sh")
         for j in range(60):
             if button.is_pressed:
