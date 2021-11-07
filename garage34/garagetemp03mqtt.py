@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 
+##########
+# Author: Robin Greig
+# Date: 2021.11.06
+# Filenae: /raspi-git/garage34/garagetemp03mqtt.py
+# 1) Check temp stored in mqtt 'Garage/FurnaceHeat'
+# 2) GPIO24 connected to relay so when output is high, relay is off
+# 3) If FurnaceHeat > GarageTemp then GPIO24 goes low and turns relay on
+# 4) And GarageTemp is sent back to mqtt to display
+##########
+
 import paho.mqtt.client as mqtt
 import time
 import datetime
@@ -18,6 +28,8 @@ relay = 24
 GPIO.setwarnings(False) # Don't display the warnings
 GPIO.setmode(GPIO.BCM) # Numbering scheme that corresponds to breakout board and pin layout
 GPIO.setup(relay,GPIO.OUT) # Sets up variable relay as an output
+#GPIO.output(relay,GPIO.HIGH) # Turn the relay off so furnace stars OFF
+##### Leave GPIO alone in case furnace is running and program runs again
 
 # Assign one wire devices
 base_dir = '/sys/bus/w1/devices/'
@@ -125,8 +137,8 @@ print("Garage Temperature is: ", temp1)
 thermostatFloat = float(thermostat)
 print("thermostatFloat: ", thermostatFloat)
 if thermostatFloat > temp1: # If garage temp < garage thermostat
-  GPIO.output(relay,GPIO.HIGH) # Turn the relay on and start the furnace
+  GPIO.output(relay,GPIO.LOW) # Output LOW = Furnace On
   print("Turning Furnace on")
 else:
-  GPIO.output(relay,GPIO.LOW) # Turn the relay off and stop the furnace
+  GPIO.output(relay,GPIO.HIGH) # Output HIGH = Furnace Off
   print("Turning Furnace off")

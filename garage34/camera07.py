@@ -21,7 +21,8 @@ camera = PiCamera()
 door = Button(23)
 # Assign variable 'light' as an output (LED) on GPIO25
 light = LED(25)
-
+# Relay for light is off when output is High (on)
+light.on()
 # Debug = 0 to stop test messages, Debug = 1 to print
 Debug = 1
 # Number of pics to be taken each time door is opened
@@ -38,6 +39,7 @@ while True:
         door.wait_for_release() # Door opened
         if Debug > 0:
             print("Door Opened!")
+            light.off() # output low = Light ON
 # Send email that door is opened
         os.system("/home/robin/raspi-git/Python3/SMTP/Garage34Door.py")
         for i in range(Num_Pics):
@@ -47,6 +49,7 @@ while True:
         os.system("/home/robin/raspi-git/garage34/movePics.sh")
         for j in range(60):
             if door.is_pressed:
+                light.on() # output high = Light OFF
                 if Debug > 0:
                     print("Door is closed")
                 break
