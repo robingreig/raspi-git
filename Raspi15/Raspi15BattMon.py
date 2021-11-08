@@ -39,7 +39,8 @@ while True:
   if DEBUG > 0:
     print ("Battery Voltage: ", (round(read_CurrentBatteryVoltage(),2)))
     print ("\tBattVolts: ", BattVolts)
-  os.system("/home/robin/raspi-git/Python3/SMTP/sendanemail3.py")
+# Email saying program has run
+#  os.system("/home/robin/raspi-git/Python3/SMTP/sendanemail3.py")
   if BattVolts >= 27:
     GPIO.output(pinNum,GPIO.LOW) # Turn the Battery Charger off
     print ("Battery Charger OFF")
