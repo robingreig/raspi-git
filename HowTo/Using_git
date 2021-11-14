@@ -45,5 +45,6 @@ git remote set-url origin git@github.com:robingreig/raspi-git.git
 
 git config --global user.name Robin Greig
 git config --global user.email robin.greig@calalta.com
+cd ./raspi-git
 git remote set-url origin git@github.com:robingreig/raspi-git.git
 
