@@ -1,0 +1,14 @@
+1) Add the bottom 3 lines to your /etc/dhcpcd.conf file
+# A sample configuration for dhcpcd.
+# See dhcpcd.conf(5) for details.
+
+# Allow users of this group to interact with dhcpcd via the control socket.
+#controlgroup wheel
+
+interface  wlan0 
+env  ifwireless = 1 
+env  wpa_supplicant_driver = wext , nl80211
+
+
+2) 
+
