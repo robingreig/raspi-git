@@ -46,7 +46,7 @@ even_numbers = filter(lambda a: a%2 == 0, lst_numbers)
 def even_num(a):
     return a%2 == 0
 even_ = filter(even_num, lst_numbers)
-#print(list(even_))
+print(list(even_))
 
 
 # Map with Lambda
