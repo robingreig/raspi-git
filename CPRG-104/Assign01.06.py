@@ -5,7 +5,7 @@ Class: CPRG-104
 Instructor: Hamdy Ibrahim
 Student: Robin Greig
 Created on 2021/10/28 19:02:01  
-Filename: Assignment02.04.py
+Filename: Assignment01.06.py
 
 """
 class Zoo:
