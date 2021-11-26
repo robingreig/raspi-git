@@ -97,6 +97,8 @@ class Zoo:
         self.__bird_list = list()
         
     def add(self, living_thing):
+        if not isinstance(living_thing, Animal) and not isinstance(living_thing, Bird):
+            raise Exception ("This is not animals or birds")
         if isinstance(living_thing, Animal):
             if len(self.__animal_list) < 2:
                 self.__animal_list.append(living_thing)
@@ -122,7 +124,9 @@ class Zoo:
                 
 zoo = Zoo()
 zoo.add(Tiger())
-zoo.add(Wolf())
-zoo.add(WildCat())
-zoo.add(Eagle())
+zoo.add(Tiger())
+#zoo.add(Fish())
+#zoo.add(Wolf())
+#zoo.add(WildCat())
+#zoo.add(Eagle())
 zoo.looking()

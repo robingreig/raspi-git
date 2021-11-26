@@ -8,7 +8,6 @@ Created on 2021/11/24 15:33:21
 Filename: Assignment02.01.py 
 
 """
-import functools
 
 class Animal:
     def __init__(self):
@@ -98,41 +97,21 @@ class Zoo:
         self.__bird_list = list()
         
     def add(self, living_thing):
-        try:
-            if isinstance(living_thing, Animal):
-                if len(self.__animal_list) == 0:
-                    self.__animal_list.append(living_thing)
-                    print("Animal Added")
-                    if isinstance(living_thing, Tiger):
-                        zooAnimal1 = ['Tiger']
-                        print('Tiger added to animals')
-                    elif isinstance(living_thing, WildCat):
-                        zooAnimal1 = ['WildCat']
-                        print('WildCat added to animals')
-                    else:
-                        zooAnimal1 = ['Wolf']
-                        print('Wolf added to animals')
-                    print('First Animal Added')
-                elif len(self.__animal_list) == 1:
-                    if filter(living_thing, zooAnimal1):
-                        print('Animal already added once, cannot add a second time')
-                        return
-                    self.__animal_list.append(living_thing)
-                    print("Second Animal Added")
-                else:
-                    print("Zoo is full for animals")
-            elif isinstance(living_thing, Bird):
-                if len(self.__bird_list) < 1:
-                    self.__bird_list.append(living_thing)
-                    print("Bird Added")
-                else:
-                    print("Zoo is full for Birds")
+        if not isinstance(living_thing, Animal) and not isinstance(living_thing, Bird):
+            raise Exception ("This is not animals or birds")
+        if isinstance(living_thing, Animal):
+            if len(self.__animal_list) < 2:
+                self.__animal_list.append(living_thing)
+                print("Animal Added")
             else:
-                print('Not an animal or a bird')
-        except NameError:
-            print("I do not recognize this animal")
-        else:
-            print('living thing successfully added')
+                print("Zoo is full for animals")
+        elif isinstance(living_thing, Bird):
+            if len(self.__bird_list) < 1:
+                self.__bird_list.append(living_thing)
+                print("Bird Added")
+            else:
+                print("Zoo is full for Birds")
+                
     def looking(self):
         if len(self.__bird_list) == 0 and len(self.__animal_list) == 0:
             print("Zoo is empty")
@@ -144,9 +123,9 @@ class Zoo:
             print("")
                 
 zoo = Zoo()
-#zoo.add(Tiger())
-#zoo.add(Tiger())
-zoo.add(Wolf())
-zoo.add(WildCat())
+zoo.add(Tiger())
+zoo.add(Fish())
+#zoo.add(Wolf())
+#zoo.add(WildCat())
 #zoo.add(Eagle())
 zoo.looking()
