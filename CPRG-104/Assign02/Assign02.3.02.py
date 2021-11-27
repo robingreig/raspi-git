@@ -174,9 +174,13 @@ class Zoo:
         print('\ncanine Looking Method:\n',canineList)
         
     def filterTiger(self):
-        zooAnimals = str(map(lambda animal: animal.look(), self.__animal_list)) # create list from map object of animals
+        zooString = ''
+        zooAnimals = list(map(lambda animal: animal.look(), self.__animal_list)) # create list from map object of animals
         print(zooAnimals)
-        matchSearch = re.search("cat", zooAnimals)
+        for x in zooAnimals:
+            zooString += x
+        print(zooString)
+        matchSearch = re.search("cat", zooString)
         print(matchSearch.span())
 
         
