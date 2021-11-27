@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+M4_lambdas.py
 Created on Sun Aug 15 10:24:49 2021
-
 """
 
 # Example of a lambda that adds 5 to the input
