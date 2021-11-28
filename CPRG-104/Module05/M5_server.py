@@ -9,7 +9,8 @@ import socket
 # Create a socket object
 soc = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 # Get the IP and port
-ip = socket.gethostname()
+#ip = socket.gethostname()
+ip = '192.168.200.138'
 port = 5490
 # Bind the socket to the ip and port
 soc.bind((ip,port))
