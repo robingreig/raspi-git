@@ -1,0 +1,14 @@
+
+https://pythonguides.com/python-threading-and-multithreading/
+
+https://codezup.com/socket-server-with-multiple-clients-model-multithreading-python/
+
+https://www.positronx.io/create-socket-server-with-multiple-clients-in-python/
+
+https://www.geeksforgeeks.org/why-create-an-account-on-geeksforgeeks/
+
+https://www.tutorialspoint.com/python/python_multithreading.htm
+
+https://www.techbeamers.com/python-tutorial-write-multithreaded-python-server/
+
+
