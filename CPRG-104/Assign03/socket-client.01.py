@@ -12,11 +12,11 @@ except socket.error as e:
     print(str(e))
 
 Response = ClientSocket.recv(1024)
-
 while True:
-    Input = input('client asks say Something: ')
-    #Input = ("Hello")
-    ClientSocket.send(str.encode(Input))
+    print('Made it to the while True loop')
+    #Input = input('Say Something: ')
+    Input = ("Hello")
+    #ClientSocket.send(str.encode(Input))
     Response = ClientSocket.recv(1024)
     print(Response.decode('utf-8'))
 
