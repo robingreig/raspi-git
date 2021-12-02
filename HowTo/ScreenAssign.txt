@@ -15,6 +15,7 @@ raspi20		= fail2ban ssh access
 mqtt21		= Mosquitto mqtt server for house
 arduino23	= APRX Battery monitor / Arduino
 battmon24	= Battery Monitor (new)
+irricana30	= Irricana House Pi
 alarm31		= CFMF Alarm 1 *** May have conflict with Pi House
 raspi31		= Pi House *** May have conflice with alarm31
 desktop32	= Garag desktop
@@ -23,6 +24,7 @@ garage34	= Camera in garage
 alarm35		= CFMF Alarm 3
 breadboard36	= Arduino... soon to be breadboard36
 raingauge37	= Raingauge, was Raspi37 at MakerSpace
+pi400		= Pi400 desktop computer
 blockheat41	= BlockHeater (new)
 raspi42		= Pico programmer
 
