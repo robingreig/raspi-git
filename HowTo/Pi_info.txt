@@ -1,0 +1,10 @@
+
+Which Pi OS?
+cat /etc/os-release
+
+Which PI?
+cat /proc/device-tree/model
+or
+cat /proc/cpuinfo
+
+
