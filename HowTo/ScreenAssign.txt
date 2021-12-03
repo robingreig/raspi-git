@@ -28,3 +28,5 @@ pi400		= Pi400 desktop computer
 blockheat41	= BlockHeater (new)
 raspi42		= Pico programmer
 raspi43		= SAIT Pi 4
+SMSDatabase	= 22202
+zero11		= 22211
