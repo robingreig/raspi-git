@@ -1,4 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
 
+Class: CPRG-104
+Instructor: Hamdy Ibrahim
+Student: Robin Greig
+Created on 2021/11/30 21:33:21
+Filename: Assig03.server03.py 
+
+"""
 import socket
 import os
 from _thread import *
@@ -11,11 +20,11 @@ port = 1233
 ThreadCount = 0
 try:
 	ServerSocket.bind((host, port))
-except socket.error as e:
-	print(str(e))
+except socket.error as problem:
+	print(str(problem))
 
 print('Waitiing for a Connection..')
-ServerSocket.listen(6)
+ServerSocket.listen(10)
 
 
 def threaded_client(connection):
@@ -26,11 +35,11 @@ def threaded_client(connection):
 			return
 		threadNumber = 'Client Thread Number: ' + data.decode('utf-8') + ('\n')
 		connection.send(str.encode(threadNumber))
-		x = range(1,31)
-		for n in x:
-			print(n)
-			count = str(n)
-			connection.send(str.encode(count))
+		x = range(1,51)
+		for count in x:
+			print(count)
+			newCount = str(count)
+			connection.send(str.encode(newCount))
 			time.sleep(2)
 		return
 	connection.close()
