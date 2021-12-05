@@ -1,0 +1,19 @@
+To find out about your whitelist:
+
+if you don't have someone in your whitelist and they are sending you an email
+send with //WL@K at the beginning of the subject line
+
+email
+name: system
+subjec: whitelist
+body:
+list = list of whitelist accepted & blocked
+accept: email@
+reject: email@
+delete: email@
+
+to accept a complete domain: @gmail.com
+BUT VERY damgerous
+
+Poster used it for receiving text messages that might come back with a different address
+
