@@ -1,3 +1,12 @@
+To Encrypt & Decrpyt on the same computer:
+Encrypt:
+gpg --encrypt --output message02.txt.gpg --recipient robin.greig@calalta.com message02.txt
+Decrypt:
+gpg --decrypt --output message02.txt ./message02.txt.gpg
+
+***** If you don't specify the output, it will simply decrypt to the screen
+
+
 
 To Encrypt:
 
