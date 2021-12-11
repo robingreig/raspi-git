@@ -1,3 +1,8 @@
+Pi400 = robin.greig@calalta.com
+sadt38 = ve6rbn@gmail.com
+raspi43 = kananaskis@gmail.com
+
+
 To Encrypt & Decrpyt on the same computer:
 Encrypt:
 gpg --encrypt --output message02.txt.gpg --recipient robin.greig@calalta.com message02.txt
@@ -5,6 +10,14 @@ Decrypt:
 gpg --decrypt --output message02.txt ./message02.txt.gpg
 
 ***** If you don't specify the output, it will simply decrypt to the screen
+
+
+To setup gpg on a new pi:
+1) gpg --full-generate-key
+***** and it will ask for your name and email address
+2) Check private & public keys with gpg --list-secret-keys & gpg --list-public-keys
+
+
 
 
 
