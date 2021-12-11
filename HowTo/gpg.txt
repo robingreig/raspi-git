@@ -18,6 +18,10 @@ To setup gpg on a new pi:
 2) Check private & public keys with gpg --list-secret-keys & gpg --list-public-keys
 
 
+##### if you want to trust a different key
+You need to run gpg --edit-key TheirKeyID and
+gpg> sign so that you're certifing that you trust their key
+otherwise you could contact them and make sure the fingerprints match
 
 
 
@@ -42,10 +46,6 @@ gpg -k
 
 To make additional encryption key
 gpg --edit-key Robin
-
-
-To generate original key
-gpg --gen-key
 
 
 Website:
