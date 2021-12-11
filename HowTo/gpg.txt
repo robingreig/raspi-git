@@ -1,0 +1,32 @@
+
+To Encrypt:
+
+gpg --encrypt --output wap.txt.gpg --recipient robin.greig@calalta.com wpa.txt
+
+gpg --encrypt --output wpa.txt.gpg wpa.txt
+
+
+To Decrypt:
+
+gpg --decrypt --output wpa.txt wpa.txt.gpg
+
+
+
+gpg --list-public-keys
+
+gpg --list-secret-keys
+
+gpg -k
+
+To make additional encryption key
+gpg --edit-key Robin
+
+
+To generate original key
+gpg --gen-key
+
+
+Website:
+https://itsfoss.com/gpg-encrypt-files-basic/
+
+
