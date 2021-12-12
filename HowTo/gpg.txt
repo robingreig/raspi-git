@@ -1,3 +1,9 @@
+To encrypt and decrypt a file:
+gpg --output message02.txt.gpg --symmetric message02.txt
+Then you'll have to make up & enter a passphrase
+gpg --decrypt message02.txt.gpg >> ./message04.txt
+
+
 Pi400 = robin.greig@calalta.com
 sadt38 = ve6rbn@gmail.com
 raspi43 = kananaskis@gmail.com
