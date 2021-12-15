@@ -50,7 +50,12 @@ while True:
         if waiverSign == 0:
             print("\nI cannot find you in our list?    Did you sign the waiver?")
             time.sleep(delay1)
-            os.system('/home/robin/raspi-git/SMSDatabase/waiverEntry.py')
+            secret = input("\n\n Enter the code to input a new user: ")
+            if secret == '999':
+               os.system('/home/robin/raspi-git/SMSDatabase/waiverEntry.py')
+            else:
+               print("\n\n***** Sorry, please see a MakerSpace Volunteer to help you out! *****")
+               time.sleep(delay2)
     except sqlite3.Error as error:
         print("\nError#1: {}".format(error))
     finally:

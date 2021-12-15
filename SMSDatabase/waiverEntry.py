@@ -18,14 +18,14 @@ delay2 = 5
 # Did they sign a waiver? waiverSign == 1
 waiverSign = 0
 
-while True:
+while waiverSign == 0:
 ####	 Clear the screen
     if debug == 0:
         os.system('clear')
     waiverSign = 0
     signIn = 0
 ####	 Scan SAIT Barcode
-    sait =  input("\n\n\nPlease scan the SAIT ID: ")
+    sait =  input("\n\n\nPlease RE-SCAN the SAIT ID to double check that it isn't in the system: ")
     if debug > 0:
         print("\nThe SAIT ID: ",sait)
         time.sleep(delay1)
@@ -39,6 +39,7 @@ while True:
                 print("\nRowcount returned from checking if they are in the system: ", cursor.rowcount)
                 print("\nsignIn value: ",signIn)
                 print ("\n", firstName, lastName, "You are in our Database!!\n")
+                waiverSign = 1
                 time.sleep(delay1)
             waiverSign = 1
         if waiverSign == 0:
