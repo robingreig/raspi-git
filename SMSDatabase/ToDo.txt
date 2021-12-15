@@ -1,0 +1,18 @@
+
+##### ToDo list for MakerSpace #####
+
+
+> Write script to Tally total number of hours each day / month for each school / program
+
+> Write script to close out any entries that forgot to logout each day
+>> Competed 2021.12.15
+>> dayEnd.py to close out any entries that forgot to sign out, timeIN + 2 hours
+>> added to crontab to run @ 23:59 every day
+
+> Add ability to enter new makerspace users online
+>> Completed 2021.12.12
+>> Using Attendance.py and passcode 999 will run waiverEntry.py
+
+> Switch database over to sqlite3 from mariadb so I don't need a server running
+>> Completd 2021.12.11
+>> Modified existing programs to use sqlite3
