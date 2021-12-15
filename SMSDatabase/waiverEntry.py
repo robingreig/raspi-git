@@ -5,7 +5,7 @@ import time
 import os
 
 # Establish sqlite3 database connection to 'makerSpace.db'
-dbc = sqlite3.connect('makerspace.db')
+dbc = sqlite3.connect('/home/robin/makerspace.db')
 
 # To debug program debug > 0
 debug = 0

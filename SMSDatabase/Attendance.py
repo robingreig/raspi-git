@@ -5,7 +5,7 @@ import time
 import os
 
 # Establish sqlite3 database connection to 'makerSpace.db'
-dbc = sqlite3.connect('makerspace.db')
+dbc = sqlite3.connect('/home/robin/makerspace.db')
 
 # To debug program debug > 0
 debug = 0
@@ -66,7 +66,8 @@ while True:
         try:
             cursor = dbc.cursor()
 #            cursor.execute("SELECT * from attendance where timeOUT IS NULL and date = curdate() and saitID = '%s'"%(sait))
-            cursor.execute("SELECT * from attendance where timeOUT IS NULL and date = CURRENT_DATE and saitID = '%s'"%(sait))
+#            cursor.execute("SELECT * from attendance where timeOUT IS NULL and date = CURRENT_DATE and saitID = '%s'"%(sait))
+            cursor.execute("SELECT * from attendance where timeOUT IS NULL and date = date('now','localtime') and saitID = '%s'"%(sait))
             results = cursor.fetchone()
 #            numberRows = cursor.rowcount
 #            if numberRows == 1:
@@ -98,7 +99,8 @@ while True:
             if debug > 0:
                 print("\nSelect the record with the timeIN entry")
 ###            cursor.execute("SELECT attendID from attendance where timeOUT IS NULL and date = CURRENT_DATE and saitID = '%s'"%(sait))
-            cursor.execute("SELECT rowid from attendance where timeOUT IS NULL and date = CURRENT_DATE and saitID = '%s'"%(sait))
+#            cursor.execute("SELECT rowid from attendance where timeOUT IS NULL and date = CURRENT_DATE and saitID = '%s'"%(sait))
+            cursor.execute("SELECT rowid from attendance where timeOUT IS NULL and date = date('now','localtime') and saitID = '%s'"%(sait))
             results = cursor.fetchone()
             if debug > 0:
                 time.sleep(delay1)
@@ -116,7 +118,8 @@ while True:
             if debug > 0:
                 print("\nUpdate the record that was previously selected")
 #            cursor.execute("UPDATE attendance set timeOUT = CURRENT_TIME where attendID = '%s'"%(results))
-            cursor.execute("UPDATE attendance set timeOUT = CURRENT_TIME where rowid = '%s'"%(results))
+#            cursor.execute("UPDATE attendance set timeOUT = CURRENT_TIME where rowid = '%s'"%(results))
+            cursor.execute("UPDATE attendance set timeOUT = time('now','localtime') where rowid = '%s'"%(results))
             dbc.commit()
             print("\n",firstName,lastName," Thanks for signing OUT of the MakerSpace today!")
             time.sleep(delay2)
@@ -143,7 +146,8 @@ while True:
             cursor.execute("""INSERT into attendance
                (date, timeIN, saitID)
                VALUES
-               (CURRENT_DATE,CURRENT_TIME,'%s');""" % (sait))
+               (date('now','localtime'),time('now','localtime'),'%s');""" %(sait))
+#               (CURRENT_DATE,CURRENT_TIME,'%s');""" % (sait))
             dbc.commit()
             print("\n",firstName,lastName," Thanks for signing IN to the MakerSpace today!")
             time.sleep(delay2)
