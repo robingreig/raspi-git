@@ -23,8 +23,8 @@ diffTotal = dt.datetime.strptime('00:00:00', '%H:%M:%S')
 try:
     cursor = dbc.cursor()
 ### cursor.execute +2 days to test WITHOUT data!
-    cursor.execute("SELECT timeIN, timeOUT from attendance where date = date('now','localtime','-1 days')")
-#    cursor.execute("SELECT timeIN, timeOUT from attendance where date = date('now','localtime')")
+#    cursor.execute("SELECT timeIN, timeOUT from attendance where date = date('now','localtime','-1 days')")
+    cursor.execute("SELECT timeIN, timeOUT from attendance where date = date('now','localtime')")
     results = cursor.fetchall()
     if results is not None:
 #    if results != None:
