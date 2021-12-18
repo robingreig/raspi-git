@@ -1,0 +1,13 @@
+ssh into toughswitch using:
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -c aes256-cbc robin@192.168.200.64
+
+to enable POE on port 2 @ 24V type:
+poe 2 24
+
+to disable POE on port 2 type:
+poe 2 0
+
+to cycle power on port 2 with 5 second off cycle:
+poe2 0; sleep 5; poe 2 24
+
+
