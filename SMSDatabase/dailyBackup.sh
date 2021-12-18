@@ -15,10 +15,16 @@
 ###scp /home/robin/mariadb/makerspace_backup.`date +%F`.sql.gz robin@10.248.128.5:/home/robin/mariadb/
 #scp /home/robin/mariadb/makerspace_backup.`date +%F`.sql.gz robin@10.248.128.29:/home/robin/mariadb/
 
+#  add timeOUT times for members who forgot to sign out
+/home/robin/raspi-git/SMSDatabase/dayEnd.py
+
 # backup sqlite3 database
 /home/robin/raspi-git/SMSDatabase/dailyBackup.py
 
+# zip the file
+gzip /home/robin/makerspace_backup.db
+
 # move backup to /home//robin/backups
-mv /home/robin/makerspace_backup.db /home/robin/backups/makerspace_backup_`date +%F`.db
+mv /home/robin/makerspace_backup.db.gz /home/robin/backups/makerspace_backup_`date +%F`.db.gz
 
 
