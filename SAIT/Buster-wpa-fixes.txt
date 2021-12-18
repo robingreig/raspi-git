@@ -1,4 +1,18 @@
-1) Add the bottom 3 lines to your /etc/dhcpcd.conf file
+zero10 = Older Buster
+zero11 = New Buster with security updates
+
+1)
+wget https://w1.fi/releases/wpa_supplicant-2.9.tar.gz
+tar -xvf wpa_supplicant-2.9.tar.gz
+sudo apt install libnl-3-dev libdbus-1-dev libnl-genl-3-dev libssl-dev
+cd wpa_suppliant-2.9/wpa_supplicant
+cp -p defconfig .config
+make
+sudo make install
+
+
+*** didn't always work
+2) Add the bottom 3 lines to your /etc/dhcpcd.conf file
 # A sample configuration for dhcpcd.
 # See dhcpcd.conf(5) for details.
 
@@ -8,7 +22,4 @@
 interface  wlan0 
 env  ifwireless = 1 
 env  wpa_supplicant_driver = wext , nl80211
-
-
-2) 
 
