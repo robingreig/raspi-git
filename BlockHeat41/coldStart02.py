@@ -35,8 +35,8 @@ z0 = dt.datetime.strftime(z,'%H:%M')
 if debug > 0:
     print("z0 should be only hours & mins = ",z0)
 
-if '03:00'<= z0 <= '03:20' and lines2 <= -18:
-#if '08:56' <= z0 <= '09:00' and lines2 <= -9.31:
+#if '03:00'<= z0 <= '03:20' and lines2 <= -18:
+if '09:17' <= z0 <= '09:18' and lines2 <= -9.31:
     if debug > 0:
         print("temp < -18 and turning on Block Heaters")
     else: # turn on the outputs if debugging is OFF, <0
