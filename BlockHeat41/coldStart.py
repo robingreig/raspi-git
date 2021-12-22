@@ -35,6 +35,7 @@ z0 = dt.datetime.strftime(z,'%H:%M')
 if debug > 0:
     print("z0 should be only hours & mins = ",z0)
 
+# Only run the program if time between 3:00am & 3:20am
 if '03:00'<= z0 <= '03:20':
 #if '09:36' <= z0 <= '09:40':
 #if '08:56' <= z0 <= '09:00' and lines2 <= -9.31:
