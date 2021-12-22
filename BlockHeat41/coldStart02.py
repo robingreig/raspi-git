@@ -38,10 +38,11 @@ if debug > 0:
 if '03:00'<= z0 <= '03:20':
 #if '09:36' <= z0 <= '09:40':
 #if '08:56' <= z0 <= '09:00' and lines2 <= -9.31:
+    # if debug is OFF and temp is COLD turn on outputs
     if debug == 0 and lines2 <= -18:
         os.system("/home/robin/raspi-git/BlockHeat41/BH-right23-on-mqtt.py")
         os.system("/home/robin/raspi-git/BlockHeat41/BH-left24-on-mqtt.py")
-    else: # don't activate outputs and print debugging is ON, >0
+    else: # if debug is ON or temp is not COLD enough, just print
            print("temp < -9 and debug > 0")
     cht = open("/home/robin/outsideTempLast", "w")
     cht.write (str(lines2))
