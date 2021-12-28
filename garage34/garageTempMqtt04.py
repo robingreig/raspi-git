@@ -24,6 +24,7 @@ import warnings
 # Add a delay for boot
 time.sleep(1)
 DEBUG = 0
+tempRange = 0.5 # how much above & below the set temp to minimize furnace cycling
 
 # Setup GPIO24 as relay output
 relay = 24
@@ -137,9 +138,9 @@ print("Garage Thermostat setting is: ",thermostat)
 print("Garage Temperature is: ", temp1)
 thermostatFloat = float(thermostat)
 print("thermostatFloat: ", thermostatFloat)
-thermostatUpper = thermostatFloat + 0.2
+thermostatUpper = thermostatFloat + tempRange
 print("Garage Thermostat upper limit = ",thermostatUpper)
-thermostatLower = thermostatFloat - 0.2
+thermostatLower = thermostatFloat - tempRange
 print("Garage Thermostat lower limit = ",thermostatLower)
 if thermostatLower > temp1: # If garage temp < garage thermostat
   GPIO.output(relay,GPIO.LOW) # Output LOW = Furnace On
