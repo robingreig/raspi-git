@@ -24,7 +24,7 @@ import warnings
 # Add a delay for boot
 time.sleep(1)
 DEBUG = 0
-tempRange = 0.5 # how much above & below the set temp to minimize furnace cycling
+tempRange = 1.0 # how much above & below the set temp to minimize furnace cycling
 
 # Setup GPIO24 as relay output
 relay = 24

@@ -26,9 +26,9 @@ light.on()
 # Debug = 0 to stop test messages, Debug = 1 to print
 Debug = 1
 # Number of pics to be taken each time door is opened
-Num_Pics = 20
+Num_Pics = 10
 # Delay between pics taken
-Camera_Sleep = 0.5
+Camera_Sleep = 1
 # Delay x 60 before additional sets of pics taken if door isn't closed
 Picture_Cycle = 5
 
