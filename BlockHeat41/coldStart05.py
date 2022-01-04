@@ -5,7 +5,7 @@ import datetime as dt
 import os
 
 # if debug > 0 then outputs will be turned OFF
-debug = 0
+debug = 1
 
 # outside temp stored in file by blockheat program running every 10 mins
 f = open("/home/robin/outsideTemp", 'r')
