@@ -5,7 +5,7 @@ import datetime as dt
 import os
 
 # if debug > 0 then outputs will be turned OFF
-debug = 1
+debug = 0
 
 # outside temp stored in file by blockheat program running every 10 mins
 f = open("/home/robin/outsideTemp", 'r')
@@ -35,6 +35,7 @@ z0 = dt.datetime.strftime(z,'%H:%M')
 if debug > 0:
     print("z0 should be only hours & mins = ",z0)
 
+##### Removed the time restraint 3:00am - 3:30am because I change when coldStart.py starts
 # if debug is OFF and temp is COLD turn on outputs
 if debug == 0 and lines2 <= -18:
     os.system("/home/robin/raspi-git/BlockHeat41/BH-right23-on-mqtt.py")
