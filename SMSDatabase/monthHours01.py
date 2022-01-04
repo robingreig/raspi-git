@@ -9,9 +9,9 @@ import datetime as dt
 dbc = sqlite3.connect('/home/robin/makerspace.db')
 
 # To TURN OFF debug program debug = 0
-debug = 0
+#debug = 0
 # To TURN ON debug, will break without results, debug = 1
-#debug = 1
+debug = 1
 
 # Short Delay
 delay1 = 2
@@ -29,8 +29,7 @@ try:
     results = cursor.fetchall()
     if results is not None:
 #    if results != None:
-        if debug > 0:
-            print("All results = :",results)
+        print("All results = :",results)
         for i in results:
             if debug > 0:
                 print("All of i = ",i)
@@ -57,31 +56,9 @@ try:
             if debug > 0:
                 print("diffTotal = ",diffTotal)
 #                time.sleep(delay1)
-            if debug > 0:
-                print("totalTime = ",totalTime)
+        if debug > 0:
+            print("totalTime = ",totalTime)
 #            time.sleep(delay1)
-#            totalTime wraps around after 24 hours and increments the day
-#            Isolate only day from totalTime datetime.timedelta
-            totalDays = dt.datetime.strftime(diffTotal,'%d')
-            if debug > 0:
-                print("totalDays = ",totalDays)
-#                time.sleep(delay1)
-#            multiply totalDays x 24 for number of full days
-            hoursDays = int(totalDays) * 24
-            if debug > 0:
-                print("hoursDays = ",hoursDays)
-#                time.sleep(delay1)
-#            Strip off year/month/day from totalTime datetime.timedelta
-            partDays = dt.datetime.strftime(diffTotal,'%H')
-            if debug > 0:
-                print("partDays = ",partDays)
-#                time.sleep(delay1)
-#            Strip off year/month/day from totalTime datetime.timedelta
-            monthHours = hoursDays + int(partDays)
-            if debug > 0:
-                print("monthHours = ",monthHours)
-        print("Total hours for this month: ",monthHours)
-#                time.sleep(delay1)
 except sqlite3.Error as error:
     print("\nError#2: {}".format(error))
 finally:

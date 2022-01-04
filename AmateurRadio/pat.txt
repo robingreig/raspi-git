@@ -1,0 +1,21 @@
+
+
+Command line:
+
+print help
+pat help
+
+to configure
+pat configure
+
+to start pat with http (will generate webpage on 8080)
+pat http
+
+To compose an email:
+pat compose
+
+To send the email
+pat connect telnet
+
+To check your entire inbox:
+cat ./.local/share/pat/mailbox/VE6RBN/in/*

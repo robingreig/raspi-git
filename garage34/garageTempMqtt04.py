@@ -2,12 +2,14 @@
 
 ##########
 # Author: Robin Greig
-# Date: 2021.11.06
-# Filenae: /raspi-git/garage34/garagetemp03mqtt.py
+# Date: 2021.12.28
+# Filenae: /raspi-git/garage34/garageTempMqtt.py
 # 1) Check temp stored in mqtt 'Garage/FurnaceHeat'
 # 2) GPIO24 connected to relay so when output is high, relay is off
 # 3) If FurnaceHeat > GarageTemp then GPIO24 goes low and turns relay on
 # 4) And GarageTemp is sent back to mqtt to display
+# 5) Need to increase turn off +0.5 degrees and turn on 0.2 degrees to
+# minimize cycle time of furnace
 ##########
 
 import paho.mqtt.client as mqtt
@@ -22,6 +24,7 @@ import warnings
 # Add a delay for boot
 time.sleep(1)
 DEBUG = 0
+tempRange = 0.5 # how much above & below the set temp to minimize furnace cycling
 
 # Setup GPIO24 as relay output
 relay = 24
@@ -135,9 +138,13 @@ print("Garage Thermostat setting is: ",thermostat)
 print("Garage Temperature is: ", temp1)
 thermostatFloat = float(thermostat)
 print("thermostatFloat: ", thermostatFloat)
-if thermostatFloat > temp1: # If garage temp < garage thermostat
+thermostatUpper = thermostatFloat + tempRange
+print("Garage Thermostat upper limit = ",thermostatUpper)
+thermostatLower = thermostatFloat - tempRange
+print("Garage Thermostat lower limit = ",thermostatLower)
+if thermostatLower > temp1: # If garage temp < garage thermostat
   GPIO.output(relay,GPIO.LOW) # Output LOW = Furnace On
   print("Turning Furnace on")
-else:
+elif thermostatUpper < temp1: # if garage temp > garage thermostat
   GPIO.output(relay,GPIO.HIGH) # Output HIGH = Furnace Off
   print("Turning Furnace off")
