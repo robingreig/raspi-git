@@ -30,3 +30,5 @@ raspi42		= Pico programmer
 raspi43		= SAIT Pi 4
 SMSDatabase	= 22202
 zero11		= 22211
+greenhouse	= 22243 (pi user)
+
