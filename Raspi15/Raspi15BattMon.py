@@ -45,7 +45,7 @@ while True:
     GPIO.output(pinNum,GPIO.LOW) # Turn the Battery Charger off
     print ("Battery Charger OFF")
     os.system("/home/robin/raspi-git/Python3/SMTP/Raspi15BattHigh.py")
-  elif BattVolts < 24:
+  elif BattVolts <= 24:
     os.system("/home/robin/raspi-git/Python3/SMTP/Raspi15BattLow.py")
     print ("Battery Charger ON")
     GPIO.output(pinNum,GPIO.HIGH) # Turn the Battery Charger on
