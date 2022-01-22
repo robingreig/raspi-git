@@ -27,8 +27,8 @@ raingauge37	= Raingauge, was Raspi37 at MakerSpace
 pi400		= Pi400 desktop computer
 blockheat41	= BlockHeater (new)
 raspi42		= Pico programmer
-raspi43		= SAIT Pi 4
+raspi43		= 22243 SAIT Pi 4
 SMSDatabase	= 22202
 zero11		= 22211
-greenhouse	= 22243 (pi user)
+greenhouse	= 22260 (pi user)
 
