@@ -1,0 +1,17 @@
+To:
+
+Compose email
+pat compose
+*** to send pat connect telnet
+
+Configure
+pat configure
+
+Help:
+pat help
+or for specific pat help configure
+
+HTTP
+pat http
+http://localhost:8080
+
