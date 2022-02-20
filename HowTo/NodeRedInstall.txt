@@ -30,3 +30,8 @@ To install node-red-dashboard
 4) node-red-start in a terminal window or click on the icon
 5) In a separate terminal window, sudo systemctl enable nodered.service
 
+To install the DS18B20 module
+1) cd into ./.node-red
+npm install node-red-contrib-ds18b20-sensor
+
+
