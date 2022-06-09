@@ -1,10 +1,18 @@
-serv16makerspace01	MkSP@1601	
 serv16makerspace02	MkSP@1602	
-serv16makerspace03	MkSP@1603	
-serv16makerspace04	MkSP@1604	
-serv16makerspace05	MkSP@1605	
-serv16makerspace06	MkSP@1606	
-serv16makerspace07	MkSP@1607	Raspi32		10.248.128.5	p22232
-serv16makerspace08	MkSP@1608	Desktop40	10.248.128.29	p22240
-serv16makerspace09	MkSP@1609	SMScalendar	10.248.128.33	p22201
-serv16makerspace010	MkSP@16010	SMSdatabase	10.248.128.31	p22202
+
+serv16makerspace01	$pac3-01m4k3r*	
+serv16makerspace02	$pac3-02m4k3r*	
+serv16makerspace03	$pac3-03m4k3r*	
+serv16makerspace04	$pac3-04m4k3r*	
+serv16makerspace05	$pac3-05m4k3r*	
+serv16makerspace06	$pac3-06m4k3r*	
+serv16makerspace07	$pac3-07m4k3r*	
+serv16makerspace08	$pac3-08m4k3r*	
+serv16makerspace09	$pac3-09m4k3r*	
+serv16makerspace010	$pac3-10m4k3r*	
+
+Raspi32		10.248.128.5	p22232
+Desktop40	10.248.128.29	p22240
+SMScalendar	10.248.128.33	p22201
+SMSdatabase	10.248.128.31	p22202
+

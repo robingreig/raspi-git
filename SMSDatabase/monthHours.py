@@ -9,13 +9,15 @@ import datetime as dt
 dbc = sqlite3.connect('/home/robin/makerspace.db')
 
 # To TURN OFF debug program debug = 0
-debug = 0
+#debug = 0
 # To TURN ON debug, will break without results, debug = 1
-#debug = 1
+debug = 1
 
 # Short Delay
 delay1 = 2
 
+# set monthHours = 0 for the start of a month without any hours logged
+monthHours = 0
 
 diffTotal = dt.datetime.strptime('00:00:00', '%H:%M:%S')
 
@@ -23,7 +25,8 @@ diffTotal = dt.datetime.strptime('00:00:00', '%H:%M:%S')
 try:
     cursor = dbc.cursor()
 ### cursor.execute +2 days to test WITHOUT data!
-    cursor.execute("SELECT timeIN, timeOUT from attendance where date like '2021-12%'")
+#    cursor.execute("SELECT timeIN, timeOUT from attendance where date like '2021-12%'")
+    cursor.execute("SELECT timeIN, timeOUT from attendance where date like '2022-01%'")
 #    cursor.execute("SELECT timeIN, timeOUT from attendance where date = date('now','localtime','-1 days')")
 #    cursor.execute("SELECT timeIN, timeOUT from attendance where date = date('now','localtime')")
     results = cursor.fetchall()
@@ -63,6 +66,9 @@ try:
 #            totalTime wraps around after 24 hours and increments the day
 #            Isolate only day from totalTime datetime.timedelta
             totalDays = dt.datetime.strftime(diffTotal,'%d')
+###          totalTime is starting at 1900-01-01 which is 1 day,
+###          so subtract 1 from the beginning to be accurate
+            totalDays = int(totalDays) - 1
             if debug > 0:
                 print("totalDays = ",totalDays)
 #                time.sleep(delay1)
