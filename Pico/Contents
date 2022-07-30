@@ -1,9 +1,18 @@
 Adafruit in Circuit Python directory
+
 Micro Python directory for others (car temperature sensor) using display
+
 C has software for ADC for battery charger, etc
+
 C/serial01 first try
 C/serial02 second try
 C/serial03 A & B preset numbers & C is ADC input
 C/serial04 works with all 3 analogue inputs
 C/serial05 will be GPIO output if ADC voltage falls below a preset level based on serial03
+> 2022.07.30 - serial05.py has error cannot covert string to float
 
+C/serial06 will be GPIO output if ADC voltage falls and on board LED pin based on serial05
+> 2022.07.30 - Need to adjust program so that LED output monitors continuously and will
+not wait for serial input to do so. I still want serial input so that I can remotely poll the 
+voltage of the ADC. Learned about puts command, puts variable date to stdout. Played with strcmp command
+and added strcmp(buffer, "B") == 0
