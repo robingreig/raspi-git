@@ -14,5 +14,9 @@ C/serial05 will be GPIO output if ADC voltage falls below a preset level based o
 C/serial06 will be GPIO output if ADC voltage falls and on board LED pin based on serial05
 > 2022.07.30 - Need to adjust program so that LED output monitors continuously and will
 not wait for serial input to do so. I still want serial input so that I can remotely poll the 
-voltage of the ADC. Learned about puts command, puts variable date to stdout. Played with strcmp command
+voltage of the ADC. 
++ Learned about puts command, puts variable date to stdout. Played with strcmp command
 and added strcmp(buffer, "B") == 0
++ Was able to get serial05.py working with serial06.c by limiting the printf command to only send back
+the value of the voltage variable with the "V" at the end. That was what was giving me the error
+about unable to convert string to float.
