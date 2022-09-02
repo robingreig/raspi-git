@@ -10,20 +10,9 @@ network={
 	auth_alg=OPEN
 	eap=PEAP
 	identity="serv16makerspace02"
-	password="MkSP@1602"
+	password="$pac3-02m4k3r*"
 	phase1="peaplabel=0"
 	phase2="auth=MSCHAPV2"
 	priority=1
 }
 
-network={
-	ssid="Calalta01"
-	psk=""
-	key_mgmt=WPA-PSK
-}
-
-network={
-	ssid="Calalta02"
-	psk=""
-	key_mgmt=WPA-PSK
-}

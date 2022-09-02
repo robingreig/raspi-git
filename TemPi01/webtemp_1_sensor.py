@@ -40,11 +40,11 @@ time.sleep(2)
 # Continuously append data
 while(True):
 
-  os.system('modprobe w1-gpio')
-  os.system('modprobe w1-therm')
+#  os.system('modprobe w1-gpio')
+#  os.system('modprobe w1-therm')
  
   base_dir = '/sys/bus/w1/devices/'
-  device_folder1 = glob.glob(base_dir + '*2902')[0]
+  device_folder1 = glob.glob(base_dir + '*64ff')[0]
   device_file1 = device_folder1 + '/w1_slave'
 #  device_folder2 = glob.glob(base_dir + '*3796')[0]
 #  device_file2 = device_folder2 + '/w1_slave'
