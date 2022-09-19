@@ -1,0 +1,7 @@
+
+The first five fields (time and date) also accepts the following operators:
+
+* - The asterisk operator means all allowed values. If you have the asterisk symbol in the Minute field, it means the task will be performed each minute.
+- - The hyphen operator allows you to specify a range of values. If you set 1-5 in the Day of the week field, the task will run every weekday (From Monday to Friday). The range is inclusive, which means that the first and last values are included in the range.
+, - The comma operator allows you to define a list of values for repetition. For example, if you have 1,3,5 in the Hour field, the task will run at 1 am, 3 am and 5 am. The list can contain single values and ranges, 1-5,7,8,10-15
+/ - The slash operator allows you to specify step values that can be used in conjunction with ranges. For example, if you have 1-10/2 in the Minutes field, it means the action will be performed every two minutes in range 1-10, same as specifying 1,3,5,7,9. Instead of a range of values, you can also use the asterisk operator. To specify a job to be run every 20 minutes, you can use “*/20”.
