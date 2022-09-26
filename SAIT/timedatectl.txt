@@ -1,11 +1,17 @@
 Try:
 /etc/systemd/timesyncd.conf
 
+***** The following line should work at SAIT *****
+***** And the second may work for Raspi's used at SAIT and at home?????
+
+NTP=time1.sait.ca time2.sait.ca 
+FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+
+
+
 [Time]
 NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
 FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
-
-#### Try NTP=0.time1.sait.ca 2.time2.sait.ca ?????
 
 and if not......
 
