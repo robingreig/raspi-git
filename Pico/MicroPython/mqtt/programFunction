@@ -1,0 +1,10 @@
+blink01 - first blink program
+
+wireless01 - first wireless program, verifies connection
+wireless02 - once connected, onboard LED will light
+
+mqttPub01 - Publish example from peppe8o
+mqttSub01 - First subscribe example 
+mqttSub02 - Second subscribe example where onboard led lights when wifi is connected
+and GPIO22 lights to follow the Garden/Pump1 topic
+
