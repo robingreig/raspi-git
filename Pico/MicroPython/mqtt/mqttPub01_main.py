@@ -40,7 +40,6 @@ topic_pub = 'Garden/Pump1'
 
 last_message = 0
 message_interval = 5
-counter = 0
 
 #MQTT connect
 def mqtt_connect():
@@ -57,12 +56,13 @@ def reconnect():
     machine.reset()
 
 while True:
+    counter = 3
     try:
         client = mqtt_connect()
     except OSError as e:
         reconnect()
     
-    while True:
+    while counter > 0:
         try:
             client.publish(topic_pub, msg='0')
             print('published 0')
@@ -85,5 +85,7 @@ while True:
             reconnect()
             pass
         print('Printed second set')
+        print('Counter decremented')
+        counter -=1
         
-        client.disconnect()
+    client.disconnect()

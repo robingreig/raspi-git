@@ -1,0 +1,10 @@
+
+use arp -a to find mac address
+
+sudo nano /etc/dnsmasq.conf
+
+To set DHCP reservations
+dhcp-host=xx:xx:xx:xx:xx:xx:xx:xx,192.168.204.103
+
+sudo systemctl restart dnsmasq
+or stop and start

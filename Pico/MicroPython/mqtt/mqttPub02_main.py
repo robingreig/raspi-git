@@ -24,6 +24,7 @@ while max_wait > 0:
 # Handle connection error
 if wlan.status() != 3:
     raise RuntimeError('network connection failed')
+    machine.reset()
 else:
     print('connected')
     status = wlan.ifconfig()
@@ -40,7 +41,6 @@ topic_pub = 'Garden/Pump1'
 
 last_message = 0
 message_interval = 5
-counter = 0
 
 #MQTT connect
 def mqtt_connect():
@@ -57,12 +57,13 @@ def reconnect():
     machine.reset()
 
 while True:
+    counter = 3
     try:
         client = mqtt_connect()
     except OSError as e:
         reconnect()
     
-    while True:
+    while counter > 0:
         try:
             client.publish(topic_pub, msg='0')
             print('published 0')
@@ -73,17 +74,7 @@ while True:
         except:
             reconnect()
             pass
-        print('Printed first set')
-        try:
-            client.publish(topic_pub, msg='0')
-            print('published 0')
-            time.sleep(5)
-            client.publish(topic_pub, msg='1')
-            print('published 1')
-            time.sleep(5)
-        except:
-            reconnect()
-            pass
-        print('Printed second set')
+        print('printed set number %s'%(counter))
+        counter -=1
         
-        client.disconnect()
+    client.disconnect()
