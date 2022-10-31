@@ -1,0 +1,11 @@
+
+Once AP is setup and mosquitto mqtt broker installed
+I needed to modify the /etc/mosquitto/mosquitto.conf file
+
+
+Without listeners connection was refused
+listener 1883
+
+Without anonymous, connection wasn't authenticated
+allow_anonymous true
+
