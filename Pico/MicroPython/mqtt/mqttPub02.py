@@ -11,9 +11,13 @@ wlan.active(True)
 wlan.connect(ssid, password)
 rp2.country('CA')
 led = machine.Pin("LED", machine.Pin.OUT, value=0)
+potentiometer = machine.ADC(26)
+#conversion_factor = 3.3 / (65535)
+conversion_factor = 3.3 / (61300)
+sleep_time = 5
 
 # Wait for connect or fail
-max_wait = 10
+max_wait = 60
 while max_wait > 0:
     if wlan.status() < 0 or wlan.status() >= 3:
         break
@@ -36,7 +40,8 @@ mqtt_server = '192.168.200.21'
 client_id = 'Pico0'
 #user_t = 'pico'
 #password_t = 'picopassword'
-topic_pub = 'Garden/Pump1'
+topic_pub1 = 'Garden/Pump1'
+topic_pub2 = 'Garden/Pump2'
 
 last_message = 0
 message_interval = 5
@@ -54,44 +59,26 @@ def mqtt_connect():
 def reconnect():
     print('Failed to connected to MQTT Broker. Reconnecting...')
     time.sleep(5)
-    machine.reset()
+    client = mqtt_connect()
+#    machine.reset()
 
 while True:
     try:
         client = mqtt_connect()
     except OSError as e:
         reconnect()
-    
-    while True:
-        try:
-            client.publish(topic_pub, msg='0')
-            print('published 0')
-            time.sleep(5)
-            client.publish(topic_pub, msg='1')
-            print('published 1')
-            time.sleep(5)
-        except:
-            reconnect()
-            pass
-        print('Printed first set')
-        try:
-            client.publish(topic_pub, msg='0')
-            print('published 0')
-            time.sleep(5)
-            client.publish(topic_pub, msg='1')
-            print('published 1')
-            time.sleep(5)
-        except:
-            reconnect()
-            pass
-        print('Printed second set')
-        
-        try:
-            client.set_callback(gotMessage)
-            client.subscribe(b"Garden/Pump1")
-            print('subscribed to')
-            client.wait_msg()
-        except:
-            reconnect()
-            pass
-        client.disconnect()
+    try:
+        voltage = potentiometer.read_u16() * conversion_factor
+        print("Voltage raw= ",voltage)
+        time.sleep(sleep_time)
+        print('publishing str(voltage)')
+        voltage = voltage * 4.5454545454
+        voltage = str(voltage)
+        print('voltage string = ',voltage)
+        client.publish(topic_pub2, voltage)
+        print('published VOLTAGE!!!')
+        time.sleep(sleep_time)
+    except:
+        reconnect()
+        pass
+    client.disconnect()
