@@ -1,6 +1,19 @@
 to install the paho-mqtt client:
+
 pip3 install paho-mqtt
 
 HiveMQ broker: broker.hivemq.com
+
+Don't forget to install mosquitto broker & clients
+
+Mosquitto Topics:
+
+Garden:
+Garden/Pump1
+Garden/Pump2
+
+Garage
+
+Irricana
 
 
