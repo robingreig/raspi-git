@@ -2,3 +2,9 @@
 To copy from raspi20 to AUTOSSH client
 
 scp -P22243 file.txt robin@localhost:/home/robin/
+
+
+
+To copy from the AUTOSSH client to raspi20
+
+scp file.txt robin@rlg.webhop.me:/home/robin
