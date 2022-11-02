@@ -1,0 +1,4 @@
+
+To copy from raspi20 to AUTOSSH client
+
+scp -P22243 file.txt robin@localhost:/home/robin/
