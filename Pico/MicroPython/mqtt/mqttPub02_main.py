@@ -13,7 +13,7 @@ rp2.country('CA')
 led = machine.Pin("LED", machine.Pin.OUT, value=0)
 
 # Wait for connect or fail
-max_wait = 10
+max_wait = 100
 while max_wait > 0:
     if wlan.status() < 0 or wlan.status() >= 3:
         break
@@ -24,6 +24,7 @@ while max_wait > 0:
 # Handle connection error
 if wlan.status() != 3:
     raise RuntimeError('network connection failed')
+    time.sleep(2)
     machine.reset()
 else:
     print('connected')
@@ -53,7 +54,7 @@ def mqtt_connect():
 #reconnect & reset
 def reconnect():
     print('Failed to connected to MQTT Broker. Reconnecting...')
-    time.sleep(5)
+    time.sleep(2)
     machine.reset()
 
 while True:
