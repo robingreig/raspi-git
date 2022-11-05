@@ -8,12 +8,40 @@ Don't forget to install mosquitto broker & clients
 
 Mosquitto Topics:
 
-Garden:
+BlockHeater
+BlockHeat/right23
+BlockHeat/left24
+BlockHeat/BlockInTemp
+BlockHeat/BlockOutTemp
+
+Garage Battery Voltages:
+Garage/BlueOrange
+Garage/BlueBlue
+Garage/White/Brown
+Garage/WhiteOrange
+
+Garage Temps
+Garage/AtticTemp
+Garage/CeilingTemp
+Garage/DeskTemp
+Garage/OutsideTemp
+Garage/FurnaceTemp
+Garage/FurnaceHeat
+
+Garden/OutTemp
+Garden/InTemp
 Garden/Pump1
 Garden/Pump2
 
-Garage
+Irricana/StoveFan
+Irricana/TiffanyLamp
+Irricana/RainbowLamp
 
-Irricana
+Raingauge
+Weather/Raingauge
+Weather/Quad1
+Weather/Quad2
+Weather/Quad3
+Weather/Quad4
 
 
