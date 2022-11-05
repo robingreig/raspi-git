@@ -175,6 +175,45 @@ bs2_default_padded_checksummed_asm/fast:
 	$(MAKE) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/build
 .PHONY : bs2_default_padded_checksummed_asm/fast
 
+#=============================================================================
+# Target rules for targets named cyw43_firmware_package
+
+# Build rule for target.
+cyw43_firmware_package: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cyw43_firmware_package
+.PHONY : cyw43_firmware_package
+
+# fast build rule for target.
+cyw43_firmware_package/fast:
+	$(MAKE) -f pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/cyw43_firmware_package.dir/build.make pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/cyw43_firmware_package.dir/build
+.PHONY : cyw43_firmware_package/fast
+
+#=============================================================================
+# Target rules for targets named PioasmBuild
+
+# Build rule for target.
+PioasmBuild: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PioasmBuild
+.PHONY : PioasmBuild
+
+# fast build rule for target.
+PioasmBuild/fast:
+	$(MAKE) -f pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/PioasmBuild.dir/build.make pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/PioasmBuild.dir/build
+.PHONY : PioasmBuild/fast
+
+#=============================================================================
+# Target rules for targets named cyw43_driver_picow_cyw43_bus_pio_spi_pio_h
+
+# Build rule for target.
+cyw43_driver_picow_cyw43_bus_pio_spi_pio_h: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cyw43_driver_picow_cyw43_bus_pio_spi_pio_h
+.PHONY : cyw43_driver_picow_cyw43_bus_pio_spi_pio_h
+
+# fast build rule for target.
+cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast:
+	$(MAKE) -f pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build.make pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build
+.PHONY : cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast
+
 home/robin/pico/pico-sdk/src/common/pico_sync/critical_section.obj: home/robin/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 
 .PHONY : home/robin/pico/pico-sdk/src/common/pico_sync/critical_section.obj
@@ -1259,6 +1298,9 @@ help:
 	@echo "... bs2_default"
 	@echo "... bs2_default_bin"
 	@echo "... bs2_default_padded_checksummed_asm"
+	@echo "... cyw43_firmware_package"
+	@echo "... PioasmBuild"
+	@echo "... cyw43_driver_picow_cyw43_bus_pio_spi_pio_h"
 	@echo "... home/robin/pico/pico-sdk/src/common/pico_sync/critical_section.obj"
 	@echo "... home/robin/pico/pico-sdk/src/common/pico_sync/critical_section.i"
 	@echo "... home/robin/pico/pico-sdk/src/common/pico_sync/critical_section.s"

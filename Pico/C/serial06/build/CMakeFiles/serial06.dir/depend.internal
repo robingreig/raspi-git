@@ -3,14 +3,20 @@
 
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
@@ -22,6 +28,7 @@ CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_irq/irq
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h
@@ -31,15 +38,28 @@ CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_irq/irq
  generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
@@ -47,10 +67,16 @@ CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_divider/div
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_divider/include/hardware/divider_helper.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_divider/divider.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
@@ -59,18 +85,32 @@ CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_double/doub
  /home/robin/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
@@ -79,42 +119,75 @@ CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_float/float
  /home/robin/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S
  /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/asm_helper.S
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/config.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/error.h
+ /home/robin/pico/pico-sdk/src/common/pico_base/include/pico/types.h
  /home/robin/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/defs.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
+ /home/robin/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  /home/robin/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S
  generated/pico_base/pico/config_autogen.h
+ generated/pico_base/pico/version.h
 CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
  /home/robin/pico/pico-sdk/src/boards/include/boards/pico.h
  /home/robin/pico/pico-sdk/src/common/pico_base/include/pico.h
@@ -364,12 +437,14 @@ CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_clocks/
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pll.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/xosc.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pll.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h
+ /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h
  /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/xosc.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h
@@ -434,6 +509,7 @@ CMakeFiles/serial06.dir/home/robin/pico/pico-sdk/src/rp2_common/hardware_irq/irq
  /home/robin/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h
  /home/robin/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h
+ /home/robin/pico/pico-sdk/src/rp2_common/hardware_claim/include/hardware/claim.h
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c
  /home/robin/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h

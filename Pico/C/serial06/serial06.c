@@ -41,9 +41,11 @@ int main() {
     while (true) {
  	// Read the adc input 0
         uint16_t result = adc_read();
-//        printf("Raw value: 0x%03x, voltage: %f V\n", result, result * conversion_factor);
+//	printf("Raw value: 0x%03x, voltage: %f V\n", result, result * conversion_factor);
         voltage = result * conversion_factor;
-	sleep_ms(2000);
+//	wait 5 seconds between the 3 samples
+////////	sleep_ms(5000);
+	sleep_ms(500);
 	voltageTotal = voltage + voltageTotal;
 //	printf("VoltageTotal = %f\n",voltageTotal);
 //	printf("Voltage Count = %d\n", voltageCount);
@@ -55,6 +57,8 @@ int main() {
 	    printf("%f\n", voltage15);
 	    voltageCount = 0;
 	    voltageTotal = 0;
+            sleep_ms(1000);
+////////	    sleep_ms(15000);
 	} else {
 	    voltageCount++;
 	}
@@ -70,8 +74,6 @@ int main() {
 	  gpio_put(LED_PIN1, 0);
   	  gpio_put(LED_PIN2, 0);
 	}
-
-        sleep_ms(5000);
     }
     return 0;
 }
