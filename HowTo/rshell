@@ -1,0 +1,26 @@
+>rshell
+Welcome to rshell. Use Control-D to exit.
+/home/dhylands/Dropbox/micropython/rshell> ls -l /pyboard
+   529 May 21 17:34 README.txt
+   286 May 21 17:34 boot.py
+    34 May 21 17:34 main.py
+  2436 May 21 17:34 pybcdc.inf
+/home/dhylands/Dropbox/micropython/rshell> cp hello.py /pyboard
+/home/dhylands/Dropbox/micropython/rshell> ls -l /pyboard
+   529 May 21 17:34 README.txt
+   286 May 21 17:34 boot.py
+    21 May 21 17:35 hello.py
+    34 May 21 17:34 main.py
+  2436 May 21 17:34 pybcdc.inf
+/home/dhylands/Dropbox/micropython/rshell> cat /pyboard/hello.py
+print('Hello World')
+/home/dhylands/Dropbox/micropython/rshell> repl
+Entering REPL. Use Control-X to exit.
+
+Micro Python v1.4.3-28-ga3a14b9 on 2015-05-21; PYBv1.0 with STM32F405RG
+Type "help()" for more information.
+>>>
+>>> import hello
+Hello World
+>>>
+/home/dhylands/Dropbox/micropython/rshell>

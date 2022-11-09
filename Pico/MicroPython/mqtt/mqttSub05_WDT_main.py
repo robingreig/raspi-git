@@ -42,7 +42,8 @@ while True:
 
 # Handle connection error
 if wlan.status() != 3:
-    raise RuntimeError('network connection failed')
+#    raise RuntimeError('network connection failed')
+    print('network connection failed, resetting in 5 sec')
     led_machine_reset(1)
     time.sleep(5)
     machine.reset()
