@@ -1,3 +1,3 @@
 import time
-time.sleep(5)
-import mqttSub06_WDT
+time.sleep(10)
+import mqttSub06.py
