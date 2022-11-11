@@ -1,17 +1,19 @@
+import rp2
 import time
 import network
-from machine import Pin
+import machine
 from umqttsimple import MQTTClient
+from secrets_home import secrets
 
 ssid = (secrets['ssid'])
-password = (secrets['pw'])'
+password = (secrets['pw'])
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
 wlan.connect(ssid, password)
 rp2.country('CA')
 led_onboard = machine.Pin("LED", machine.Pin.OUT, value=0)
-led_offboard = machine.Pin(22, machine.Pin.OUT, value=0)
+led_offboard = machine.Pin(15, machine.Pin.OUT, value=0)
 
 
 # Wait for connect or fail

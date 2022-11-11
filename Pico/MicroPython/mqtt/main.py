@@ -1,3 +1,3 @@
 import time
-time.sleep(10)
-import mqttSub06.py
+time.sleep(5)
+import mqttSub01_secrets
