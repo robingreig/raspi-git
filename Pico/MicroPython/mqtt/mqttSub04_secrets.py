@@ -4,6 +4,7 @@ import network
 import machine
 from umqttsimple import MQTTClient
 from secrets_home import secrets
+#from secrets_work import secrets
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -18,12 +19,12 @@ led_Pump1_status = machine.Pin(15, machine.Pin.OUT, value=0)
 
 # Wait for connect or fail
 while True:
-    max_wait = 10
-    while max_wait > 0:
+    attempts = 30
+    while attempts > 0:
         led_wifi_connecting(1)
         if wlan.status() < 0 or wlan.status() >= 3:
             break
-        max_wait -= 1
+        attempts -= 1
         print('waiting for connection...')
         time.sleep(1)
         led_wifi_connecting.toggle
@@ -36,15 +37,19 @@ while True:
 
 # Handle connection error
 if wlan.status() != 3:
-    raise RuntimeError('network connection failed')
-    led_machine_reset(1)
-    time.sleep(5)
+# when the RuntimeError is rasied, program just stops
+# And doesn't proceed to the next step, so it won't reset
     machine.reset()
+#    raise RuntimeError('network connection failed')
+#    led_machine_reset(1)
+#    machine.reset()
 else:
     print('connected')
     status = wlan.ifconfig()
+    txpower = wlan.config('txpower')
     print( 'ip = ' + status[0] )
     print(wlan.ifconfig())
+    print('txpower = '+ str(txpower))
     led_wifi_connecting(0)
     led_wifi_connect(1)
 
@@ -61,7 +66,7 @@ def sub_cb(topic_sub1, msg):
 
 #MQTT connect
 def mqtt_connect_sub():
-    client = MQTTClient(secrets['client_id'], secrets['broker'], keepalive=60)
+    client = MQTTClient(secrets['client_id'], secrets['broker'], keepalive=600)
     client.set_callback(sub_cb)
     client.connect()
     client.subscribe(secrets['pubTopic01'])
@@ -82,7 +87,7 @@ while True:
         client = mqtt_connect_sub()
     except OSError as e:
         reconnect()
-    
+
     while True:
         try:
             new_msg = client.check_msg()
