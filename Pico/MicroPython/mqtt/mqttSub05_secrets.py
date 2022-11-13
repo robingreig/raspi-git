@@ -35,8 +35,9 @@ while True:
         print('connected')
         status = wlan.ifconfig()
         txpower = wlan.config('txpower')
-        print( 'ip = ' + status[0] )
-        print(wlan.ifconfig())
+        print( 'ip = ' + status[0] +',', 'netmask = ' + status[1] )
+        print( 'gateway = ' + status[2] +',', 'dns server = '+status[3] )
+#        print(wlan.ifconfig())
         print('txpower = '+ str(txpower))
         led_wifi_connecting(0)
         led_wifi_connect(1)
@@ -46,7 +47,9 @@ while True:
 topic_sub1 = (secrets['pubTopic01'])
 
 def sub_cb(topic_sub1, msg):
-    print('Received Message %s from topic %s', (msg, topic_sub1))
+#    print('Received Message %s from topic %s' %(msg, topic_sub1))
+# Either of these print statements work
+    print('Received Message {} from topic {}'.format(msg, topic_sub1))
     print(msg)
     if msg == b'0':
         led_Pump1_status(0)
@@ -58,14 +61,15 @@ def mqtt_connect_sub():
     client = MQTTClient(secrets['client_id'], secrets['broker'], keepalive=600)
     client.set_callback(sub_cb)
     client.connect()
+    print('Connected to %s MQTT Broker'%(secrets['broker']))
     client.subscribe(secrets['pubTopic01'])
-    print('Subscribed to %s MQTT Broker'%(secrets['broker']))
+    print('Subscribed to %s Topic'%(topic_sub1))
     led_mqtt_connect(1)
     return client
 
 #lose mqtt connection & reset
 def reconnect1():
-    print('Failed to stay connected to MQTT Broker. Reconnecting...')
+    print('Failed to stay connected to MQTT Broker. Resetting Microcontroller')
     led_mqtt_connect(0)
     time.sleep(5)
     led_machine_reset(1)
@@ -82,5 +86,5 @@ while True:
             new_msg = client.check_msg()
             time.sleep(0.2)
         except OSError as e:
-            print("Lost connection with message %s", topic_sub1)
+            print("Lost connection with message %s"%(topic_sub1))
             break
