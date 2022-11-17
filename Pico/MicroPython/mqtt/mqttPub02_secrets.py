@@ -2,9 +2,12 @@ import rp2
 import time
 import network
 import machine
+from machine import Pin
 from umqttsimple import MQTTClient
 #from secrets_home import secrets
 from secrets_work import secrets
+from onewire import OneWire
+from ds18x20 import DS18X20
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -19,7 +22,7 @@ led_Pump1_status = machine.Pin(15, machine.Pin.OUT, value=0)
 
 # Wait for connect or fail
 while True:
-    attempts = 30
+    attempts = 10
     while attempts > 0:
         led_wifi_connecting(1)
         if wlan.status() < 0 or wlan.status() >= 3:
@@ -30,7 +33,7 @@ while True:
         led_wifi_connecting.toggle
         time.sleep(1)
     if wlan.status() != 3:
-        machne.reset()
+        machine.reset()
     else:
         print('connected')
         status = wlan.ifconfig()
@@ -44,47 +47,54 @@ while True:
         break
 
 #MQTT topics
-topic_sub1 = (secrets['pubTopic01'])
-
-def sub_cb(topic_sub1, msg):
-#    print('Received Message %s from topic %s' %(msg, topic_sub1))
-# Either of these print statements work
-    print('Received Message {} from topic {}'.format(msg, topic_sub1))
-    print(msg)
-    if msg == b'0':
-        led_Pump1_status(0)
-    if msg == b'1':
-        led_Pump1_status(1)
+topic_pub = (secrets['pubTopic03'])
 
 #MQTT connect
-def mqtt_connect_sub():
+def mqtt_connect():
     client = MQTTClient(secrets['client_id'], secrets['broker'], keepalive=600)
-    client.set_callback(sub_cb)
     client.connect()
     print('Connected to %s MQTT Broker'%(secrets['broker']))
-    client.subscribe(secrets['pubTopic01'])
-    print('Subscribed to %s Topic'%(topic_sub1))
-    led_mqtt_connect(1)
     return client
 
 #lose mqtt connection & reset
-def reconnect1():
-    print('Failed to stay connected to MQTT Broker. Resetting Microcontroller')
-    led_mqtt_connect(0)
-    time.sleep(5)
-    led_machine_reset(1)
-    machine.reset()
+def reconnect():
+    print('Failed to stay connected to MQTT Broker. Reconnecting....')
+    client = mqtt_connect()
+#    machine.reset()
+
+ds = DS18X20(OneWire(Pin(16)))
+roms = ds.scan()
 
 while True:
     try:
-        client = mqtt_connect_sub()
+        print('Client Connecting...')
+        client = mqtt_connect()
     except OSError as e:
-        reconnect1()
-
-    while True:
-        try:
-            new_msg = client.check_msg()
-            time.sleep(0.2)
-        except OSError as e:
-            print("Lost connection with message %s"%(topic_sub1))
-            break
+        reconnect()
+    try:
+        ds.convert_temp()
+        time.sleep_ms(750)
+        for rom in roms:
+#            print(ds.read_temp(rom))
+            temp = (ds.read_temp(rom))
+            print('Published Topic = ',topic_pub)
+            time.sleep(2)
+            print('temp = ',temp)
+            time.sleep(2)
+            print('publishing temp')
+            temp = "%3.2f" % temp
+            print('Formatted temp = ',temp)
+#            temp = int(temp)
+#            print('Temp as an int = ',temp)
+            time.sleep(2)
+#            client.publish(topic_pub, temp)
+            client.publish(topic_pub, temp, retain=True)
+#            client.publish('Garden/Temp1', temp)
+            print('published TEMPERATURE!!!')
+            time.sleep(2)
+            pass
+    except:
+        reconnect()
+    print('Client Disconnecting....')
+    time.sleep(2)
+    client.disconnect()

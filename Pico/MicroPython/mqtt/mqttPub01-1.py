@@ -17,11 +17,11 @@ rp2.country('CA')
 led = machine.Pin("LED", machine.Pin.OUT, value=0)
 
 # Wait for connect or fail
-max_wait = 10
-while max_wait > 0:
+attempts = 30
+while attempts > 0:
     if wlan.status() < 0 or wlan.status() >= 3:
         break
-    max_wait -= 1
+    attempts -= 1
     print('waiting for connection...')
     time.sleep(1)
 
@@ -36,6 +36,7 @@ else:
     led.toggle()
     
     #mqtt config
+#mqtt_server = '192.168.200.21'
 mqtt_server = '192.168.204.1'
 client_id = 'Pico0'
 #user_t = 'pico'
