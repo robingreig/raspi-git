@@ -75,6 +75,12 @@ while True:
         ds.convert_temp()
         time.sleep_ms(750)
         for rom in roms:
+#            print('rom = ',rom)
+#            str1 = bytes(rom)
+#            str2 = str1.decode()
+#            print('str1 = ',str1)
+#            str2 = str(str1, 'UTF-8')
+#            print('str2 = ',str2)
 #            print(ds.read_temp(rom))
             temp = (ds.read_temp(rom))
             print('Published Topic = ',topic_pub)
