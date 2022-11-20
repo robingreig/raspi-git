@@ -1,0 +1,5 @@
+https://www.raspberrypi-spy.co.uk/2012/07/stepper-motor-control-in-python/
+
+https://tutorials-raspberrypi.com/how-to-control-a-stepper-motor-with-raspberry-pi-and-l293d-uln2003a/
+
+https://forums.raspberrypi.com/viewtopic.php?t=55580
