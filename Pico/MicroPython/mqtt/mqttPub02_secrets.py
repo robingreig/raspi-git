@@ -59,8 +59,8 @@ def mqtt_connect():
 #lose mqtt connection & reset
 def reconnect():
     print('Failed to stay connected to MQTT Broker. Reconnecting....')
-    client = mqtt_connect()
-#    machine.reset()
+#    client = mqtt_connect()
+    machine.reset()
 
 ds = DS18X20(OneWire(Pin(16)))
 roms = ds.scan()
@@ -75,7 +75,6 @@ while True:
         ds.convert_temp()
         time.sleep_ms(750)
         for rom in roms:
-#            print(ds.read_temp(rom))
             temp = (ds.read_temp(rom))
             print('Published Topic = ',topic_pub)
             time.sleep(2)
@@ -84,14 +83,12 @@ while True:
             print('publishing temp')
             temp = "%3.2f" % temp
             print('Formatted temp = ',temp)
-#            temp = int(temp)
-#            print('Temp as an int = ',temp)
             time.sleep(2)
 #            client.publish(topic_pub, temp)
             client.publish(topic_pub, temp, retain=True)
 #            client.publish('Garden/Temp1', temp)
             print('published TEMPERATURE!!!')
-            time.sleep(2)
+            time.sleep(60)
             pass
     except:
         reconnect()

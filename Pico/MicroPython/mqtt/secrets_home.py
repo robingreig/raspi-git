@@ -1,6 +1,8 @@
 secrets = {
-    'ssid': 'Calalta02',
-    'pw': 'Micr0s0ft2018',
+#    'ssid': 'Calalta02',
+#    'pw': 'Micr0s0ft2018',
+    'ssid': 'TELUS2547',
+    'pw': 'g2299sjk6p',
     'broker' : '192.168.200.21',
     'port' : 1883,
     'client_id' : 'pico0',

@@ -3,8 +3,8 @@ import time
 import network
 import machine
 from umqttsimple import MQTTClient
-#from secrets_home import secrets
-from secrets_work import secrets
+from secrets_home import secrets
+#from secrets_work import secrets
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)

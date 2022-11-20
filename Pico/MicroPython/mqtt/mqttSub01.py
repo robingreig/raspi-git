@@ -12,6 +12,7 @@ wlan.connect(ssid, password)
 rp2.country('CA')
 led_onboard = machine.Pin("LED", machine.Pin.OUT, value=0)
 
+#wlan.scan()
 
 # Wait for connect or fail
 max_wait = 10
