@@ -1,10 +1,8 @@
 import time
-import machine
+import binascii
 from machine import Pin
 from onewire import OneWire
 from ds18x20 import DS18X20
-from secrets_home import secrets
-import binascii
 
 # read the value from the DS18B20 connected to pin 16
 ds = DS18X20(OneWire(Pin(16)))
