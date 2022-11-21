@@ -13,10 +13,19 @@ wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
 wlan.connect(secrets['ssid'],secrets['pw'])
 rp2.country('CA')
+# Pico onboard LED will light when wifi connection successful
 led_wifi_connect = machine.Pin("LED", machine.Pin.OUT, value=0)
+
+# Pico will reset within 5 seconds when LED lit
 led_machine_reset = machine.Pin(12, machine.Pin.OUT, value=0)
+
+# Pico is connected to mqtt
 led_mqtt_connect = machine.Pin(13, machine.Pin.OUT, value=0)
+
+# Pico is trying to connect to mqtt
 led_wifi_connecting = machine.Pin(14, machine.Pin.OUT, value=0)
+
+# Status of Garden/Pump1 mqtt variable
 led_Pump1_status = machine.Pin(15, machine.Pin.OUT, value=0)
 
 
