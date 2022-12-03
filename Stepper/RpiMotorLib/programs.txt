@@ -1,0 +1,15 @@
+
+BYJ_Motor_Test.py
+github.com/gavinlyonsrepo/RpiMotorLib
+
+StepperTest01.py
+> Tested various delays between pulses
+
+StepperTest02.py
+> Tested various delays & run 1/2 circle
+
+StepperTest03.py
+Use GPIO13 as input button to stop
+Use button to find home position
+
+
