@@ -4,13 +4,13 @@
 
 // WiFi 
 
-const char *ssid = "mousse"; // Enter your WiFi name 
+const char *ssid = "Calalta02"; // Enter your WiFi name 
 
-const char *password = "qweqweqwe";  // Enter WiFi password 
+const char *password = "Micr0s0ft2018";  // Enter WiFi password 
 
 // MQTT Broker 
 
-const char *mqtt_broker = "broker.emqx.io"; 
+const char *mqtt_broker = "192.168.200.21"; 
 
 const char *topic = "esp8266/test"; 
 
@@ -32,6 +32,13 @@ void setup() {
 
   Serial.begin(115200); 
 
+  // seutp onboard led
+  #define LED 2 // onboard led tied to gpio2
+  #define Green 15 // Green led tied to gpio8
+  
+  pinMode(LED, OUTPUT);
+  pinMode(Green, OUTPUT);
+
   // connecting to a WiFi network 
 
   WiFi.begin(ssid, password); 
@@ -45,6 +52,9 @@ void setup() {
   } 
 
   Serial.println("Connected to the WiFi network"); 
+  // turn on onboard led
+//  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(LED, HIGH);
 
   //connecting to a mqtt broker 
 
@@ -54,16 +64,18 @@ void setup() {
 
   while (!client.connected()) { 
 
-      String client_id = "esp8266-client-"; 
+      String client_id = "esp8266-00 > "; 
 
-      client_id += String(WiFi.macAddress()); 
+      client_id += String(WiFi.macAddress());
 
-      Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str()); 
+      Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
 
-      if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) { 
+//      if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) { 
+      if (client.connect(client_id.c_str())) { 
 
-          Serial.println("Public emqx mqtt broker connected"); 
-
+          Serial.println("Mqtt broker connected"); 
+          digitalWrite(Green, HIGH);
+          
       } else { 
 
           Serial.print("failed with state "); 

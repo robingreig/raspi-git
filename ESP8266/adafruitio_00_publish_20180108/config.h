@@ -13,10 +13,17 @@
 //   - Feather M0 WiFi -> https://www.adafruit.com/products/3010
 //   - Feather WICED -> https://www.adafruit.com/products/3056
 
-//#define WIFI_SSID       "Calalta01"
-//#define WIFI_PASS       "Micr0s0ft2017"
-#define WIFI_SSID       "Calalta02"
-#define WIFI_PASS       "Micr0s0ft2018"
+#define WIFI_SSID       "Calalta01"
+#define WIFI_PASS       "Micr0s0ft2017"
+
+//#define WIFI_SSID       "DESKTOP-PVRC4S2"
+//#define WIFI_PASS       "P@55w0rd"
+
+//#define WIFI_SSID       "Robin's iPhone"
+//#define WIFI_PASS       "P@55w0rd"
+
+//#define WIFI_SSID       "RLG"
+//#define WIFI_PASS       "P@55w0rd"
 
 // comment out the following two lines if you are using fona or ethernet
 #include "AdafruitIO_WiFi.h"

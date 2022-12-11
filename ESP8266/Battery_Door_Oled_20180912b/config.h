@@ -3,7 +3,7 @@
 // visit io.adafruit.com if you need to create an account,
 // or if you need your Adafruit IO key.
 #define IO_USERNAME    "robingreig"
-#define IO_KEY         "7e01e8b5e56360efc48a27682324fc353e18d14f"
+#define IO_KEY         "d0c57dc7661d4b2e8a1868133f9e162c"
 
 /******************************* WIFI **************************************/
 
@@ -15,8 +15,12 @@
 
 //#define WIFI_SSID       "Calalta01"
 //#define WIFI_PASS       "Micr0s0ft2017"
+
 #define WIFI_SSID       "Calalta02"
 #define WIFI_PASS       "Micr0s0ft2018"
+
+//#define WIFI_SSID       "RLG"
+//#define WIFI_PASS       "P@55w0rd"
 
 // comment out the following two lines if you are using fona or ethernet
 #include "AdafruitIO_WiFi.h"

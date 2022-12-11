@@ -1,0 +1,22 @@
+
+blink_reset, added ESP.restart() to the blink sketch
+
+ds18b20_a, read temp from ds18b20
+
+i2cScan, scan i2c for address
+
+LCD_HelloWorld, print Hello World on i2c Display, SDA = GPIO4(D2) & SCL = GPIO5(D1)
+LCD_Pushbutton_a, turn backlight on when displaying & off 
+LCD_Pushbutton_b, display on LCD when button presses
+
+mqtt_ds18b20_a, print temp to mqtt, but need to convert temp from float to char
+mqtt_ds18b20_b, printing ds18b20 temp to mqtt
+mqtt_ds18b20_c, printing ds18b20 temp and rssi to mqtt
+
+
+oled_20221204i, text size test for oled on HUZZH
+
+
+PubSub_20221209a, First PubSub for ESP8266 & successful wifi & mqtt
+PubSub_20221210a, Added onboard LED lights when wifi connected, light doesn't stay on
+PubSub_20221210b, Added a green LED on GPIO8
