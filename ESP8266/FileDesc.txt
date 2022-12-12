@@ -1,6 +1,8 @@
 
 blink_reset, added ESP.restart() to the blink sketch
 
+charToInt, didn't work, can't run C++ on ESP8266?
+
 deepSleep, deepsleep sketch from randomnerdtutorials
 
 ds18b20_a, read temp from ds18b20
@@ -14,7 +16,7 @@ LCD_Pushbutton_b, display on LCD when button presses
 mqtt_ds18b20_a, print temp to mqtt, but need to convert temp from float to char
 mqtt_ds18b20_b, printing ds18b20 temp to mqtt
 mqtt_ds18b20_c, printing ds18b20 temp and rssi to mqtt
-mqtt_ds18b20_deepSleep_a, mqtt rssi & temp & deepSleep for 60 seconds
+mqtt_ds18b20_deepSleep_a, mqtt rssi, temp & mac & deepSleep for 60 seconds
 	* led still not working correctly, lights when first connected then goes out
 
 oled_20221204i, text size test for oled on HUZZH
@@ -23,3 +25,10 @@ oled_20221204i, text size test for oled on HUZZH
 PubSub_20221209a, First PubSub for ESP8266 & successful wifi & mqtt
 PubSub_20221210a, Added onboard LED lights when wifi connected, light doesn't stay on
 PubSub_20221210b, Added a green LED on GPIO8
+PubSub_20221211a, Have ESP8266 transmit mac via mqtt to esp8266/mac
+PubSub_20221211b
+
+MAC addresses
+ESP8266-00: c8:c9:a3:61:b3:43
+ESP8266-01: c8:c9:a3:5d:d1:b1
+ESP8266-02: 5c:cf:7f:03:96:b4

@@ -29,6 +29,8 @@ const char *topic1 = "temp/outside";
 
 const char *topic2 = "esp8266/RSSI";
 
+const char *topic3 = "esp8266/mac";
+
 const int mqtt_port = 1883; 
 
 WiFiClient espClient; 
@@ -40,8 +42,9 @@ PubSubClient client(espClient);
 
 // initialize temp variable
 float temperatureC = 0;
-char *temperatureChar = "00.00";
-char signal[6]; 
+char *tempChar = "00.00"; // temp needs to be char for mqtt
+char signal[6]; // RSSI signal needs to be char for mqtt
+char mac[18]; // mac address needs to be char for mqtt
 
 void setup() { 
 
@@ -71,7 +74,7 @@ void setup() {
 
   while (!client.connected()) { 
 
-      String client_id = "esp8266-00 > "; 
+      String client_id = "esp8266-"; 
 
       String WiFiRSSI = String(WiFi.RSSI());
 
@@ -82,6 +85,8 @@ void setup() {
       client_id += String(WiFi.macAddress());
 
       Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
+
+      strcpy(mac, (String(WiFi.macAddress()).c_str()));
 
 //      if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) { 
       if (client.connect(client_id.c_str())) { 
@@ -112,10 +117,15 @@ void loop() {
   temperatureC = sensors.getTempCByIndex(0);
   Serial.print(temperatureC);
   Serial.println("ºC"); 
-  sprintf(temperatureChar,"%.2f", temperatureC);
-  client.publish(topic1, temperatureChar); //publish temp
+  sprintf(tempChar,"%.2f", temperatureC);
+  client.publish(topic1, tempChar); //publish temp
+  Serial.printf("Published Temp to: %s\n",topic1);
   delay(5000);
   client.publish(topic2, signal); // publish RSSI
+  Serial.printf("Published RSSI to: %s\n",topic2);
+  delay(5000);
+  client.publish(topic3, mac); // publish mac address
+  Serial.printf("Published mac address to: %s\n",topic3);
   delay(5000);
   Serial.println("Going to sleep for 60 seconds");
   ESP.deepSleep(60e6);
