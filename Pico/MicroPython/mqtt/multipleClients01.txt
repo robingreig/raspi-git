@@ -1,0 +1,36 @@
+Webpage:
+https://forum.arduino.cc/t/how-to-multiple-mqtt-topics-with-arduino-pubsubclient-in-esp8266/594409
+
+
+if(strcmp(topic, "room1/light1") == 0)
+   {
+        //turn the light on if the payload is '1' and publish to the MQTT server a confirmation message
+        if (payload[0] == '1')
+        {
+           digitalWrite(lightPin1, HIGH);
+           client.publish("room1/light1", "Light On");
+        }
+
+        //turn the light off if the payload is '0' and publish to the MQTT server a confirmation message
+        else if (payload[0] == '0')
+        {
+           digitalWrite(lightPin1, LOW);
+           client.publish("room1/light1", "Light Off");
+        }
+   }
+   else if((strcmp(topic, "room1/light2") == 0)
+   {
+        //turn the light on if the payload is '1' and publish to the MQTT server a confirmation message
+        if (payload[0] == '1')
+        {
+           digitalWrite(lightPin2, HIGH);
+           client.publish("room1/light2", "Light On");
+        }
+
+        //turn the light off if the payload is '0' and publish to the MQTT server a confirmation message
+        else if (payload[0] == '0')
+        {
+           digitalWrite(lightPin2, LOW);
+           client.publish("room1/light2", "Light Off");
+        }
+   }

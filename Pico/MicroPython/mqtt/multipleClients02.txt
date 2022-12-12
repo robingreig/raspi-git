@@ -1,0 +1,11 @@
+void callback(char* topic, byte* payload, unsigned int length) 
+{
+  if(strcmp(topic, "/lights/led1") == 0) 
+  {
+    changeLEDState(1, payload, length);
+  } 
+  else if(strcmp(topic, "/relays/relay2") == 0) 
+  {
+    changeRelayState(2, payload, length);
+  }
+}
