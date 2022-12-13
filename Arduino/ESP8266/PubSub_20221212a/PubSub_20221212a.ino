@@ -30,9 +30,7 @@ const int mqtt_port = 1883;
 
 WiFiClient espClient; 
 
-PubSubClient client(espClient); 
-
- 
+PubSubClient client(espClient);
 
 void setup() { 
 
@@ -68,7 +66,7 @@ void setup() {
 
   client.setServer(mqtt_broker, mqtt_port); 
 
-  client.setCallback(callback); 
+  client.setCallback(callback);
 
   while (!client.connected()) { 
 
@@ -96,9 +94,7 @@ void setup() {
 
   } 
 
-  // publish and subscribe 
-
-//  client.publish(topic2, "hello emqx"); 
+  // publish and subscribe  
 
   client.subscribe(topic1); 
 
