@@ -98,7 +98,7 @@ void setup() {
 
   // publish and subscribe 
 
-  client.publish(topic2, "hello emqx"); 
+//  client.publish(topic2, "hello emqx"); 
 
   client.subscribe(topic1); 
 
@@ -112,18 +112,33 @@ void callback(char *topic1, byte *payload, unsigned int length) {
 
   Serial.println(topic1); 
 
-  Serial.print("Message:"); 
-
-  for (int i = 0; i < length; i++) { 
-
-      Serial.print((char) payload[i]); 
-
-  } 
+  Serial.print("Message:");
+  Serial.println((char)payload[0]);
+  int a = ((char) payload[0]); // store ascii of payload into a
+  Serial.print("ascii of payload[0] = ");
+  Serial.println(a);
+  int b = a - '0';
+  Serial.print("a - '0' = ");
+  Serial.println(b);
+  switch (b)
+  {
+    case (0):
+      Serial.println("Received a 0 and publishing");
+      client.publish(topic2, "Received a 0");
+      break;
+    case (1):
+      Serial.println("Received a 1 and publishing");
+      client.publish(topic2, "Received a 1");
+      break;
+    default:
+      Serial.println("Default response from case statement");
+      break;
+  }
 
   Serial.println(); 
 
   Serial.println("-----------------------");
-
+  
 } 
 
  
