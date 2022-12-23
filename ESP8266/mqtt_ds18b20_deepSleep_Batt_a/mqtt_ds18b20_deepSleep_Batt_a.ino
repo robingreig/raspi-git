@@ -4,7 +4,13 @@
 #include <DallasTemperature.h>
 #include <string.h>
 
-// DS18B20
+// Define Analogue Pin
+#define analogPin A0
+
+
+float adcValue = 0; //Initialize Variable for ADC output
+float battVolt = 0; // Variable for Battery voltage
+char *battChar = "00.00"; // mqtt needs char
 
 // GPIO where the DS18B20's are connected to
 const int oneWireBus = 04;
@@ -38,6 +44,8 @@ const char *topic1 = "temp/outTemp";
 const char *topic2 = "temp/battTemp";
 
 const char *topic3 = "esp8266/RSSI";
+
+const char *topic4 = "esp8266/battVolt";
 
 const int mqtt_port = 1883; 
 
@@ -118,9 +126,20 @@ void setup() {
 
 void loop() { 
   while(!Serial) {}
+  adcValue = analogRead(analogPin); // Read analogue input value
+  Serial.print("Adc Value = ");
+  Serial.println(adcValue);
+  battVolt = ((adcValue/1023)*15); // convert from digital value to battery value
+  Serial.print("battVolt = ");
+  Serial.println(battVolt);
+  // adcValue / 1022 will be a decimal or 1 if 15V, then x 15 = 15V full value
+  sprintf(battChar, "%.2f", battVolt);
+  client.publish(topic4, battChar); //publish temp
+  Serial.printf("Published Voltage of %.2f to: %s\n",battVolt, topic4); //print temp
+  delay(5000);
   client.loop();
   sensors.requestTemperatures(); // request temps
-  tempSensor1 = sensors.getTempC(SilverSensor); // get BrownSensor temp
+  tempSensor1 = sensors.getTempC(SilverSensor); // get SilverSensor temp
   sprintf(tempChar, "%.2f", tempSensor1); //convert float tempSensor1 to char for tempChar
   client.publish(topic1, tempChar); //publish temp
   Serial.printf("Published Temp of %.2fºC to: %s\n",tempSensor1, topic1); //print temp
@@ -133,6 +152,8 @@ void loop() {
   client.publish(topic3, rssi); // publish RSSI
   Serial.printf("Published RSSI of %s to: %s\n",rssi, topic3);
   delay(5000);
-  Serial.println("Going to sleep for 60 seconds");
-  ESP.deepSleep(60e6);
+  Serial.println("Going to sleep for 180 seconds");
+  ESP.deepSleep(180e6);
+//  Serial.println("Going to sleep for 600 seconds");
+//  ESP.deepSleep(60e6);
 }

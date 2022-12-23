@@ -12,6 +12,7 @@ i2cScan, scan i2c for address
 LCD_HelloWorld, print Hello World on i2c Display, SDA = GPIO4(D2) & SCL = GPIO5(D1)
 LCD_Pushbutton_a, turn backlight on when displaying & off 
 LCD_Pushbutton_b, display on LCD when button presses
+LCD_Pushbutton_c, display ds18b20 temp on display when button pressed
 
 mqtt_ds18b20_a, print temp to mqtt, but need to convert temp from float to char
 mqtt_ds18b20_b, printing ds18b20 temp to mqtt
