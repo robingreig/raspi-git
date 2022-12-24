@@ -7,6 +7,12 @@ deepSleep, deepsleep sketch from randomnerdtutorials
 
 ds18b20_a, read temp from ds18b20
 
+gpsBasic20221224, Basic gps display on ESP8266 & Serial Monitor
+gpsBasicLCD20221224a, Display lat & lng on LCD
+gpsBasicLCD20221224b, Display lat & lng on LCD with 2 second update
+gpsBasicLCD20221224c, Display lat & lng for 2 sec then date & time for 2 sec
+gpsFull, Full display on ESP8266 & Serial Monitor
+
 i2cScan, scan i2c for address
 
 LCD_HelloWorld, print Hello World on i2c Display, SDA = GPIO4(D2) & SCL = GPIO5(D1)
