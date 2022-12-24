@@ -17,6 +17,7 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 unsigned long previousMillis = 0; // variable to hold previous time
 const long interval = 4000; // time interval in mS
 int toggle = 0; // switch between lat&long / date&time
+int hourMT = 00; //change from GMT to MST
 
 // The TinyGPSPlus object
 TinyGPSPlus gps;
@@ -86,7 +87,7 @@ void displayInfo()
   {
     lcd.clear();
     lcd.backlight();
-    lcd.print("Aquiring Sats");
+    lcd.print("Aquiring Sats1");
     Serial.print(F("INVALID"));
   }
 
@@ -103,15 +104,20 @@ void displayInfo()
   {
     lcd.clear();
     lcd.backlight();
-    lcd.print("Aquiring Sats");
+    lcd.print("Aquiring Sats2");
     Serial.print(F("INVALID"));
   }
 
   Serial.print(F(" "));
   if (gps.time.isValid())
   {
-    if (gps.time.hour() < 10) Serial.print(F("0"));
-    Serial.print(gps.time.hour());
+    hourMT = (gps.time.hour() - 7); // adjust hour from GMT to MT
+    // if hour GMT < 7 it will be negative so 24 + (-)hourMT will correct it
+    if (hourMT < 1) (hourMT = 24 + hourMT); //
+    if (hourMT < 10) Serial.print(F("0"));
+//    if (gps.time.hour() < 10) Serial.print(F("0"));
+    Serial.print(hourMT);
+//    Serial.print(gps.time.hour());
     Serial.print(F(":"));
     if (gps.time.minute() < 10) Serial.print(F("0"));
     Serial.print(gps.time.minute());
@@ -126,7 +132,7 @@ void displayInfo()
   {
     lcd.clear();
     lcd.backlight();
-    lcd.print("Aquiring Sats");
+    lcd.print("Aquiring Sats3");
     Serial.print(F("INVALID"));
   }
 
@@ -147,6 +153,9 @@ void displayLatLng() // function to display lat & long
 
 void displayDateTime()
 {
+  int DST = 7; // DST = 7 winter & 6 summer
+  int hourMT = 0; // hour variable to conver GMT to MT
+  int dayMT = 0; // day variable to convert GMT to MT
   lcd.clear(); // clear lcd display
   lcd.backlight(); //turn backlight on
   lcd.setCursor(0,0); // set cursor to first column, first row
@@ -155,11 +164,17 @@ void displayDateTime()
   lcd.print(F("/"));
   lcd.print(gps.date.month());
   lcd.print(F("/"));
-  lcd.print(gps.date.day());
+  hourMT = (gps.time.hour() - DST); // adjust hour from GMT to MT
+  dayMT = (gps.date.day());
+  // if hourMT is negative, it is yesterday MT so dayMT - 1
+  if (hourMT < 0) (dayMT -=1);
+  lcd.print(dayMT);
   lcd.setCursor(0,1); // set cursor to second column, first row
-  lcd.print("Time: "); // print Long message
-  if (gps.time.hour() < 10) lcd.print(F("0"));
-  lcd.print(gps.time.hour());
+  lcd.print("Time: "); // print Time message
+  // if hour GMT < 7 it will be negative so 24 + (-)hourMT will correct it
+  if (hourMT < 1) (hourMT = 24 + hourMT); // adjust hour from GMT to MT
+  if (hourMT < 10) Serial.print(F("0"));
+  lcd.print(hourMT);
   lcd.print(F(":"));
   if (gps.time.minute() < 10) lcd.print(F("0"));
   lcd.print(gps.time.minute());
