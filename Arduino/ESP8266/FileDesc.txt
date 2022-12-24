@@ -12,7 +12,9 @@ gpsBasicLCD20221224a, Display lat & lng on LCD
 gpsBasicLCD20221224b, Display lat & lng on LCD with 2 second update
 gpsBasicLCD20221224c, Display lat & lng for 2 sec then date & time for 4 sec
 gpsBasicLCD20221224d, Display lat&long, correct date&time for MT
-Toggle lat&long / date&time / satellites&hdop
+gpsBasicLCD20221224e, Toggle lat&long / date&time / satellites&hdop
+gpsBasicLCD20221224f, lat&long / date&time / satellites&hdop / altitude&age
+
 
 gpsFull, Full display on ESP8266 & Serial Monitor
 
