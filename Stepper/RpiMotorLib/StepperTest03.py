@@ -30,6 +30,3 @@ except KeyboardInterrupt:
     pass
 finally:
     GPIO.cleanup()
-
-#    print('i = ',i)
-#    i -= 1
