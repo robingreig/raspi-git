@@ -11,7 +11,7 @@ static const uint32_t GPSBaud = 9600;  // gps baud rate
 
 int lcdColumns = 16; // Set LCD Columns
 int lcdRows = 2; // Set LCD Rows
-// set LCD address, number of columns and rows
+// set LCD I2C address, number of columns and rows
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 unsigned long previousMillis = 0; // variable to hold previous time
@@ -123,7 +123,8 @@ void displayInfo()
   Serial.print(F(" "));
   if (gps.time.isValid())
   {
-    hourMT = (gps.time.hour() - 7); // adjust hour from GMT to MT
+    hourMT = (gps.time.hour() - 7); // adjust hour from GMT to MST
+//    hourMT = (gps.time.hour() - 6); // adjust hour from GMT to MDT
     // if hour GMT < 7 it will be negative so 24 + (-)hourMT will correct it
     if (hourMT < 1) (hourMT = 24 + hourMT); //
     if (hourMT < 10) Serial.print(F("0"));

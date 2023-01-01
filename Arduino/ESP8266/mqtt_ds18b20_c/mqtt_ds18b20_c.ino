@@ -25,9 +25,11 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 const char *mqtt_broker = "192.168.200.21"; 
 
-const char *topic1 = "temp/outside";
+//const char *topic1 = "temp/outside";
+const char *topic1 = "test/outside";
 
-const char *topic2 = "esp8266/RSSI";
+//const char *topic2 = "esp8266/RSSI";
+const char *topic2 = "test/RSSI";
 
 const int mqtt_port = 1883; 
 

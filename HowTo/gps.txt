@@ -1,0 +1,14 @@
+
+GPS module NEO-6M
+
+#include <TinyGPSPlus.h>
+#include <SoftwareSerial.h>
+
+static const int RXPin = 13, TXPin = 15; // tx & rx pins to gps
+static const uint32_t GPSBaud = 9600;  // gps baud rate
+
+VCC, RX, TX, GND
+Operates on 3.3v
+used ESP8266 pins 13(rx) & 15(tx)
+May need to change 15 with standalone ESP8266 since it needs to be held low(?)
+

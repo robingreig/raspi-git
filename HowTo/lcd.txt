@@ -1,0 +1,12 @@
+
+2rows, 16 columns
+*** needs 5V to operate properly, not 3.3v
+but can run SDA & SCL on 3.3v
+
+#include <LiquidCrystal_I2C.h>
+
+int lcdColumns = 16; // Set LCD Columns
+int lcdRows = 2; // Set LCD Rows
+// set LCD I2C address, number of columns and rows
+LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
+for address 0x27, SCL = D1 = GPIO5 & SDA = D2 = GPIO4

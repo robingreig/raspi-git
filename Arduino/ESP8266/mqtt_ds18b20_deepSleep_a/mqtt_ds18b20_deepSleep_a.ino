@@ -1,3 +1,4 @@
+// GPIO16 connect to Reset to wake up
 #include <ESP8266WiFi.h> 
 #include <PubSubClient.h>
 #include <OneWire.h>
@@ -25,11 +26,14 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 const char *mqtt_broker = "192.168.200.21"; 
 
-const char *topic1 = "temp/outside";
+//const char *topic1 = "temp/outside";
+const char *topic1 = "test/outside";
 
-const char *topic2 = "esp8266/RSSI";
+//const char *topic2 = "esp8266/RSSI";
+const char *topic2 = "test/RSSI";
 
-const char *topic3 = "esp8266/mac";
+//const char *top = "esp8266/mac";
+const char *topic3 = "test/mac";
 
 const int mqtt_port = 1883; 
 
@@ -127,6 +131,8 @@ void loop() {
   client.publish(topic3, mac); // publish mac address
   Serial.printf("Published mac address to: %s\n",topic3);
   delay(5000);
-  Serial.println("Going to sleep for 60 seconds");
-  ESP.deepSleep(60e6);
+//  Serial.println("Going to sleep for 60 seconds");
+//  ESP.deepSleep(60e6);
+  Serial.println("Going to sleep for 5 minutes");
+  ESP.deepSleep(300e6);
 }
