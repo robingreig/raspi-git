@@ -7,6 +7,7 @@ const char* mqttServer = "192.168.200.21";
 const int mqttPort = 1883;
 const char* mqttUser = "otfxknod";
 const char* mqttPassword = "nSuUc1dDLygF";
+char signal[6];
  
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -33,8 +34,13 @@ void setup() {
  
 //    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
     if (client.connect("ESP8266Client")) {
- 
       Serial.println("connected");  
+      String client_id = "esp8266- > "; 
+      String WiFiRSSI = String(WiFi.RSSI());
+      Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
+      strcpy(signal, WiFiRSSI.c_str());
+      client_id += String(WiFi.macAddress());
+      Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
  
     } else {
  
