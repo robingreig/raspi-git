@@ -23,18 +23,21 @@ int pinNum[9] = {16, 5, 4, 0, 2, 14, 12, 13, 15};
 
 void setup() {
   for (int i = 0; i < 9; i++){
-    pinMode(pinNum[i], OUTPUT); 
+    pinMode(pinNum[i], OUTPUT);
+    digitalWrite(pinNum[i], HIGH); 
   }
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  for (int i = 0; i < 9; i++){
-    digitalWrite(pinNum[i], HIGH);
-    delay(500);
-  }
   for (int i = 8; i > -1; i--){
     digitalWrite(pinNum[i], LOW);
     delay(500); 
   }
+  delay(1000);
+  for (int i = 0; i < 9; i++){
+    digitalWrite(pinNum[i], HIGH);
+    delay(500);
+  }
+  delay(5000);
 }
