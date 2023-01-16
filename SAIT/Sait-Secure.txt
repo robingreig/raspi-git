@@ -12,11 +12,16 @@ serv16makerspace09	$pac3-09m4k3r*
 serv16makerspace010	$pac3-10m4k3r*	
 
 Raspi32		10.248.128.5	p22232
-Breadboard40	10.248.128.2
+
+Breadboard40	10.248.128.1
 		10.97.5.136
+
 Desktop40	10.248.128.29	p22240
+
 Raspi43		eth0	10.97.6.181
 		wlan0	10.248.128.29
+
 SMScalendar	10.248.128.33	p22201
-SMSdatabase	10.248.128.1	p22202
+
+SMSdatabase	10.248.128.2	p22202
 
