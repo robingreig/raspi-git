@@ -1,0 +1,7 @@
+
+Exit:	.exit or Ctrl-d
+select * from users;
+select * from attendance;
+
+commands at
+https://www.sqlitetutorial.net/sqlite-delete/
