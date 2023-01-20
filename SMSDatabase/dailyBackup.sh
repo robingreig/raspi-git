@@ -24,6 +24,9 @@
 # zip the file
 gzip /home/robin/makerspace_backup.db
 
+# copy zipped backup to raspi20
+scp /home/robin/makerspace_backup.db.gz robin@rlg.webhop.me:/home/robin/SMSDatabase/makerspace_backup_`date +%F`.db.gz
+
 # move backup to /home//robin/backups
 mv /home/robin/makerspace_backup.db.gz /home/robin/backups/makerspace_backup_`date +%F`.db.gz
 
