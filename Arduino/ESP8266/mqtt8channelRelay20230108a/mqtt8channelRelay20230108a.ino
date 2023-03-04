@@ -1,7 +1,6 @@
 /*
   mqtt8channelRelay20230108a
-  Robin Greig
-  2023.01.08
+  Robin Greig, 2023.01.08
   mqtt 0 = all OFF
   mqtt 1 - 8 turns on that indvidual relay
   mqtt 9 = all ON
