@@ -1,5 +1,5 @@
 MAC Address
 ESP8266-00: c8:c9:a3:61:b3:43, 192.168.200.122
 ESP8266-01: c8:c9:a3:5d:a9:2e, 192.168.200.123
-ESP8266-02: In GPS module, didn't record MAC address 
+ESP8266-02: 8 Channel Relay board w/ESP8266, 44:17:93:0F:A4:FF, 192.168.200.125
 ESP8266-03: 8 Channel Relay board w/ESP8266, 44:17:93:0F:BF:0B, 192.168.200.124

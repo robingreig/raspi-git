@@ -14,6 +14,10 @@ void loop()
   /* Print the output in the Serial Monitor */
   Serial.print("ADC Value = ");
   Serial.println(adcValue);
+  Serial.print("ADC Value corrected for 1.946V = ");
+  Serial.println(adcValue-526);
+  Serial.print("ADC Value converted to mA = ");
+  Serial.println((adcValue-526)/2);
   
-  delay(1000);
+  delay(2000);
 }
