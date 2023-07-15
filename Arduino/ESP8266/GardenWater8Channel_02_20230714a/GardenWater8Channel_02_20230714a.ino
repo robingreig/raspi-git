@@ -1,7 +1,7 @@
 
 /*
-  8channelRelay_pSwitch02_20230702a
-  Robin Greig, 2023.07.02a
+  GardenWater8Channel_02_20230714a
+  Robin Greig, 2023.07.14
   Use 8 channel Relay board with built in ESP8266
   mqtt keepalive is only 15 seconds so I've added 2 functions
   to check for wifi & mqtt connection at the start of the loop
@@ -39,9 +39,9 @@ float adcFloat = 0; // Variable to convert ADC value to battery voltage
 char adcFloatChar[6]; // Variable to store voltage as a Char
 
 unsigned long previousMillis = 0; // will store last time MQTT published
-const long interval = 5000; // 5 second interval at which to publish MQTT values
+//const long interval = 5000; // 5 second interval at which to publish MQTT values
 //const long interval = 60000; // 60 second interval at which to publish MQTT values
-//const long interval = 300000; // 5 minute interval at which to publish MQTT values
+const long interval = 180000; // 3 minute interval at which to publish MQTT values
 
 const char *switch01 = "esp/pSwitch02"; // MQTT subscribe topic for switch inputs
 const char *battVolt = "esp/gdnBatt02"; // MQTT publish topic for battery voltage

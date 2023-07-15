@@ -1,7 +1,7 @@
 
 /*
-  8channelRelay_pSwitch02_20230702a
-  Robin Greig, 2023.07.02a
+  GardenWater8Channel_02_20230715a
+  Robin Greig, 2023.07.15
   Use 8 channel Relay board with built in ESP8266
   mqtt keepalive is only 15 seconds so I've added 2 functions
   to check for wifi & mqtt connection at the start of the loop
@@ -78,6 +78,7 @@ DallasTemperature sensors(&oneWire);
 // initialize temp variables
 float temperatureC = 0;
 char *temperatureChar = "00.00";
+int numberOfDevices;
 
 
 void reconnectMQTT() {

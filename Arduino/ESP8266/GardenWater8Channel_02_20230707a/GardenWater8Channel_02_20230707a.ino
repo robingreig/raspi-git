@@ -1,7 +1,7 @@
 
 /*
-  8channelRelay_pSwitch02_20230702a
-  Robin Greig, 2023.07.02a
+  GardenWater8Channel_02_20230707a
+  Robin Greig, 2023.07.07
   Use 8 channel Relay board with built in ESP8266
   mqtt keepalive is only 15 seconds so I've added 2 functions
   to check for wifi & mqtt connection at the start of the loop
