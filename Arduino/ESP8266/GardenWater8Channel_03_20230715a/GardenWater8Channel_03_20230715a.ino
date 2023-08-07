@@ -1,17 +1,17 @@
 
 /*
-  GardenWater8Channel_02_20230714a
-  Robin Greig, 2023.07.14
+  GardenWater8Channel_02_20230715a
+  Robin Greig, 2023.07.15
   Use 8 channel Relay board with built in ESP8266
   mqtt keepalive is only 15 seconds so I've added 2 functions
   to check for wifi & mqtt connection at the start of the loop
   mqtt broker: mqtt21.local
-  mqtt topic: esp/pSwitch02
+  mqtt topic: esp/pSwitch03
   Send mqtt 00000000 for all off & 11111111 for all on
   Each digit represents a relay (first on left & eigth on right)
-  And Publish RSSI on MQTT esp/gdnRSSI02
-  And Publish Battery Voltage on MQTT esp/gdnBatt02
-  And Publish Outside Temp on MQTT esp/outTemp02
+  And Publish RSSI on MQTT esp/gdnRSSI03
+  And Publish Battery Voltage on MQTT esp/gdnBatt03
+  And Publish Outside Temp on MQTT esp/outTemp03
   Used millis to delay publishing without delaying MQTT loop checking
   Used for loop to sample battery voltage x 3 before publishing
 */
@@ -43,10 +43,10 @@ unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 60000; // 60 second interval at which to publish MQTT values
 const long interval = 180000; // 3 minute interval at which to publish MQTT values
 
-const char *switch01 = "esp/pSwitch02"; // MQTT subscribe topic for switch inputs
-const char *battVolt = "esp/gdnBatt02"; // MQTT publish topic for battery voltage
-const char *outTemp = "esp/outTemp02"; // MQTT publish topic for outside temperature
-const char *rssi = "esp/gdnRSSI02"; // MQTT publish topic for signal RSSI
+const char *switch01 = "esp/pSwitch03"; // MQTT subscribe topic for switch inputs
+const char *battVolt = "esp/gdnBatt03"; // MQTT publish topic for battery voltage
+const char *outTemp = "esp/outTemp03"; // MQTT publish topic for outside temperature
+const char *rssi = "esp/gdnRSSI03"; // MQTT publish topic for signal RSSI
 
  
 WiFiClient espClient;

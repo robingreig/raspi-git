@@ -1,0 +1,13 @@
+MAC Address
+ESP8266-00: c8:c9:a3:61:b3:43, 192.168.200.122
+ESP8266-01: c8:c9:a3:5d:a9:2e, 192.168.200.123
+ESP8266-02: 8 Channel Relay board w/ESP8266, 44:17:93:0f:a4:ff, 192.168.200.125
+ESP8266-03: 8 Channel Relay board w/ESP8266, 44:17:93:0f:bf:0b, 192.168.200.124
+ESP8266-04: c8:c9:a3:5d:d1:b1, 
+
+
+2023.07.15
+ESP8266-02 running GardenWater8Channel_02_20230715a controlling 1 water pump and 1 temperature sensor
+ESP8266-03 running GardenWater8Channel_03_20230715a controlling 1 water pump and 1 temperature sensor
+
+
