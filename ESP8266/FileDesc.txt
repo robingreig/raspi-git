@@ -14,6 +14,10 @@ ds18b20_a
 ds18b20_ident
 > read ID's from multiple ds18b20's
 
+GardenWater8channel
+> Iterations for using 8 channel ESP8266 board & watering system
+> Most up to date was GardenWater8Channel_03_20230715a
+
 i2cScan
 > scan i2c for address
 
@@ -53,4 +57,15 @@ PubSub_20221211a
 > have ESP8266 transmit mac via mqtt to esp8266/mac
 PubSub_20221211b
 
+PubSub_02_intLED
+> Test ESP8266 and flash internal LED
 
+PubSub_14
+Test ESP8266 on GPIO 14
+
+PubSub_14_vpn
+Used ESP8266 to turn Raspi42 on and off
+
+PubSub_14_vpn_02
+> Updated sketch to better handle disconnect from wifi & mqtt
+> Same as what I did with the 8 channel sketch

@@ -1,0 +1,24 @@
+MAC addresses & Assignments
+
+ESP8266-00: c8:c9:a3:61:b3:43
+> 
+
+ESP8266-01: c8:c9:a3:5d:d1:b1
+> 
+
+ESP8266-02: 5c:cf:7f:03:96:b4
+> GardenWater8Channel_03_20230715a for garden watering system
+> In Use
+
+ESP8266-03: 60:01:94:01:00:21
+> GardenWater8Channel_03_20230715a for garden watering system
+> Spare
+ 
+ESP8266-04: 5c:cf:7f:03:96:b4
+> 
+
+ESP8266-05: 18:fe:34:e1:3c:ab
+> PubSub_02_intLED
+
+ESP8266-06: 18:fe:34:e1:3b:74
+> PubSub_14_vpn_02 to control power to VPN on raspi42
