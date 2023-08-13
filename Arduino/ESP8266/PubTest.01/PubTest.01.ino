@@ -1,9 +1,13 @@
-/*  PubSub_14_vpn_02
- *  2023.08.13
- *  Robin Greig
- *  Monitor mqtt esp8266/06/vpnPower and turn on GPIO14 
- *  Send MAC, IP, & RSSI back via mqtt
- */
+// PubTest.01
+// Functions to call connect wifi & connect mqtt
+// So that if either fail, it will automatically reconnect
+// Sends RSSI via mqtt
+// Sends MAC via mqtt
+// Sends IP via mqtt
+// IP data type is different than RSSI & MAC so publish command is different
+// Watches mqtt topic which controls GPIO02 (Blue LED on ESP8266-12)
+// 2023.10.11
+// Robin Greig
 
 #include <ESP8266WiFi.h> 
 
@@ -21,13 +25,13 @@ const char *mqttServer = "192.168.200.21";
 
 const int mqttPort = 1883; 
 
-const char *vpnPower = "esp8266/06/vpnPower"; 
+const char *topic01 = "esp8266/01/GPIO02"; 
 
-const char *rssi = "esp8266/06/RSSI";
+const char *rssi = "esp8266/01/RSSI";
 
-const char *mac = "esp8266/06/MAC";
+const char *mac = "esp8266/01/MAC";
 
-const char *ipaddr = "esp8266/06/IP";
+const char *ipaddr = "esp8266/01/IP";
 
 const char *mqtt_username = "emqx"; 
 
@@ -35,8 +39,8 @@ const char *mqtt_password = "public";
 
 unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 5000; // 5 second interval at which to publish MQTT values
-//const long interval = 60000; // 60 second interval at which to publish MQTT values
-const long interval = 180000; // 3 minute interval at which to publish MQTT values
+const long interval = 60000; // 60 second interval at which to publish MQTT values
+//const long interval = 180000; // 3 minute interval at which to publish MQTT values
 
 WiFiClient espClient; 
 
@@ -67,7 +71,7 @@ void reconnectMQTT() {
       Serial.printf("The client %s is connected to MQTT\n", client_id.c_str());
       String WiFiRSSI = String(WiFi.RSSI());
       Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
-      client.subscribe(vpnPower); // subscribe to mqtt topic
+      client.subscribe(topic01); // subscribe to mqtt topic
     } else {
       Serial.print("failed with state ");
       Serial.print(client.state());
@@ -77,9 +81,9 @@ void reconnectMQTT() {
 }
 
 void setup() { 
-  // Set pin 14 as output
-  pinMode(14, OUTPUT);
-  digitalWrite(14, LOW);
+  // Set pin 02 as output
+  pinMode(02, OUTPUT);
+  digitalWrite(02, HIGH); // Blue LED is OFF when GPIO02 is HIGH
 
   // Set software serial baud to 115200; 
 
@@ -107,14 +111,13 @@ void callback(char *topic, byte *payload, unsigned int length) {
   Serial.println("-----------------------"); 
 
   if ((char)payload[0] == '1'){
-    digitalWrite(14, HIGH);
-    Serial.println("GPIO 14 ON");
+    digitalWrite(02, LOW);
+    Serial.println("GPIO 02 ON");
   } else {
-    digitalWrite(14,LOW);
-    Serial.println("GPIO 14 OFF");
+    digitalWrite(02,LOW);
+    Serial.println("GPIO 02 OFF");
   }
-
-  Serial.println(); 
+  
   Serial.println("-----------------------"); 
 
 } 
@@ -135,13 +138,13 @@ void loop() {
 
   unsigned long currentMillis = millis();
   /* Check to see if it is time to publish MQTT, if the difference between the current
-   *  time and the last time > 5 seconds then pubilish again
+   *  time and the last time > interval then pubilish again
    */
 
   if (currentMillis - previousMillis >= interval) {
     // Update previousMillis to current time
     previousMillis = currentMillis;
-    // Publish RSSi to esp/gdnRSSI01 with retain flag set
+    // Convert RSSI to String & publish with retain flag set
     String WiFiRSSI = String(WiFi.RSSI());
     client.publish(rssi,WiFiRSSI.c_str(),"-r");
     // Convert MAC Address to String & publish with retain flag set
@@ -149,7 +152,8 @@ void loop() {
     client.publish(mac,WiFiMac.c_str(),"-r");
     // Convert IP Address to String & publish with retain flag set
     String WiFiAddr = WiFi.localIP().toString();
-    client.publish(ipaddr,WiFiAddr.c_str(),"-r");  }
+    client.publish(ipaddr,WiFiAddr.c_str(),"-r");
+  }
   
   client.loop(); 
 } 

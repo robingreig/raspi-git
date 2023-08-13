@@ -1,32 +1,48 @@
 MAC addresses & Assignments
 
-ESP8266-00: c8:c9:a3:61:b3:43
-> NodeMCU
-> ADC test
+All ESP8266 should use mqtt format 
+device/deviceNumber/topic
+esp8266/05/RSSI for example
 
-ESP8266-01: c8:c9:a3:5d:a9:2e
+ESP8266-00: c8:c9:a3:61:b3:43 (checked)
 > NodeMCU
-> PubSub test
+> PubTest01 to send rssi, ip, and mac via mqtt
+
+ESP8266-01: c8:c9:a3:5d:a9:2e (checked)
+> NodeMCU
+> PubTest.01 to send rssi, ip, and mac via mqtt
 
 ESP8266-02: 5c:cf:7f:03:96:b4
 > GardenWater8Channel_03_20230715a for garden watering system
 > In Use
 
-ESP8266-03: 60:01:94:01:00:21
+ESP8266-03: 44:17:93:0f:bf:0b (checked)
 > GardenWater8Channel_03_20230715a for garden watering system
 > Spare
  
 ESP8266-04: c8:c9:a3:5d:d1:b1
 > ds18b20_a to test ds18b20
 
-ESP8266-05: 18:fe:34:e1:3c:ab
+ESP8266-05: 18:fe:34:e1:3c:ab (checked)
 > White Board
-> PubSub_02_intLED
+> PubDeepSleep.01 to send rssi, ip, and mac via mqtt and 
+to DeepSleep
+> Had to make modifications with delays to get subscribe to work
+> Subscribe to ESP8266/05/GPIO04
 
-ESP8266-06: 18:fe:34:e1:3b:74
+ESP8266-06: 18:fe:34:e1:3b:74 (checked)
 > White Board with switching Power Supply on Prototype
-> PubSub_14_vpn_02 to control power to VPN on raspi42
+> PubSub_14_vpn_03 to control power to VPN on raspi42 and send
+rssi, ip and mac via mqtt every 3 minutes
 
 ESP8266-07: 5c:cf:7f:03:8b:cb
 > Chip Only
 > PubSub Test
+
+ESP8266-08: 5c:cf:7f:99:a2:39 (Green Design Services board)
+> esp8266-GPIO-test
+
+ESP8266-09: 60:01:94:01:00:21 (checked)
+> mqtt_soil_20230813a (added printing IP address)
+> Plant Watering (African Violet)
+
