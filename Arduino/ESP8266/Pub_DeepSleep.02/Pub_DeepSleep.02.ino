@@ -7,6 +7,7 @@
  *  Subscribed GPIO turns off in DeepSleep
  *  Connects to wifi and sends RSSI, IP, & MAC via mqtt
  *  Sleeps for 60 Seconds
+ *  To DeepSleep connect pins D0 / GPIO16 to Reset
  *  I'm curious how long it will run on a 9v battery
 */
 #include <ESP8266WiFi.h> 
@@ -27,13 +28,13 @@ const int mqttPort = 1883;
 
 // Topics
 
-const char *topic01 = "esp8266/05/GPIO04";  
+const char *topic01 = "esp8266/07/GPIO04";  
 
-const char *rssi = "esp8266/05/RSSI";
+const char *rssi = "esp8266/07/RSSI";
 
-const char *mac = "esp8266/05/MAC";
+const char *mac = "esp8266/07/MAC";
 
-const char *ipaddr = "esp8266/05/IP";
+const char *ipaddr = "esp8266/07/IP";
 
 // MQTT Security
 

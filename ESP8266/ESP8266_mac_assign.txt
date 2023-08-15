@@ -46,3 +46,6 @@ ESP8266-09: 60:01:94:01:00:21 (checked)
 > mqtt_soil_20230813a (added printing IP address)
 > Plant Watering (African Violet)
 
+ESP8266-10 48:55:19:00:96:09 (Arduino Uno board)
+*** Don't connect USB without powering up board first!
+> PubTest.01

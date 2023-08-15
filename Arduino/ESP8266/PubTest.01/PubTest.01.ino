@@ -25,13 +25,13 @@ const char *mqttServer = "192.168.200.21";
 
 const int mqttPort = 1883; 
 
-const char *topic01 = "esp8266/01/GPIO02"; 
+const char *topic01 = "esp8266/10/GPIO02"; 
 
-const char *rssi = "esp8266/01/RSSI";
+const char *rssi = "esp8266/10/RSSI";
 
-const char *mac = "esp8266/01/MAC";
+const char *mac = "esp8266/10/MAC";
 
-const char *ipaddr = "esp8266/01/IP";
+const char *ipaddr = "esp8266/10/IP";
 
 const char *mqtt_username = "emqx"; 
 

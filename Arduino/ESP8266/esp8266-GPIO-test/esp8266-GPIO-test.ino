@@ -25,8 +25,8 @@ const int mqttPort = 1883;
 const char *mqttUser = "otfxknod";
 const char *mqttPassword = "nSuUc1dDLygF";
 // Topic
-const char *topic01 = "esp8266/08/GPIO";
-const char *rssi = "esp8266/08/RSSI";
+const char *topic01 = "esp8266/10/GPIO";
+const char *rssi = "esp8266/10/RSSI";
 
 WiFiClient espClient;
 PubSubClient client(espClient);

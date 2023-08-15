@@ -22,11 +22,11 @@ const char *mqttServer = "192.168.200.21";
 
 const int mqttPort = 1883; 
 
-const char *topic = "esp8266/test04"; 
+const char *topic = "esp8266/07/GPIP04"; 
 
-const char *rssi = "esp8266/testRSSI";
+const char *rssi = "esp8266/07/RSSI";
 
-const char *mqtt_username = "emqx"; 
+const char *mqtt_username = "emqx";  
 
 const char *mqtt_password = "public"; 
 
