@@ -1,3 +1,5 @@
+2023.08.19 - Using Google Docs to update info 
+
 MAC addresses & Assignments
 
 All ESP8266 should use mqtt format 
