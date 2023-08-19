@@ -1,7 +1,7 @@
 
 /*
-  8channelRelay_pSwitch02_20230702a
-  Robin Greig, 2023.07.02a
+  GardenWater8Channel_01_20230707d
+  Robin Greig, 2023.07.07
   Use 8 channel Relay board with built in ESP8266
   mqtt keepalive is only 15 seconds so I've added 2 functions
   to check for wifi & mqtt connection at the start of the loop
@@ -11,6 +11,8 @@
   Each digit represents a relay (first on left & eigth on right)
   And Publish RSSI on MQTT esp/gdnRSSI01
   And Publish Battery Voltage on MQTT es/gdnBatt01
+  Used millis to delay publishing without delaying MQTT loop checking
+  Used for loop to sample battery voltage x 3 before publishing
 */
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
@@ -24,10 +26,14 @@ const int mqttPort = 1883;
 const char* mqttUser = "otfxknod";
 const char* mqttPassword = "nSuUc1dDLygF";
 
-int adcValue = 0; // Varialbe to store output of ADC
+int adcSample = 0; //Varialble to store Sample adc
+int adcValue = 0; // Varialbe to store running total of adcSample
+int adcAverage = 0; // Variable to store average value of adc
 float adcFloat = 0; // Variable to convert ADC value to battery voltage
 char adcFloatChar[6]; // Variable to store voltage as a Char
 
+unsigned long previousMillis = 0; // will store last time MQTT published
+const long interval = 10000; // interval at which to publish MQTT values
  
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -149,7 +155,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
   } else {
     digitalWrite(pinNum[7], LOW);  // Turn off Relay 8
   }
-
   delay(500);
 }
   
@@ -165,26 +170,43 @@ void loop()
     reconnectMQTT();
   }
 
-  // Publish RSSi to esp/gdnRSSI01 with retain flag set
-  String WiFiRSSI = String(WiFi.RSSI());
-  client.publish("esp/gdnRSSI01",WiFiRSSI.c_str(),"-r");
+  unsigned long currentMillis = millis();
+  /* Check to see if it is time to publish MQTT, if the difference between the current
+   *  time and the last time > 5 seconds then pubilish again
+   */
 
-  /* Publish the Battery Voltage to esp/gdnBatt01 with retain flag set */
-  // Read the Analogue Input value
-  adcValue = analogRead(analogPin);
-  // Print the output in the Serial Monitor
-  Serial.print("ADC Value = ");
-  Serial.println(adcValue);
-  /* Convert the digital ADC value to the actual voltage 
-   *  as a float using a 12K and 3K3 resistor*/
-  adcFloat = adcValue * 0.0142;
-  Serial.print("ADC Float = ");
-  Serial.println(adcFloat);
-  // Convert voltage float into char
-  sprintf(adcFloatChar, "%.2f", adcFloat);
-  Serial.print("ADC Float Char = ");
-  Serial.println(adcFloatChar);
-  client.publish("esp/gdnBatt01",adcFloatChar,"-r");
-  delay(1000);
+  if (currentMillis - previousMillis >= interval) {
+    // Update previousMillis to current time
+    previousMillis = currentMillis;
+    // Publish RSSi to esp/gdnRSSI01 with retain flag set
+    String WiFiRSSI = String(WiFi.RSSI());
+    client.publish("esp/gdnRSSI01",WiFiRSSI.c_str(),"-r");
+    adcValue = 0;
+    // Sample the battery voltage x 3 then publish
+    for (int i = 1; i < 3; i++) {
+      // Read the Analogue Input value
+      adcSample = analogRead(analogPin);
+      // Print the output in the Serial Monitor
+      Serial.print("ADC Sample = ");
+      Serial.println(adcSample);
+      adcValue += adcSample;
+      Serial.print("ADC Value = ");
+      Serial.println(adcValue);
+      adcAverage = (adcValue/i);
+      Serial.print("ADC Average = ");
+      Serial.println(adcAverage);
+    }
+    /* Convert the digital ADC value to the actual voltage 
+     *  as a float using a 12K and 3K3 resistor*/
+    adcFloat = adcAverage * 0.0142;
+    Serial.print("ADC Float = ");
+    Serial.println(adcFloat);
+    // Convert voltage float into char
+    sprintf(adcFloatChar, "%.2f", adcFloat);
+    Serial.print("ADC Float Char = ");
+    Serial.println(adcFloatChar);
+    /* Publish the Battery Voltage to esp/gdnBatt01 with retain flag set */
+    client.publish("esp/gdnBatt01",adcFloatChar,"-r");
+  }
   client.loop();
 }

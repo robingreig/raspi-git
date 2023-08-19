@@ -1,5 +1,5 @@
 
-/* esp8266-GPIO-test
+/*  GPIO-test.01
  *  Robin Greig, 2023.08.13
  *  Use to test outputs on ESP8266
  *  Initialize GPIO00, FLASH pin as an output

@@ -1,20 +1,22 @@
-// PubSub_04.01
-// Functions to call connect wifi & connect mqtt
-// So that if either fail, it will automatically reconnect
-// Sends RSSI via mqtt
-// Watches mqtt topic which controls GPIO04
-// 2023.10.10
-// Robin Greig
+/* PubSub_04_OTA.01
+ * Robin Greig
+ * 2023.08.19
+ * Can be programmed OTA
+ * Functions to call connect wifi & connect mqtt
+ * So that if either fail, it will automatically reconnect
+ * Sends RSSI via mqtt to verify ESP8266 is running
+ * Watches mqtt topic which controls GPIO02 & 04
+*/
 
-#include <ESP8266WiFi.h> 
+#include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+#include <PubSubClient.h>
 
-#include <PubSubClient.h> 
-
-// WiFi 
-
-const char *ssid = "Calalta02"; // Enter your WiFi name 
-
-const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+// WiFi
+const char* ssid = "Calalta02";
+const char* password = "Micr0s0ft2018";
 
 // MQTT Broker 
 
@@ -22,23 +24,22 @@ const char *mqttServer = "192.168.200.21";
 
 const int mqttPort = 1883; 
 
-const char *topic = "esp8266/07/GPIO04"; 
+const char *topic = "esp8266/11/GPIO"; 
 
-const char *rssi = "esp8266/07/RSSI";
+const char *rssi = "esp8266/11/RSSI";
 
 const char *mqtt_username = "emqx";  
 
 const char *mqtt_password = "public"; 
 
 unsigned long previousMillis = 0; // will store last time MQTT published
-const long interval = 5000; // 5 second interval at which to publish MQTT values
-//const long interval = 60000; // 60 second interval at which to publish MQTT values
+//const long interval = 5000; // 5 second interval at which to publish MQTT values
+const long interval = 60000; // 60 second interval at which to publish MQTT values
 //const long interval = 180000; // 3 minute interval at which to publish MQTT values
 
 WiFiClient espClient; 
 
 PubSubClient client(espClient); 
-
 
 void reconnectWiFi() {
   WiFi.begin(ssid, password);
@@ -73,21 +74,57 @@ void reconnectMQTT() {
   }
 }
 
-void setup() { 
-  // Set pin 04 as output
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Booting");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.println("Connection Failed! Rebooting...");
+    delay(5000);
+    ESP.restart();
+  }
+
+  // Set pin 02 & 04 as output
+  pinMode(02, OUTPUT);
+  digitalWrite(02, HIGH); // Blue LED is OFF when HIGH
   pinMode(04, OUTPUT);
   digitalWrite(04, LOW);
-
-  // Set software serial baud to 115200; 
-
-  Serial.begin(115200); 
 
   client.setServer(mqttServer, mqttPort);
   client.setCallback(callback);
 
-} 
+  // Port defaults to 8266
+  // ArduinoOTA.setPort(8266);
 
- 
+  // Hostname defaults to esp8266-[ChipID]
+  // ArduinoOTA.setHostname("myesp8266");
+
+  // No authentication by default
+  // ArduinoOTA.setPassword((const char *)"123");
+
+  ArduinoOTA.onStart([]() {
+    Serial.println("Start");
+  });
+  ArduinoOTA.onEnd([]() {
+    Serial.println("\nEnd");
+  });
+  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
+    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+  });
+  ArduinoOTA.onError([](ota_error_t error) {
+    Serial.printf("Error[%u]: ", error);
+    if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+    else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+    else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+    else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+    else if (error == OTA_END_ERROR) Serial.println("End Failed");
+  });
+  ArduinoOTA.begin();
+  Serial.println("Ready");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
 
 void callback(char *topic, byte *payload, unsigned int length) { 
 
@@ -104,10 +141,14 @@ void callback(char *topic, byte *payload, unsigned int length) {
   Serial.println("-----------------------"); 
 
   if ((char)payload[0] == '1'){
+    digitalWrite(02, LOW);
+    Serial.println("GPIO 02 ON");
     digitalWrite(04, HIGH);
     Serial.println("GPIO 04 ON");
   } else {
-    digitalWrite(04,LOW);
+    digitalWrite(02, HIGH);
+    Serial.println("GPIO 02 OFF");
+    digitalWrite(04, LOW);
     Serial.println("GPIO 04 OFF");
   }
 
@@ -116,10 +157,10 @@ void callback(char *topic, byte *payload, unsigned int length) {
 
 } 
 
- 
 
-void loop() { 
-
+void loop() {
+  ArduinoOTA.handle();
+  
   // Connect to WiFi if not connected
   if (WiFi.status() != WL_CONNECTED) {
     reconnectWiFi();
@@ -144,4 +185,5 @@ void loop() {
   }
   
   client.loop(); 
-} 
+
+}

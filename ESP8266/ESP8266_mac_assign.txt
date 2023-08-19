@@ -48,4 +48,7 @@ ESP8266-09: 60:01:94:01:00:21 (checked)
 
 ESP8266-10 48:55:19:00:96:09 (Arduino Uno board)
 *** Don't connect USB without powering up board first!
-> PubTest.01
+> esp8266-GPIO-test
+
+ESP8266-11 5c:cf:7f:a4:88:df (Chip only)
+> esp8266-GPIO-test.02
