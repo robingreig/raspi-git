@@ -1,6 +1,6 @@
- 
-/*  GPIO-test.02
- *  Robin Greig, 2023.08.15
+/*  BasicOTA_GPIO_Test.01
+ *  Robin Greig, 2023.08.19
+ *  Can be programmed OTA
  *  Use to test outputs on ESP8266
  *  Initialize GPIO00, FLASH pin as an output
  *  Initialize GPIO02, Internal Blue LED as an output
@@ -14,55 +14,46 @@
 */
 
 #include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
 #include <PubSubClient.h>
 
 // WiFi
-const char *ssid = "Calalta02"; // Enter your WiFi name
-const char *password =  "Micr0s0ft2018"; // Enter WiFi password
-// MQTT
+//const char* ssid = "Calalta02";
+//const char* password = "Micr0s0ft2018";
+const char* ssid = "TELUS2547";
+const char* password =  "g2299sjk6p";
+
+// MQTT Broker 
+
 const char *mqttServer = "192.168.200.21";
-const int mqttPort = 1883;
-const char *mqttUser = "otfxknod";
-const char *mqttPassword = "nSuUc1dDLygF";
-// Topic
-const char *topic01 = "esp8266/12/GPIO";
 
-const char *rssi = "esp8266/12/RSSI";
+const int mqttPort = 1883; 
 
-const char *mac = "esp8266/12/MAC";
+const char *topic = "esp8266/11/GPIO"; 
 
-const char *ipaddr = "esp8266/12/IP";
+const char *rssi = "esp8266/11/RSSI";
+
+const char *mac = "esp8266/11/MAC";
+
+const char *ipaddr = "esp8266/11/IP";
+
+const char *mqtt_username = "emqx";  
+
+const char *mqtt_password = "public"; 
 
 unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 5000; // 5 second interval at which to publish MQTT values
 const long interval = 60000; // 60 second interval at which to publish MQTT values
 //const long interval = 180000; // 3 minute interval at which to publish MQTT values
 
-WiFiClient espClient;
-PubSubClient client(espClient);
+WiFiClient espClient; 
+
+PubSubClient client(espClient); 
 
 int pinNum[9] = {00, 02, 04, 05, 12, 13, 14, 15, 16};
 
-void reconnectMQTT() {
-  while (!client.connected()) {
-    Serial.println("Connecting to MQTT...");
-    // Unique client ID (using ESP8266 macAddress)  
-    String client_id = "esp8266-";
-    client_id += String(WiFi.macAddress());
-    Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
-//    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
-    if (client.connect(client_id.c_str())) {
-      Serial.printf("The client %s is connected to MQTT\n", client_id.c_str());
-      String WiFiRSSI = String(WiFi.RSSI());
-      Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
-      client.subscribe(topic01); // subscribe to mqtt channel
-    } else {
-      Serial.print("failed with state ");
-      Serial.print(client.state());
-      delay(500);
-    }
-  }
-}
 
 void reconnectWiFi() {
   WiFi.begin(ssid, password);
@@ -75,30 +66,25 @@ void reconnectWiFi() {
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
 }
-
-void setup() {
-  Serial.begin(115200);
-  for (int i = 0; i < 9; i++){
-    pinMode(pinNum[i], OUTPUT);
-    digitalWrite(pinNum[i], LOW); 
-  }
-  client.setServer(mqttServer, mqttPort);
-  client.setCallback(callback);
-}
-
-void turnOffGPIO(){
-  Serial.println("Turning OFF all GPIO");
-  for (int i = 0; i < 9; i++){
-    digitalWrite(pinNum[i], LOW); // Turn all outputs OFF
-  }
-}
-
-void scanGPIO(){
-  for (int i = 0; i < 9; i++){
-    turnOffGPIO();
-    digitalWrite(pinNum[i], HIGH); // Turn On GPIO
-    Serial.printf("scanGPIO() is turning GPIO %d ON\n",pinNum[i]);
-    delay(2000);
+ 
+void reconnectMQTT() {
+  while (!client.connected()) {
+    Serial.println("Connecting to MQTT...");
+    // Unique client ID (using ESP8266 macAddress)  
+    String client_id = "esp8266-";
+    client_id += String(WiFi.macAddress());
+    Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
+//    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
+    if (client.connect(client_id.c_str())) {
+      Serial.printf("The client %s is connected to MQTT\n", client_id.c_str());
+      String WiFiRSSI = String(WiFi.RSSI());
+      Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
+      client.subscribe(topic); // subscribe to mqtt topic
+    } else {
+      Serial.print("failed with state ");
+      Serial.print(client.state());
+      delay(500);
+    }
   }
 }
 
@@ -117,8 +103,23 @@ void publishValues(){
   delay(100);
 }
 
+void scanGPIO(){
+  for (int i = 0; i < 9; i++){
+    turnOffGPIO();
+    digitalWrite(pinNum[i], HIGH); // Turn On GPIO
+    Serial.printf("scanGPIO() is turning GPIO %d ON\n",pinNum[i]);
+    delay(2000);
+  }
+}
+
+void turnOffGPIO(){
+  Serial.println("Turning OFF all GPIO");
+  for (int i = 0; i < 9; i++){
+    digitalWrite(pinNum[i], LOW); // Turn all outputs OFF
+  }
+}
+
 void callback(char* topic, byte* payload, unsigned int length) {
- 
   Serial.print("Message arrived in topic: ");
   Serial.println(topic);
   Serial.print("Received ansi: ");
@@ -168,7 +169,60 @@ void callback(char* topic, byte* payload, unsigned int length) {
   publishValues();
 }
 
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Booting");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.println("Connection Failed! Rebooting...");
+    delay(5000);
+    ESP.restart();
+  }
+
+  for (int i = 0; i < 9; i++){ // Setup GPIO pins as Outputs
+    pinMode(pinNum[i], OUTPUT);
+    digitalWrite(pinNum[i], LOW); 
+  }
+
+  client.setServer(mqttServer, mqttPort);
+  client.setCallback(callback);
+
+  // Port defaults to 8266
+  // ArduinoOTA.setPort(8266);
+
+  // Hostname defaults to esp8266-[ChipID]
+  // ArduinoOTA.setHostname("myesp8266");
+
+  // No authentication by default
+  // ArduinoOTA.setPassword((const char *)"123");
+
+  ArduinoOTA.onStart([]() {
+    Serial.println("Start");
+  });
+  ArduinoOTA.onEnd([]() {
+    Serial.println("\nEnd");
+  });
+  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
+    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+  });
+  ArduinoOTA.onError([](ota_error_t error) {
+    Serial.printf("Error[%u]: ", error);
+    if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+    else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+    else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+    else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+    else if (error == OTA_END_ERROR) Serial.println("End Failed");
+  });
+  ArduinoOTA.begin();
+  Serial.println("Ready");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
 void loop() {
+  ArduinoOTA.handle();
   
   // Connect to WiFi if not connected
   if (WiFi.status() != WL_CONNECTED) {
@@ -180,19 +234,19 @@ void loop() {
     reconnectMQTT();
   }
 
-unsigned long currentMillis = millis();
-  /*  Check to see if it is time to publish RSSI via MQTT, 
-   *  if the difference between the current time
-   *  and the last time > interval then pubilish again
+  unsigned long currentMillis = millis();
+  /* Check to see if it is time to publish MQTT, if the difference between the current
+   *  time and the last time > 5 seconds then pubilish again
    */
 
   if (currentMillis - previousMillis >= interval) {
     // Update previousMillis to current time
     previousMillis = currentMillis;
-    // publish RSSI to esp8266/chipNum/RSSI with retain flag set
+    // Publish RSSi to esp/gdnRSSI01 with retain flag set
     String WiFiRSSI = String(WiFi.RSSI());
     client.publish(rssi,WiFiRSSI.c_str(),"-r");
-    delay(100);
   }
-  client.loop();
+  
+  client.loop(); 
+
 }
