@@ -35,7 +35,7 @@ const char *ipaddr = "esp8266/01/IP";
 
 const char *mqttUser = "robin"; 
 
-const char *mqttPassword = "Anc1p1tal"; 
+const char *mqttPassword = "P@55w0rd"; 
 
 unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 5000; // 5 second interval at which to publish MQTT values

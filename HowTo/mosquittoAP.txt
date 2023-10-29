@@ -17,3 +17,5 @@ To restart the service after modifying the .conf file
 sudo systemctl restart mosquitto
 
 
+To add more users or change an existing passwork
+sudo mosquitto_passwd /etc/mosquitto/passwd name
