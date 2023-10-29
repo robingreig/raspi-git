@@ -9,3 +9,11 @@ listener 1883
 Without anonymous, connection wasn't authenticated
 allow_anonymous true
 
+
+To check the status of the mosquitto broker
+sudo systemctl status mosquitto
+
+To restart the service after modifying the .conf file
+sudo systemctl restart mosquitto
+
+

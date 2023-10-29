@@ -14,8 +14,8 @@
 #include "Arduino.h"
 #include "FS.h"                // SD Card ESP32
 #include "SD_MMC.h"            // SD Card ESP32
-#include "soc/soc.h"           // Disable brownour problems
-#include "soc/rtc_cntl_reg.h"  // Disable brownour problems
+#include "soc/soc.h"           // Disable brownout problems
+#include "soc/rtc_cntl_reg.h"  // Disable brownout problems
 #include "driver/rtc_io.h"
 #include <EEPROM.h>            // read and write from flash memory
 
@@ -150,7 +150,7 @@ void setup() {
   
   delay(1000);
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
-  Serial.println("Setup ESP32 to sleep for every " + String(TIME_TO_SLEEP) +
+  Serial.println("Setup ESP32 to sleep for " + String(TIME_TO_SLEEP) +
   " Seconds");
   delay(1000);
   Serial.println("Going to sleep now");
