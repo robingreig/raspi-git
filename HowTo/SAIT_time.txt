@@ -1,0 +1,5 @@
+
+sudo nano /etc/systemd/timesyncd.conf
+
+Uncomment #NTP = and add time1.sait.ca (space) time2.sait.ca
+And uncomment fallback for home use?
