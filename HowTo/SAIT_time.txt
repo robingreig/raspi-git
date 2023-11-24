@@ -3,3 +3,4 @@ sudo nano /etc/systemd/timesyncd.conf
 
 Uncomment #NTP = and add time1.sait.ca (space) time2.sait.ca
 And uncomment fallback for home use?
+2023.11.25 - worked fine at home with fallback uncommented?
