@@ -1,4 +1,4 @@
-// PubTest.01
+// PubTestAuth.01
 // Functions to call connect wifi & connect mqtt
 // So that if either fail, it will automatically reconnect
 // Sends RSSI via mqtt
@@ -6,7 +6,8 @@
 // Sends IP via mqtt
 // IP data type is different than RSSI & MAC so publish command is different
 // Watches mqtt topic which controls GPIO02 (Blue LED on ESP8266-12)
-// 2023.10.11
+// Also using a different mosquitto broker with auth enabled
+// 2023.11.01
 // Robin Greig
 
 #include <ESP8266WiFi.h> 
@@ -21,9 +22,15 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 // MQTT Broker 
 
-const char *mqttServer = "192.168.200.26";
+//const char *mqttServer = "192.168.200.26";
+
+const char *mqttServer = "mqtt00.local";
 
 const int mqttPort = 1883; 
+
+const char *mqttUser = "robin"; 
+
+const char *mqttPassword = "P@55w0rd"; 
 
 const char *topic01 = "esp8266/01/GPIO02"; 
 
@@ -32,10 +39,6 @@ const char *rssi = "esp8266/01/RSSI";
 const char *mac = "esp8266/01/MAC";
 
 const char *ipaddr = "esp8266/01/IP";
-
-const char *mqttUser = "robin"; 
-
-const char *mqttPassword = "P@55w0rd"; 
 
 unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 5000; // 5 second interval at which to publish MQTT values

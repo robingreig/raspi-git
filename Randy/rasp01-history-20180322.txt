@@ -1,0 +1,70 @@
+    1  raspi-config
+    2  sudo raspi-config
+    3  ifconfig
+    4  sudo shutdown -h now
+    5  ifconfig
+    6  sudo vi /etc/dhcpcd.conf
+    7  sudo reboot
+    8  sudo vi /etc/dhcpcd.conf
+    9  sudo reboot
+   10  ls
+   11  sudo apt update
+   12  sudo apt upgrade -y
+   13  sudo apt dist-upgrade -y
+   14  sudo rpi-update
+   15  sudo reboot
+   16  python3 --version
+   17  sudo apt install bc
+   18  sudo apt install libncurses5-dev
+   19  sudo wget https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source -O /usr/bin/rpi-source && sudo chmod +x /usr/bin/rpi-source && /usr/bin/rpi-source -q --tag-update
+   20  rpi-source --skip-gcc
+   21  ls -ltr /dev/tty*
+   22  cd xr_usb_serial_common-1a/
+   23  sudo make
+   24  sudo rmmod cdc-acm
+   25  sudo modprobe -r usbserial
+   26  sudo modprobe usbserial
+   27  sudo insmod ./xr_usb_serial_common.ko
+   28  ls -ltr /dev/tty*
+   29  lsusb
+   30  lsmod
+   31  dmesg
+   32  sudo cp xr_usb_serial_common.ko /lib/modules/4.9.48+
+   33  sudo depmod -a
+   34  lsmod
+   35  ls -ltr /dev/tty*
+   36  modprobe xr_usb_serial_common
+   37  sudo vi /etc/modules
+   38  sudo reboot
+   39  lsusb
+   40  ls -l /dev/tty*
+   41  sudo apt install python3-mysqldb
+   42  pip3 install pymodbus
+   43  sudo apt install python3-pip
+   44  pip3 install pymodbus
+   45  python3
+   46  sudo shutdown -h now
+   47  sh -x tracer1.sh
+   48  crontab -e 
+   49  exit
+   50  ls
+   51  cat tracer1.py
+   52  history >rasp01-history-20171005.txt
+   53  vi rasp01-history-20171005.txt 
+   54  cat tracer1.py
+   55  cat rasp01-history-20171005.txt 
+   56  sudo apt install python3-mysqldb
+   57  python3
+   58  clear
+   59  exit
+   60  cat /etc/os_version
+   61  cat /etc/os-release
+   62  exit
+   63  ls
+   64  exit
+   65  cat /sys/class/thermal/thermal_zone0/temp
+   66  exit
+   67  ls
+   68  cat tracer1.log
+   69  cat tracer1.py
+   70  history >rasp01-history-20180322.txt

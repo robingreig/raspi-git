@@ -1,0 +1,132 @@
+    1  raspi-config
+    2  sudo raspi-config
+    3  ifconfig
+    4  sudo shutdown -h now
+    5  ifconfig
+    6  sudo vi /etc/dhcpcd.conf
+    7  sudo reboot
+    8  sudo vi /etc/dhcpcd.conf
+    9  sudo reboot
+   10  ls
+   11  sudo apt update
+   12  sudo apt upgrade -y
+   13  sudo apt dist-upgrade -y
+   14  sudo rpi-update
+   15  sudo reboot
+   16  python3 --version
+   17  sudo apt install bc
+   18  sudo apt install libncurses5-dev
+   19  sudo wget https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source -O /usr/bin/rpi-source && sudo chmod +x /usr/bin/rpi-source && /usr/bin/rpi-source -q --tag-update
+   20  rpi-source --skip-gcc
+   21  ls -ltr /dev/tty*
+   22  cd xr_usb_serial_common-1a/
+   23  sudo make
+   24  sudo rmmod cdc-acm
+   25  sudo modprobe -r usbserial
+   26  sudo modprobe usbserial
+   27  sudo insmod ./xr_usb_serial_common.ko
+   28  ls -ltr /dev/tty*
+   29  lsusb
+   30  lsmod
+   31  dmesg
+   32  sudo cp xr_usb_serial_common.ko /lib/modules/4.9.48+
+   33  sudo depmod -a
+   34  lsmod
+   35  ls -ltr /dev/tty*
+   36  modprobe xr_usb_serial_common
+   37  sudo vi /etc/modules
+   38  sudo reboot
+   39  lsusb
+   40  ls -l /dev/tty*
+   41  sudo apt install python3-mysqldb
+   42  pip3 install pymodbus
+   43  sudo apt install python3-pip
+   44  pip3 install pymodbus
+   45  python3
+   46  sudo shutdown -h now
+   47  sh -x tracer1.sh
+   48  crontab -e 
+   49  exit
+   50  ls
+   51  cat tracer1.py
+   52  history >rasp01-history-20171005.txt
+   53  vi rasp01-history-20171005.txt 
+   54  cat tracer1.py
+   55  cat rasp01-history-20171005.txt 
+   56  sudo apt install python3-mysqldb
+   57  python3
+   58  clear
+   59  exit
+   60  cat /etc/os_version
+   61  cat /etc/os-release
+   62  exit
+   63  ls
+   64  exit
+   65  cat /sys/class/thermal/thermal_zone0/temp
+   66  exit
+   67  ls
+   68  cat tracer1.log
+   69  cat tracer1.py
+   70  history >rasp01-history-20180322.txt
+   71  exit
+   72  crontab -e
+   73  ls
+   74  cat tracer1.sh
+   75  cat tracer1.py
+   76  exit
+   77  ls
+   78  more tracer1.py
+   79  tail -30 rasp01-history-20180322.txt 
+   80  tail -40 rasp01-history-20180322.txt 
+   81  more tracer1.py
+   82  man mysql
+   83  exit
+   84  more tracer1.py
+   85  exit
+   86  mysql
+   87  ls
+   88  mysql -h 192.168.1.105 -h home_data -u pidata -p
+   89  sudo install mysql-client
+   90  sudo apt install mysql-client
+   91  mysql -h 192.168.1.105 -h home_data -u pidata -p
+   92  mysql -h 192.168.1.105 -d home_data -u pidata -p
+   93  man mysql
+   94  mysql -h 192.168.1.105 -D home_data -u pidata -p
+   95  ls
+   96  mysql -h 192.168.1.105 -u pidata -p
+   97  exit
+   98  history |grep -i mysql
+   99  exit
+  100  ls
+  101  exit
+  102  ps ax
+  103  version
+  104  uname -a
+  105  history
+  106  ls
+  107  sudo shutdown -h now
+  108  ps ax
+  109  crontab -l
+  110  ls
+  111  cat tracer1.sh
+  112  ./tracer.sh
+  113  ./tracer1.sh
+  114  ls -l
+  115  sh -x tracer1.sh 
+  116  telnet 
+  117  sh -x tracer1.sh 
+  118  sudo apt install telnet
+  119  telnet
+  120  man telnet
+  121  telnet 192.168.1.105 3306
+  122  sh -x tracer1.sh 
+  123  exit
+  124  sudo shutdown -h  now
+  125  ps ax
+  126  crontab -v
+  127  crontab -l
+  128  shutdown -h now
+  129  sudo shutdown -h now
+  130  cat /proc/device-tree/model
+  131  ls -ltr
+  132  history >raspi01-history-20190401.txt
