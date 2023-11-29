@@ -1,0 +1,10 @@
+
+
+2023.11.27
+- Worked great in pivpn and using the qr code on my phone
+- Made a second .conf file in pivpn for Breadboard40 and then had to copy it over
+- Once I installed it on Breadboard40, i had difficulty starting it with the conf file
+XXX sudo wg setconf wg0 ./configs/Breadboard40.conf
+- Until I googled further and saw reference to wp-quick command
+sudo wg-quick up ./configs/Breadboard40.conf
+sudo wg-quick down ./configs/Breadboard40.conf 
