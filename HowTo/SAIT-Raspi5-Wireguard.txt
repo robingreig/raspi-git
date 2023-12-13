@@ -1,0 +1,4 @@
+1. link  sudo ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
+2. sudo apt install systemd-resolved
+3. systemctl enable systemd-resolved.service
+4. reboot
