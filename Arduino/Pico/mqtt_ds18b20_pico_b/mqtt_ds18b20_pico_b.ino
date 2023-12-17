@@ -1,23 +1,18 @@
-/* mqtt_ds18b20_pico_a doesn't work
- *  mqtt_ds18b20_pico_b works with smaller onewire library
+/* mqtt_da18b20_pico_b  2023.12.09
+ *  Robin Greig
+ *  Found the microDS18B20 library from Random Nerd Tutorials
+ *  used dtosstrf to convert float to char
  */
 
 #include <WiFi.h> 
 #include <PubSubClient.h>
-#include <OneWire.h>
-#include <DallasTemperature.h>
+#include <microDS18B20.h>
 #include <string.h>
 
 // DS18B20
 
 // GPIO where the DS18B20 is connected to
-const int oneWireBus = 15;
-
-// Setup a oneWire instance to communicate with any OneWire devices
-OneWire oneWire(oneWireBus);
-
-// Pass our oneWire reference to Dallas Temperature sensor 
-DallasTemperature sensors(&oneWire);
+MicroDS18B20<22> sensor;
 
 // WiFi 
 
@@ -40,15 +35,12 @@ PubSubClient client(espClient);
 
 // initialize temp variable
 float temperatureC = 0;
-char *temperatureTest = "-15.5";
- 
+char tempTest [8];
 
 void setup() { 
 
   Serial.begin(115200); // Start Serial Monitor
   
-  sensors.begin(); // Start the DS18B20 sensor
-
   WiFi.begin(ssid, password); // connecting to the WiFi network 
 
   while (WiFi.status() != WL_CONNECTED) { 
@@ -72,7 +64,6 @@ void setup() {
       client_id += String(WiFi.macAddress());
 
       Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
-
 //      if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) { 
       if (client.connect(client_id.c_str())) { 
 
@@ -97,12 +88,15 @@ void setup() {
 void loop() { 
 
   client.loop();
-  sensors.requestTemperatures();
-  temperatureC = sensors.getTempCByIndex(0);
+  sensor.requestTemp();
+  delay(1000); // delay to read sample?
+  temperatureC = sensor.getTemp();
+  Serial.println("Printing temperatureC");
   Serial.print(temperatureC);
   Serial.println("ºC");
-  client.publish(topic, temperatureTest ); //publish temp 
-  sprintf(temperatureTest,"%.2f", temperatureC);
-  client.publish(topic, temperatureTest ); //publish temp 
-  delay(5000);
+  dtostrf(temperatureC, 6, 2, tempTest);
+  Serial.print("tempTest = ");
+  Serial.println(tempTest);
+  client.publish(topic, tempTest ); //publish temp 
+  delay(50000);
 }

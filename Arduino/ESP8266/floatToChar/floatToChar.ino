@@ -11,14 +11,18 @@ void setup() {
 }
 
 float temperature = -12.5;
-char convert[16];
+char convert[8];
+char tempTest[8];
 
 // the loop routine runs over and over again forever:
 void loop() {
   Serial.print("float temp = ");
   Serial.println(temperature);
-  sprintf(convert, "%.3f", temperature);
-  Serial.print("A converted float: %s");
+  sprintf(convert, "%.2f", temperature);
+  Serial.print("A converted float using spintf: ");
   Serial.println(convert);
+  dtostrf(temperature, 6, 2, tempTest);
+  Serial.print("A converted float using dtostrf: ");
+  Serial.println(tempTest);
   delay(1000);        // delay in between reads for stability
 }

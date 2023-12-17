@@ -1,4 +1,7 @@
-// GPIO16 connect to Reset to wagke up
+/* mqtt_ds18b20_deepSleep_b doesn't use LED 2 to save power
+ *  Robin Greig  2023.12.09
+ *  GPIO16 connect to Reset to wake up *****
+*/
 #include <ESP8266WiFi.h> 
 #include <PubSubClient.h>
 #include <OneWire.h>
@@ -41,9 +44,6 @@ WiFiClient espClient;
 
 PubSubClient client(espClient); 
 
-// LED to turn on when connected
-#define LED 2
-
 // initialize temp variable
 float temperatureC = 0;
 char *tempChar = "00.00"; // temp needs to be char for mqtt
@@ -56,8 +56,6 @@ void setup() {
   
   sensors.begin(); // Start the DS18B20 sensor
 
-  pinMode(LED, OUTPUT); // setup onboard LED as output
-
   WiFi.begin(ssid, password); // connecting to the WiFi network 
 
   while (WiFi.status() != WL_CONNECTED) { 
@@ -69,8 +67,6 @@ void setup() {
   } 
 
   Serial.println("Connected to the WiFi network"); 
-  // turn on onboard led
-  digitalWrite(LED, HIGH);
 
   //connecting to a mqtt broker 
 
@@ -96,7 +92,6 @@ void setup() {
       if (client.connect(client_id.c_str())) { 
 
           Serial.println("Mqtt broker connected"); 
-          digitalWrite(LED, HIGH);
           
       } else { 
 

@@ -5,7 +5,7 @@ const char* ssid = "Calalta02"; // Enter your WiFi name
 const char* password =  "Micr0s0ft2018"; // Enter WiFi password
 const char* mqttServer = "192.168.200.21";
 const int mqttPort = 1883;
-const char* mqttUser = "otfxknod";
+const char* mqttUser = "pico00";
 const char* mqttPassword = "nSuUc1dDLygF";
  
 WiFiClient espClient;
@@ -43,9 +43,9 @@ void setup() {
     }
   }
  
-//  client.publish("esp/test", "hello"); //Topic name
-  client.publish("esp/test", mqttUser); //Topic name
-  client.subscribe("esp/test");
+//  client.publish("pico-00/test", "hello"); //Topic name
+  client.publish("pico-00/test", mqttUser); //Topic name
+  client.subscribe("pico-00/test");
  
 }
  
