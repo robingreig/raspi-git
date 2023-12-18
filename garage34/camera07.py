@@ -24,7 +24,7 @@ light = LED(25)
 # Relay for light is off when output is High (on)
 light.on()
 # Debug = 0 to stop test messages, Debug = 1 to print
-Debug = 1
+Debug = 0
 # Number of pics to be taken each time door is opened
 Num_Pics = 10
 # Delay between pics taken
@@ -39,7 +39,7 @@ while True:
         door.wait_for_release() # Door opened
         if Debug > 0:
             print("Door Opened!")
-            light.off() # output low = Light ON
+        light.off() # output low = Light ON
 # Send email that door is opened
         os.system("/home/robin/raspi-git/Python3/SMTP/Garage34Door.py")
         for i in range(Num_Pics):
@@ -47,6 +47,7 @@ while True:
             camera.capture('/home/robin/PicsTemp/%s.jpg' % now)
 # Send a copy of the pics to battmon24
         os.system("/home/robin/raspi-git/garage34/movePics.sh")
+#        os.system("/home/robin/PicsTemp/movePicsRename.sh")
         for j in range(60):
             if door.is_pressed:
                 light.on() # output high = Light OFF

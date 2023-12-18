@@ -1,0 +1,42 @@
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+
+##### set GPIO23 as door input
+##### set GPIO24 as furnace relay, HIGH to turn relay OFF
+##### set GPIO25 as door light relay, HIGH to turn relay OFF
+
+@reboot /home/robin/raspi-git/garage34/resetGPIO.py > /dev/null 2>&1
+
+##### garagetemp03mqtt.py is used for remote temperature control 
+#@reboot /home/robin/raspi-git/garage34/garagetemp03mqtt.py > /dev/null 2>&1
+#*/2 * * * * /home/robin/raspi-git/garage34/garagetemp03mqtt.py > /dev/null 2>&1
+* * * * * /home/robin/raspi-git/garage34/garageTempMqtt.py > /dev/null 2>&1
+#@reboot /home/robin/raspi-git/garage34/garageTempMqtt.py > /dev/null 2>&1 &
+
+##### Start camera / door monitor when pi boots up
+#@reboot /home/robin/raspi-git/garage34/camera07.py > /dev/null 2>&1 &
+@reboot /home/robin/raspi-git/garage34/camera07.py >> /home/robin/test/cameraLog.txt 2>&1 &
+
+# Run /home/robin/Pictures/fileRename.sh to remove : and space and replace with .
+59 23 * * * /home/robin/Pictures/fileRename.sh > /dev/null 2>&1
