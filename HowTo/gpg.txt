@@ -22,7 +22,11 @@ To setup gpg on a new pi:
 1) gpg --full-generate-key
 ***** and it will ask for your name and email address
 2) Check private & public keys with gpg --list-secret-keys & gpg --list-public-keys
+3) To export the private key gpg --export-secret-keys -a [keyID] > my_secret_key.asc
+4) To export the public key gpg --export -a [keyID] > my_public_key.asc
 
+To generate a revocation certificate
+gpg --gen-revoke --output revoke.asc [keyID]
 
 ##### if you want to trust a different key
 You need to run gpg --edit-key TheirKeyID and
@@ -56,5 +60,5 @@ gpg --edit-key Robin
 
 Website:
 https://itsfoss.com/gpg-encrypt-files-basic/
-
+https://emailselfdefense.fsf.org/en/
 
