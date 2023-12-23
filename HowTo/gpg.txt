@@ -25,6 +25,14 @@ To setup gpg on a new pi:
 3) To export the private key gpg --export-secret-keys -a [keyID] > my_secret_key.asc
 4) To export the public key gpg --export -a [keyID] > my_public_key.asc
 
+To import keys from another computer
+gpg --import public.key (or whatever you named it)
+gpt --import private key
+gpg --edit-key (KEY) trust quit
+# enter 5<return> (I trust ultimately)
+# enter y<return> (Really set this key to ultimate turst)
+Now verify with gpg --list-keys
+
 To generate a revocation certificate
 gpg --gen-revoke --output revoke.asc [keyID]
 
