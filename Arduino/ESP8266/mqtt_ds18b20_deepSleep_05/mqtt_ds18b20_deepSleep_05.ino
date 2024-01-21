@@ -1,4 +1,23 @@
-// GPIO16 connect to Reset to wagke up
+/******************************************************************************
+ *    Filename: mqtt_ds18b20_deepSleep_05                                     *
+ *    Version: 1.2                                                            *
+ *    Date: 14 Jan 2024                                                       *                *
+ *    Programmer: Robin Greig                                                 *
+ *                                                                            *                                             
+ *    Hardware: ESP8266 & DS18B20                                             *
+ *    Connect via wireless to Calalta02                                       *
+ *    Send RSSI to esp8266/05/RSSI                                            *
+ *    Send mac to esp8266/05/mac                                              *
+ *    Send temp to esp8266/05/temp                                            *
+ *    And go into deepSleep for 5 minutes                                     *
+ *                                                                            *
+ *    To program disconnect GPIO16 from Reset                                 *                                                                        
+ *    And reconnect to allow unit to wake up after deep sleep                 *
+ *    DS18B20 is sending data to GPIO13                                       *
+ *                                                                            *
+ ******************************************************************************/
+
+
 #include <ESP8266WiFi.h> 
 #include <PubSubClient.h>
 #include <OneWire.h>
@@ -27,13 +46,13 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 const char *mqtt_broker = "192.168.200.21"; 
 
 //const char *topic1 = "temp/outside";
-const char *topic1 = "esp8266/11/temp";
+const char *topic1 = "esp8266/05/temp";
 
 //const char *topic2 = "esp8266/RSSI";
-const char *topic2 = "esp8266/11/RSSI";
+const char *topic2 = "esp8266/05/RSSI";
 
 //const char *top = "esp8266/mac";
-const char *topic3 = "esp8266/11/mac";
+const char *topic3 = "esp8266/05/mac";
 
 const int mqtt_port = 1883; 
 
@@ -51,9 +70,6 @@ char signal[6]; // RSSI signal needs to be char for mqtt
 char mac[18]; // mac address needs to be char for mqtt
 
 void setup() { 
-
-  // Test WDT during Sleep
-  ESP.wdtDisable();
   
   Serial.begin(115200); // Start Serial Monitor
   
@@ -118,24 +134,30 @@ void setup() {
  
 
 void loop() { 
-  while(!Serial) {}
+  //while(!Serial) {}
   client.loop();
   sensors.requestTemperatures();
   temperatureC = sensors.getTempCByIndex(0);
   Serial.print(temperatureC);
   Serial.println("ºC"); 
   sprintf(tempChar,"%.2f", temperatureC);
-  client.publish(topic1, tempChar); //publish temp
+  client.publish(topic1, tempChar,"-r"); //publish temp
   Serial.printf("Published Temp to: %s\n",topic1);
-  delay(5000);
+  delay(1000);
   client.publish(topic2, signal); // publish RSSI
   Serial.printf("Published RSSI to: %s\n",topic2);
-  delay(5000);
-  client.publish(topic3, mac); // publish mac address
+  delay(1000);
+  client.publish(topic3, mac,"-r"); // publish mac address
   Serial.printf("Published mac address to: %s\n",topic3);
-  delay(5000);
-//  Serial.println("Going to sleep for 60 seconds");
-//  ESP.deepSleep(60e6);
-  Serial.println("Going to sleep for 5 minutes");
-  ESP.deepSleep(300e6);
+  delay(1000);
+//  Serial.println("Going to sleep for 1 minute / 60 seconds");
+  ESP.deepSleep(60e6);
+//  Serial.println("Going to sleep for 1.5 minutes / 90 seconds");
+//  ESP.deepSleep(90e6);
+//  Serial.println("Going to sleep for 2 minutes / 120 seconds");
+//  ESP.deepSleep(120e6);
+//  Serial.println("Going to sleep for 3 minutes / 180 seconds");
+//  ESP.deepSleep(180e6);
+//  Serial.println("Going to sleep for 5 minutes / 300 seconds");
+//  ESP.deepSleep(300e6);
 }

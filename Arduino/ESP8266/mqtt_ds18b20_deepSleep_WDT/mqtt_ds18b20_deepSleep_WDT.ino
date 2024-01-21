@@ -26,14 +26,11 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 const char *mqtt_broker = "192.168.200.21"; 
 
-//const char *topic1 = "temp/outside";
-const char *topic1 = "esp8266/11/temp";
+const char *topic1 = "esp8266/04/temp";
 
-//const char *topic2 = "esp8266/RSSI";
-const char *topic2 = "esp8266/11/RSSI";
+const char *topic2 = "esp8266/04/RSSI";
 
-//const char *top = "esp8266/mac";
-const char *topic3 = "esp8266/11/mac";
+const char *topic3 = "esp8266/04/mac";
 
 const int mqtt_port = 1883; 
 
@@ -46,7 +43,8 @@ PubSubClient client(espClient);
 
 // initialize temp variable
 float temperatureC = 0;
-char *tempChar = "00.00"; // temp needs to be char for mqtt
+//char *tempChar = "00.00"; // temp needs to be char for mqtt
+char tempChar[6]; // temp needs to be char for mqtt
 char signal[6]; // RSSI signal needs to be char for mqtt
 char mac[18]; // mac address needs to be char for mqtt
 
@@ -65,6 +63,9 @@ void setup() {
 
   while (WiFi.status() != WL_CONNECTED) { 
 
+      // Test WDT & Feed
+      ESP.wdtFeed();
+
       delay(500); 
 
       Serial.println("Connecting to WiFi.."); 
@@ -77,9 +78,13 @@ void setup() {
 
   //connecting to a mqtt broker 
 
-  client.setServer(mqtt_broker, mqtt_port); 
+  client.setServer(mqtt_broker, mqtt_port);
 
-  while (!client.connected()) { 
+
+  while (!client.connected()) {
+
+      // Test WDT & Feed
+      ESP.wdtFeed();
 
       String client_id = "esp8266-"; 
 
@@ -127,12 +132,18 @@ void loop() {
   sprintf(tempChar,"%.2f", temperatureC);
   client.publish(topic1, tempChar); //publish temp
   Serial.printf("Published Temp to: %s\n",topic1);
+  // Test WDT & Feed
+  ESP.wdtFeed();
   delay(5000);
   client.publish(topic2, signal); // publish RSSI
   Serial.printf("Published RSSI to: %s\n",topic2);
+  // Test WDT & Feed
+  ESP.wdtFeed();
   delay(5000);
   client.publish(topic3, mac); // publish mac address
   Serial.printf("Published mac address to: %s\n",topic3);
+  // Test WDT & Feed
+  ESP.wdtFeed();
   delay(5000);
 //  Serial.println("Going to sleep for 60 seconds");
 //  ESP.deepSleep(60e6);
