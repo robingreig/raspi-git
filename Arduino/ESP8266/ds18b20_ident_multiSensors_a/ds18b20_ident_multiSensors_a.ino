@@ -1,4 +1,4 @@
-/*********
+                                                                                                                                                                                                                                                                                                                                                                                                           /*********
   Rui Santos
   Complete project details at https://RandomNerdTutorials.com  
 *********/
@@ -32,6 +32,7 @@ void setup(){
   numberOfDevices = sensors.getDeviceCount();
   
   // locate devices on the bus
+  Serial.println();
   Serial.print("Locating devices...");
   Serial.print("Found ");
   Serial.print(numberOfDevices, DEC);
