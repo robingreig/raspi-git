@@ -224,7 +224,7 @@ void loop()
   if (currentMillis - previousMillis >= interval) {
     // Update previousMillis to current time
     previousMillis = currentMillis;
-    // Publish RSSi to esp/gdnRSSI01 with retain flag set
+    // Publish RSSi to esp8266/02/RSSI with retain flag set
     String WiFiRSSI = String(WiFi.RSSI());
     client.publish(rssi,WiFiRSSI.c_str(),"-r");
     adcValue = 0;
@@ -251,7 +251,7 @@ void loop()
     sprintf(adcFloatChar, "%.2f", adcFloat);
     Serial.print("ADC Float Char = ");
     Serial.println(adcFloatChar);
-    /* Publish the Battery Voltage to esp8266/03/battVolt with retain flag set */
+    /* Publish the Battery Voltage to esp8266/02/battVolt with retain flag set */
     client.publish(battVolt,adcFloatChar,"-r");
     sensors.requestTemperatures();
     temperature1 = sensors.getTempCByIndex(0);
@@ -259,12 +259,14 @@ void loop()
     Serial.print(temperature1);
     Serial.println("ºC"); 
     sprintf(temperatureChar1,"%.2f", temperature1);
+    /* Publish the Battery Temperature to esp8266/02/battTemp with retain flag set */
     client.publish(battTemp, temperatureChar1,"-r"); //publish temp
     temperature2 = sensors.getTempCByIndex(1);
     Serial.print("Blue temp = outTemp = ");
     Serial.print(temperature2);
     Serial.println("ºC"); 
     sprintf(temperatureChar2,"%.2f", temperature2);
+    /* Publish the Outdoor Temperature to esp8266/02/outTemp with retain flag set */
     client.publish(outTemp, temperatureChar2,"-r"); //publish temp
   }
   client.loop();

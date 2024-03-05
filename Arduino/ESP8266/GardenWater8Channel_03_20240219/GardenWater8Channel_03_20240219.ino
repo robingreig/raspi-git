@@ -1,9 +1,8 @@
 
 /************************************************************************
-  GardenWater8Channel_02_20240121a
-  Robin Greig, 2024.01.21
+  GardenWater8Channel_03_20240120a
+  Robin Greig, 2024.01.20
   Use 8 channel Relay board with built in ESP8266
-  To program connect GPIO00 to GND pin & TX, RX, & GND to Raspi
   mqtt keepalive is only 15 seconds so I've added 2 functions
   to check for wifi & mqtt connection at the start of the loop
   mqtt broker: mqtt21.local
@@ -13,9 +12,9 @@
   And Publish RSSI on MQTT esp8266/03/RSSI
   And Publish Battery Voltage on MQTT esp8266/03/battVolt
   temperature1 = sensors.getTempCByIndex(0) which is Green/Red DS18B20
-  which will publish Battery Temp on MQTT esp8266/02/battTemp
+  which will publish Battery Temp on MQTT esp8266/03/battTemp
   temperature2 = sensors.getTempCByIndex(1) which is Silver DS18B20
-  which will publish Outside Temp on MQTT esp8266/02/outTemp
+  which will publish Outside Temp on MQTT esp8266/03/outTemp
   Used millis to delay publishing without delaying MQTT loop checking
   Used for loop to sample battery voltage x 3 before publishing
 **************************************************************************/
@@ -48,11 +47,11 @@ unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 180000; // 3 minute interval at which to publish MQTT values
 const long interval = 300000; // 5 minute interval at which to publish MQTT values
 
-const char *switch01 = "esp8266/02/GPIO"; // MQTT subscribe topic for switch inputs
-const char *battVolt = "esp8266/02/battVolt"; // MQTT publish topic for battery voltage
-const char *outTemp = "esp8266/02/outTemp"; // MQTT publish topic for outside temperature
-const char *battTemp = "esp8266/02/battTemp"; // MQTT publish topic for outside temperature
-const char *rssi = "esp8266/02/RSSI"; // MQTT publish topic for signal RSSI
+const char *switch01 = "esp8266/03/GPIO"; // MQTT subscribe topic for switch inputs
+const char *battVolt = "esp8266/03/battVolt"; // MQTT publish topic for battery voltage
+const char *outTemp = "esp8266/03/outTemp"; // MQTT publish topic for outside temperature
+const char *battTemp = "esp8266/03/battTemp"; // MQTT publish topic for outside temperature
+const char *rssi = "esp8266/03/RSSI"; // MQTT publish topic for signal RSSI
 
  
 WiFiClient espClient;
@@ -255,13 +254,13 @@ void loop()
     client.publish(battVolt,adcFloatChar,"-r");
     sensors.requestTemperatures();
     temperature1 = sensors.getTempCByIndex(0);
-    Serial.print("Yellow/Green temp = battTemp = ");
+    Serial.print("Yellow/Green or Green/Red = battTemp = ");
     Serial.print(temperature1);
     Serial.println("ºC"); 
     sprintf(temperatureChar1,"%.2f", temperature1);
     client.publish(battTemp, temperatureChar1,"-r"); //publish temp
     temperature2 = sensors.getTempCByIndex(1);
-    Serial.print("Blue temp = outTemp = ");
+    Serial.print("Blue or Silver = outTemp = ");
     Serial.print(temperature2);
     Serial.println("ºC"); 
     sprintf(temperatureChar2,"%.2f", temperature2);
