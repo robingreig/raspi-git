@@ -1,7 +1,7 @@
 
 /************************************************************************
-  GardenWater8Channel_03_20240120b
-  Robin Greig, 2024.01.20
+  GardenWater8Channel_02_20240303a
+  Robin Greig, 2024.03.03
   Use 8 channel Relay board with built in ESP8266
   mqtt keepalive is only 15 seconds so I've added 2 functions
   to check for wifi & mqtt connection at the start of the loop
@@ -17,6 +17,8 @@
   which will publish Outside Temp on MQTT esp8266/03/outTemp
   Used millis to delay publishing without delaying MQTT loop checking
   Used for loop to sample battery voltage x 3 before publishing
+  2024.03.03 units keep locking up in the cold so I'm trying to add watchdog
+  - 12 seconds was too long, 6 worked well, but I settled on 5 seconds to feed the dog 
 **************************************************************************/
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
@@ -41,18 +43,24 @@ int adcAverage = 0; // Variable to store average value of adc
 float adcFloat = 0; // Variable to convert ADC value to battery voltage
 char adcFloatChar[6]; // Variable to store voltage as a Char
 
-unsigned long previousMillis = 0; // will store last time MQTT published
-//const long interval = 5000; // 5 second interval at which to publish MQTT values
-//const long interval = 60000; // 60 second interval at which to publish MQTT values
-//const long interval = 180000; // 3 minute interval at which to publish MQTT values
-const long interval = 240000; // 4 minute interval at which to publish MQTT values
-//const long interval = 300000; // 5 minute interval at which to publish MQTT values
+unsigned long mqttPreviousMillis = 0; // will store last time MQTT published
+//const long mqttInterval = 5000; // 5 second interval at which to publish MQTT values
+//const long mqttInterval = 60000; // 60 second interval at which to publish MQTT values
+//const long mqttInterval = 180000; // 3 minute interval at which to publish MQTT values
+const long mqttInterval = 300000; // 5 minute interval at which to publish MQTT values
 
-const char *switch01 = "esp8266/03/GPIO"; // MQTT subscribe topic for switch inputs
-const char *battVolt = "esp8266/03/battVolt"; // MQTT publish topic for battery voltage
-const char *outTemp = "esp8266/03/outTemp"; // MQTT publish topic for outside temperature
-const char *battTemp = "esp8266/03/battTemp"; // MQTT publish topic for outside temperature
-const char *rssi = "esp8266/03/RSSI"; // MQTT publish topic for signal RSSI
+unsigned long wdtPreviousMillis = 0; // will store last time MQTT published
+const long wdtInterval = 2000; // 2 second interval at which to feed the dog
+//const long wdtInterval = 5000; // 5 second interval at which to feed the dog
+//const long wdtInterval = 6000; // 6 second interval at which to feed the dog
+//const long wdtInterval = 12000; // 12 second interval at which to feed the dog
+
+
+const char *switch01 = "esp8266/02/GPIO"; // MQTT subscribe topic for switch inputs
+const char *battVolt = "esp8266/02/battVolt"; // MQTT publish topic for battery voltage
+const char *outTemp = "esp8266/02/outTemp"; // MQTT publish topic for outside temperature
+const char *battTemp = "esp8266/02/battTemp"; // MQTT publish topic for outside temperature
+const char *rssi = "esp8266/02/RSSI"; // MQTT publish topic for signal RSSI
 
  
 WiFiClient espClient;
@@ -123,6 +131,8 @@ void reconnectWiFi() {
 
 void setup() {
  
+  // enable wdt
+  ESP.wdtDisable();
   Serial.begin(115200);
   for (int i = 0; i < 9; i++){
     pinMode(pinNum[i], OUTPUT);
@@ -209,21 +219,29 @@ void loop()
   // Connect to WiFi if not connected
   if (WiFi.status() != WL_CONNECTED) {
     reconnectWiFi();
+    ESP.wdtFeed();
+    Serial.println("Just fed the wifi dog");
   }
 
   // Connect to MQTT if not connected
   if(!client.connected()) {
     reconnectMQTT();
+    ESP.wdtFeed();
+    Serial.println("Just fed the mqtt dog");
   }
 
   unsigned long currentMillis = millis();
   /* Check to see if it is time to publish MQTT, if the difference between the current
    *  time and the last time > 5 seconds then pubilish again
    */
-
-  if (currentMillis - previousMillis >= interval) {
-    // Update previousMillis to current time
-    previousMillis = currentMillis;
+  if (currentMillis - wdtPreviousMillis >= wdtInterval){
+    wdtPreviousMillis = currentMillis;
+    ESP.wdtFeed();
+    Serial.println("Just fed the main loop dog!");   
+  }
+  if (currentMillis - mqttPreviousMillis >= mqttInterval) {
+    // Update mqttPreviousMillis to current time
+    mqttPreviousMillis = currentMillis;
     // Publish RSSi to esp/gdnRSSI01 with retain flag set
     String WiFiRSSI = String(WiFi.RSSI());
     client.publish(rssi,WiFiRSSI.c_str(),"-r");
