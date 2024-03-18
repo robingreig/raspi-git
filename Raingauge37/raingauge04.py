@@ -30,13 +30,15 @@ def button_callback(channel):
     c.execute("INSERT INTO raincount(currentdate, currenttime) VALUES (?, ?)", (d, t))
 #    c.execute("INSERT INTO raincount(currentdate, currenttime) VALUES (date('now'), time('now'))")
     conn.commit()
-
+    time.sleep(0.5)
 # Setup event on GPIO 23, Falling Edge
 GPIO.add_event_detect(21, GPIO.FALLING, callback=button_callback)
+while True:
+    time.sleep(0.5)
 #GPIO.add_event_detect(21, GPIO.RISING, callback=button_callback)
 
 # raingauge03 has this line, commented out in raingauge04
-message = input("Press enter to quit\n\n") # Run until enter pressed
+#message = input("Press enter to quit\n\n") # Run until enter pressed
 
 GPIO.cleanup() # Clean Up
 
