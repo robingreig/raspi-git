@@ -17,19 +17,18 @@ DallasTemperature sensors(&oneWire);
 
 // WiFi 
 
-const char *ssid = "Calalta02"; // Enter your WiFi name 
+const char* ssid = "Calalta02"; // Enter your WiFi name 
 
-const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+const char* password = "Micr0s0ft2018";  // Enter WiFi password 
 
 // MQTT Broker 
 
 const char *mqtt_broker = "192.168.200.21"; 
 
-//const char *topic1 = "temp/outside";
-const char *topic1 = "test/outside";
+const char *topic1 = "esp8266/11/temp1";
 
 //const char *topic2 = "esp8266/RSSI";
-const char *topic2 = "test/RSSI";
+const char *topic2 = "esp8266/11/RSSI";
 
 const int mqtt_port = 1883; 
 
@@ -73,7 +72,7 @@ void setup() {
 
   while (!client.connected()) { 
 
-      String client_id = "esp8266-00 > "; 
+      String client_id = "esp8266-11 > "; 
 
       String WiFiRSSI = String(WiFi.RSSI());
 
