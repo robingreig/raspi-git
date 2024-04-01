@@ -1,15 +1,17 @@
 /******************************************************************************
- *    Filename: mqtt_ds18b20_double_deepSleep_11                                     *
+ *    Filename: mqtt_ds18b20_double_deepSleep_14                              *
  *    Version: 1.0                                                            *
- *    Date: 30 March 2024                                                     *
+ *    Date: 31 March 2024                                                     *
  *    Programmer: Robin Greig                                                 *
  *                                                                            *                                             
- *    Hardware: ESP8266 & 2 x DS18B20                                             *
+ *    Hardware: ESP8266 & 4 x DS18B20                                         *
  *    Connect via wireless to Calalta02                                       *
- *    Send RSSI to esp8266/11/RSSI                                            *
- *    Send mac to esp8266/11/mac                                              *
- *    Send temp1 to esp8266/11/inTemp which is the red DS18B20                *                                            
- *    Send temp2 to esp8266/11/outTemp which is the plain DS18B20             *
+ *    Send RSSI to esp8266/14/RSSI                                            *
+ *    Send mac to esp8266/14/mac                                              *
+ *    Send temp1 to esp8266/14/Temp1 which is the ? DS18B20                   *                                            
+ *    Send temp2 to esp8266/14/Temp2 which is the : DS18B20                   *
+ *    Send temp3 to esp8266/14/Temp3 which is the ? DS18B20                   *                                            
+ *    Send temp4 to esp8266/14/Temp4 which is the : DS18B20                   *
  *    And go into deepSleep for 5 minutes                                     *
  *                                                                            *
  *    To program disconnect GPIO16 from Reset                                 *                                                                        
@@ -25,10 +27,14 @@
 #include <DallasTemperature.h>
 #include <string.h>
 
+// Set DEBUG Variable, > 0 = print Serial statements
+const int DEBUG = 0;
+
+
 // DS18B20
 
 // GPIO where the DS18B20 is connected to
-const int oneWireBus = 04;
+const int oneWireBus = 13;
 
 // Setup a oneWire instance to communicate with any OneWire devices
 OneWire oneWire(oneWireBus);
@@ -48,15 +54,19 @@ const char *mqttServer = "192.168.200.21";
 
 const int mqttPort = 1883;
 
-const char *switch01 = "esp8266/11/GPIO";
+const char *switch01 = "esp8266/14/GPIO";
 
-const char *topic1 = "esp8266/11/inTemp";
+const char *topic1 = "esp8266/14/inTemp";
 
-const char *topic2 = "esp8266/11/outTemp";
+const char *topic2 = "esp8266/14/outTemp";
 
-const char *topic3 = "esp8266/11/RSSI";
+const char *topic3 = "esp8266/14/inTemp";
 
-const char *topic4 = "esp8266/11/mac";
+const char *topic4 = "esp8266/14/outTemp";
+
+const char *topic5 = "esp8266/14/RSSI";
+
+const char *topic6 = "esp8266/14/mac";
 
 WiFiClient espClient; 
 
@@ -65,7 +75,7 @@ PubSubClient client(espClient);
 // initialize temp variable
 float temperatureC = 0;
 char *tempChar = "00.00"; // temp needs to be char for mqtt
-char strength[6]; // RSSI strength needs to be char for mqtt
+char signal[6]; // RSSI signal needs to be char for mqtt
 char mac[18]; // mac address needs to be char for mqtt
 
 void reconnectMQTT() {
@@ -94,11 +104,15 @@ void reconnectWiFi() {
  
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
+    if (DEBUG > 0) {
     Serial.println("Connecting to WiFi..");
+    }
   }
+  if (DEBUG > 0) {
   Serial.println("Connected to the WiFi network");
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
+  }
 }
 
 void setup() { 
@@ -129,25 +143,31 @@ void loop() {
   client.loop();
   sensors.requestTemperatures();
   temperatureC = sensors.getTempCByIndex(0);
+  if (DEBUG > 0) {
   Serial.print(temperatureC);
   Serial.println("ºC"); 
   sprintf(tempChar,"%.2f", temperatureC);
+  Serial.printf("Published Temp1 to topic1 from ? DS18B20: %s\n",topic1);
+  }
   client.publish(topic1, tempChar,"-r"); //publish temp
-  Serial.printf("Published inTemp to topic1 from RED DS18B20: %s\n",topic1);
   delay(1000);
   temperatureC = sensors.getTempCByIndex(1);
+  if (DEBUG > 0) {
   Serial.print(temperatureC);
   Serial.println("ºC"); 
   sprintf(tempChar,"%.2f", temperatureC);
+  Serial.printf("Published Temp2 to topic2 from ? DS18B20: %s\n",topic2);
+  }
   client.publish(topic2, tempChar,"-r"); //publish temp
-  Serial.printf("Published outTemp to topic2 from PLAIN DS18B20: %s\n",topic2);
-  delay(1000);
-  Serial.printf("Published RSSI to: %s\n",topic3);
+  delay(1000);  
+  client.publish(topic5, signal,"-r"); // publish RSSI
+  if (DEBUG > 0) {
+  Serial.printf("Published RSSI to: %s\n",topic5);
   Serial.println();
-  client.publish(topic3, strength,"-r"); // publish RSSI
+  }
   delay(1000);
-  Serial.println("Going to sleep for 1 minute / 60 seconds");
-  ESP.deepSleep(60e6);
+//  Serial.println("Going to sleep for 1 minute / 60 seconds");
+//  ESP.deepSleep(60e6);
 //  Serial.println("Going to sleep for 1.5 minutes / 90 seconds");
 //  ESP.deepSleep(90e6);
 //  Serial.println("Going to sleep for 2 minutes / 120 seconds");
