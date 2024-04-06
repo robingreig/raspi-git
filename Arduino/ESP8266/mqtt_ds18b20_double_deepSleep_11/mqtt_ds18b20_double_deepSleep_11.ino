@@ -1,7 +1,7 @@
 /******************************************************************************
  *    Filename: mqtt_ds18b20_double_deepSleep_11                                     *
  *    Version: 1.0                                                            *
- *    Date: 30 March 2024                                                     *
+ *    Date: 4 April 2024                                                     *
  *    Programmer: Robin Greig                                                 *
  *                                                                            *                                             
  *    Hardware: ESP8266 & 2 x DS18B20                                             *
@@ -24,6 +24,9 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <string.h>
+
+// Set DEBUG Variable, > 0 = print Serial statements
+const int DEBUG = 1;
 
 // DS18B20
 
@@ -70,17 +73,25 @@ char mac[18]; // mac address needs to be char for mqtt
 
 void reconnectMQTT() {
   while (!client.connected()) {
+    if (DEBUG > 0) {
     Serial.println("Connecting to MQTT...");
+    }
     // Unique client ID (using ESP8266 macAddress)  
     String client_id = "esp8266-";
     client_id += String(WiFi.macAddress());
-    Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
+    if (DEBUG > 0) {
+    Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str());
+    } 
 //    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
     if (client.connect(client_id.c_str())) {
+      if (DEBUG > 0) {
       Serial.printf("The client %s is connected to MQTT\n", client_id.c_str());
+      }
       String WiFiRSSI = String(WiFi.RSSI());
+      strcpy(strength, WiFiRSSI.c_str());
+      if (DEBUG > 0) {
       Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
-      client.subscribe(switch01); // subscribe to mqtt topic
+      }client.subscribe(switch01); // subscribe to mqtt topic
     } else {
       Serial.print("failed with state ");
       Serial.print(client.state());
@@ -94,11 +105,15 @@ void reconnectWiFi() {
  
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
+    if (DEBUG > 0) {
     Serial.println("Connecting to WiFi..");
+    }
   }
+  if (DEBUG > 0) {
   Serial.println("Connected to the WiFi network");
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
+  }
 }
 
 void setup() { 
@@ -129,22 +144,29 @@ void loop() {
   client.loop();
   sensors.requestTemperatures();
   temperatureC = sensors.getTempCByIndex(0);
+  if (DEBUG > 0) {
   Serial.print(temperatureC);
   Serial.println("ºC"); 
   sprintf(tempChar,"%.2f", temperatureC);
-  client.publish(topic1, tempChar,"-r"); //publish temp
   Serial.printf("Published inTemp to topic1 from RED DS18B20: %s\n",topic1);
+  }
+  client.publish(topic1, tempChar,"-r"); //publish temp
   delay(1000);
   temperatureC = sensors.getTempCByIndex(1);
+  if (DEBUG > 0) {
   Serial.print(temperatureC);
   Serial.println("ºC"); 
   sprintf(tempChar,"%.2f", temperatureC);
-  client.publish(topic2, tempChar,"-r"); //publish temp
   Serial.printf("Published outTemp to topic2 from PLAIN DS18B20: %s\n",topic2);
+  }
+  client.publish(topic2, tempChar,"-r"); //publish temp
   delay(1000);
+  client.publish(topic3, strength,"-r"); // publish RSSI
+  if (DEBUG > 0) {
   Serial.printf("Published RSSI to: %s\n",topic3);
   Serial.println();
-  client.publish(topic3, strength,"-r"); // publish RSSI
+  delay(5000);
+  }
   delay(1000);
   Serial.println("Going to sleep for 1 minute / 60 seconds");
   ESP.deepSleep(60e6);

@@ -1,7 +1,7 @@
 /******************************************************************************
- *    Filename: mqtt_ds18b20_double_deepSleep_14                              *
+ *    Filename: mqtt_ds18b20_double_deepSleep_11                              *
  *    Version: 1.0                                                            *
- *    Date: 01 April 2024                                                     *
+ *    Date: 03 April 2024                                                     *
  *    Programmer: Robin Greig                                                 *
  *                                                                            *                                             
  *    Hardware: ESP8266 & 4 x DS18B20                                         *
@@ -10,13 +10,15 @@
  *    > Send mac to esp8266/14/mac (not working)                              *              
  *    > For some reason if I don't put the const char *topic6 in there        *
  *    > Then the RSSI doesn't get sent via mqtt?                              *
- *    Send topic1 to esp8266/14/whiteTemp which is the White DS18B20          *                                            
- *    Send topic2 to esp8266/14/blueTemp which is the Blue DS18B20            *
- *    Send topic3 to esp8266/14/orangeTemp which is the Orange DS18B20        *                                            
- *    Send topic4 to esp8266/14/greenTemp which is the Green DS18B20          *
+ *    Send topic1 to esp8266/15/greenTemp which is the Green DS18B20          *                                            
+ *    Send topic2 to esp8266/15/orangeTemp which is the Orange DS18B20        *
+ *    Send topic3 to esp8266/15/redTemp which is the Red DS18B20              *                                            
+ *    Send topic4 to esp8266/15/plainTemp which is the Plain DS18B20          *
+ *    Send topic5 to ESP8266/15/RSSI                                          *
+ *    Had to add topic 6 mac so that topic5 RSSI would work?                  *
  *    And go into deepSleep for 1 minute                                      *
  *                                                                            *
- *    Setup DEBUG variable to print Serial.print lines if > 0                                    *
+ *    Setup DEBUG variable to print Serial.print lines if >                   *
  *                                                                            *
  *    To program disconnect GPIO16 from Reset                                 *                                                                        
  *    And reconnect to allow unit to wake up after deep sleep                 *
@@ -58,19 +60,19 @@ const char *mqttServer = "192.168.200.21";
 
 const int mqttPort = 1883;
 
-const char *switch01 = "esp8266/14/GPIO";
+const char *switch01 = "esp8266/15/GPIO";
 
-const char *topic1 = "esp8266/14/whiteTemp";
+const char *topic1 = "esp8266/15/greenTemp";
 
-const char *topic2 = "esp8266/14/blueTemp";
+const char *topic2 = "esp8266/15/orangeTemp";
 
-const char *topic3 = "esp8266/14/orangeTemp";
+const char *topic3 = "esp8266/15/redTemp";
 
-const char *topic4 = "esp8266/14/greenTemp";
+const char *topic4 = "esp8266/15/plainTemp";
 
-const char *topic5 = "esp8266/14/RSSI";
+const char *topic5 = "esp8266/15/RSSI";
 
-const char *topic6 = "esp8266/14/mac";
+const char *topic6 = "esp8266/15/mac";
 
 WiFiClient espClient; 
 
@@ -159,7 +161,7 @@ void loop() {
   temperatureC = sensors.getTempCByIndex(0);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic1 value of %.2fºC to whiteTemp from White DS18B20: %s\n", temperatureC, topic1);
+  Serial.printf("Published topic1 value of %.2fºC to greenTemp from Green DS18B20: %s\n", temperatureC, topic1);
   Serial.println();
   }
   client.publish(topic1, tempChar,"-r"); //publish temp
@@ -167,7 +169,7 @@ void loop() {
   temperatureC = sensors.getTempCByIndex(1);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic2 value of %.2fºC to blueTemp from Blue DS18B20: %s\n", temperatureC, topic2);
+  Serial.printf("Published topic2 value of %.2fºC to orangeTemp from Blue DS18B20: %s\n", temperatureC, topic2);
   Serial.println();
   }
   client.publish(topic2, tempChar,"-r"); //publish temp
@@ -175,7 +177,7 @@ void loop() {
   temperatureC = sensors.getTempCByIndex(2);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic3 value of %.2fºC to orangeTemp from Orange DS18B20: %s\n", temperatureC, topic3);
+  Serial.printf("Published topic3 value of %.2fºC to redTemp from Red DS18B20: %s\n", temperatureC, topic3);
   Serial.println();
   }
   client.publish(topic3, tempChar,"-r"); //publish temp
@@ -183,7 +185,7 @@ void loop() {
   temperatureC = sensors.getTempCByIndex(3);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic4 value of %.2fºC to greenTemp from Green DS18B20: %s\n", temperatureC, topic4);
+  Serial.printf("Published topic4 value of %.2fºC to plainTemp from Plain DS18B20: %s\n", temperatureC, topic4);
   Serial.println();
   }
   client.publish(topic4, tempChar,"-r"); //publish temp

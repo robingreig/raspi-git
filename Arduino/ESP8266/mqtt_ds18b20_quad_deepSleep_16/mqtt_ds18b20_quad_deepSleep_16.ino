@@ -1,7 +1,7 @@
 /******************************************************************************
- *    Filename: mqtt_ds18b20_double_deepSleep_14                              *
+ *    Filename: mqtt_ds18b20_double_deepSleep_11                              *
  *    Version: 1.0                                                            *
- *    Date: 01 April 2024                                                     *
+ *    Date: 03 April 2024                                                     *
  *    Programmer: Robin Greig                                                 *
  *                                                                            *                                             
  *    Hardware: ESP8266 & 4 x DS18B20                                         *
@@ -10,10 +10,12 @@
  *    > Send mac to esp8266/14/mac (not working)                              *              
  *    > For some reason if I don't put the const char *topic6 in there        *
  *    > Then the RSSI doesn't get sent via mqtt?                              *
- *    Send topic1 to esp8266/14/whiteTemp which is the White DS18B20          *                                            
- *    Send topic2 to esp8266/14/blueTemp which is the Blue DS18B20            *
- *    Send topic3 to esp8266/14/orangeTemp which is the Orange DS18B20        *                                            
- *    Send topic4 to esp8266/14/greenTemp which is the Green DS18B20          *
+ *    Send topic1 to esp8266/11/whiteTemp which is the White DS18B20          *                                            
+ *    Send topic2 to esp8266/11/blueTemp which is the Blue DS18B20            *
+ *    Send topic3 to esp8266/11/orangeTemp which is the Orange DS18B20        *                                            
+ *    Send topic4 to esp8266/11/greenTemp which is the Green DS18B20          *
+ *    Send topic5 to ESP8266/11/RSSI
+ *    Had to add topic 6 mac so that topic5 RSSI would work?
  *    And go into deepSleep for 1 minute                                      *
  *                                                                            *
  *    Setup DEBUG variable to print Serial.print lines if > 0                                    *
@@ -58,19 +60,19 @@ const char *mqttServer = "192.168.200.21";
 
 const int mqttPort = 1883;
 
-const char *switch01 = "esp8266/14/GPIO";
+const char *switch01 = "esp8266/11/GPIO";
 
-const char *topic1 = "esp8266/14/whiteTemp";
+const char *topic1 = "esp8266/11/whiteTemp";
 
-const char *topic2 = "esp8266/14/blueTemp";
+const char *topic2 = "esp8266/11/blueTemp";
 
-const char *topic3 = "esp8266/14/orangeTemp";
+const char *topic3 = "esp8266/11/orangeTemp";
 
-const char *topic4 = "esp8266/14/greenTemp";
+const char *topic4 = "esp8266/11/greenTemp";
 
-const char *topic5 = "esp8266/14/RSSI";
+const char *topic5 = "esp8266/11/RSSI";
 
-const char *topic6 = "esp8266/14/mac";
+const char *topic6 = "esp8266/11/mac";
 
 WiFiClient espClient; 
 
@@ -141,6 +143,9 @@ void setup() {
 
   //client.setCallback(callback);
 
+  /// was giving stack dumps and wdt reset?
+  ESP.wdtDisable();
+
 }
 
 void loop() { 
@@ -196,7 +201,7 @@ void loop() {
   client.publish(topic5, strength,"-r"); // publish RSSI
   delay(1000);
   Serial.println("Going to sleep for 1 minute / 60 seconds");
-  ESP.deepSleep(60e6);
+//  ESP.deepSleep(60e6);
 //  Serial.println("Going to sleep for 1.5 minutes / 90 seconds");
 //  ESP.deepSleep(90e6);
 //  Serial.println("Going to sleep for 2 minutes / 120 seconds");
