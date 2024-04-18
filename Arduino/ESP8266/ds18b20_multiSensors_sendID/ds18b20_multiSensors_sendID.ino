@@ -63,8 +63,12 @@ void loop(){
     // Search the wire for address
     if(sensors.getAddress(tempDeviceAddress, i)){
       // Output the device ID
+      Serial.println();
       Serial.print("Temperature for device: ");
       Serial.println(i,DEC);
+      Serial.print("With address: ");
+      printAddress(tempDeviceAddress);
+      Serial.println();
       // Print the data
       float tempC = sensors.getTempC(tempDeviceAddress);
       Serial.print("Temp C: ");
@@ -73,12 +77,12 @@ void loop(){
       Serial.println(DallasTemperature::toFahrenheit(tempC)); // Converts tempC to Fahrenheit
     }
   }
-//  String tempString = "28802707D6013CCA";
+  String tempString = "28802707D6013CCA";
 //  const unsigned char tempChar[] = {"28802707D6013CCA"};
 //  tempChar[0] = tempString[0];
-//  Serial.print("tempString[0] = ");
+//  Serial.print(tempString);
 //  Serial.println(tempString[0], DEC);
-//  float tempFloat = sensors.getTempC(tempChar);
+//  float tempFloat = sensors.getTempC((tempString, HEX));
 //  Serial.print("tempChar = ");
 //  Serial.println(*tempChar);
 //  float tempFloat = sensors.getTempC(tempString);
