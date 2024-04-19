@@ -1,13 +1,15 @@
 
+If you use copy & paste, ensure additional Board Managers copies properly
+
 Add the additional Board Managers
 https://dl.espressif.com/dl/package_esp32_index.json,
 http://arduino.esp8266.com/stable/package_esp8266com_index.json,
 https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
 
-Goto Boards Manager and search esp8266
-Add esp8266 by esp8266 community
-
+Goto Boards Manager and add:
+esp8266 by esp8266 community
+esp32 by espressif systems
 
 Add the following libraries
 
