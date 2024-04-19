@@ -10,6 +10,8 @@ https://github.com/earlephilhower/arduino-pico/releases/download/global/package_
 Goto Boards Manager and add:
 esp8266 by esp8266 community
 esp32 by espressif systems
+raspberry pi pico/RP2040 by Earl F Philhower
+
 
 Add the following libraries
 
