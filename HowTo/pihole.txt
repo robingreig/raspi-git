@@ -1,0 +1,5 @@
+
+
+to install or update
+
+curl -sSL https://install.pi-hole.net | bash
