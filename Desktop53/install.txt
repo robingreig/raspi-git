@@ -1,0 +1,38 @@
+
+2024.04.19
+1) Was upgrading 32GB SD card and it stopped at Wolfram-Engine. Looking back I'm thinking the piHole lockup could have 
+caused a issue with downloading the update? Once I did a hard reboot the desktop wouldn't come backa and when I ran
+df-h the SD card was full
+2) Took a 64GB SD card and installed bookworm 64bit 2024-03-15
+3) sudo apt update && sudo apt upgrade -y
+4) ssh-keygen
+5) git clone raspi-git
+6) added is_rsa.pub to github
+7) sudo apt install arduino
+8) If you use copy & paste, ensure additional Board Managers copies properly
+
+Add the additional Board Managers in the prefernces
+https://dl.espressif.com/dl/package_esp32_index.json,
+http://arduino.esp8266.com/stable/package_esp8266com_index.json,
+https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+
+
+Goto Boards Manager and add:
+esp8266 by esp8266 community
+esp32 by espressif systems
+raspberry pi pico/RP2040 by Earl F Philhower
+
+
+Add the following libraries
+
+PubSubClient by Nick O'Leary
+Onewire library by Paul Stoffregen
+Dallal Tmperature library by Miles Burton 
+
+9) Installed Thunderbird Mail
+10) sudo apt remove claws-mail. I played with it and could download emails, but couldn't get folder & sub-folders to work
+11) Tested PGP keys and old ones wouldn'w tork with the Edward bot so I created new ones and deleted my email from the
+keys.opengpg.org site. Published the new keys and stored all of the old keys in BitWarden..Tested to Proton Mail
+12) Setup printer and it was already discovered and installed. Test Page printed fine in color
+13) Mounted old raspi53 32GB SD card and copied over all desktop items
+14) SD card copied to new Lexar 64GB SD card & tested

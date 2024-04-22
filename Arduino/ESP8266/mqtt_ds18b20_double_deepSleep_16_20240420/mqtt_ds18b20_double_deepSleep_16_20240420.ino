@@ -1,5 +1,5 @@
 /******************************************************************************
- *    Filename: mqtt_ds18b20_double_deepSleep_16                              *
+ *    Filename: mqtt_ds18b20_double_deepSleep_16_20240420                              *
  *    Version: 1.0                                                            *
  *    Date: 03 April 2024                                                     *
  *    Programmer: Robin Greig                                                 *
@@ -69,22 +69,31 @@ PubSubClient client(espClient);
 
 // initialize temp variable
 float temperatureC = 0;
-char *tempChar = "00.00"; // temp needs to be char for mqtt
+//char *tempChar = "00.00"; // temp needs to be char for mqtt
+char tempChar[6]; // temp needs to be char for mqtt
 char strength[6]; // RSSI strength needs to be char for mqtt
 char mac[18]; // mac address needs to be char for mqtt
 
 void reconnectMQTT() {
   while (!client.connected()) {
-    Serial.println("Connecting to MQTT...");
+    if (DEBUG > 0){
+      Serial.println("Connecting to MQTT...");
+    }
     // Unique client ID (using ESP8266 macAddress)  
     String client_id = "esp8266-";
     client_id += String(WiFi.macAddress());
-    Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
+    if (DEBUG > 0){
+      Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
+    }
 //    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
     if (client.connect(client_id.c_str())) {
-      Serial.printf("The client %s is connected to MQTT\n", client_id.c_str());
+       if (DEBUG > 0){
+         Serial.printf("The client %s is connected to MQTT\n", client_id.c_str());
+       }
       String WiFiRSSI = String(WiFi.RSSI());
-      Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
+      if (DEBUG > 0){
+        Serial.printf("The client RSSI is %s\n\n",WiFiRSSI.c_str());
+      }
       client.subscribe(switch01); // subscribe to mqtt topic
     } else {
       Serial.print("failed with state ");
@@ -139,30 +148,22 @@ void loop() {
   sensors.requestTemperatures();
   temperatureC = sensors.getTempCByIndex(0);
   if (DEBUG > 0) {
-    Serial.printf("Published temp1 of: %.2fºC to topic 1: %s/n",temperatureC,topic1);
-//    Serial.print(temperatureC);
-//    Serial.printf("%.2f",temperatureC);
-//    Serial.printf("ºC to topic 1: %s/n",topic1);
-//    Serial.printf("%s\n",topic1);
-//  Serial.printf("Published Temp1 to topic1 from ? DS18B20: %s\n",topic1);
+    Serial.printf("Published temp1 of: %.2fºC to topic 1: %s\n",temperatureC,topic1);
   }
   sprintf(tempChar,"%.2f", temperatureC);
   client.publish(topic1, tempChar,"-r"); //publish temp
   delay(1000);
   temperatureC = sensors.getTempCByIndex(1);
   if (DEBUG > 0) {
-//  Serial.print(temperatureC);
-//  Serial.println("ºC"); 
-  sprintf(tempChar,"%.2f", temperatureC);
-  Serial.printf("Published Temp2 to topic2 from ? DS18B20: %s\n",topic2);
-  Serial.println();
+    Serial.printf("Published temp2 of: %.2fºC to topic 2: %s\n",temperatureC,topic2);
   }
   client.publish(topic2, tempChar,"-r"); //publish temp
-  delay(1000);  
+  delay(1000);
+  String WiFiRSSI = String(WiFi.RSSI());
+  sprintf(strength,"%s",WiFiRSSI.c_str());  
   client.publish(topic3, strength,"-r"); // publish RSSI
   if (DEBUG > 0) {
-  Serial.printf("Published RSSI to: %s\n",topic3);
-  Serial.println();
+    Serial.printf("Published RSSI of: %s to: %s\n\n",strength,topic3);
   }
   delay(5000);
 //  Serial.println("Going to sleep for 1 minute / 60 seconds");
