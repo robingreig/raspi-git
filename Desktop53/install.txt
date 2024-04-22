@@ -35,4 +35,5 @@ Dallal Tmperature library by Miles Burton
 keys.opengpg.org site. Published the new keys and stored all of the old keys in BitWarden..Tested to Proton Mail
 12) Setup printer and it was already discovered and installed. Test Page printed fine in color
 13) Mounted old raspi53 32GB SD card and copied over all desktop items
-14) SD card copied to new Lexar 64GB SD card & tested
+14) SD card copied to new Lexar 64GB SD card & tested fine other than me
+forgetting to sync github before copying?
