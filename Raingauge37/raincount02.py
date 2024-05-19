@@ -16,7 +16,8 @@ c = conn.cursor()
 ##### Select total count from yesterday
 #t = datetime.date.today()
 #print(t)
-c.execute("SELECT COUNT(*) from raincount where currentdate = date('now','localtime','-1 day')")
+#c.execute("SELECT COUNT(*) from raincount where currentdate = date('now','localtime','-1 day')")
+c.execute("SELECT COUNT(*) from raincount where currentdate = date('now','localtime')")
 myresult = c.fetchone()
 print("myresult is %s" %myresult)
 count = sum(myresult) # convert myresult (tuple) to int

@@ -7,13 +7,15 @@ import paho.mqtt.client as mqtt
 
 # Open file to read daily steps of rainfall 
 # Each step = 0.245mm
+# Each step = 0.375mm (8 steps / 2.8mm 20240518)
 ##### Total Rainfall for previous day
 file = open("/home/robin/Raincount.txt", "r")
 count = file.read()
 file.close()
 print("Raincount = ", count)
 print("count type = ",type(count))
-amount = round((int(count) * 0.245),2)
+#amount = round((int(count) * 0.245),2)
+amount = round((int(count) * 0.35),2)
 print("Rain amount = ",amount)
 
 ##### Total rainfall for first quad today (midnight > 6am)
@@ -22,7 +24,8 @@ count = file.read()
 file.close()
 print("Raincount quad1 = ", count)
 print("count type = ",type(count))
-quad1amount = round((int(count) * 0.245),2)
+#quad1amount = round((int(count) * 0.245),2)
+quad1amount = round((int(count) * 0.35),2)
 print("Rain amount quad 1 = ",quad1amount)
 
 file = open("/home/robin/quad2.txt", "r")
@@ -30,7 +33,8 @@ count = file.read()
 file.close()
 print("Raincount quad2 = ", count)
 print("count type = ",type(count))
-quad2amount = round((int(count) * 0.245),2)
+#quad2amount = round((int(count) * 0.245),2)
+quad2amount = round((int(count) * 0.35),2)
 print("Rain amount quad2 = ",quad2amount)
 
 file = open("/home/robin/quad3.txt", "r")
@@ -38,7 +42,8 @@ count = file.read()
 file.close()
 print("Raincount quad3 = ", count)
 print("count type = ",type(count))
-quad3amount = round((int(count) * 0.245),2)
+#quad3amount = round((int(count) * 0.245),2)
+quad3amount = round((int(count) * 0.35),2)
 print("Rain amount quad3 = ",quad3amount)
 
 file = open("/home/robin/quad4.txt", "r")
@@ -46,7 +51,8 @@ count = file.read()
 file.close()
 print("Raincount quad4 = ", count)
 print("count type = ",type(count))
-quad4amount = round((int(count) * 0.245),2)
+#quad4amount = round((int(count) * 0.245),2)
+quad4amount = round((int(count) * 0.35),2)
 print("Rain amount quad4 = ",quad4amount)
 
 #### upload voltages to mqtt broker
