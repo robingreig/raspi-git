@@ -8,3 +8,9 @@ XXX sudo wg setconf wg0 ./configs/Breadboard40.conf
 - Until I googled further and saw reference to wp-quick command
 sudo wg-quick up ./configs/Breadboard40.conf
 sudo wg-quick down ./configs/Breadboard40.conf 
+
+Fresh install on Breadboard40 had an error with wg-quick up
+/usr/bin/wg-quick: line 32: resolvconf: connamd not found
+Had to install sudo apt install openresolv
+And then it worked fine
+
