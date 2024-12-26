@@ -6,11 +6,10 @@
  *                                                                            *                                             
  *    Hardware: ESP8266 & 2 x DS18B20                                         *
  *    Connect via wireless to Calalta02                                       *
- *    Send RSSI to esp8266/14/RSSI                                            *
- *    Send mac to esp8266/14/mac                                              *
- *    Send temp1 to esp8266/14/Temp1 which is the ? DS18B20                   *                                            
- *    Send temp2 to esp8266/14/Temp2 which is the : DS18B20                   *
- *    Send temp3 to es
+ *    Send RSSI to esp8266/16/RSSI                                            *
+ *    Send mac to esp8266/16/mac                                              *
+ *    Send temp1 to esp8266/16/Temp1 which is the ? DS18B20                   *                                            
+ *    Send temp2 to esp8266/16/Temp2 which is the : DS18B20                   *
  *    And go into deepSleep for 5 minutes                                     *
  *                                                                            *
  *    To program disconnect GPIO16 from Reset                                 *                                                                        
@@ -43,9 +42,13 @@ DallasTemperature sensors(&oneWire);
 
 // WiFi 
 
-const char *ssid = "Calalta02"; // Enter your WiFi name 
+//const char *ssid = "Calalta02"; // Enter your WiFi name 
 
-const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+//const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+
+const char *ssid = "TELUS2547"; // Enter your WiFi name 
+
+const char *password = "g2299sjk6p";  // Enter WiFi password 
 
 // MQTT Broker 
 
@@ -140,6 +143,7 @@ void loop() {
   temperatureC = sensors.getTempCByIndex(0);
   if (DEBUG > 0) {
     Serial.printf("Published temp1 of: %.2fºC to topic 1: %s/n",temperatureC,topic1);
+    Serial.println();
 //    Serial.print(temperatureC);
 //    Serial.printf("%.2f",temperatureC);
 //    Serial.printf("ºC to topic 1: %s/n",topic1);
@@ -158,21 +162,24 @@ void loop() {
   Serial.println();
   }
   client.publish(topic2, tempChar,"-r"); //publish temp
-  delay(1000);  
-  client.publish(topic3, strength,"-r"); // publish RSSI
+  delay(1000);
+  String strength = String(WiFi.RSSI());  
+  client.publish(topic3, strength.c_str(),"-r"); // publish RSSI
   if (DEBUG > 0) {
   Serial.printf("Published RSSI to: %s\n",topic3);
   Serial.println();
   }
-  delay(5000);
+  delay(1000);
 //  Serial.println("Going to sleep for 1 minute / 60 seconds");
 //  ESP.deepSleep(60e6);
 //  Serial.println("Going to sleep for 1.5 minutes / 90 seconds");
 //  ESP.deepSleep(90e6);
 //  Serial.println("Going to sleep for 2 minutes / 120 seconds");
 //  ESP.deepSleep(120e6);
-//  Serial.println("Going to sleep for 3 minutes / 180 seconds");
-//  ESP.deepSleep(180e6);
+  if (DEBUG > 0) {
+    Serial.println("Going to sleep for 3 minutes / 180 seconds");  
+  }
+  ESP.deepSleep(180e6);
 //  Serial.println("Going to sleep for 5 minutes / 300 seconds");
 //  ESP.deepSleep(300e6);
 }

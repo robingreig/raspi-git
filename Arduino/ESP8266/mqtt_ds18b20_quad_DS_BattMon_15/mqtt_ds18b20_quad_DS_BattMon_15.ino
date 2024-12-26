@@ -65,7 +65,7 @@ const int mqttPort = 1883;
 
 // Variables
 
-const char *switch01 = "esp8266/14/GPIO";
+const char *switch01 = "esp8266/15/GPIO";
 
 const char *topic1 = "esp8266/15/brownTemp";
 
@@ -179,38 +179,38 @@ void loop() {
   temperatureC = sensors.getTempCByIndex(0);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic1 value of %.2fºC to brownTemp from Brown DS18B20: %s\n", temperatureC, topic1);
-  Serial.println();
+    Serial.printf("Published topic1 value of %.2fºC to brownTemp from Brown DS18B20: %s\n", temperatureC, topic1);
+    Serial.println();
   }
   client.publish(topic1, tempChar,"-r"); //publish temp
   delay(1000);
   temperatureC = sensors.getTempCByIndex(1);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic2 value of %.2fºC to blueTemp from Blue DS18B20: %s\n", temperatureC, topic2);
-  Serial.println();
+    Serial.printf("Published topic2 value of %.2fºC to blueTemp from Blue DS18B20: %s\n", temperatureC, topic2);
+    Serial.println();
   }
   client.publish(topic2, tempChar,"-r"); //publish temp
   delay(1000);  
   temperatureC = sensors.getTempCByIndex(2);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic3 value of %.2fºC to OrangeTemp from Orange DS18B20: %s\n", temperatureC, topic3);
-  Serial.println();
+    Serial.printf("Published topic3 value of %.2fºC to OrangeTemp from Orange DS18B20: %s\n", temperatureC, topic3);
+    Serial.println();
   }
   client.publish(topic3, tempChar,"-r"); //publish temp
   delay(1000);
   temperatureC = sensors.getTempCByIndex(3);
   sprintf(tempChar,"%.2f", temperatureC);
   if (DEBUG > 0) {
-  Serial.printf("Published topic4 value of %.2fºC to greenTemp from Green DS18B20: %s\n", temperatureC, topic4);
-  Serial.println();
+    Serial.printf("Published topic4 value of %.2fºC to greenTemp from Green DS18B20: %s\n", temperatureC, topic4);
+    Serial.println();
   }
   client.publish(topic4, tempChar,"-r"); //publish temp
   delay(1000);
   if (DEBUG > 0) {
-  Serial.printf("Published RSSI to: %s\n",topic5);
-  Serial.println();
+    Serial.printf("Published RSSI to: %s\n",topic5);
+    Serial.println();
   delay(5000);
   }
   client.publish(topic5, strength,"-r"); // publish RSSI
@@ -241,24 +241,24 @@ void loop() {
      *  as a float using a 12K and 3K3 resistor*/
   adcFloat = adcAverage * 0.0142; // reads 15.0vdc @ 1.0vdc ADC input
   if (DEBUG > 0) {  
-  Serial.print("ADC Float = ");
-  Serial.println(adcFloat);
+    Serial.print("ADC Float = ");
+    Serial.println(adcFloat);
   }
   // Convert voltage float into char
   sprintf(adcFloatChar, "%.2f", adcFloat);
   if (DEBUG > 0) {  
-  Serial.print("ADC Float Char = ");
-  Serial.println(adcFloatChar);
+    Serial.print("ADC Float Char = ");
+    Serial.println(adcFloatChar);
   }
   /* Publish the Battery Voltage to esp8266/03/battVolt with retain flag set */
   client.publish(topic6,adcFloatChar,"-r");
   delay(1000);
-  Serial.println("Going to sleep for 1 minute / 60 seconds");
-  ESP.deepSleep(60e6);
+//  Serial.println("Going to sleep for 1 minute / 60 seconds");
+//  ESP.deepSleep(60e6);
 //  Serial.println("Going to sleep for 1.5 minutes / 90 seconds");
 //  ESP.deepSleep(90e6);
-//  Serial.println("Going to sleep for 2 minutes / 120 seconds");
-//  ESP.deepSleep(120e6);
+  Serial.println("Going to sleep for 2 minutes / 120 seconds");
+  ESP.deepSleep(120e6);
 //  Serial.println("Going to sleep for 3 minutes / 180 seconds");
 //  ESP.deepSleep(180e6);
 //  Serial.println("Going to sleep for 5 minutes / 300 seconds");

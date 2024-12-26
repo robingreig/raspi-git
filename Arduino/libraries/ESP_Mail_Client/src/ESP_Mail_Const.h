@@ -1,14 +1,10 @@
-// Created August 20, 2023
+// Created September 11, 2023
 
 #pragma once
 
 #ifndef ESP_MAIL_CONST_H
 #define ESP_MAIL_CONST_H
 
-#include "ESP_Mail_Client_Version.h"
-#if !VALID_VERSION_CHECK(30409)
-#error "Mixed versions compilation."
-#endif
 
 #include <Arduino.h>
 #include "ESP_Mail_FS.h"
@@ -34,8 +30,7 @@
 #define FPSTR
 #endif
 
-#include "extras/Networks_Provider.h"
-#include "extras/ESP8266_Supports.h"
+#include "./extras/Networks.h"
 
 #if defined(ESP8266)
 #if __has_include(<core_esp8266_version.h>)
@@ -73,6 +68,28 @@
 
 #endif
 
+typedef struct esp_mail_client_static_address
+{
+    friend class ESP_Mail_TCPClient;
+
+public:
+    esp_mail_client_static_address(IPAddress ipAddress, IPAddress netMask, IPAddress defaultGateway, IPAddress dnsServer, bool optional)
+    {
+        this->ipAddress = ipAddress;
+        this->netMask = netMask;
+        this->defaultGateway = defaultGateway;
+        this->dnsServer = dnsServer;
+        this->optional = optional;
+    };
+
+private:
+    IPAddress ipAddress;
+    IPAddress netMask;
+    IPAddress defaultGateway;
+    IPAddress dnsServer;
+    bool optional = false;
+} ESP_Mail_StaticIP;
+
 typedef enum
 {
     esp_mail_cert_type_undefined = -1,
@@ -87,8 +104,9 @@ typedef enum
 {
     esp_mail_client_type_undefined,
     esp_mail_client_type_internal_basic_client,
-    esp_mail_client_type_external_basic_client,
-    esp_mail_client_type_external_gsm_client
+    esp_mail_client_type_external_generic_client,
+    esp_mail_client_type_external_gsm_client,
+    esp_mail_client_type_external_ethernet_client
 
 } esp_mail_client_type;
 
@@ -837,7 +855,7 @@ struct esp_mail_smtp_command_t
 
 struct esp_mail_timestamp_value_t
 {
-   /* The time format of timestamp to inject into subject or content as using in strftime C++ function */
+    /* The time format of timestamp to inject into subject or content as using in strftime C++ function */
     MB_String format;
     /* The tag that will be replaced with current timestamp */
     MB_String tag;

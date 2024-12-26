@@ -3,15 +3,11 @@
 
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 
-#include "ESP_Mail_Client_Version.h"
-#if !VALID_VERSION_CHECK(30409)
-#error "Mixed versions compilation."
-#endif
 
 /**
  * Mail Client Arduino Library for Arduino devices.
  *
- * Created August 28, 2023
+ * Created September 13, 2023
  *
  * This library allows Espressif's ESP32, ESP8266, SAMD and RP2040 Pico devices to send and read Email through the SMTP and IMAP servers.
  *
@@ -798,7 +794,7 @@ void ESP_Mail_Client::appendHeaderField(MB_String &buf, const char *name, PGM_P 
   appendString(buf, value, comma, newLine, type);
 }
 
-void ESP_Mail_Client::appendAddressHeaderField(MB_String &buf, esp_mail_address_info_t &source, esp_mail_rfc822_header_field_types type, bool header, bool comma, bool newLine)
+void ESP_Mail_Client::appendAddressHeaderField(MB_String &buf, esp_mail_address_info_t &source, esp_mail_rfc822_header_field_types type, bool header, bool comma, bool newLine, bool encode)
 {
   // Construct header field.
   if (header)
@@ -807,7 +803,7 @@ void ESP_Mail_Client::appendAddressHeaderField(MB_String &buf, esp_mail_address_
   if (type != esp_mail_rfc822_header_field_cc && type != esp_mail_rfc822_header_field_bcc &&
       source.name.length() > 0)
   {
-    appendString(buf, source.name.c_str(), false, false, esp_mail_string_mark_type_double_quote);
+    appendString(buf, encode ? encodeBUTF8(source.name.c_str()).c_str() : source.name.c_str(), false, false, esp_mail_string_mark_type_double_quote);
     // Add white space after name for SMTP to fix iCloud Mail Service IMAP search compatibility issue #278
     // This is not restricted by rfc2822.
     appendSpace(buf);
@@ -974,6 +970,21 @@ MB_String ESP_Mail_Client::mGetBase64(MB_StringPtr str)
 {
   MB_String data = str;
   return encodeBase64Str((uint8_t *)(data.c_str()), data.length());
+}
+
+MB_String ESP_Mail_Client::encodeBUTF8(const char *src)
+{
+  MB_String buff;
+  size_t len = strlen(src);
+  if (len > 4 && src[0] != '=' && src[1] != '?' && src[len - 1] != '=' && src[len - 2] != '?')
+  {
+    buff = "=?utf-8?B?";
+    buff += toBase64(src);
+    buff += "?=";
+  }
+  else
+    buff = src;
+  return buff;
 }
 
 int ESP_Mail_Client::readLine(ESP_Mail_TCPClient *client, char *buf, int bufLen, bool withLineBreak, int &count, bool &ovf, unsigned long timeoutSec, bool &isTimeout)
@@ -1272,6 +1283,7 @@ bool ESP_Mail_Client::beginConnection(Session_Config *session_config, T sessionP
 
   sessionPtr->client.setWiFi(&wifi);
   sessionPtr->client.setSession(session_config);
+  sessionPtr->client.setBSSLSession(&(sessionPtr->_bsslSession));
 
   if (!reconnect<T>(sessionPtr))
     return false;

@@ -219,7 +219,7 @@ void setup()
   SMTP_Message message;
 
   /* Set the message headers */
-  message.sender.name = F("ESP Mail");
+  message.sender.name = F("Me (我)");
   message.sender.email = AUTHOR_EMAIL;
 
   /** If author and sender are not identical
@@ -229,11 +229,32 @@ void setup()
   message.author.email = AUTHOR_EMAIL; // should be the same email as config.login.email
  */
 
-  message.subject = F("Test sending plain text Email");
-  message.addRecipient(F("Someone"), RECIPIENT_EMAIL);
+  // In case of sending non-ASCII characters in message envelope,
+  // that non-ASCII words should be encoded with proper charsets and encodings
+  // in form of `encoded-words` per RFC2047
+  // https://datatracker.ietf.org/doc/html/rfc2047
 
-  String textMsg = "This is simple plain text message";
+  String subject = "Test sending a message (メッセージの送信をテストする)";
+  message.subject = subject;
+
+  message.addRecipient(F("Someone (誰か)"), RECIPIENT_EMAIL);
+
+  String textMsg = "This is simple plain text message which contains Chinese and Japanese words.\n";
+  textMsg += "这是简单的纯文本消息，包含中文和日文单词\n";
+  textMsg += "これは中国語と日本語を含む単純なプレーンテキストメッセージです\n";
+
   message.text.content = textMsg;
+
+  /** The content transfer encoding e.g.
+   * enc_7bit or "7bit" (not encoded)
+   * enc_qp or "quoted-printable" (encoded)
+   * enc_base64 or "base64" (encoded)
+   * enc_binary or "binary" (not encoded)
+   * enc_8bit or "8bit" (not encoded)
+   * The default value is "7bit"
+   */
+
+  message.text.transfer_encoding = "base64"; // recommend for non-ASCII words in message.
 
   /** If the message to send is a large string, to reduce the memory used from internal copying  while sending,
    * you can assign string to message.text.blob by cast your string to uint8_t array like this
@@ -255,17 +276,7 @@ void setup()
    * utf-7
    * The default value is utf-8
    */
-  message.text.charSet = F("us-ascii");
-
-  /** The content transfer encoding e.g.
-   * enc_7bit or "7bit" (not encoded)
-   * enc_qp or "quoted-printable" (encoded)
-   * enc_base64 or "base64" (encoded)
-   * enc_binary or "binary" (not encoded)
-   * enc_8bit or "8bit" (not encoded)
-   * The default value is "7bit"
-   */
-  message.text.transfer_encoding = Content_Transfer_Encoding::enc_7bit;
+  message.text.charSet = F("utf-8"); // recommend for non-ASCII words in message.
 
   // If this is a reply message
   // message.in_reply_to = "<parent message id>";
@@ -317,7 +328,7 @@ void setup()
   /* Connect to the server */
   if (!smtp.connect(&config))
   {
-    MailClient.printf("Connection error, Status Code: %d, Error Code: %d, Reason: %s", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
+    MailClient.printf("Connection error, Status Code: %d, Error Code: %d, Reason: %s\n", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
     return;
   }
 
@@ -332,19 +343,19 @@ void setup()
 
   if (!smtp.isLoggedIn())
   {
-    Serial.println("\nNot yet logged in.");
+    Serial.println("Not yet logged in.");
   }
   else
   {
     if (smtp.isAuthenticated())
-      Serial.println("\nSuccessfully logged in.");
+      Serial.println("Successfully logged in.");
     else
-      Serial.println("\nConnected with no Auth.");
+      Serial.println("Connected with no Auth.");
   }
 
   /* Start sending Email and close the session */
   if (!MailClient.sendMail(&smtp, &message))
-    MailClient.printf("Error, Status Code: %d, Error Code: %d, Reason: %s", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
+    MailClient.printf("Error, Status Code: %d, Error Code: %d, Reason: %s\n", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
 
   // to clear sending result log
   // smtp.sendingResult.clear();

@@ -1,15 +1,11 @@
 #ifndef ESP_MAIL_CLIENT_H
 #define ESP_MAIL_CLIENT_H
 
-#include "ESP_Mail_Client_Version.h"
-#if !VALID_VERSION_CHECK(30409)
-#error "Mixed versions compilation."
-#endif
 
 /**
  * Mail Client Arduino Library for Arduino devices.
  *
- * Created August 28, 2023
+ * Created September 13, 2023
  *
  * This library allows Espressif's ESP32, ESP8266, SAMD and RP2040 Pico devices to send and read Email through the SMTP and IMAP servers.
  *
@@ -98,7 +94,7 @@ extern char *__brkval;
 
 #endif
 
-#include "ESP_Mail_TCPClient.h"
+#include "./client/ESP_Mail_TCPClient.h"
 
 using namespace mb_string;
 
@@ -733,7 +729,7 @@ public:
 
   /* The field that contains the parent's references (if any) and followed by the parent's message ID (if any) of the message to which this one is a reply */
   MB_String references;
-  
+
   /* The timestamp value to replace in text */
   esp_mail_timestamp_value_t timestamp;
 
@@ -1189,6 +1185,9 @@ private:
 
   // Decode base64 encoded string
   MB_String mGetBase64(MB_StringPtr str);
+  
+  // RFC2047 encode word (UTF-8 only)
+  MB_String encodeBUTF8(const char* str);
 
   // Sub string
   char *subStr(const char *buf, PGM_P beginToken, PGM_P endToken, int beginPos, int endPos = 0, bool caseSensitive = true);
@@ -1245,7 +1244,7 @@ private:
   void appendHeaderField(MB_String &buf, const char *name, PGM_P value, bool comma, bool newLine, esp_mail_string_mark_type type = esp_mail_string_mark_type_none);
 
   // Append SMTP address header field
-  void appendAddressHeaderField(MB_String &buf, esp_mail_address_info_t &source, esp_mail_rfc822_header_field_types type, bool header, bool comma, bool newLine);
+  void appendAddressHeaderField(MB_String &buf, esp_mail_address_info_t &source, esp_mail_rfc822_header_field_types type, bool header, bool comma, bool newLine, bool encode);
 
   // Append header field name to buffer
   void appendHeaderName(MB_String &buf, const char *name, bool clear = false, bool lowercase = false, bool space = true);
@@ -1739,6 +1738,17 @@ public:
    * @param password The GPRS password.
    */
   void setGSMClient(Client *client, void *modem, const char *pin, const char *apn, const char *user, const char *password);
+
+  /** Assign external Ethernet Client.
+   *
+   * @param client The pointer to Ethernet client object.
+   * @param macAddress The Ethernet MAC address.
+   * @param csPin The Ethernet module SPI chip select pin.
+   * @param resetPin The Ethernet module reset pin.
+   * @param staticIP (Optional) The pointer to ESP_Mail_StaticIP object which has these IPAddress in its constructor i.e.
+   * ipAddress, netMask, defaultGateway, dnsServer and optional.
+   */
+  void setEthernetClient(Client *client, uint8_t macAddress[6], int csPin, int resetPin, ESP_Mail_StaticIP *staticIP = nullptr);
 
   /** Assign the callback function to handle the network connection for custom Client.
    *
@@ -2274,6 +2284,82 @@ public:
   friend class foldderList;
 
 private:
+  bool _sessionSSL = false;
+  bool _sessionLogin = false;
+  bool _loginStatus = false;
+  unsigned long _last_polling_error_ms = 0;
+  unsigned long _last_host_check_ms = 0;
+  unsigned long _last_server_connect_ms = 0;
+  unsigned long _last_network_error_ms = 0;
+  unsigned long tcpTimeout = TCP_CLIENT_DEFAULT_TCP_TIMEOUT_SEC;
+  struct esp_mail_imap_response_status_t _responseStatus;
+  int _cMsgIdx = 0;
+  int _cPartIdx = 0;
+  int _totalRead = 0;
+  _vectorImpl<struct esp_mail_message_header_t> _headers;
+
+  esp_mail_imap_command _imap_cmd = esp_mail_imap_command::esp_mail_imap_cmd_sasl_login;
+  esp_mail_imap_command _prev_imap_cmd = esp_mail_imap_command::esp_mail_imap_cmd_sasl_login;
+  esp_mail_imap_command _imap_custom_cmd = esp_mail_imap_cmd_custom;
+  esp_mail_imap_command _prev_imap_custom_cmd = esp_mail_imap_cmd_custom;
+  bool _idle = false;
+  MB_String _cmd;
+  _vectorImpl<struct esp_mail_imap_multipart_level_t> _multipart_levels;
+  int _rfc822_part_count = 0;
+  bool _unseen = false;
+  bool _readOnlyMode = true;
+  bool _msgDownload = false;
+  bool _attDownload = false;
+  bool _storageReady = false;
+  bool _storageChecked = false;
+
+  bool _auth_capability[esp_mail_auth_capability_maxType];
+  bool _feature_capability[esp_mail_imap_read_capability_maxType];
+  Session_Config *_session_cfg;
+  _vectorImpl<int> _configPtrList;
+  MB_String _currentFolder;
+  bool _mailboxOpened = false;
+  unsigned long _lastSameFolderOpenMillis = 0;
+  MB_String _nextUID;
+  MB_String _unseenMsgIndex;
+  MB_String _flags_tmp;
+  MB_String _quota_tmp;
+  MB_String _quota_root_tmp;
+  MB_String _acl_tmp;
+  MB_String _ns_tmp;
+  MB_String _server_id_tmp;
+  MB_String _sdFileList;
+
+  struct esp_mail_imap_data_config_t *_imap_data = nullptr;
+
+  int _userHeaderOnly = -1;
+  bool _headerOnly = true;
+  bool _uidSearch = false;
+  bool _headerSaved = false;
+  bool _debug = false;
+  int _debugLevel = 0;
+  bool _secure = false;
+  bool _authenticated = false;
+  bool _isFirmwareUpdated = false;
+  imapStatusCallback _statusCallback = NULL;
+  imapResponseCallback _customCmdResCallback = NULL;
+  MIMEDataStreamCallback _mimeDataStreamCallback = NULL;
+  imapCharacterDecodingCallback _charDecCallback = NULL;
+
+  _vectorImpl<struct esp_mail_imap_msg_num_t> _imap_msg_num;
+  esp_mail_session_type _sessionType = esp_mail_session_type_imap;
+
+  FoldersCollection _folders;
+  SelectedFolderInfo _mbif;
+  int _uid_tmp = 0;
+  int _lastProgress = -1;
+
+  ESP_Mail_TCPClient client;
+
+  IMAP_Status _cbData;
+
+  BearSSL_Session _bsslSession;
+
   // Log in to IMAP server
   bool mLogin(MB_StringPtr email, MB_StringPtr password, bool isToken);
 
@@ -2435,80 +2521,6 @@ private:
 
   // Print features not supported debug error message
   void printDebugNotSupported();
-
-  bool _sessionSSL = false;
-  bool _sessionLogin = false;
-  bool _loginStatus = false;
-  unsigned long _last_polling_error_ms = 0;
-  unsigned long _last_host_check_ms = 0;
-  unsigned long _last_server_connect_ms = 0;
-  unsigned long _last_network_error_ms = 0;
-  unsigned long tcpTimeout = TCP_CLIENT_DEFAULT_TCP_TIMEOUT_SEC;
-  struct esp_mail_imap_response_status_t _responseStatus;
-  int _cMsgIdx = 0;
-  int _cPartIdx = 0;
-  int _totalRead = 0;
-  _vectorImpl<struct esp_mail_message_header_t> _headers;
-
-  esp_mail_imap_command _imap_cmd = esp_mail_imap_command::esp_mail_imap_cmd_sasl_login;
-  esp_mail_imap_command _prev_imap_cmd = esp_mail_imap_command::esp_mail_imap_cmd_sasl_login;
-  esp_mail_imap_command _imap_custom_cmd = esp_mail_imap_cmd_custom;
-  esp_mail_imap_command _prev_imap_custom_cmd = esp_mail_imap_cmd_custom;
-  bool _idle = false;
-  MB_String _cmd;
-  _vectorImpl<struct esp_mail_imap_multipart_level_t> _multipart_levels;
-  int _rfc822_part_count = 0;
-  bool _unseen = false;
-  bool _readOnlyMode = true;
-  bool _msgDownload = false;
-  bool _attDownload = false;
-  bool _storageReady = false;
-  bool _storageChecked = false;
-
-  bool _auth_capability[esp_mail_auth_capability_maxType];
-  bool _feature_capability[esp_mail_imap_read_capability_maxType];
-  Session_Config *_session_cfg;
-  _vectorImpl<int> _configPtrList;
-  MB_String _currentFolder;
-  bool _mailboxOpened = false;
-  unsigned long _lastSameFolderOpenMillis = 0;
-  MB_String _nextUID;
-  MB_String _unseenMsgIndex;
-  MB_String _flags_tmp;
-  MB_String _quota_tmp;
-  MB_String _quota_root_tmp;
-  MB_String _acl_tmp;
-  MB_String _ns_tmp;
-  MB_String _server_id_tmp;
-  MB_String _sdFileList;
-
-  struct esp_mail_imap_data_config_t *_imap_data = nullptr;
-
-  int _userHeaderOnly = -1;
-  bool _headerOnly = true;
-  bool _uidSearch = false;
-  bool _headerSaved = false;
-  bool _debug = false;
-  int _debugLevel = 0;
-  bool _secure = false;
-  bool _authenticated = false;
-  bool _isFirmwareUpdated = false;
-  imapStatusCallback _statusCallback = NULL;
-  imapResponseCallback _customCmdResCallback = NULL;
-  MIMEDataStreamCallback _mimeDataStreamCallback = NULL;
-  imapCharacterDecodingCallback _charDecCallback = NULL;
-
-  _vectorImpl<struct esp_mail_imap_msg_num_t> _imap_msg_num;
-  esp_mail_session_type _sessionType = esp_mail_session_type_imap;
-
-  FoldersCollection _folders;
-  SelectedFolderInfo _mbif;
-  int _uid_tmp = 0;
-  int _lastProgress = -1;
-
-  ESP_Mail_TCPClient client;
-
-  IMAP_Status _cbData;
 };
 
 #endif
@@ -2582,6 +2594,17 @@ public:
    * @param password The GPRS password.
    */
   void setGSMClient(Client *client, void *modem, const char *pin, const char *apn, const char *user, const char *password);
+
+  /** Assign external Ethernet Client.
+   *
+   * @param client The pointer to Ethernet client object.
+   * @param macAddress The Ethernet MAC address.
+   * @param csPin The Ethernet module SPI chip select pin.
+   * @param resetPin The Ethernet module reset pin.
+   * @param staticIP (Optional) The pointer to ESP_Mail_StaticIP object which has these IPAddress in its constructor i.e.
+   * ipAddress, netMask, defaultGateway, dnsServer and optional.
+   */
+  void setEthernetClient(Client *client, uint8_t macAddress[6], int csPin, int resetPin, ESP_Mail_StaticIP *staticIP = nullptr);
 
   /** Assign the callback function to handle the network connection for custom Client.
    *
@@ -2822,6 +2845,7 @@ private:
   SMTP_Status _cbData;
   struct esp_mail_smtp_msg_type_t _msgType;
   int _lastProgress = -1;
+  BearSSL_Session _bsslSession;
 
   ESP_Mail_TCPClient client;
 

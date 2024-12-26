@@ -1,11 +1,17 @@
 
 /**
- * Mobizt's SRAM/PSRAM supported String, version 1.2.9
+ * Mobizt's SRAM/PSRAM supported String, version 1.2.11
  *
- * Created December 3, 2022
+ * Created March 23, 2024
  *
  * Changes Log
  *
+ * v1.2.11
+ * - fix float to string conversion
+ * 
+ * v1.2.10
+ * - add support Arduino UNO WiFi R4
+ * 
  * v1.2.9
  * - substring optimization
  *
@@ -900,7 +906,7 @@ public:
             s = boolStr(value);
         else if (is_num_neg_int<T>::value)
         {
-#if defined(ARDUINO_ARCH_SAMD) || defined(__AVR_ATmega4809__) || defined(ARDUINO_NANO_RP2040_CONNECT)
+#if defined(ARDUINO_ARCH_SAMD) || defined(__AVR_ATmega4809__) || defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_UNOWIFIR4)
             s = int32Str(value);
 #else
             s = int64Str(value);
@@ -908,7 +914,7 @@ public:
         }
         else if (is_num_pos_int<T>::value)
         {
-#if defined(ARDUINO_ARCH_SAMD) || defined(__AVR_ATmega4809__) || defined(ARDUINO_NANO_RP2040_CONNECT)
+#if defined(ARDUINO_ARCH_SAMD) || defined(__AVR_ATmega4809__) || defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_UNOWIFIR4)
             s = uint32Str(value);
 #else
             s = uint64Str(value);
@@ -1475,7 +1481,7 @@ public:
     static const size_t npos = -1;
 
 private:
-#if defined(ARDUINO_ARCH_SAMD) || defined(__AVR_ATmega4809__) || defined(ARDUINO_NANO_RP2040_CONNECT)
+#if defined(ARDUINO_ARCH_SAMD) || defined(__AVR_ATmega4809__) || defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_UNOWIFIR4)
 
     char *int32Str(signed long value)
     {
@@ -1524,10 +1530,18 @@ private:
         {
             MB_String fmt = MBSTRING_FLASH_MCR("%.");
             fmt += precision;
-            if (type == 2)
-                fmt += MBSTRING_FLASH_MCR("L");
-            fmt += MBSTRING_FLASH_MCR("f");
-            sprintf(t, fmt.c_str(), value);
+
+            if (type < 2)
+            {
+                fmt += MBSTRING_FLASH_MCR("f");
+                sprintf(t, fmt.c_str(), (double)value);
+            }
+            else
+            {
+                fmt += MBSTRING_FLASH_MCR("Lf");
+                sprintf(t, fmt.c_str(), value);
+            }
+
             trim(t);
         }
 

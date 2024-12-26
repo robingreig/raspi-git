@@ -13,6 +13,8 @@ The features can be configurable to add and exclude some unused features, see [L
 
 The [ESP8266 and Raspberry Pi Pico](https://github.com/mobizt/Firebase-ESP8266) and [ESP32](https://github.com/mobizt/Firebase-ESP32) versions are available which provide only Firebase Realtime database and Firebase Cloud Messaging functions.
 
+The version of new async [FirebaseClient](https://github.com/mobizt/FirebaseClient) library is availavle which is faster and more reliable.
+
 
 ## Contents
 
@@ -139,7 +141,6 @@ The [ESP8266 and Raspberry Pi Pico](https://github.com/mobizt/Firebase-ESP8266) 
  * Arduino Nano 33 IoT
  * Arduino MKR Vidor 4000
  * Raspberry Pi Pico (RP2040)
- * Arduino UNO R4 WiFi (Renesas).
  * LAN8720 Ethernet PHY
  * TLK110 Ethernet PHY
  * IP101 Ethernet PHY
@@ -2084,7 +2085,7 @@ Thanks for all contributions and Google Open Source.
 
 The MIT License (MIT)
 
-Copyright (c) 2023 K. Suwatchai (Mobizt)
+Copyright (c) 2024 K. Suwatchai (Mobizt)
 
 
 Permission is hereby granted, free of charge, to any person returning a copy of

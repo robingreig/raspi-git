@@ -1,12 +1,8 @@
-#include "./core/Firebase_Client_Version.h"
-#if !FIREBASE_CLIENT_VERSION_CHECK(40408)
-#error "Mixed versions compilation."
-#endif
 
 /**
- * Google's Firebase Realtime Database class, FB_RTDB.h version 2.1.1
+ * Google's Firebase Realtime Database class, FB_RTDB.cpp version 2.1.2
  *
- * Created September 13, 2023
+ * Created February 17, 2024
  *
  * The MIT License (MIT)
  * Copyright (c) 2023 K. Suwatchai (Mobizt)

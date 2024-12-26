@@ -85,7 +85,12 @@ The minimum ram requirement is based on the applications (SMTP and IMAP). IMAP a
 
   - [ESP32 and W5500](#esp32-and-w5500)
 
-[8. License](#license)
+
+[8. Acheivement](#acheivement)
+
+- [Open Sourcs Contribution Awards](#open-sourcs-contribution-awards)
+
+[9. License](#license)
 
 
 
@@ -381,9 +386,23 @@ ENABLE_SMTP // For SMTP class compilation
 ENABLE_NTP_TIME // For enabling the device or library time setup from NTP server
 ENABLE_ERROR_STRING // For enabling the error string from error reason
 ESP_MAIL_USE_PSRAM // For enabling PSRAM support
-ESP_MAIL_DEFAULT_FLASH_FS // For enabling flash filesystem support
-ESP_MAIL_DEFAULT_SD_FS // For enabling SD filesystem support
+ESP_MAIL_DEFAULT_FLASH_FS // For enabling Flash filesystem support
+ESP_MAIL_DEFAULT_SD_FS // For enabling SD filesystem support 
+ESP_MAIL_CARD_TYPE_SD or ESP_MAIL_CARD_TYPE_SD_MMC // The SD card type for SD filesystem
 ```
+
+The Flash and SD filesystems are predefined.
+
+SD is the default SD filesystem for all devices.
+
+For ESP8266 and Arduino Pico, LittleFS is the default flash filesystem.
+
+For ESP32 since v2.0.x, LittleFS is the default flash filesystem otherwise SPIFFS is the default flash filesystem.
+
+In otherr devices, SPIFFS is the default flash filesystem.
+
+User can change `ESP_MAIL_DEFAULT_FLASH_FS` and `ESP_MAIL_DEFAULT_SD_FS` with `ESP_MAIL_CARD_TYPE_SD` or `ESP_MAIL_CARD_TYPE_SD_MMC` defined values for other filesystems.
+
 
 ### Optional Options
 
@@ -391,6 +410,9 @@ The following options are not yet defined in [**ESP_Mail_FS.h**](src/ESP_Mail_FS
 
 ```cpp
 SILENT_MODE // For silent operation (no debug printing and callback)
+ESP_MAIL_ETHERNET_MODULE_LIB `"EthernetLibrary.h"` // For the Ethernet library to work with external Ethernet module
+ESP_MAIL_ETHERNET_MODULE_CLASS EthernetClass // For the Ethernet class object of Ethernet library to work with external Ethernet module
+ESP_MAIL_ETHERNET_MODULE_TIMEOUT 2000 // For the time out in milliseconds to wait external Ethernet module to connect to network
 ENABLE_ESP8266_ENC28J60_ETH //  For ENC28J60 Ethernet module support in ESP8266
 ENABLE_ESP8266_W5500_ETH // For W5500 Ethernet module support in ESP8266
 ENABLE_ESP8266_W5100_ETH // For W5100 Ethernet module support in ESP8266
@@ -414,6 +436,15 @@ build_flags = -D ESP_MAIL_DEBUG_PORT=Serial
               -D DISABLE_IMAP
               -D ESP_MAIL_DISABLE_ONBOARD_WIFI
 ```
+
+For external Ethernet module integation used with function `setEthernetClient`, both `ESP_MAIL_ETHERNET_MODULE_LIB` and `ESP_MAIL_ETHERNET_MODULE_CLASS` should be defined.
+
+`ESP_MAIL_ETHERNET_MODULE_LIB` is the Ethernet library name with extension (.h) and should be inside `""` or `<>` e.g. `"Ethernet.h"`.
+
+`ESP_MAIL_ETHERNET_MODULE_CLASS` is the name of static object defined from class e.g. `Ethernet`.
+
+`ESP_MAIL_ETHERNET_MODULE_TIMEOUT` is the time out in milliseconds to wait network connection.
+
 
 For disabling predefined options instead of editing the [**ESP_Mail_FS.h**](src/ESP_Mail_FS.h) or using `#undef` in `Custom_ESP_Mail_FS.h`, you can define these build flags with these names or macros in `Custom_ESP_Mail_FS.h`.
 
@@ -755,9 +786,9 @@ This library supports external netwoking devices e.g. WiFi modules, Ethernet mod
 
 Since v3.4.0, the Arduino Clients can be used with this library without additional external SSL Client required.
 
-No additional setup needed, only pass the Arduino Client to the function `setClient` or pass the TinyGSMClient and TinyGSM modem to the function `setGSMClient`.
+No additional setup needed, only pass the Arduino Client to the function `setClient` or pass the TinyGSMClient and TinyGSM modem to the function `setGSMClient` or pass the Ethernet client and mac address to the function `setEthernetClient`.
 
-Two callback functions required (except for using `setGSMClient`) for network connection (with disconnection) and sending connecting status back to the Mail Client.
+Two callback functions are required (except for `setGSMClient` and `setEthernetClient`) for network connection (with disconnection) and sending connecting status back to the Mail Client.
 
 If device has on-board WiFi and supports native (SDK) Ethernet, these two native networks will be auto detectd and used.
 
@@ -982,67 +1013,17 @@ The below example will use ESP32 and W5500 and Ethernet client library to connec
 #define WIZNET_SCLK_PIN 18  // Connect W5500 SCLK pin to GPIO 18 of ESP32
 
 
-EthernetClient eth_client;
-
 uint8_t Eth_MAC[] = {0x02, 0xF0, 0x0D, 0xBE, 0xEF, 0x01};
 
-SMTPSession smtp; 
+SMTPSession smtp;
 
-Session_Config config;
+EthernetClient eth_client;
 
-// Callback function to get the Email sending status
 void smtpCallback(SMTP_Status status);
-
-void ResetEthernet()
-{
-    Serial.println("Resetting WIZnet W5500 Ethernet Board...  ");
-    pinMode(WIZNET_RESET_PIN, OUTPUT);
-    digitalWrite(WIZNET_RESET_PIN, HIGH);
-    delay(200);
-    digitalWrite(WIZNET_RESET_PIN, LOW);
-    delay(50);
-    digitalWrite(WIZNET_RESET_PIN, HIGH);
-    delay(200);
-}
-
-void networkConnection()
-{
-
-    Ethernet.init(WIZNET_CS_PIN);
-
-    ResetEthernet();
-
-    Serial.println("Starting Ethernet connection...");
-    Ethernet.begin(Eth_MAC);
-
-    unsigned long to = millis();
-
-    while (Ethernet.linkStatus() == LinkOFF || millis() - to < 2000)
-    {
-        delay(100);
-    }
-
-    if (Ethernet.linkStatus() == LinkON)
-    {
-        Serial.print("Connected with IP ");
-        Serial.println(Ethernet.localIP());
-    }
-    else
-    {
-        Serial.println("Can't connect");
-    }
-}
-
-void networkStatusRequestCallback()
-{
-    smtp.setNetworkStatus(Ethernet.linkStatus() == LinkON);
-}
 
 void setup()
 {
     Serial.begin(115200);
-
-    networkConnection();
 
     config.server.host_name = "smtp.gmail.com"; //for gmail.com
     config.server.port = 587; // requires connection upgrade via STARTTLS
@@ -1066,12 +1047,7 @@ void setup()
     // Set the message content
     message.text.content = "This is simple plain text message";
 
-     // Set the callback function for connection upgrade
-    smtp.networkStatusRequestCallback(networkStatusRequestCallback);
-
-    smtp.networkConnectionRequestCallback(networkConnection);
-
-    smtp.setClient(&eth_client);
+    smtp.setEthernetClient(&eth_client, Eth_MAC, WIZNET_CS_PIN, WIZNET_RESET_PIN); 
 
     // Set debug option
     smtp.debug(1);
@@ -1101,12 +1077,25 @@ void smtpCallback(SMTP_Status status)
 
 ```
 
+## Acheivement
+
+### Open Sourcs Contribution Awards
+
+This project **ESP Mail Client** wins the [Google Open Source Peer Bonus program](https://opensource.google/documentation/reference/growing/peer-bonus).
+
+This project would not have been possible without support from all users.
+
+Thanks for all contributors for help, bugs fix and improvement.
+
+Thanks for Edward Chuang (莊坪達) from Google for selecting this project.
+
+
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2023 K. Suwatchai (Mobizt)
+Copyright (c) 2024 K. Suwatchai (Mobizt)
 
 
 Permission is hereby granted, free of charge, to any person returning a copy of

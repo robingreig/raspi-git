@@ -4,23 +4,23 @@
 
 // WiFi 
 
-//const char *ssid = "Calalta02"; // Enter your WiFi name 
+const char *ssid = "Calalta02"; // Enter your WiFi name 
 
-//const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+const char *password = "Micr0s0ft2018";  // Enter WiFi password 
 
-const char *ssid = "MakerSpaceTest"; // Enter your WiFi name 
+//const char *ssid = "MakerSpaceTest"; // Enter your WiFi name 
 
-const char *password = "P@55w0rd";  // Enter WiFi password 
+//const char *password = "P@55w0rd";  // Enter WiFi password 
 
 // MQTT Broker 
 
-//const char *mqtt_broker = "192.168.200.21"; 
+const char *mqtt_broker = "192.168.200.21"; 
 
-const char *mqtt_broker = "192.168.204.1"; 
+//const char *mqtt_broker = "192.168.204.1"; 
 
-const char *topic1 = "esp8266/test";
+const char *topic1 = "esp8266/00/test";
 
-const char *topic2 = "esp8266/reply";
+const char *topic2 = "esp8266/00/reply";
 
 const char *mqtt_username = "emqx"; 
 

@@ -133,8 +133,8 @@ void setup()
 
     RTC.begin();
 
-    // RTCTime startTime(30, Month::JUNE, 2023, 13, 37, 00, DayOfWeek::WEDNESDAY, SaveLight::SAVING_TIME_ACTIVE);
-    // RTC.setTime(startTime);
+     RTCTime startTime(30, Month::JUNE, 2023, 13, 37, 00, DayOfWeek::WEDNESDAY, SaveLight::SAVING_TIME_ACTIVE);
+     RTC.setTime(startTime);
 
     RTCTime currentTime;
 
@@ -160,6 +160,8 @@ void setup()
 
     smtp.callback(smtpCallback);
 
+    smtp.setTCPTimeout(10);
+
     Session_Config config;
 
     config.server.host_name = SMTP_HOST;
@@ -178,7 +180,16 @@ void setup()
      * config.time.day_light_offset
      *
      * To reset the reference time and use config.time instead, call smtp.setSystemTime(0) whenever you want.
+     * 
+     * The config.time.gmt_offset should be set to match with your time zone 
+     * when you manually set the device time with function configTime.
+     * 
+     * This config.time.gmt_offset will use in RFC2822 date header creation when sending message.
+     * 
+     * If config.time.gmt_offset does not match the configTime time zone, the invalid date will send and your message
+     * can be rejected by server based on its policy.
      */
+
 
     SMTP_Message message;
 
@@ -199,24 +210,24 @@ void setup()
 
     if (!smtp.connect(&config))
     {
-        MailClient.printf("Connection error, Status Code: %d, Error Code: %d, Reason: %s", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
+        MailClient.printf("Connection error, Status Code: %d, Error Code: %d, Reason: %s\n", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
         return;
     }
 
     if (!smtp.isLoggedIn())
     {
-        Serial.println("\nNot yet logged in.");
+        Serial.println("Not yet logged in.");
     }
     else
     {
         if (smtp.isAuthenticated())
-            Serial.println("\nSuccessfully logged in.");
+            Serial.println("Successfully logged in.");
         else
-            Serial.println("\nConnected with no Auth.");
+            Serial.println("Connected with no Auth.");
     }
 
     if (!MailClient.sendMail(&smtp, &message))
-        MailClient.printf("Error, Status Code: %d, Error Code: %d, Reason: %s", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
+        MailClient.printf("Error, Status Code: %d, Error Code: %d, Reason: %s\n", smtp.statusCode(), smtp.errorCode(), smtp.errorReason().c_str());
 }
 
 void loop()

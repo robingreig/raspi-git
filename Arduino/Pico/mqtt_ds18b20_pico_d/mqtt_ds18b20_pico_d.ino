@@ -25,9 +25,9 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 // MQTT Broker 
 
-const char *mqtt_broker = "192.168.200.21"; 
+const char *mqtt_broker = "192.168.200.132"; 
 
-const char *topic = "pico/00/basementTemp";  
+const char *topic = "pico/00/basementTemp";  //
 
 const int mqtt_port = 1883; 
 
@@ -37,10 +37,10 @@ PubSubClient client(espClient);
 
 unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 5000; // 5 second interval at which to publish MQTT values
-//const long interval = 60000; // 60 second interval at which to publish MQTT values
+const long interval = 60000; // 60 second interval at which to publish MQTT values
 //const long interval = 180000; // 3 minute interval at which to publish MQTT values
 //const long interval = 300000; // 5 minute interval at which to publish MQTT values
-const long interval = 600000; // 10 minute interval at which to publish MQTT values
+//const long interval = 600000; // 10 minute interval at which to publish MQTT values
  
 
 
