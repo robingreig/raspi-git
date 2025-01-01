@@ -2,9 +2,12 @@
  *  Robin Greig
  *  Found the microDS18B20 library from Random Nerd Tutorials
  *  used dtosstrf to convert float to char
+ *  pico_a doesn't work
  *  pico_b worked great with small delays, but broke with larger
  *  pico_c uses reconnect functions
- *  pico_d doesn't use deay, currentmillis
+ *  pico_d uses currentmillis rather than delay
+ *  2024.12.27
+ *  Updated to mqtt43 & added retain flag "-r" 
  */
 
 #include <WiFi.h> 
@@ -25,7 +28,7 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 // MQTT Broker 
 
-const char *mqtt_broker = "192.168.200.132"; 
+const char *mqtt_broker = "192.168.200.143"; 
 
 const char *topic = "pico/00/basementTemp";  //
 
@@ -104,12 +107,12 @@ void loop() {
     sensor.requestTemp();
     delay(1000); // delay to read sample?
     temperatureC = sensor.getTemp();
-    Serial.println("Printing temperatureC");
+    Serial.print("Printing temperatureC: ");
     Serial.print(temperatureC);
     Serial.println("ºC");
     dtostrf(temperatureC, 6, 2, tempTest);
     Serial.print("tempTest = ");
     Serial.println(tempTest);
-    client.publish(topic, tempTest ); //publish temp
+    client.publish(topic, tempTest,"-r" ); //publish temp
   }
 }

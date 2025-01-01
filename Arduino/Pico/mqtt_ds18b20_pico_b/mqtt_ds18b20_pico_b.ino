@@ -22,9 +22,9 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 // MQTT Broker 
 
-const char *mqtt_broker = "192.168.200.21"; 
+const char *mqtt_broker = "192.168.200.143"; 
 
-const char *topic = "pico-00/temp";  
+const char *topic = "pico/00/temp";  
 
 const int mqtt_port = 1883; 
 
