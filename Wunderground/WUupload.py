@@ -1,9 +1,14 @@
+#!/usr/bin/python3
+
 import requests
 
-ambient_tempc=-15.83
-print("ambient_tempc: ",ambient_tempc)
-ambient_tempf = (ambient_tempc *1.8)+32
-print("ambient_tempf: ",ambient_tempf)
+f = open("/home/robin/CurrentOutsideTemp", "r")
+ambient_tempc = f.read()
+f.close()
+
+#print("ambient_tempc: ",ambient_tempc)
+ambient_tempf = (float(ambient_tempc) *1.8)+32
+#print("ambient_tempf: ",ambient_tempf)
 
 # create a string to hold the first part of the URL
 
@@ -23,13 +28,5 @@ r = requests.get(
 	str(date_str) +
 	"&tempf=" + str(temp_str) +
 	str(action_str))
-
-#r= requests.get(
-#    WUurl + 
-#    WUcreds + 
-#    date_str + 
-#    "&tempf=" + temp_str + 
-#    action_str)
-
 
 print("Received " + str(r.status_code) + " " + str(r.text))
