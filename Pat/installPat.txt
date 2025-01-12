@@ -1,0 +1,15 @@
+
+
+1. Navigate to the location of the .deb file (e.g. cd ~/Downloads)
+2. Install the package: sudo dpkg -i pat_x.y.z_linux_arch.deb (replace x.y.z and arch)
+3. pat configure
+> mycall - VE6RBN
+> password
+> locator - DO31eh
+> http_addr - 0.0.0.0:5000
+4. running pat as a background service
+> sudo systemctl start pat@robin
+> sudo systemctl enable pat@robin
+5. Compose a test email
+6. pat connect telnet to send it
+
