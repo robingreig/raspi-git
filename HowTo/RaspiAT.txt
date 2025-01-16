@@ -1,0 +1,13 @@
+
+sudo nmcli con add con-name hotspot ifname wlan0 type wifi ssid "Raspi44"
+
+sudo nmcli con modify hotspot wifi-sec.key-mgmt wpa-psk
+
+sudo nmcli con modify hotspot wifi-sec.psk "P@55w0rd"
+
+sudo nmcli con modify hotspot 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method shared
+
+To Edit: sudo nmtui
+
+To check the logs: journalctl
+journalctl | grep hotspot
