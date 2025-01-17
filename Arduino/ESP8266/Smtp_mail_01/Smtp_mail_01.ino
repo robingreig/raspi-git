@@ -17,8 +17,10 @@
 #endif
 #include <ESP_Mail_Client.h>
 
-#define WIFI_SSID "Calalta02"
-#define WIFI_PASSWORD "Micr0s0ft2018"
+#define WIFI_SSID "Robin's iPhone"
+#define WIFI_PASSWORD "P@55w0rd2023"
+//#define WIFI_SSID "Calalta01"
+//#define WIFI_PASSWORD "Micr0s0ft2018"
 
 /** The smtp host name e.g. smtp.gmail.com for GMail or smtp.office365.com for Outlook or smtp.mail.yahoo.com */
 #define SMTP_HOST "smtp.gmail.com"
