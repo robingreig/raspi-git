@@ -22,7 +22,8 @@ const char *password = "P@55w0rd2025";  // Enter WiFi password
 
 // MQTT Broker 
 
-const char *mqttServer = "192.168.200.21";
+//const char *mqttServer = "192.168.200.21";
+const char *mqttServer = "10.42.0.1";
 
 const int mqttPort = 1883; 
 
