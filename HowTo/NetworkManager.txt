@@ -1,0 +1,17 @@
+CLI Network Manager
+sudo nmtui
+
+Show Connections
+nmcli con show
+
+Confirm name of wifi
+iwconfig
+
+Setup hotspot
+sudo nmcli d wifi hotspot ifname <DEVICE> ssid <SSID> password <PASSWORD>
+
+Show password as QR code
+nmcli dev wifi show-password
+
+Disable networks stack's protected management frames functionality
+sudo nmcli con modify Hotspot wifi-sec.pmf disable
