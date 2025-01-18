@@ -59,7 +59,8 @@ void reconnectWiFi() {
  
 void reconnectMQTT() {
   while (!client.connected()) {
-    Serial.println("Connecting to MQTT...");
+    Serial.print("Connecting to MQTT > ");
+    Serial.println(String(mqttServer));
     // Unique client ID (using ESP8266 macAddress)  
     String client_id = "esp8266-";
     client_id += String(WiFi.macAddress());
