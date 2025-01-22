@@ -12,7 +12,7 @@ TEXT = 'The Battery Voltage is above 27VDC on Raspi15 & charger is turning off'
 
 # Gmail Sign In
 gmail_sender = 'kananaskis@gmail.com'
-gmail_passwd = 'gjodocqcmaqozrgq'
+gmail_passwd = 'dmbvvtnqfhewaszv'
 
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.login(gmail_sender, gmail_passwd)
