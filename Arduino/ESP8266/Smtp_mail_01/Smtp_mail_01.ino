@@ -17,8 +17,8 @@
 #endif
 #include <ESP_Mail_Client.h>
 
-#define WIFI_SSID "Robin's iPhone"
-#define WIFI_PASSWORD "P@55w0rd2023"
+#define WIFI_SSID "Raspi32"
+#define WIFI_PASSWORD "P@55w0rd2025"
 //#define WIFI_SSID "Calalta01"
 //#define WIFI_PASSWORD "Micr0s0ft2018"
 
@@ -27,8 +27,8 @@
 #define SMTP_PORT 465
 
 /* The sign in credentials */
-#define AUTHOR_EMAIL "kananaskis@gmail.com"
-#define AUTHOR_PASSWORD "kyplpzwibgsndppn"
+#define AUTHOR_EMAIL "canukalert@gmail.com"
+#define AUTHOR_PASSWORD "ghjb zvxz jhvw znzr"
 
 /* Recipient's email*/
 #define RECIPIENT_EMAIL "robin.greig@calalta.com"
@@ -84,7 +84,7 @@ void setup(){
   Ex. American/Denver GMT would be -6. 6 + 12 = 18
   See https://en.wikipedia.org/wiki/Time_zone for a list of the GMT/UTC timezone offsets
   */
-  config.time.ntp_server = F("pool.ntp.org,time.nist.gov");
+  config.time.ntp_server = F("time1.sait.ca,pool.ntp.org,time.nist.gov");
   config.time.gmt_offset = -6; // Summer DST = -6, Winter = -7
   config.time.day_light_offset = 0;
 

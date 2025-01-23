@@ -17,8 +17,10 @@
 #endif
 #include <ESP_Mail_Client.h>
 
-#define WIFI_SSID "Calalta02"
-#define WIFI_PASSWORD "Micr0s0ft2018"
+//#define WIFI_SSID "Calalta02"
+//#define WIFI_PASSWORD "Micr0s0ft2018"
+#define WIFI_SSID "Raspi32"
+#define WIFI_PASSWORD "P@55w0rd2025"
 
 /** The smtp host name e.g. smtp.gmail.com for GMail or smtp.office365.com for Outlook or smtp.mail.yahoo.com */
 #define SMTP_HOST "smtp.gmail.com"
@@ -82,7 +84,7 @@ void setup(){
   Ex. American/Denver GMT would be -6. 6 + 12 = 18
   See https://en.wikipedia.org/wiki/Time_zone for a list of the GMT/UTC timezone offsets
   */
-  config.time.ntp_server = F("pool.ntp.org,time.nist.gov");
+  config.time.ntp_server = F("time1.sait.ca,pool.ntp.org,time.nist.gov");
   config.time.gmt_offset = -7;
   config.time.day_light_offset = 0;
 
