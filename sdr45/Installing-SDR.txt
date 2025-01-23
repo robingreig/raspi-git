@@ -1,0 +1,32 @@
+
+1) lsusb will show the Realtek dongle with the DVB-T driver (TV)
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 004: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 001 Device 003: ID 0bda:2838 Realtek Semiconductor Corp. RTL2838 DVB-T
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+2) lsmod | grep dbv will show the driversdvb_usb_rtl28xxu       28672  1
+dvb_usb_v2             24576  1 dvb_usb_rtl28xxu
+dvb_core              131072  1 dvb_usb_v2
+mc                     61440  9 videodev,bcm2835_codec,dvb_usb_v2,videobuf2_v4l2,dvb_core,videobuf2_common,rpivid_hevc,v4l2_mem2mem,bcm2835_isp
+
+3) We need to blacklist those drivers
+> sudo nano /etc/modprobe.d/blacklist-dvb.conf (new file)
+> add blacklist dvb_usb_rtl28xxu
+> save & close the file
+
+4) Install the correct drivers
+> sudo apt install rtl-sdr
+
+5) ensure the unit is hooked up with an antenna and run rtl_test to see if we hear anythin
+> however I received this error
+Found 1 device(s):
+  0:  ,  , SN: ���	
+
+Using device 0: Generic RTL2832U OEM
+usb_open error -3
+Please fix the device permissions, e.g. by installing the udev rules file rtl-sdr.rules
+Failed to open rtlsdr device #0.
+
+> when I googled the error 
