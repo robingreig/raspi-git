@@ -39,4 +39,49 @@ even tho the dongle will go down to 100KHz
 
 8) sudo apt update && sudo apt upgrade -y
 
-9) 
+9) sudo apt install gqrx-sdr
+> I used "Add Remove Software" in the GUI and it shows gqrx-sdr-2.15.9-1+b2(64-bit)
+
+10) ran lsusb and it showed the dvb driver beside the rtl dongle
+> rebooted the Pi and ran it again still showed dvb driver
+> rtl_test command wasn't recognized
+
+11) sudo apt install rtl-sdr and installed with an error
+> sudo apt install --fix-broken didn't look like it helped
+> rebooted the Pi and ran rtl_test again and it appears to be working fine?
+
+12) started GQRX using headphones and it appears to be working 95.9 noisy, but cannot tune below 24MHz
+
+I/Q Input
+Nooelec NESDR SMArt v5 SN: 0000001 and device string rtl=0 and input rate 1800000, no Decimationcann
+
+13) ran lsmod and dongle still showed dvb driver
+> ran lsmod | grep dvb and still appeared to show the drivers installed
+
+14) sudo nano /etc/modprobe.d/blacklist-dvb.conf
+> added the line blacklist dvb_usb_rtl28xxu
+> rebooted Pi
+
+15) lsmod | grep dvb now doesn't return anything
+
+16) Followed ragone.dev/post/install-sdrpp-server-raspberry-pi
+> installed dependencies
+> installed sdr++ server
+
+17) installed rtaudio from fussthepiguy.tech/rtaudio-raspberry
+
+18) following https://radiosrs.net/installing_SDRPlusPlus.html
+> error on the cmake
+codec2 not found
+> sudo apt install codec2
+
+19) Finally found great install instructions at 
+https://www.aaronrombaut.com/build-sdr-on-raspberry-pi-5/
+And to install rtl-sdr
+
+
+
+
+
+
+
