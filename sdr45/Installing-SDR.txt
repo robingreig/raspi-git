@@ -29,4 +29,14 @@ usb_open error -3
 Please fix the device permissions, e.g. by installing the udev rules file rtl-sdr.rules
 Failed to open rtlsdr device #0.
 
-> when I googled the error 
+> when I googled the error it looked like I may not have the correct udev rules for the rtl-sdr?
+> However when I rebooted the Pi, rtl_test it found the device and looks like it set it up properly.
+
+6) sudo apt install gqrx-sdr and it appeared to go well, however I couldn't tune below 26MHz,
+even tho the dongle will go down to 100KHz
+
+7) Try #2, installed 64 bit Raspbian on the SD card
+
+8) sudo apt update && sudo apt upgrade -y
+
+9) 
