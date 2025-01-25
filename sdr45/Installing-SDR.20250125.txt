@@ -6,4 +6,8 @@ Installing-SDR.20250125.txt
 
 3) install rtl-sdr drivers following 
 https://www.aaronrombaut.com/rtl-sdr-blog-v4-on-raspberry-pi-os/
-> 
+
+2) followed the install process to install gqrx
+https://www.aaronrombaut.com/build-gqrx-on-raspberry-pi-5/
+
+
