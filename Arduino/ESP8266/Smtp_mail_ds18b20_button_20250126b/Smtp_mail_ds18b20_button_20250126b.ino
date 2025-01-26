@@ -69,7 +69,7 @@ unsigned long previousMillis = 0;
 int count = 1;
 
 // if triggered time in Millis delay before it sends out another email
-int interval = 30000;
+int interval = 60000;
 
 void setup(){
   Serial.begin(115200);
@@ -128,8 +128,9 @@ void sendEmail(){
   See https://en.wikipedia.org/wiki/Time_zone for a list of the GMT/UTC timezone offsets
   */
   config.time.ntp_server = F("pool.ntp.org,time1.sait.ca,time.nist.gov");
-  config.time.gmt_offset = -7; // Summer DST = -6, Winter = -7
+  config.time.gmt_offset = 0; // Summer DST = -6, Winter = -7
   config.time.day_light_offset = 0;
+  config.time.timezone_env_string = "MST7MDT,M3.2.0,M11.1.0"; //Denver
 
   /* Declare the message class */
   SMTP_Message message;
