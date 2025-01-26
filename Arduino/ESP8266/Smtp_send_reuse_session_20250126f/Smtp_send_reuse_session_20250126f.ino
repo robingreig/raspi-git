@@ -16,15 +16,22 @@
  *  sending every 2 minutes
  *  Using timezone
  *  config.time.timezone_env_string = "MST7MDT,M3.2.0,M11.1.0"; //Denver
+ *  
  *  Smtp_send_reuse_session_20250126c
  *  Sending text instead of html
+ *  
  *  Smtp_send_reuse_session_20250126d
  *  Sending ds18b20 temp
+ *  
  *  Smtp_send_reuse_session_20250126e
  *  Setup digital input 
  *  Send an email at start
- *  Send an email when input first goest high
+ *  Send an email when input first goes high
  *  Send an email every 5 minutes (interval) if input stays high 
+ *  
+ *  Smtp_send_reuse_session_20250126e
+ *  Add temperature monitoring
+ *  Send email if temp < 15C
  */
 
 #include <Arduino.h>
@@ -48,6 +55,8 @@
 #define WIFI_PASSWORD "Micr0s0ft2018"
 // If sensor goes high how long is the delay between emails?
 int interval = 5; // in minutes
+// Low Temperature Threshold
+int lowTemp = 15;
 
 /** For Gmail, the app password will be used for log in
  *  Check out https://github.com/mobizt/ESP-Mail-Client#gmail-smtp-and-imap-required-app-passwords-to-sign-in
@@ -205,14 +214,14 @@ void loop()
       Serial.println("sentMillis == 0");
       Serial.print("Interval = ");
       Serial.println(interval);
-    // send email if sensor goes high the first time
-    } else if (sensorVal == HIGH && sentMillis == 1) { 
+    // send email if sensor goes high or lowTemp the first time
+    } else if ((sensorVal == HIGH || temperatureC < lowTemp) && sentMillis == 1) { 
       toggle = 1;
       Serial.println("sensorVal == HIGH && sentMillis == 1");
       sentMillis = millis();
 //    } else if (sensorVal == HIGH && millis() - sentMillis > 2 * 60 * 1000) {
-    // send email every interval if sensor stays high
-    } else if (sensorVal == HIGH && millis() - sentMillis > interval * 60 * 1000) {
+    // send email every interval if sensor stays high or temp stays low
+    } else if ((sensorVal == HIGH || temperatureC < lowTemp) && millis() - sentMillis > interval * 60 * 1000) {
       toggle = 1;
       sentMillis = millis();
       Serial.println("sensorVal == HIGH && millis() - sentMillis > 2*60*1000");
@@ -237,7 +246,17 @@ void loop()
 
         message.sender.name = F("ESP Mail");
         message.sender.email = AUTHOR_EMAIL;
-        message.subject = F("Water Leak Detected");
+        // Send first email subject "First Email at Startup"
+        if (sentMillis == 1) {
+          message.subject = F("First Email at Startup");
+        }
+        if (sensorVal > 0) {
+          message.subject = F("Water Leak Detected !!");
+        }
+        if (temperatureC <= lowTemp) {
+          message.subject = F("Low Temperature Detected !!");
+        }
+        
         message.addRecipient(F("user"), RECIPIENT_EMAIL);
 
         //message.html.content = F("<p>This is the HTML message.</p>");
@@ -248,7 +267,21 @@ void loop()
         textMsg += "IP Address is: "+String(WiFi.localIP().toString())+String("\n");
         textMsg += "RSSI is: "+String(WiFi.RSSI())+String("\n");
         textMsg += "MAC Address is: "+String(WiFi.macAddress())+String("\n"); 
+        textMsg += String("\n");
+        if (sensorVal > 0){
+          textMsg += "****** Water WAS detected ******"+String("\n");
+        } else {
+          textMsg += "Water was NOT detected"+String("\n");
+        }
+        textMsg += String("\n");
         textMsg += "Temperature: "+String(temperatureC)+String("\n");
+        textMsg += String("\n");
+        if (temperatureC <= lowTemp){
+          textMsg += "****** Low Temperature WAS detected ******"+String("\n");
+        } else {
+          textMsg += "Low Temperature was NOT detected"+String("\n");
+        }
+        textMsg += String("\n");
         message.text.content = textMsg.c_str();
         message.text.charSet = "us-ascii";
         message.text.transfer_encoding = Content_Transfer_Encoding::enc_7bit;
@@ -293,7 +326,7 @@ void loop()
         heapInfo.collect();
         heapInfo.print();
     }
-    delay(1000);
+    delay(500);
 }
 
 /* Callback function to get the Email sending status */
