@@ -1,0 +1,80 @@
+
+
+
+sensorVal: 0
+sensorVal: 0
+sensorVal: 1
+Inside if (sensorVal == HIGH) loop
+Inside if (count > 0) branch
+
+Temperature: 22.31ºC
+Count: 1
+Connecting to Wi-Fi...........
+Connected with IP: 192.168.200.218
+
+#### Connecting to SMTP server...
+> C: ESP Mail Client v3.4.19
+> C: Reading time from NTP server..
+> C: connecting to SMTP server
+> C: Host > smtp.gmail.com
+> C: Port > 465
+
+#### SMTP server connected
+> C: SMTP server connected, wait for greeting...
+< S: 220 smtp.gmail.com ESMTP 98e67ed59e1d1-2f7ffaf8f03sm5394859a91.39 - gsmtp
+
+#### Sending greeting response...
+> C: send SMTP command, EHLO
+< S: 250-smtp.gmail.com at your service, [137.186.135.221]
+< S: 250-SIZE 35882577
+< S: 250-8BITMIME
+< S: 250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+< S: 250-ENHANCEDSTATUSCODES
+< S: 250-PIPELINING
+< S: 250-CHUNKING
+< S: 250 SMTPUTF8
+
+#### Logging in...
+> C: send SMTP command, AUTH PLAIN
+> C: canukalert@gmail.com
+> C: *******************
+< S: 235 2.7.0 Accepted
+
+Successfully logged in.
+
+#### Sending Email...
+> C: send Email
+
+#### Sending message header...
+> C: send message header
+< S: 250 2.1.0 OK 98e67ed59e1d1-2f7ffaf8f03sm5394859a91.39 - gsmtp
+< S: 250 2.1.5 OK 98e67ed59e1d1-2f7ffaf8f03sm5394859a91.39 - gsmtp
+
+#### Sending message body...
+> C: send message body
+< S: 354 Go ahead 98e67ed59e1d1-2f7ffaf8f03sm5394859a91.39 - gsmtp
+
+#### Finishing the message sending...
+> C: finishing the message sending
+< S: 250 2.0.0 OK  1737913701 98e67ed59e1d1-2f7ffaf8f03sm5394859a91.39 - gsmtp
+
+#### Closing the session...
+> C: terminate the SMTP session
+
+#### Message sent successfully
+> C: message sent successfully
+
+----------------
+Message sent success: 1
+Message sent failed: 0
+----------------
+
+Message No: 1
+Status: success
+Date/Time: 26 January 2025, 10:48:20
+Recipient: robin.greig@calalta.com
+Subject: ESP Test Email
+----------------
+
+sensorVal: 0
+sensorVal: 0

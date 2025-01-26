@@ -95,6 +95,7 @@ void sendEmail(){
   Serial.print("Connected with IP: ");
   Serial.println(WiFi.localIP());
   Serial.println();
+  delay(500);
   /*  Set the network reconnection option */
   MailClient.networkReconnect(true);
 
@@ -126,7 +127,7 @@ void sendEmail(){
   Ex. American/Denver GMT would be -6. 6 + 12 = 18
   See https://en.wikipedia.org/wiki/Time_zone for a list of the GMT/UTC timezone offsets
   */
-  config.time.ntp_server = F("time1.sait.ca,pool.ntp.org,time.nist.gov");
+  config.time.ntp_server = F("pool.ntp.org,time1.sait.ca,time.nist.gov");
   config.time.gmt_offset = -7; // Summer DST = -6, Winter = -7
   config.time.day_light_offset = 0;
 
@@ -193,6 +194,7 @@ void loop(){
   if (currentMillis - previousMillis >= interval){
     previousMillis = currentMillis; 
     count = 1;
+    Serial.println("previousMillis = currentMillis");
   }
   int sensorVal = digitalRead(12);
   Serial.print("sensorVal: ");
@@ -200,8 +202,10 @@ void loop(){
   // Trigger when input goes low
   //if (sensorVal == LOw && count > 0){
   // Trigger when input goes high
-  while (sensorVal == HIGH){
+  if (sensorVal == HIGH){
+    Serial.println("Inside if (sensorVal == HIGH) loop");
     if (count > 0){
+      Serial.println("Inside if (count > 0) branch");
       // Get Temp
       sensors.requestTemperatures(); 
       temperatureC = sensors.getTempCByIndex(0);
