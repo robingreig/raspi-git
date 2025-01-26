@@ -1,18 +1,18 @@
 /*
   Rui Santos
   Complete project details at:
-   - ESP32: https://RandomNerdTutorials.com/esp32-send-email-smtp-server-arduino-ide/
    - ESP8266: https://RandomNerdTutorials.com/esp8266-nodemcu-send-email-smtp-server-arduino/
   
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files.
   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
   Example adapted from: https://github.com/mobizt/ESP-Mail-Client
 
-  Smtp_mail_ds18b20_button_20250125a
-  25 Jan 2025
+  Smtp_mail_ds18b20_button_20250126a
+  26 Jan 2025
   Robin Greig
   DS18B20 on pin GPIO14 (D5)
   Button on pin GPIO12 (D6)
+  Input normall low and Raindrop sensor will pull it HIGH
 */
 
 #include <Arduino.h>
@@ -68,7 +68,10 @@ void setup(){
   sensors.begin();
   // Connect to WiFi
   Serial.println();
-  pinMode(12, INPUT_PULLUP);
+  // set input to normally HIGH
+  //pinMode(12, INPUT_PULLUP);
+  // set input to normally LOW
+  pinMode(12, INPUT);
 }
 
 void sendEmail(){
@@ -172,11 +175,14 @@ void sendEmail(){
 
 void loop(){
   // count = number of emails to send
-  int count = 1;
+  int count = 2;
   int sensorVal = digitalRead(12);
   Serial.print("sensorVal: ");
   Serial.println(sensorVal);
-  if (sensorVal == LOW && count > 0){
+  // Trigger when input goes low
+  //if (sensorVal == LOw && count > 0){
+  // Trigger when input goes high
+  if (sensorVal == HIGH && count > 0){
     // Get Temp
     sensors.requestTemperatures(); 
     temperatureC = sensors.getTempCByIndex(0);
@@ -185,7 +191,7 @@ void loop(){
     Serial.print(temperatureC);
     Serial.println("ºC");
     Serial.print("Count: ");
-    Serial.println(count);  
+    Serial.println(count);
     sendEmail();
     count -=1;
     delay(3000); 

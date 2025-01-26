@@ -1,18 +1,18 @@
 /*
   Rui Santos
   Complete project details at:
-   - ESP32: https://RandomNerdTutorials.com/esp32-send-email-smtp-server-arduino-ide/
    - ESP8266: https://RandomNerdTutorials.com/esp8266-nodemcu-send-email-smtp-server-arduino/
   
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files.
   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
   Example adapted from: https://github.com/mobizt/ESP-Mail-Client
 
-  Smtp_mail_ds18b20_button_20250125a
-  25 Jan 2025
+  Smtp_mail_ds18b20_button_20250126a
+  26 Jan 2025
   Robin Greig
   DS18B20 on pin GPIO14 (D5)
   Button on pin GPIO12 (D6)
+  Input normall low and Raindrop sensor will pull it HIGH
 */
 
 #include <Arduino.h>
@@ -62,13 +62,25 @@ int num = 18;
 // Setup float variable to hold temperature reading
 float temperatureC;
 
+// variable to hold time
+unsigned long previousMillis = 0;
+
+// setup count with initial value for number of emails to send
+int count = 1;
+
+// if triggered time in Millis delay before it sends out another email
+int interval = 30000;
+
 void setup(){
   Serial.begin(115200);
   // Start the DS18B20 sensor
   sensors.begin();
   // Connect to WiFi
   Serial.println();
-  pinMode(12, INPUT_PULLUP);
+  // set input to normally HIGH
+  //pinMode(12, INPUT_PULLUP);
+  // set input to normally LOW
+  pinMode(12, INPUT);
 }
 
 void sendEmail(){
@@ -171,24 +183,38 @@ void sendEmail(){
 }
 
 void loop(){
-  // count = number of emails to send
-  int count = 1;
+  /* Timer currentMillis - previousMillis uses the interval to determine
+   *  how long to wait to resend an email if the sensor is still 
+   *  detecting water
+   *  count starts at 1 and gets reduced to zero
+   *  once the interval has transpired count gets put back to 1
+   */
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval){
+    previousMillis = currentMillis; 
+    count = 1;
+  }
   int sensorVal = digitalRead(12);
   Serial.print("sensorVal: ");
   Serial.println(sensorVal);
-  if (sensorVal == LOW && count > 0){
-    // Get Temp
-    sensors.requestTemperatures(); 
-    temperatureC = sensors.getTempCByIndex(0);
-    Serial.println();
-    Serial.print("Temperature: ");
-    Serial.print(temperatureC);
-    Serial.println("ºC");
-    Serial.print("Count: ");
-    Serial.println(count);  
-    sendEmail();
-    count -=1;
-    delay(3000); 
+  // Trigger when input goes low
+  //if (sensorVal == LOw && count > 0){
+  // Trigger when input goes high
+  while (sensorVal == HIGH){
+    if (count > 0){
+      // Get Temp
+      sensors.requestTemperatures(); 
+      temperatureC = sensors.getTempCByIndex(0);
+      Serial.println();
+      Serial.print("Temperature: ");
+      Serial.print(temperatureC);
+      Serial.println("ºC");
+      Serial.print("Count: ");
+      Serial.println(count);
+      sendEmail();
+      count -=1;
+      delay(2000);
+    } 
   }
   delay(250);
 }
