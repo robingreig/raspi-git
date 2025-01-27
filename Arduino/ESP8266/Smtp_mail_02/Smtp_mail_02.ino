@@ -17,10 +17,10 @@
 #endif
 #include <ESP_Mail_Client.h>
 
+//#define WIFI_SSID "Calalta02"
+//#define WIFI_PASSWORD "Micr0s0ft2018"
 #define WIFI_SSID "Raspi32"
 #define WIFI_PASSWORD "P@55w0rd2025"
-//#define WIFI_SSID "Calalta01"
-//#define WIFI_PASSWORD "Micr0s0ft2018"
 
 /** The smtp host name e.g. smtp.gmail.com for GMail or smtp.office365.com for Outlook or smtp.mail.yahoo.com */
 #define SMTP_HOST "smtp.gmail.com"
@@ -28,11 +28,8 @@
 
 /* The sign in credentials */
 #define AUTHOR_EMAIL "canukalert@gmail.com"
-#define AUTHOR_PASSWORD "ghjb zvxz jhvw znzr"
+#define AUTHOR_PASSWORD "ghjb zvxz jhvw znzr "
 
-// Subject
-#define SUBJECT "Email from ESP-17" 
- 
 /* Recipient's email*/
 #define RECIPIENT_EMAIL "robin.greig@calalta.com"
 
@@ -65,7 +62,7 @@ void setup(){
    *
    * Debug port can be changed via ESP_MAIL_DEFAULT_DEBUG_PORT in ESP_Mail_FS.h
    */
-  smtp.debug(1);
+  smtp.debug(0);
 
   /* Set the callback function to get the sending results */
   smtp.callback(smtpCallback);
@@ -88,18 +85,17 @@ void setup(){
   See https://en.wikipedia.org/wiki/Time_zone for a list of the GMT/UTC timezone offsets
   */
   config.time.ntp_server = F("time1.sait.ca,pool.ntp.org,time.nist.gov");
-  config.time.gmt_offset = -6; // Summer DST = -6, Winter = -7
+  config.time.gmt_offset = -7;
   config.time.day_light_offset = 0;
 
   /* Declare the message class */
   SMTP_Message message;
 
   /* Set the message headers */
-  message.sender.name = F("ESP8266");
+  message.sender.name = F("ESP");
   message.sender.email = AUTHOR_EMAIL;
-  message.subject = SUBJECT;
-//  message.subject = F("Email from ESP-17");
-  message.addRecipient(F("RobinHome"), RECIPIENT_EMAIL);
+  message.subject = F("ESP Test Email");
+  message.addRecipient(F("Robin"), RECIPIENT_EMAIL);
     
   /*Send HTML message*/
   /*String htmlMsg = "<div style=\"color:#2f4468;\"><h1>Hello World!</h1><p>- Sent from ESP board</p></div>";
@@ -107,13 +103,10 @@ void setup(){
   message.html.content = htmlMsg.c_str();
   message.text.charSet = "us-ascii";
   message.html.transfer_encoding = Content_Transfer_Encoding::enc_7bit;*/
-  int num = 17;
+
    
   //Send raw text message
-  String textMsg = "Sent from ESP8266-"+String(num)+String("\n");
-  textMsg += "IP Address is: "+String(WiFi.localIP().toString())+String("\n");
-  textMsg += "RSSI is: "+String(WiFi.RSSI())+String("\n");
-  textMsg += "MAC Address is: "+String(WiFi.macAddress())+String("\n"); 
+  String textMsg = "Hello World! - Sent from ESP board";
   message.text.content = textMsg.c_str();
   message.text.charSet = "us-ascii";
   message.text.transfer_encoding = Content_Transfer_Encoding::enc_7bit;
@@ -175,7 +168,7 @@ void smtpCallback(SMTP_Status status){
       
       ESP_MAIL_PRINTF("Message No: %d\n", i + 1);
       ESP_MAIL_PRINTF("Status: %s\n", result.completed ? "success" : "failed");
-      ESP_MAIL_PRINTF("Date/Time: %s\n", MailClient.Time.getDateTimeString(result.timestamp, "%d %B %Y, %H:%M:%S").c_str());
+      ESP_MAIL_PRINTF("Date/Time: %s\n", MailClient.Time.getDateTimeString(result.timestamp, "%B %d, %Y %H:%M:%S").c_str());
       ESP_MAIL_PRINTF("Recipient: %s\n", result.recipients.c_str());
       ESP_MAIL_PRINTF("Subject: %s\n", result.subject.c_str());
     }
