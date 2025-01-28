@@ -8,6 +8,7 @@
 
 // GPIO where the DS18B20 is connected to
 const int oneWireBus = 02;
+//const int oneWireBus = 05;
 
 // Setup a oneWire instance to communicate with any OneWire devices
 OneWire oneWire(oneWireBus);
