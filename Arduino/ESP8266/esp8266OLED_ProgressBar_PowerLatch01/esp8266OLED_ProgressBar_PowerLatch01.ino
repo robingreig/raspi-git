@@ -56,7 +56,7 @@ void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
 
-  // Define powerLatch pin as an OUTPUT
+  // Define powerLatch pin as an OUTPUT    
   pinMode(powerLatch, OUTPUT);  
   
   // Keeps the circuit on
@@ -72,36 +72,41 @@ void setup() {
 
 
 void loop() {
-  int progress = 100;
+  for (int i = 100; i >= 0; i -= 10){
 
-  for (int i = 100; 
+    int progress = i;
+    Serial.print("i = ");
+    Serial.println(i);
+    Serial.print("progress = ");
+    Serial.println(progress);
+    
+    // clear the display
+    display.clear();
+
+    // draw the progress bar
+    display.drawProgressBar(0, 50, 120, 10, progress);
+
+    // draw the percentage as String
+    display.setFont(ArialMT_Plain_16);
+    display.setTextAlignment(TEXT_ALIGN_CENTER);
+    display.drawString(64, 32, String(progress) + "%");
   
-  // clear the display
-  display.clear();
+    // write the buffer to the display
+    display.display();
 
-
-  // draw the progress bar
-  display.drawProgressBar(0, 50, 120, 10, progress);
-
-  // draw the percentage as String
-  display.setFont(ArialMT_Plain_16);
-  display.setTextAlignment(TEXT_ALIGN_CENTER);
-  display.drawString(64, 32, String(progress) + "%");
-  
-  // write the buffer to the display
-  display.display();
-  if (ledState == LOW) {
-    ledState = HIGH;  // Note that this switches the LED *off*
-  } else {
-    ledState = LOW;  // Note that this switches the LED *on*
+    if (ledState == LOW) {
+      ledState = HIGH;  // Note that this switches the LED *off*
+    } else {
+      ledState = LOW;  // Note that this switches the LED *on*
+    }
+    delay(500);
+    digitalWrite(LED_BUILTIN, ledState);
+    // Turn off at 0%
+    if (progress == 0) {
+      // Turns the power latch circuit off
+      digitalWrite(powerLatch, LOW);
+      Serial.println("powerLatch = LOW");
   }
-  delay(500);
-  digitalWrite(LED_BUILTIN, ledState);
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;
-    // Turns the power latch circuit off
-    digitalWrite(powerLatch, LOW);
+  delay(1000);
   }
-  delay(10);
 }

@@ -41,6 +41,14 @@
  *  No Water - LED Off - Digital Output HIGH
  *  Water - LED On - Digital Output LOW
  *  
+ *  Smtp_ds18b20_button_20250128a
+ *  GPIO14 is used for built in display and conflicts with oneWire
+ *  Change oneWire input to GPIO10 (S3)
+ *  GPIO12 is used for built in display and conflicts with RainDrop sensor 
+ *  Change RainDrop sensor to GPIO09 (S2)
+ *  GPIO 9 & 10 didn't work so moving to
+ *  oneWire - GPIO5 (D1) BB14
+ *  Raindrop = GPIO4 (D2) BB13 *  
  */
 
 #include <Arduino.h>
@@ -120,7 +128,11 @@ int num = 18;
 int toggle = 0;
 
 // GPIO where the DS18B20 is connected to GPIO14 (D5)
-const int oneWireBus = 14;
+//const int oneWireBus = 14;
+// GPIO14 is used for built in display so change to GPIO10 (S3)
+//const int oneWireBus = 10;
+// GPIO10 didn't work so moving to GPIO5 (D1) BB14
+const int oneWireBus = 5;
 
 // Setup a oneWire instance to communicate with any OneWire devices
 OneWire oneWire(oneWireBus);
@@ -141,7 +153,11 @@ void setup()
     // Setup input digital pin to go HIGH when water detected
 //    pinMode(12, INPUT);
     // Setup input digital pin to go HIGH when water detected
-    pinMode(12, INPUT_PULLUP);
+//    pinMode(12, INPUT_PULLUP);
+    // GPIO12 is used for built in display so change to GPIO09
+//    pinMode(9, INPUT_PULLUP);
+    // GPIO9 didn't work so moving to GPIO4 (D2) BB13
+    pinMode(9, INPUT_PULLUP);
 
 #if defined(ARDUINO_ARCH_SAMD)
     while (!Serial)
@@ -211,7 +227,10 @@ void setup()
 
 void loop()
 {
-    int sensorVal = digitalRead(12); // GPIO 12 = D6
+    // GPIO12 is used for built in display so change to GPIO09
+//    int sensorVal = digitalRead(12); // GPIO 12 = D6
+//    int sensorVal = digitalRead(9); // GPIO 09 = S2
+    int sensorVal = digitalRead(4); // GPIO 04 = D2
     Serial.print("sensorVal: ");
     Serial.println(sensorVal);
     sensors.requestTemperatures(); 
