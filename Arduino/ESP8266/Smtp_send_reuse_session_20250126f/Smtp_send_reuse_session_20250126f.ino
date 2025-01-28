@@ -29,9 +29,10 @@
  *  Send an email when input first goes high
  *  Send an email every 5 minutes (interval) if input stays high 
  *  
- *  Smtp_send_reuse_session_20250126e
+ *  Smtp_send_reuse_session_20250126f
  *  Add temperature monitoring
  *  Send email if temp < 15C
+ *  Change subject line according to the event, Low Temp or Water Leak
  */
 
 #include <Arduino.h>
@@ -128,7 +129,7 @@ void setup()
     sensors.begin();
 
     // Setup input digital pin
-    pinMode(12, INPUT);
+    pinMode(12, INPUT); // GPIO12 = D6
 
 #if defined(ARDUINO_ARCH_SAMD)
     while (!Serial)
