@@ -2,6 +2,7 @@ rainbow02	= Rainbow Light
 zero3		= Stove Fan
 tiffany04	= Tiffany Lamp
 breadboard10	= OpenVPN, & breadboard (old)
+DeckLight11	= Zero W running front deck lights
 aprx11		= APRX
 battmon12	= Battery Monitor (old)
 gardentemp13	= Garden Temperature Monitor (old)
