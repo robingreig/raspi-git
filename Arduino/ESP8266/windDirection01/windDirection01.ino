@@ -3,7 +3,7 @@
 #include <SoftwareSerial.h>
  
 // Create a SoftwareSerial object to communicate with the MAX485 module
-SoftwareSerial mySerial(7, 6); // RX pin of RS-485, TX pin of RS-485
+SoftwareSerial mySerial(13, 02); // RX pin of RS-485, TX pin of RS-485
  
 // Create a ModbusMaster object
 ModbusMaster node;
@@ -82,5 +82,5 @@ void loop() {
   }
  
   // Wait for 2 seconds before the next read
-  delay(5000);
+  delay(2000);
 }
