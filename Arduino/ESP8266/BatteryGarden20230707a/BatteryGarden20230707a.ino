@@ -30,22 +30,26 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 void reconnectMQTT() {
+  // Loop until we're reconnected
   while (!client.connected()) {
-    Serial.println("Connecting to MQTT...");
-//    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
-    if (client.connect("ESP8266Client")) {
-      Serial.println("connected to MQTT");
-      // Unique client ID (using ESP8266-03)  
-      String client_id = "esp8266 - "; 
+    // Attempt to connect
+    Serial.print("Attempting MQTT connection...");
+    // Establish unique ID string
+    String client_id = "esp8266 > ";
+    client_id += String(WiFi.macAddress());
+    Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
+//      if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) { 
+    if (client.connect(client_id.c_str())) {
+      Serial.println("connected");
       String WiFiRSSI = String(WiFi.RSSI());
       Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
-      strcpy(signal, WiFiRSSI.c_str());
-      client_id += String(WiFi.macAddress());
-      Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
+      strcpy(signal, WiFiRSSI.c_str()); 
     } else {
-      Serial.print("failed with state ");
+      Serial.print("failed, rc=");
       Serial.print(client.state());
-      delay(500);
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
     }
   }
 }
