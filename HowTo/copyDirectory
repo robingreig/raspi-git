@@ -1,0 +1,5 @@
+
+to copy a complete directory recursively
+
+cp -av FROM TO
+or sudo if needed?
