@@ -9,3 +9,16 @@ https://github.com/earlephilhower/arduino-pico/releases/download/global/package_
 Sketchbook Location
 /home/robin/raspi-git/Arduino
 
+
+Installing Desktop500
+1. Install OS
+2. update && upgrade -y
+3. ssh-keygen
+4. git clone raspi-git
+5. add pub key to github
+6. enable git & login to test
+7. install arduino
+8. update sketchbook location in preferences /home/robin/raspi-git/Arduino
+9. add links to additional boards manager URL's seperated by commas
+10. add boards in boards manager eps8266 by espressif, esp32 by espressif, pico by Earl E. Philtower
+
