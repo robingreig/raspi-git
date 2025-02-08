@@ -21,4 +21,18 @@ Installing Desktop500
 8. update sketchbook location in preferences /home/robin/raspi-git/Arduino
 9. add links to additional boards manager URL's seperated by commas
 10. add boards in boards manager eps8266 by espressif, esp32 by espressif, pico by Earl E. Philtower
+11. add gparted to manage usb drives
+
+sudo fdisk -l
+to list all drives and partitions
+sudo fdisk /dev/sda1
+- Create a new partition table "g"
+- Create a new partition "n"
+- use the defaults
+- Finally write and exit fdisk "w"
+- run sudo fdisk -l again to see the new partition
+sudo mkfs.FILETYPE DEVICE
+sudo mkfs.ext4 /dev/sda1
+If you can't access the drive chmod 777 to give all access
+
 
