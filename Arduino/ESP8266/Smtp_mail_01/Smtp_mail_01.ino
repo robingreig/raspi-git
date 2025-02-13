@@ -31,7 +31,7 @@
 #define AUTHOR_PASSWORD "ghjb zvxz jhvw znzr"
 
 // Subject
-#define SUBJECT "Email from ESP-17" 
+#define SUBJECT "Email from ESP8266-17" 
  
 /* Recipient's email*/
 #define RECIPIENT_EMAIL "robin.greig@calalta.com"
