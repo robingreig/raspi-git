@@ -13,7 +13,7 @@ SoftwareSerial rs485(6, 7);  // RX: 6, TX: 7
 
 void setup() {
   // start communication with baud rate 9600
-  rs485.begin(4800);
+  rs485.begin(9600);
   Serial.begin(115200);
 
   // wait a moment to allow serial ports to initialize
