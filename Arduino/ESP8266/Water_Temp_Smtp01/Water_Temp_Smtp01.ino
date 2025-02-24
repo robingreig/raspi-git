@@ -44,10 +44,10 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-#define WIFI_SSID "Calalta02"
-#define WIFI_PASSWORD "Micr0s0ft2018"
-//#define WIFI_SSID "Raspi32"
-//#define WIFI_PASSWORD "P@55w0rd2025"
+//#define WIFI_SSID "Calalta02"
+//#define WIFI_PASSWORD "Micr0s0ft2018"
+#define WIFI_SSID "Raspi32"
+#define WIFI_PASSWORD "P@55w0rd2025"
 
 /** For Gmail, the app password will be used for log in
  *  Check out https://github.com/mobizt/ESP-Mail-Client#gmail-smtp-and-imap-required-app-passwords-to-sign-in
@@ -75,7 +75,9 @@
 #define AUTHOR_PASSWORD "ghjb zvxz jhvw znzr"
 
 /* Recipient email address */
-#define RECIPIENT_EMAIL "robin.greig@calalta.com"
+//#define RECIPIENT_EMAIL "robin.greig@calalta.com"
+#define RECIPIENT_EMAIL "robin.greig@sait.ca"
+//#define RECIPIENT_EMAIL "ron.lukiv@sait.ca"
 
 SMTPSession smtp;
 
