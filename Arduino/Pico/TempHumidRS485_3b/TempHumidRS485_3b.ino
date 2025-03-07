@@ -24,7 +24,7 @@
 
 // Create a SoftwareSerial object to communicate with the MAX485 module
 SoftwareSerial mySerial1(1, 0); // Rx-Pin 2-GPIO 1 & Tx-Pin 1-GPIO 0
-SoftwareSerial mySerial2(5, 4); // Rx-Pin 2-GPIO 1 & Tx-Pin 1-GPIO 0
+SoftwareSerial mySerial2(5, 4); // Rx-Pin 7-GPIO 5 & Tx-Pin 6-GPIO 4
 SerialPIO mySerial3(8, 9); // Tx-GPIO 8-Pin 11 & Rx-GPIO 12-Pin 10
 //for SoftwareSerial PIO-based UART
 
@@ -252,6 +252,7 @@ void loop() {
   sprintf(humidChar3,"%.2f",humidity3);
   Serial.print("humidChar3 = ");
   Serial.println(humidChar3);
+  Serial.println();
   client.publish(topic6, humidChar3); 
 
   // Wait for 2 seconds before the next read
