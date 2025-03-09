@@ -14,9 +14,11 @@
  
 // Create a SoftwareSerial object to communicate with the MAX485 module
 SoftwareSerial mySerial(1, 0); // RX, TX
- 
+//char node[4] = "n";
+char* node[4] = {"n","o"};
+
 // Create a ModbusMaster object
-ModbusMaster node0;
+ModbusMaster n;
  
 void setup() {
   // Initialize serial communication for debugging
@@ -25,55 +27,33 @@ void setup() {
   mySerial.begin(9600);
  
   // Initialize Modbus communication with the Modbus slave ID 1
-  node0.begin(1, mySerial);
+  n.begin(1, mySerial);
  
   // Allow some time for initialization
   delay(1000);
 }
 
-// char variable for node input
-char node[6] = "node0";
-
-float tempHumid (char node)
-  {
-    uint8_t result;   // Variable to store the result of Modbus operations
-    uint16_t data[2]; // Array to store the data read from the Modbus slave
- 
-    // Read 2 holding registers starting at address 0x0000
-    // This function sends a Modbus request to the slave to read the registers
-    result = node.readHoldingRegisters(0x0000, 2);
- 
-    // If the read is successful, process the data
-    if (result == node.ku8MBSuccess) {
-      // Get the response data from the response buffer
-      data[0] = node.getResponseBuffer(0x00); // Humidity
-      data[1] = node.getResponseBuffer(0x01); // Temperature
- 
-    // Calculate actual humidity and temperature values
-    float humidity = data[0] / 10.0;      // Humidity is scaled by 10
-    float temperature = data[1] / 10.0;   // Temperature is scaled by 10
-    tempHumid = humidity;
-    return humidity
-  }
-
 void loop() {
+  Serial.println();
+  Serial.print("node[1] = ");
+  Serial.println(node[1]);
   uint8_t result;   // Variable to store the result of Modbus operations
   uint16_t data[2]; // Array to store the data read from the Modbus slave
  
   // Read 2 holding registers starting at address 0x0000
   // This function sends a Modbus request to the slave to read the registers
-  result = node.readHoldingRegisters(0x0000, 2);
+  result = (sscanf(*node[0])).readHoldingRegisters(0x0000, 2);
  
   // If the read is successful, process the data
-  if (result == node.ku8MBSuccess) {
+  if (result == n.ku8MBSuccess) {
     // Get the response data from the response buffer
-    data[0] = node.getResponseBuffer(0x00); // Humidity
-    data[1] = node.getResponseBuffer(0x01); // Temperature
+    data[0] = n.getResponseBuffer(0x00); // Humidity
+    data[1] = n.getResponseBuffer(0x01); // Temperature
  
     // Calculate actual humidity and temperature values
     float humidity = data[0] / 10.0;      // Humidity is scaled by 10
     float temperature = data[1] / 10.0;   // Temperature is scaled by 10
- 
+
     // Print the values to the Serial Monitor
     Serial.print("Humidity: ");
     Serial.print(humidity);
