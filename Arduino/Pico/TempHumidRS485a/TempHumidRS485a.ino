@@ -6,6 +6,9 @@
  *  Reads the Temp & Humidity of RS485 device and prints it to Serial Monitor
  *  
  *  Based on the ModbusMaster example below
+ *  
+ *  2025.03.16
+ *  > this sketch still works OK
 */
 
 

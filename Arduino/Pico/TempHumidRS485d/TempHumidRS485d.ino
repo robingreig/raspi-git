@@ -1,5 +1,5 @@
 /* 
- *  TempHumidRS485c.ino
+ *  TempHumidRS485d.ino
  *  Robin Greig
  *  2025.03.16
  *  
@@ -10,6 +10,8 @@
  *  2025.03.16
  *  Working using Hippy's suggestion for function from Raspberry Pi Forum
  *  https://forums.raspberrypi.com/search.php?author_id=40310&sr=posts
+ *  
+ *  Getting humidity & temperature out of the function into individual variables
  *  
 */
 
@@ -41,15 +43,14 @@ void setup() {
   delay(1000);
 }
 
-// char variable for node input
-int nodeNumber;
+// function to measure temp & humid from various sensors
+// Send it pointer to the variable *humidP
+// Send it pointer to the variable *tempP
 
-void tempHumid (ModbusMaster node, int nodeNumber)
+void tempHumid (ModbusMaster node, float *humidP, float *tempP)
   {
     uint8_t result;   // Variable to store the result of Modbus operations
     uint16_t data[2]; // Array to store the data read from the Modbus slave
-    float humidity;
-    float temperature;
  
     // Read 2 holding registers starting at address 0x0000
     // This function sends a Modbus request to the slave to read the registers
@@ -62,23 +63,8 @@ void tempHumid (ModbusMaster node, int nodeNumber)
       data[1] = node.getResponseBuffer(0x01); // Temperature
  
       // Calculate actual humidity and temperature values
-      humidity = data[0] / 10.0;      // Humidity is scaled by 10
-      temperature = data[1] / 10.0;   // Temperature is scaled by 10
-     
-      // Print the values to the Serial Monitor
-      Serial.println();
-      Serial.print("Humidity ");
-      Serial.print(nodeNumber);
-      Serial.print(": ");
-      Serial.print(humidity);
-      Serial.println(" %RH");
- 
-      Serial.print("Temperature ");
-      Serial.print(nodeNumber);
-      Serial.print(": ");
-      Serial.print(temperature);
-      Serial.println(" °C");
-      Serial.println();
+      *humidP = data[0] / 10.0;      // Humidity is scaled by 10
+      *tempP = data[1] / 10.0;   // Temperature is scaled by 10
     } else {
       // Print an error message if the read fails
       Serial.print("Modbus read failed: ");
@@ -86,8 +72,24 @@ void tempHumid (ModbusMaster node, int nodeNumber)
     }
 }
 void loop() {
-  tempHumid(node1, 1);
-  tempHumid(node2, 2);
+  float humid1;
+  float temp1;
+  float humid2;
+  float temp2;
+  tempHumid(node1, &humid1, &temp1);
+  Serial.print("Humidity 1 Returned from pointer= ");
+  Serial.println(humid1);
+  Serial.println();
+  Serial.print("Temperature 1 Returned from pointer= ");
+  Serial.println(temp1);
+  Serial.println();
+  tempHumid(node2, &humid2, &temp2);
+  Serial.print("Humidity 2 Returned from pointer= ");
+  Serial.println(humid2);
+  Serial.println();
+  Serial.print("Temperature 2 Returned from pointer= ");
+  Serial.println(temp2);
+  Serial.println();
   // Wait for 2 seconds before the next read
   delay(5000);
 }

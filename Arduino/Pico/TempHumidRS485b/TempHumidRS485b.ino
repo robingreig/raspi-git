@@ -6,6 +6,10 @@
  *  Reads the Temp & Humidity of RS485 device and prints it to Serial Monitor
  *  
  *  Based on the ModbusMaster example below
+ *  
+ *  2025.03.16
+ *  Working using Hippy's suggestion for function
+ *  
 */
 
 
@@ -16,7 +20,7 @@
 SoftwareSerial mySerial(1, 0); // RX, TX
  
 // Create a ModbusMaster object
-ModbusMaster node0;
+ModbusMaster node;
  
 void setup() {
   // Initialize serial communication for debugging
@@ -25,19 +29,21 @@ void setup() {
   mySerial.begin(9600);
  
   // Initialize Modbus communication with the Modbus slave ID 1
-  node0.begin(1, mySerial);
+  node.begin(1, mySerial);
  
   // Allow some time for initialization
   delay(1000);
 }
 
 // char variable for node input
-char node[6] = "node0";
+int nodeNumber= 1;
 
-float tempHumid (char node)
+void tempHumid (ModbusMaster node, int nodeNumber)
   {
     uint8_t result;   // Variable to store the result of Modbus operations
     uint16_t data[2]; // Array to store the data read from the Modbus slave
+    float humidity;
+    float temperature;
  
     // Read 2 holding registers starting at address 0x0000
     // This function sends a Modbus request to the slave to read the registers
@@ -49,46 +55,35 @@ float tempHumid (char node)
       data[0] = node.getResponseBuffer(0x00); // Humidity
       data[1] = node.getResponseBuffer(0x01); // Temperature
  
-    // Calculate actual humidity and temperature values
-    float humidity = data[0] / 10.0;      // Humidity is scaled by 10
-    float temperature = data[1] / 10.0;   // Temperature is scaled by 10
-    tempHumid = humidity;
-    return humidity
-  }
-
+      // Calculate actual humidity and temperature values
+      humidity = data[0] / 10.0;      // Humidity is scaled by 10
+      temperature = data[1] / 10.0;   // Temperature is scaled by 10
+     
+      // Print the values to the Serial Monitor
+      Serial.print("Humidity inside function ");
+      Serial.print(nodeNumber);
+      Serial.print(": ");
+      Serial.print(humidity);
+      Serial.println(" %RH");
+ 
+      Serial.print("Temperature inside function ");
+      Serial.print(nodeNumber);
+      Serial.print(": ");
+      Serial.print(temperature);
+      Serial.println(" °C");
+      Serial.println();
+    } else {
+      // Print an error message if the read fails
+      Serial.print("Modbus read failed: ");
+      Serial.println(result, HEX); // Print the error code in hexadecimal format
+    }
+}
 void loop() {
-  uint8_t result;   // Variable to store the result of Modbus operations
-  uint16_t data[2]; // Array to store the data read from the Modbus slave
- 
-  // Read 2 holding registers starting at address 0x0000
-  // This function sends a Modbus request to the slave to read the registers
-  result = node.readHoldingRegisters(0x0000, 2);
- 
-  // If the read is successful, process the data
-  if (result == node.ku8MBSuccess) {
-    // Get the response data from the response buffer
-    data[0] = node.getResponseBuffer(0x00); // Humidity
-    data[1] = node.getResponseBuffer(0x01); // Temperature
- 
-    // Calculate actual humidity and temperature values
-    float humidity = data[0] / 10.0;      // Humidity is scaled by 10
-    float temperature = data[1] / 10.0;   // Temperature is scaled by 10
- 
-    // Print the values to the Serial Monitor
-    Serial.print("Humidity: ");
-    Serial.print(humidity);
-    Serial.println(" %RH");
- 
-    Serial.print("Temperature: ");
-    Serial.print(temperature);
-    Serial.println(" °C");
-    Serial.println();
-  } else {
-    // Print an error message if the read fails
-    Serial.print("Modbus read failed: ");
-    Serial.println(result, HEX); // Print the error code in hexadecimal format
-  }
- 
+  Serial.println();
+  Serial.println("Trying function");
+  tempHumid(node, 1);
+  Serial.println("End function");
+  Serial.println();
   // Wait for 2 seconds before the next read
   delay(5000);
 }
