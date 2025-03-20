@@ -4,7 +4,7 @@
 #include "one_wire.h"
 
 #define TEMP_SENSE_GPIO_PIN 28
-#define EXIT_GPIO_PIN 22
+#define EXIT_GPIO_PIN 15
 
 int main() {
   stdio_init_all();

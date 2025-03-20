@@ -6,25 +6,29 @@
 *********/
 
 #include <microDS18B20.h>
+#include <SoftwareSerial.h>
+
 
 // We're using GPIO 22, change accordingly
 MicroDS18B20<15> sensor;
+SoftwareSerial mySerial (1, 0);
 
 void setup() {
   Serial.begin(115200);
+  mySerial.begin(115200);
 }
 
 void loop() {
   //request temperature from sensor
   sensor.requestTemp();
 
-  delay(1000);
+  delay(2000);
   
   //print the temperature
-  Serial.print("Temperature (ºC): ");
+  Serial.print("Temperature from Serial (ºC): ");
   Serial.println(sensor.getTemp());
+  mySerial.print("Temperature from mySerial (ºC): ");
+  mySerial.println(sensor.getTemp());
 
-  //Temperature in Fahrenheit
-  //Serial.print("Temperature (ºF): ");
-  //Serial.println(sensor.getTemp()*(9.0/5.0) + 32.0);
+
 }
