@@ -41,4 +41,5 @@ greenhouse	= 22260 (pi user)
 
 To connect to a serial port for example:
 screen /dev/ttyS0 115200
-To exit Ctrl-A > k > y
+To exit Ctrl-A > k > y or Ctrl-A \
+
