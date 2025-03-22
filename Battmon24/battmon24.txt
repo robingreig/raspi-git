@@ -2,7 +2,40 @@
 2) make sure spi is on for MCP3008
 3) Install node-red
 bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
-4) Install dashboard from within the ./.node-red directory
+4) To start node-red: node-red-start / stop / restart / log
+5) Install dashboard from within the ./.node-red directory
 npm -i node-red-dashboard
+6) node-red-restart
+7) sudo sytemctl enable nodered.service
+8) sudo reboot
+
+Install mosquitto client
+sudo apt install mosquitto-clients -y
+
+Install paho-mqtt
+pip3 install paho-mqtt
+
+2020.06.20
+> Been having problems with consistent publishing.
+> Played with qos but doesn't seem to work with qos 2,
+so I've settled on qos 1
+> Still intermittent
+2020.06.25
+> Still intermittent
+> Turned off wifi on mqtt37, using wired only for broker
+2020.06.26
+> Still intermittent
+> Wondering if we need to connect with the broker ever time we
+publish, so I added the client.connect(broker_address) before
+every publish and it seems to be working OK
+> Then I read in steves internet guide about a keepalive option
+for the connect method?
+> Keepalive is only the time period for the pings
+> So I kept reading and read about the loop() function.
+> I updated battmon24pub05.py to battmon24pub06.py
+     > using the loop funtion
+     > mqtt37.local rather than ip address
+     > changed back to qos = 2 and seems to be working OK
+
 
 

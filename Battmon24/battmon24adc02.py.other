@@ -28,30 +28,27 @@ def analogInput(channel):
   data = ((adc[1]&3) << 8) + adc[2]
   return data
 
-def Volts12(data): # Convert data from 12VDC batteries
-#  volts = (data * 0.014662756) # 15VDC / 1023 = 0.014662756
-  volts = (data * 0.015640273) # 16VDC / 1023 = 0.015640273
-  volts = round(volts, 2) # Round off to 2 decimal places
-  return volts
-
-def Volts24(data): # Convert data from 24VDC battery banks
+# Below function will convert data to max 15VDC
+def Volts24(data):
 #  volts = (data * 3.3) / float(1023)
-#  volts = (data * 0.026392961) # 27VDC / 1023 = 0.026392961
-#  volts = (data * 0.027370478) # 28VDC / 1023 = 0.027370478
-  volts = (data * 0.028347996) # 29VDC / 1023 = 0.028347996
+  volts = (data * 0.026392961)
   volts = round(volts, 2) # Round off to 2 decimal places
   return volts
-
+# Below function will convert data to max 27VDC
+def Volts12(data):
+  volts = (data * 0.014662756)
+  volts = round(volts, 2) # Round off to 2 decimal places
+  return volts
 while repeat > 0:
   input0 = analogInput(0) # Reading from CH0
   input0_volts = Volts24(input0)
   input0voltsAvg = input0voltsAvg + input0_volts # Average all 3 entries
   timestamp = datetime.datetime.now()
-  print("Input 0: {} ({} Bits) ({}V) ({}V)".format(timestamp, input0,input0_volts,input0voltsAvg))
+  print("\nInput 0: {} ({} Bits) ({}V) ({}V)".format(timestamp, input0,input0_volts,input0voltsAvg))
   if repeat == 1:
     input0voltsAvg = input0voltsAvg / 3
     input0voltsAvg = round(input0voltsAvg, 2) # Round off to 2 decimal places
-    print("Input 0: {} ({} Bits) ({}V) ({}V)\n".format(timestamp, input0,input0_volts,input0voltsAvg))
+    print("\nInput 0: {} ({} Bits) ({}V) ({}V)".format(timestamp, input0,input0_volts,input0voltsAvg))
     cht = open("/home/robin/CurrentAdc0Volts", "w")
     cht.write (str(input0voltsAvg))
     cht.close()
@@ -62,7 +59,7 @@ while repeat > 0:
   if repeat == 1:
     input1voltsAvg = input1voltsAvg / 3
     input1voltsAvg = round(input1voltsAvg, 2) # Round off to 2 decimal places
-    print("Input 1: {} ({} Bits) ({}V) ({}V)\n".format(timestamp, input1,input1_volts,input1voltsAvg))
+    print("\nInput 1: {} ({} Bits) ({}V) ({}V)".format(timestamp, input1,input1_volts,input1voltsAvg))
     cht = open("/home/robin/CurrentAdc1Volts", "w")
     cht.write (str(input1voltsAvg))
     cht.close()
@@ -73,7 +70,7 @@ while repeat > 0:
   if repeat == 1:
     input2voltsAvg = input2voltsAvg / 3
     input2voltsAvg = round(input2voltsAvg, 2) # Round off to 2 decimal places
-    print("Input 2: {} ({} Bits) ({}V) ({}V)\n".format(timestamp, input2,input2_volts,input2voltsAvg))
+    print("\nInput 2: {} ({} Bits) ({}V) ({}V)".format(timestamp, input2,input2_volts,input2voltsAvg))
     cht = open("/home/robin/CurrentAdc2Volts", "w")
     cht.write (str(input2voltsAvg))
     cht.close()
@@ -84,7 +81,7 @@ while repeat > 0:
   if repeat == 1:
     input3voltsAvg = input3voltsAvg / 3
     input3voltsAvg = round(input3voltsAvg, 2) # Round off to 2 decimal places
-    print("Input 3: {} ({} Bits) ({}V) ({}V)\n".format(timestamp, input3,input3_volts,input3voltsAvg))
+    print("\nInput 3: {} ({} Bits) ({}V) ({}V)".format(timestamp, input3,input3_volts,input3voltsAvg))
     cht = open("/home/robin/CurrentAdc3Volts", "w")
     cht.write (str(input3voltsAvg))
     cht.close()
@@ -95,7 +92,7 @@ while repeat > 0:
   if repeat == 1:
     input4voltsAvg = input4voltsAvg / 3
     input4voltsAvg = round(input4voltsAvg, 2) # Round off to 2 decimal places
-    print("Input 4: {} ({} Bits) ({}V) ({}V)\n".format(timestamp, input4,input4_volts,input4voltsAvg))
+    print("\nInput 4: {} ({} Bits) ({}V) ({}V)".format(timestamp, input4,input4_volts,input4voltsAvg))
     cht = open("/home/robin/CurrentAdc4Volts", "w")
     cht.write (str(input4voltsAvg))
     cht.close()
@@ -106,10 +103,9 @@ while repeat > 0:
   if repeat == 1:
     input5voltsAvg = input5voltsAvg / 3
     input5voltsAvg = round(input5voltsAvg, 2) # Round off to 2 decimal places
-    print("Input 5: {} ({} Bits) ({}V) ({}V)".format(timestamp, input5,input5_volts,input5voltsAvg))
+    print("\nInput 5: {} ({} Bits) ({}V) ({}V)".format(timestamp, input5,input5_volts,input5voltsAvg))
     cht = open("/home/robin/CurrentAdc5Volts", "w")
     cht.write (str(input5voltsAvg))
     cht.close()
-  print("\n")
   sleep(sleepTime)
   repeat = repeat - 1
