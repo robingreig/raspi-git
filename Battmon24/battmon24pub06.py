@@ -3,6 +3,7 @@
 import os
 import time
 import paho.mqtt.client as mqtt
+# Run battmon24adc02.py to read analog inputs and save to files below
 import battmon24adc02
 
 
