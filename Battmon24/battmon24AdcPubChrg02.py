@@ -1,13 +1,29 @@
 #!/usr/bin/python3
+# battmon24AdcPubChrg02.py
+# 2025.03.23
+# Adding GPIO17 & 27 as outputs to control both 120V Battery chargers
 
 import os
 import time
 import paho.mqtt.client as mqtt
-# 2025.03.23 - switching up to battmon24AdcPubChrg01.py to do all 3
-# Measure voltages & save to file, publish voltages & turn charger(s) on
-# Run battmon24adc02.py to read analog inputs and save to files below
+
+# Measure battery voltages and save them to the files
 #import battmon24adc02
 
+# Publish the voltages from the files to mqtt
+#import battmon24pub06
+
+# gpiozero sets up GPIO 
+from gpiozero import LED
+
+# setup pin 17 as output 1 for battery charger
+chrg1 = LED(17)
+
+# setup pin 27 as output 2 for battery charger
+chrg2 = LED(27)
+
+# Print messages if DEBUG > 0
+DEBUG = 0
 
 ch0 = open("/home/robin/CurrentAdc0Volts", "r")
 Adc0 = ch0.read()
@@ -48,7 +64,8 @@ def on_connect(client, userdata, flags, rc):
 
 mqtt.Client.connected_flag=False # create flag in class
 
-broker_address = "192.168.200.21"
+broker_address = "192.168.200.143"
+#broker_address = "192.168.200.21"
 #broker_address = "mqtt21.local"
 print("Creating new instance")
 client = mqtt.Client("BM24") # create a new instance
@@ -62,27 +79,36 @@ client.connect(broker_address) # connect to broker
 client.loop_start() # start the loop
 
 while not client.connected_flag:
-  print("In Wait Loop")
-  time.sleep(1)
+    print("In Wait Loop")
+    time.sleep(1)
 
 print("In Main Loop")
-print("Publishing message to topic, BlueOrange") # Adc0 = Blue CAT5 / Orange Wire = Solar Batteries
-client.publish("Garage/BlueOrange", Adc0, qos=2)
-time.sleep(2)
-print("Publishing message to topic, BlueBlue") # Adc1 = Blue CAT5 / Blue Wire = Garage Batteries
-client.publish("Garage/BlueBlue", Adc1, qos=2)
-time.sleep(2)
-print("Publishing message to topic, WhiteBrown") # Adc2 = White CAT5 / Brown Wire = Ham Battery
-client.publish("Garage/WhiteBrown", Adc2, qos=2)
-time.sleep(2)
-print("Publishing message to topic, WhiteOrange") # Adc3 = White CAT5 / Orange Wire = Trailer Batteries
-client.publish("Garage/WhiteOrange", Adc3, qos=2)
-time.sleep(2)
-print("Publishing message to topic, WhiteGreen") # Adc4 = White CAT5 / Green Wire = 
-client.publish("Garage/WhiteGreen", Adc4, qos=2)
-time.sleep(2)
-print("Publishing message to topic, WhiteBlue") # Adc5 = White CAT5 / Blue Wire = 
-client.publish("Garage/WhiteBlue", Adc5, qos=2)
+Adc0 = float(Adc0)
+if Adc0 < 24.0:
+    print("Input 0: ",Adc0,"V")
+    print("Publishing message to topic, esp8266/22/relay1") # Relay 1 =  Solar Batteries
+    print("chrg1 is ON")
+    client.publish("esp8266/22/relay1", "on", qos=2)
+    chrg1.on()
+else:
+    print("Publishing message to topic, esp8266/22/relay1") # Relay 1 =  Solar Batteries
+    client.publish("esp8266/22/relay1", "off", qos=2)
+    print("chrg1 is OFF")
+    chrg1.off()
+time.sleep(1)
+Adc1 = float(Adc1)
+if Adc1 < 24.0:
+    print("Input 1: ",Adc1,"V")
+    print("Publishing message to topic, esp8266/22/relay2") # Relay 2 =  Garage Batteries
+    print("chrg2 is ON")
+    client.publish("esp8266/22/relay2", "on", qos=2)
+    chrg2.on()
+else:
+    print("Publishing message to topic, esp8266/22/relay2") # Relay 2 =  Garage Batteries
+    print("chrg2 is OFF")
+    client.publish("esp8266/22/relay2", "off", qos=2)
+    chrg2.off()
+time.sleep(1)
 print("Stopping the loop")
 client.loop_stop() # stop the loop
 print("Disconnecting")
