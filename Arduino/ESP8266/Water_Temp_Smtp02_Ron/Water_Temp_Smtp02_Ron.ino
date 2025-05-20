@@ -44,8 +44,6 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-//#define WIFI_SSID "Calalta02"
-//#define WIFI_PASSWORD "Micr0s0ft2018"
 #define WIFI_SSID "Raspi32"
 #define WIFI_PASSWORD "P@55w0rd2025"
 
@@ -75,9 +73,7 @@
 #define AUTHOR_PASSWORD "zxzh tucd xbgs bwhd"
 
 /* Recipient email address */
-//#define RECIPIENT_EMAIL "robin.greig@calalta.com"
-#define RECIPIENT_EMAIL "robin.greig@sait.ca"
-//#define RECIPIENT_EMAIL "ron.lukiv@sait.ca"
+#define RECIPIENT_EMAIL "lukivr@yahoo.com"
 
 SMTPSession smtp;
 
