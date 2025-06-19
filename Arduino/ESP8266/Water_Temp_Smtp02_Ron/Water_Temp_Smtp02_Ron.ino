@@ -106,7 +106,7 @@ int toggle = 0;
 // GPIO where the DS18B20 is connected to GPIO14 (D5)
 const int oneWireBus = 14;
 
-// GPIO where the water sensor is connected to GPIO12 (D4)
+// GPIO where the water sensor is connected to GPIO12 (D6)
 const int sensor = 12;
 
 // Setup a oneWire instance to communicate with any OneWire devices
@@ -266,7 +266,7 @@ void loop()
         textMsg += "RSSI is: "+String(WiFi.RSSI())+String("\n");
         textMsg += "MAC Address is: "+String(WiFi.macAddress())+String("\n"); 
         textMsg += String("\n");
-        if (sensorVal > 0){
+        if (sensorVal < 1){
           textMsg += "****** Water WAS detected ******"+String("\n");
         } else {
           textMsg += "Water was NOT detected"+String("\n");
