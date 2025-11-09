@@ -1,0 +1,11 @@
+
+-a,  add              Create a client conf profile
+-c,  clients          List any connected clients to the server
+-d,  debug            Start a debugging session if having trouble
+-l,  list             List all clients
+-qr, qrcode           Show the qrcode of a client for use with the mobile app
+-r,  remove           Remove a client
+-h,  help             Show this help dialog
+-u,  uninstall        Uninstall pivpn from your system!
+-up, update           Updates PiVPN Scripts
+-bk, backup           Backup VPN configs and user profiles

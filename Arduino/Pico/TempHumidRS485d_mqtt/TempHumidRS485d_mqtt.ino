@@ -63,7 +63,7 @@ float temp2F;
 char temp2C[8];
 
 // DEBUG > 0 Serial.print lines
-int DEBUG = 0;
+int DEBUG = 1;
 
 WiFiClient espClient; 
 

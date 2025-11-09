@@ -8,8 +8,9 @@
  * pubPres mqtt publish function
  * pubAlt mqtt publish function
  * pubHum mqtt publish function
+ * publish RSSI to pico/00/RSSI
  * Robin Greig
- * 2025.01.05
+ * 2025.06.21
  ******/
  
 #include <WiFi.h> 
@@ -37,9 +38,16 @@ Adafruit_BME280 bme; // I2C (default pins for Raspberry Pi Pico: GPIO 4 (SDA), G
 
 // WiFi 
 
-const char *ssid = "Calalta02"; // Enter your WiFi name 
 
-const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+
+//const char *ssid = "Calalta02"; // Enter your WiFi name 
+//const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+
+const char *ssid = "Calalta03"; // Enter your WiFi name 
+const char *password = "Micr0$0ft2024";  // Enter WiFi password 
+
+//const char *ssid = "Telus2547"; // Enter your WiFi name 
+//const char *password = "g2299sjk6p";  // Enter WiFi password 
 
 // MQTT Broker 
 
@@ -49,6 +57,8 @@ const char *topic1 = "pico/00/bme280Temp";
 const char *topic2 = "pico/00/bme280Pres";
 const char *topic3 = "pico/00/bme280Alt";
 const char *topic4 = "pico/00/bme280Hum";
+const char *rssi = "pico/00/RSSI";
+
 
 const int mqtt_port = 1883; 
 
@@ -82,7 +92,11 @@ void reconnectMQTT() {
     client_id += String(WiFi.macAddress());
     Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
     if (client.connect(client_id.c_str())) { 
-        Serial.println("Mqtt broker connected"); 
+        Serial.println("Mqtt broker connected");
+        String WiFiRSSI = String(WiFi.RSSI());
+        Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
+//        strcpy(signal, WiFiRSSI.c_str()); 
+        client.publish(rssi, WiFiRSSI.c_str(), "-r");
     } else { 
         Serial.print("failed with state "); 
         Serial.print(client.state()); 

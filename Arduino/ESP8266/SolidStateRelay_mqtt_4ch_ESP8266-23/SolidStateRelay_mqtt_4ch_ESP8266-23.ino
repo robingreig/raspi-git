@@ -2,7 +2,7 @@
 /************************************************************************
  * SolidStateRelay_mqtt_4ch_ESP8266-23
  * Robin Greig
- * 2025.03.15
+ * 2025.03.15 
  * Control 4 Solid State Relays via GPIO 14/D5 12/D6 13/D7 15/D8
 **************************************************************************/
 
@@ -16,12 +16,12 @@
 #define relay4 15 // ESP8266 GPIO15 / D8 controls relay4
 
 
-const char* ssid = "Calalta02"; // WiFi name
-const char* password =  "Micr0s0ft2018"; // WiFi password
+//const char* ssid = "Calalta02"; // WiFi name
+//const char* password =  "Micr0s0ft2018"; // WiFi password
 //const char* ssid = "Calalta03"; // WiFi name
 //const char* password =  "Micr0$0ft2024"; // WiFi password
-//const char* ssid = "TELUS2547"; // WiFi name
-//const char* password =  "g2299sjk6p"; // WiFi password
+const char* ssid = "TELUS2547"; // WiFi name
+const char* password =  "g2299sjk6p"; // WiFi password
 //const char* mqttServer = "192.168.200.21";
 const char* mqttServer = "192.168.200.143";
 const int mqttPort = 1883;

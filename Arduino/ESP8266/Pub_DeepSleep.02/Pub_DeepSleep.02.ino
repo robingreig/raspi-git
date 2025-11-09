@@ -1,7 +1,7 @@
 /*  Pub_DeepSleep.02
  *  Robin Greig
  *  2023.10.13
- *  Subscribe to ESP8266/05/GPIO04
+ *  Subscribe to ESP8266/07/GPIO04
  *  In order for subscribe to work had to add additional delay 
  *  after client.subscribe & run client.loop() at least twice
  *  Subscribed GPIO turns off in DeepSleep
@@ -71,16 +71,16 @@ void reconnectMQTT() {
       Serial.printf("The client %s is connected to MQTT\n", client_id.c_str());
       String WiFiRSSI = String(WiFi.RSSI());
       Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
-      Serial.println("Publishing esp8266/05/RSSI");
+      Serial.println("Publishing esp8266/07/RSSI");
       // Convert RSSI to String & publish with retain flag set
       client.publish(rssi,WiFiRSSI.c_str(),"-r");
       delay(100);
-      Serial.println("Publishing esp8266/05/MAC");
+      Serial.println("Publishing esp8266/07/MAC");
       // Convert MAC Address to String & publish with retain flag set
       String WiFiMac = String(WiFi.macAddress());
       client.publish(mac,WiFiMac.c_str(),"-r");
       delay(100);
-      Serial.println("Publishing esp8266/05/IP");
+      Serial.println("Publishing esp8266/07/IP");
       // Convert IP Address to String & publish with retain flag set
       String WiFiAddr = WiFi.localIP().toString();
       client.publish(ipaddr,WiFiAddr.c_str(),"-r");

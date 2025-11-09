@@ -82,7 +82,9 @@ void reconnectMQTT() {
     client_id += String(WiFi.macAddress());
     Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
     if (client.connect(client_id.c_str())) { 
-        Serial.println("Mqtt broker connected"); 
+        Serial.println("Mqtt broker connected");
+        String WiFiRSSI = String(WiFi.RSSI());
+        Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str()); 
     } else { 
         Serial.print("failed with state "); 
         Serial.print(client.state()); 
