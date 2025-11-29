@@ -70,7 +70,8 @@ time.sleep(1)
 #### upload temps to mqtt broker
 
 #broker_address = "mqtt21.local"
-broker_address = "192.168.200.21"
+#broker_address = "192.168.200.21"
+broker_address = "192.168.200.143"
 print("Creating new instance & starting logging")
 logging.basicConfig(level=logging.INFO) # use DEBUG, INFO, WARNING
 
