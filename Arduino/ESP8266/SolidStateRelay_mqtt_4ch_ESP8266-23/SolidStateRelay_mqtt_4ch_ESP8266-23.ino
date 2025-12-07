@@ -108,9 +108,9 @@ void callback(String topic, byte* message, unsigned int length) {
         digitalWrite(relay1, HIGH);
         Serial.println("On");
       }
-      else if(messageTemp == "off"){
-        digitalWrite(relay1, LOW);
-        Serial.println("Off");
+        else if(messageTemp == "off"){
+          digitalWrite(relay1, LOW);
+          Serial.println("Off");
       }
   } else if (topic == relay02){
     Serial.print("Turning Relay2 ");
@@ -118,9 +118,9 @@ void callback(String topic, byte* message, unsigned int length) {
        digitalWrite(relay2, HIGH);
        Serial.println("On");
       } 
-    else if(messageTemp == "off"){
-      digitalWrite(relay2, LOW);
-      Serial.println("Off");    
+        else if(messageTemp == "off"){
+          digitalWrite(relay2, LOW);
+          Serial.println("Off");    
       }
   } else if (topic == relay03){
     Serial.print("Turning Relay3 ");
@@ -128,9 +128,9 @@ void callback(String topic, byte* message, unsigned int length) {
        digitalWrite(relay3, HIGH);
        Serial.println("On");
       } 
-    else if(messageTemp == "off"){
-      digitalWrite(relay3, LOW);
-      Serial.println("Off");    
+        else if(messageTemp == "off"){
+          digitalWrite(relay3, LOW);
+          Serial.println("Off");    
       }
    } else if (topic == relay04){
     Serial.print("Turnng Relay4 ");
@@ -138,9 +138,9 @@ void callback(String topic, byte* message, unsigned int length) {
        digitalWrite(relay4, HIGH);
        Serial.println("On");
       } 
-    else if(messageTemp == "off"){
-      digitalWrite(relay4, LOW);
-      Serial.println("Off");    
+        else if(messageTemp == "off"){
+          digitalWrite(relay4, LOW);
+          Serial.println("Off");    
       }  Serial.println();
   }
 }
