@@ -7752,7 +7752,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "10000000",
+        "payload": "12222222",
         "payloadType": "str",
         "x": 160,
         "y": 40,
@@ -7777,10 +7777,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "02222222",
         "payloadType": "str",
         "x": 170,
-        "y": 120,
+        "y": 80,
         "wires": [
             [
                 "1471a936eb8d0514"
@@ -7803,18 +7803,18 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "10000000",
+        "onvalue": "12222222",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "02222222",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
         "x": 390,
-        "y": 80,
+        "y": 60,
         "wires": [
             [
                 "e959eca48cff6bb4"
@@ -7835,8 +7835,8 @@
         "correl": "",
         "expiry": "",
         "broker": "09e304fd7441b2f7",
-        "x": 610,
-        "y": 80,
+        "x": 710,
+        "y": 420,
         "wires": []
     },
     {
@@ -7854,10 +7854,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "01000000",
+        "payload": "21222222",
         "payloadType": "str",
         "x": 160,
-        "y": 200,
+        "y": 140,
         "wires": [
             [
                 "b18213c3c6675ee0"
@@ -7879,10 +7879,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "20222222",
         "payloadType": "str",
         "x": 160,
-        "y": 280,
+        "y": 180,
         "wires": [
             [
                 "b18213c3c6675ee0"
@@ -7905,41 +7905,23 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "01000000",
+        "onvalue": "21222222",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "20222222",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
         "x": 390,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
-                "77455d10c1649305"
+                "e959eca48cff6bb4"
             ]
         ]
-    },
-    {
-        "id": "77455d10c1649305",
-        "type": "mqtt out",
-        "z": "4f5f66f6863a95c9",
-        "name": "",
-        "topic": "esp8266/24/GPIO",
-        "qos": "2",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "09e304fd7441b2f7",
-        "x": 610,
-        "y": 240,
-        "wires": []
     },
     {
         "id": "f862db14904385aa",
@@ -7956,10 +7938,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00100000",
+        "payload": "22122222",
         "payloadType": "str",
         "x": 160,
-        "y": 360,
+        "y": 240,
         "wires": [
             [
                 "d9f430b9b2721f9c"
@@ -7981,10 +7963,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "22022222",
         "payloadType": "str",
         "x": 160,
-        "y": 440,
+        "y": 280,
         "wires": [
             [
                 "d9f430b9b2721f9c"
@@ -8007,41 +7989,23 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "00100000",
+        "onvalue": "22122222",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "22022222",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
         "x": 390,
-        "y": 400,
+        "y": 260,
         "wires": [
             [
-                "72da4647fbb3a9cf"
+                "e959eca48cff6bb4"
             ]
         ]
-    },
-    {
-        "id": "72da4647fbb3a9cf",
-        "type": "mqtt out",
-        "z": "4f5f66f6863a95c9",
-        "name": "",
-        "topic": "esp8266/24/GPIO",
-        "qos": "2",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "09e304fd7441b2f7",
-        "x": 610,
-        "y": 400,
-        "wires": []
     },
     {
         "id": "9d3027950c0eb154",
@@ -8058,10 +8022,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00010000",
+        "payload": "22212222",
         "payloadType": "str",
         "x": 160,
-        "y": 520,
+        "y": 340,
         "wires": [
             [
                 "375ee8049edef8f5"
@@ -8083,10 +8047,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "22202222",
         "payloadType": "str",
         "x": 160,
-        "y": 600,
+        "y": 380,
         "wires": [
             [
                 "375ee8049edef8f5"
@@ -8109,41 +8073,23 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "00010000",
+        "onvalue": "22212222",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "22202222",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
         "x": 390,
-        "y": 560,
+        "y": 360,
         "wires": [
             [
-                "cf509d883ec2f03b"
+                "e959eca48cff6bb4"
             ]
         ]
-    },
-    {
-        "id": "cf509d883ec2f03b",
-        "type": "mqtt out",
-        "z": "4f5f66f6863a95c9",
-        "name": "",
-        "topic": "esp8266/24/GPIO",
-        "qos": "2",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "09e304fd7441b2f7",
-        "x": 610,
-        "y": 560,
-        "wires": []
     },
     {
         "id": "f7cbeff84c918ad9",
@@ -8160,10 +8106,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00001000",
+        "payload": "22221222",
         "payloadType": "str",
-        "x": 820,
-        "y": 40,
+        "x": 160,
+        "y": 440,
         "wires": [
             [
                 "a3f8659e27e39d8e"
@@ -8185,10 +8131,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "22220222",
         "payloadType": "str",
-        "x": 820,
-        "y": 120,
+        "x": 160,
+        "y": 480,
         "wires": [
             [
                 "a3f8659e27e39d8e"
@@ -8211,41 +8157,23 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "00001000",
+        "onvalue": "22221222",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "22220222",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 1050,
-        "y": 80,
+        "x": 390,
+        "y": 460,
         "wires": [
             [
-                "dd6448011836c071"
+                "e959eca48cff6bb4"
             ]
         ]
-    },
-    {
-        "id": "dd6448011836c071",
-        "type": "mqtt out",
-        "z": "4f5f66f6863a95c9",
-        "name": "",
-        "topic": "esp8266/24/GPIO",
-        "qos": "2",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "09e304fd7441b2f7",
-        "x": 1270,
-        "y": 80,
-        "wires": []
     },
     {
         "id": "154732f77c0e3d6c",
@@ -8262,10 +8190,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000100",
+        "payload": "22222122",
         "payloadType": "str",
-        "x": 820,
-        "y": 200,
+        "x": 160,
+        "y": 540,
         "wires": [
             [
                 "501980d1df5b48bf"
@@ -8287,10 +8215,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "22222022",
         "payloadType": "str",
-        "x": 820,
-        "y": 280,
+        "x": 160,
+        "y": 580,
         "wires": [
             [
                 "501980d1df5b48bf"
@@ -8313,41 +8241,23 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "00000100",
+        "onvalue": "22222122",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "22222022",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 1050,
-        "y": 240,
+        "x": 390,
+        "y": 560,
         "wires": [
             [
-                "522c87f343b933f2"
+                "e959eca48cff6bb4"
             ]
         ]
-    },
-    {
-        "id": "522c87f343b933f2",
-        "type": "mqtt out",
-        "z": "4f5f66f6863a95c9",
-        "name": "",
-        "topic": "esp8266/24/GPIO",
-        "qos": "2",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "09e304fd7441b2f7",
-        "x": 1270,
-        "y": 240,
-        "wires": []
     },
     {
         "id": "b983435cd04ae78e",
@@ -8364,10 +8274,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000010",
+        "payload": "22222212",
         "payloadType": "str",
-        "x": 820,
-        "y": 360,
+        "x": 160,
+        "y": 640,
         "wires": [
             [
                 "bee3af526ac4a5c0"
@@ -8389,10 +8299,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "22222202",
         "payloadType": "str",
-        "x": 820,
-        "y": 440,
+        "x": 160,
+        "y": 680,
         "wires": [
             [
                 "bee3af526ac4a5c0"
@@ -8415,41 +8325,23 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "00000010",
+        "onvalue": "22222212",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "22222202",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 1050,
-        "y": 400,
+        "x": 390,
+        "y": 660,
         "wires": [
             [
-                "9837fea73d44e197"
+                "e959eca48cff6bb4"
             ]
         ]
-    },
-    {
-        "id": "9837fea73d44e197",
-        "type": "mqtt out",
-        "z": "4f5f66f6863a95c9",
-        "name": "",
-        "topic": "esp8266/24/GPIO",
-        "qos": "2",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "09e304fd7441b2f7",
-        "x": 1270,
-        "y": 400,
-        "wires": []
     },
     {
         "id": "179f26c5e632c836",
@@ -8466,10 +8358,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000001",
+        "payload": "22222221",
         "payloadType": "str",
-        "x": 820,
-        "y": 520,
+        "x": 160,
+        "y": 740,
         "wires": [
             [
                 "52bff7166a29c202"
@@ -8491,10 +8383,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "00000000",
+        "payload": "22222220",
         "payloadType": "str",
-        "x": 820,
-        "y": 600,
+        "x": 160,
+        "y": 780,
         "wires": [
             [
                 "52bff7166a29c202"
@@ -8517,40 +8409,75 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "00000001",
+        "onvalue": "22222221",
         "onvalueType": "str",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "00000000",
+        "offvalue": "22222220",
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 1050,
-        "y": 560,
+        "x": 390,
+        "y": 760,
         "wires": [
             [
-                "6ebdec76a427ab0e"
+                "e959eca48cff6bb4"
             ]
         ]
     },
     {
-        "id": "6ebdec76a427ab0e",
-        "type": "mqtt out",
+        "id": "793ef66aea45e448",
+        "type": "inject",
+        "z": "4f5f66f6863a95c9",
+        "name": "All OFF",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "00000000",
+        "payloadType": "str",
+        "x": 150,
+        "y": 840,
+        "wires": [
+            [
+                "f6d941ffc3a2d1e2"
+            ]
+        ]
+    },
+    {
+        "id": "f6d941ffc3a2d1e2",
+        "type": "ui_button",
         "z": "4f5f66f6863a95c9",
         "name": "",
-        "topic": "esp8266/24/GPIO",
-        "qos": "2",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "09e304fd7441b2f7",
-        "x": 1270,
-        "y": 560,
-        "wires": []
+        "group": "4d572a9c.a8ec54",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "ALL OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "00000000",
+        "payloadType": "str",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 380,
+        "y": 840,
+        "wires": [
+            [
+                "e959eca48cff6bb4"
+            ]
+        ]
     }
 ]
