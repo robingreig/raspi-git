@@ -17,12 +17,12 @@
 // Pause between transmited packets in seconds.
 // Set to zero to only transmit a packet when pressing the user button
 // Will not exceed 1% duty cycle, even if you set a lower value.
-#define PAUSE               300
+#define PAUSE               30
 
 // Frequency in MHz. Keep the decimal point to designate float.
 // Check your own rules and regulations to see what is legal where you are.
 //#define FREQUENCY           866.3       // for Europe
-#define FREQUENCY           905.2       // for US
+#define FREQUENCY           905.2       // 902 - 928 MHz for Canada
 
 // LoRa bandwidth. Keep the decimal point to designate float.
 // Allowed values are 7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0 and 500.0 kHz.
@@ -47,6 +47,7 @@ uint64_t minimum_pause;
 
 void setup() {
   heltec_setup();
+  heltec_ve(true);
   both.println("Radio init");
   RADIOLIB_OR_HALT(radio.begin());
   // Set the callback function for received packets
