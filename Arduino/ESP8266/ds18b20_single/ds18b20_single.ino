@@ -5,9 +5,10 @@
 
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include "driver/gpio.h"
 
 // GPIO where the DS18B20 is connected to
-const int oneWireBus = 02;
+const int oneWireBus = 33;
 //const int oneWireBus = 05;
 
 // Setup a oneWire instance to communicate with any OneWire devices

@@ -142,11 +142,8 @@ void readTemp(){
 }
 
 void setup() {
-  if (DEBUG > 0){
-    Serial.begin(115200);
-    Serial.println();
-    Serial.println();
-  }
+
+  Serial.begin(115200);
 
   client.setServer(mqttServer, mqttPort);
 

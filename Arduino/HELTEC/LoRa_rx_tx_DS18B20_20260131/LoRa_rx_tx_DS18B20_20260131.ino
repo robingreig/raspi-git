@@ -14,6 +14,11 @@
 #define HELTEC_POWER_BUTTON   // must be before "#include <heltec_unofficial.h>"
 #include <heltec_unofficial.h>
 
+// For DS18B20
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include "driver/gpio.h"
+
 // Pause between transmited packets in seconds.
 // Set to zero to only transmit a packet when pressing the user button
 // Will not exceed 1% duty cycle, even if you set a lower value.
@@ -45,13 +50,25 @@ uint64_t last_tx = 0;
 uint64_t tx_time;
 uint64_t minimum_pause;
 
+// GPIO where the DS18B20 is connected to
+const int oneWireBus = 33;
+
+// Setup a oneWire instance to communicate with any OneWire devices
+OneWire oneWire(oneWireBus);
+
+// Pass our oneWire reference to Dallas Temperature sensor 
+DallasTemperature sensors(&oneWire);
+
 void readTemp(){
+  sensors.requestTemperatures(); 
+  float temperatureC = sensors.getTempCByIndex(0);
+//  sprintf(tempChar, "%.2f", temperatureC);
   display.clear();
   display.setTextAlignment(TEXT_ALIGN_LEFT);
   display.setFont(ArialMT_Plain_16);
   display.drawString(20, 0, "Temperature");
   display.setFont(ArialMT_Plain_24);
-  display.drawString(20, 26, "31.5 ºC");
+  display.drawString(20, 26, String(temperatureC) + " ºC");
   display.display();
   delay(5000);
   display.setFont(ArialMT_Plain_16);
@@ -75,6 +92,7 @@ void setup() {
   RADIOLIB_OR_HALT(radio.setOutputPower(TRANSMIT_POWER));
   // Start receiving
   RADIOLIB_OR_HALT(radio.startReceive(RADIOLIB_SX126X_RX_TIMEOUT_INF));
+  sensors.begin();
 }
 
 void loop() {
@@ -90,10 +108,14 @@ void loop() {
     }
     readTemp();
     both.printf("TX [%s] ", String(counter).c_str());
+    sensors.requestTemperatures(); 
+    float temperatureC = sensors.getTempCByIndex(0);
+    both.printf("Temp [%s] ", String(temperatureC).c_str());
     radio.clearDio1Action();
     heltec_led(50); // 50% brightness is plenty for this LED
     tx_time = millis();
-    RADIOLIB(radio.transmit(String(counter++).c_str()));
+//    RADIOLIB(radio.transmit(String(counter++).c_str()));
+    RADIOLIB(radio.transmit(String(temperatureC).c_str()));
     tx_time = millis() - tx_time;
     heltec_led(0);
     if (_radiolib_status == RADIOLIB_ERR_NONE) {

@@ -14,10 +14,15 @@
 #define HELTEC_POWER_BUTTON   // must be before "#include <heltec_unofficial.h>"
 #include <heltec_unofficial.h>
 
+// For DS18B20
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include "driver/gpio.h"
+
 // Pause between transmited packets in seconds.
 // Set to zero to only transmit a packet when pressing the user button
 // Will not exceed 1% duty cycle, even if you set a lower value.
-#define PAUSE               30
+#define PAUSE               300
 
 // Frequency in MHz. Keep the decimal point to designate float.
 // Check your own rules and regulations to see what is legal where you are.
@@ -26,17 +31,19 @@
 
 // LoRa bandwidth. Keep the decimal point to designate float.
 // Allowed values are 7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0 and 500.0 kHz.
-#define BANDWIDTH           250.0
+// Started at 250.0, then 125.0, tehn 62.5, then 31.25
+#define BANDWIDTH           31.25
 
 // Number from 5 to 12. Higher means slower but higher "processor gain",
-// meaning (in nutshell) longer range and more robust against interference. 
-#define SPREADING_FACTOR    9
+// meaning (in nutshell) longer range and more robust against interference.
+// Started off at 9 and am moving it up to 12 
+#define SPREADING_FACTOR    12
 
 // Transmit power in dBm. 0 dBm = 1 mW, enough for tabletop-testing. This value can be
 // set anywhere between -9 dBm (0.125 mW) to 22 dBm (158 mW). Note that the maximum ERP
 // (which is what your antenna maximally radiates) on the EU ISM band is 25 mW, and that
 // transmissting without an antenna can damage your hardware.
-#define TRANSMIT_POWER      15
+#define TRANSMIT_POWER      0
 
 String rxdata;
 volatile bool rxFlag = false;
@@ -45,13 +52,25 @@ uint64_t last_tx = 0;
 uint64_t tx_time;
 uint64_t minimum_pause;
 
+// GPIO where the DS18B20 is connected to
+const int oneWireBus = 33;
+
+// Setup a oneWire instance to communicate with any OneWire devices
+OneWire oneWire(oneWireBus);
+
+// Pass our oneWire reference to Dallas Temperature sensor 
+DallasTemperature sensors(&oneWire);
+
 void readTemp(){
+  sensors.requestTemperatures(); 
+  float temperatureC = sensors.getTempCByIndex(0);
+//  sprintf(tempChar, "%.2f", temperatureC);
   display.clear();
   display.setTextAlignment(TEXT_ALIGN_LEFT);
   display.setFont(ArialMT_Plain_16);
   display.drawString(20, 0, "Temperature");
   display.setFont(ArialMT_Plain_24);
-  display.drawString(20, 26, "31.5 ºC");
+  display.drawString(20, 26, String(temperatureC) + " ºC");
   display.display();
   delay(5000);
   display.setFont(ArialMT_Plain_16);
@@ -75,6 +94,7 @@ void setup() {
   RADIOLIB_OR_HALT(radio.setOutputPower(TRANSMIT_POWER));
   // Start receiving
   RADIOLIB_OR_HALT(radio.startReceive(RADIOLIB_SX126X_RX_TIMEOUT_INF));
+  sensors.begin();
 }
 
 void loop() {
@@ -90,10 +110,15 @@ void loop() {
     }
     readTemp();
     both.printf("TX [%s] ", String(counter).c_str());
+    counter++;
+    sensors.requestTemperatures(); 
+    float temperatureC = sensors.getTempCByIndex(0);
+    both.printf("Temp [%s] ", String(temperatureC).c_str());
     radio.clearDio1Action();
     heltec_led(50); // 50% brightness is plenty for this LED
     tx_time = millis();
-    RADIOLIB(radio.transmit(String(counter++).c_str()));
+//    RADIOLIB(radio.transmit(String(counter++).c_str()));
+    RADIOLIB(radio.transmit(String(temperatureC).c_str()));
     tx_time = millis() - tx_time;
     heltec_led(0);
     if (_radiolib_status == RADIOLIB_ERR_NONE) {
