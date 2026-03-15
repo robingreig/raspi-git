@@ -1,0 +1,5 @@
+
+If the pi isn't responding to the name.local and can be accessed 
+with it's IP address run
+
+sudo systemctl restart avahi-daemon

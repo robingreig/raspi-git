@@ -63,7 +63,6 @@ void reconnectMQTT() {
         Serial.print(client.state()); 
         delay(1000); 
     } 
-
   } 
 }
 

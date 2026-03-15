@@ -1,6 +1,7 @@
 /**
  * LoRa_rx_TX_DS18B20_20260214.ino
  * Modified from heltec_unofficial.h
+ * 2026.02.19 - Modified from deep sleep 60 to 45 because USB battery pack would occasionally time out
  * 
  * Send and receive LoRa-modulation packets with a sequence number, showing RSSI
  * and SNR for received packets on the little display.
@@ -101,9 +102,7 @@ void setup() {
 
 void loop() {
   heltec_loop();
-  delay(10000);
   clockWake = true;
-  both.println("clockWake is true");
   bool tx_legal = millis() > last_tx + minimum_pause;
   // Transmit a packet every PAUSE seconds or when the button is pressed
   if ((PAUSE && tx_legal && millis() - last_tx > (PAUSE * 1000)) || button.isSingleClick()) {
@@ -119,12 +118,14 @@ void loop() {
     float temperatureC = sensors.getTempCByIndex(0);
     both.printf("Temp [%s] ", String(temperatureC).c_str());
     radio.clearDio1Action();
-    heltec_led(50); // 50% brightness is plenty for this LED
+    // don't turn heltec_led (white) on
+    //heltec_led(50); // 50% brightness is plenty for this LED
     tx_time = millis();
 //    RADIOLIB(radio.transmit(String(counter++).c_str()));
     RADIOLIB(radio.transmit(String(temperatureC).c_str()));
     tx_time = millis() - tx_time;
-    heltec_led(0);
+    // don't turn white heltec LED on & this line turns it off
+    //heltec_led(0);
     if (_radiolib_status == RADIOLIB_ERR_NONE) {
       both.printf("OK (%i ms)\n", (int)tx_time);
     } else {
@@ -137,7 +138,7 @@ void loop() {
     RADIOLIB_OR_HALT(radio.startReceive(RADIOLIB_SX126X_RX_TIMEOUT_INF));
     both.println("Going to sleep");
     delay(5000);
-    heltec_deep_sleep(300);
+    heltec_deep_sleep(45);
   }
 
   // If a packet was received, display it and the RSSI and SNR
