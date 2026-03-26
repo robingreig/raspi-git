@@ -40,11 +40,11 @@ Adafruit_BME280 bme; // I2C (default pins for Raspberry Pi Pico: GPIO 4 (SDA), G
 
 
 
-//const char *ssid = "Calalta02"; // Enter your WiFi name 
-//const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+const char *ssid = "Calalta02"; // Enter your WiFi name 
+const char *password = "Micr0s0ft2018";  // Enter WiFi password 
 
-const char *ssid = "Calalta03"; // Enter your WiFi name 
-const char *password = "Micr0$0ft2024";  // Enter WiFi password 
+//const char *ssid = "Calalta03"; // Enter your WiFi name 
+//const char *password = "Micr0$0ft2024";  // Enter WiFi password 
 
 //const char *ssid = "Telus2547"; // Enter your WiFi name 
 //const char *password = "g2299sjk6p";  // Enter WiFi password 
@@ -70,8 +70,8 @@ PubSubClient client(espClient);
 unsigned long delayTime;
 unsigned long previousMillis = 0; // will store last time MQTT published
 //const long interval = 5000; // 5 second interval at which to publish MQTT values
-//const long interval = 60000; // 60 second interval at which to publish MQTT values
-const long interval = 180000; // 3 minute interval at which to publish MQTT values
+const long interval = 60000; // 60 second interval at which to publish MQTT values
+//const long interval = 180000; // 3 minute interval at which to publish MQTT values
 //const long interval = 300000; // 5 minute interval at which to publish MQTT values
 //const long interval = 600000; // 10 minute interval at which to publish MQTT values
 
@@ -156,10 +156,15 @@ void loop() {
   if (currentMillis - previousMillis >= interval){
     previousMillis = currentMillis;
     printValues();
+    delay(500);
     pubTemp();
+    delay(500);
     pubPres();
+    delay(500);
     pubAlt();
+    delay(500);
     pubHum();
+    delay(500);
   }
 }
 
