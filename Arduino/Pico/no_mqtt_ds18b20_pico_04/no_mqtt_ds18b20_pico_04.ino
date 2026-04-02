@@ -8,24 +8,13 @@
 #include <microDS18B20.h>
 #include <PubSubClient.h>
 #include <Secrets.h>
-#include <WiFi.h> 
 #include <string.h>
+#include <WiFi.h> 
 
 // DS18B20
 
 // GPIO where the DS18B20 is connected to
 MicroDS18B20<00> sensor;
-
-// WiFi 
-
-//const char *ssid = "Calalta02"; // House & WiFi
-//const char *password = "Micr0s0ft2018";  // Enter WiFi password 
-
-//const char *ssid = "Calalta03"; // Enter your WiFi name 
-//const char *password = "Micr0$0ft2024";  // Enter WiFi password 
-
-//const char *ssid = "Telus2547"; // Enter your WiFi name 
-//const char *password = "g2299sjk6p";  // Enter WiFi password 
 
 // MQTT Broker 
 
@@ -67,18 +56,17 @@ void reconnectMQTT() {
         Serial.print(client.state()); 
         delay(1000); 
     } 
-
   } 
 }
 
 void reconnectWiFi() {
-  WiFi.begin(SECRET_SSID, SECRET_PASS); // connecting to the WiFi network 
+  WiFi.begin(SECRET_SSID_02, SECRET_PASS_02); // Connecting to the wifi network
 
   while (WiFi.status() != WL_CONNECTED) { 
     delay(500); 
     Serial.println("Connecting to WiFi.."); 
   } 
-  Serial.println("Connected to the WiFi network");
+  Serial.println("Connected to "SECRET_SSID_02);
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
   String WiFiRSSI = String(WiFi.RSSI());
