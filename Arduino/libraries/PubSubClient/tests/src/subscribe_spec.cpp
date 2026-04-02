@@ -106,7 +106,6 @@ int test_subscribe_too_long() {
     shimClient.respond(connack,4);
 
     PubSubClient client(server, 1883, callback, shimClient);
-    client.setBufferSize(128);
     int rc = client.connect((char*)"client_test1");
     IS_TRUE(rc);
 

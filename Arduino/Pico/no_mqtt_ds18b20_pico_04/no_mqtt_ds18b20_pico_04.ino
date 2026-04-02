@@ -1,4 +1,4 @@
-/* mqtt_da18b20_pico_03.ino
+/* no_mqtt_da18b20_pico_04.ino
  *  Robin Greig
  *  2026.03.28
  *  Found the microDS18B20 library from Random Nerd Tutorials
@@ -31,8 +31,8 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 const char *mqtt_broker = "192.168.200.143"; 
 
-const char *topic = "pico/03/Temp";
-const char *rssi = "pico/03/RSSI";
+const char *topic = "pico/04/Temp";
+const char *rssi = "pico/04/RSSI";
 
 const int mqtt_port = 1883; 
 
@@ -54,7 +54,7 @@ char tempTest [8];
 
 void reconnectMQTT() {
   while (!client.connected()) { 
-    String client_id = "pico-00 > "; 
+    String client_id = "pico-04 > "; 
     client_id += String(WiFi.macAddress());
     Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
     if (client.connect(client_id.c_str())) { 
@@ -103,9 +103,9 @@ void loop() {
   }
   
   // Connect to MQTT if not connected
-  if(!client.connected()) {
-    reconnectMQTT();
-  }
+//  if(!client.connected()) {
+//    reconnectMQTT();
+//  }
   unsigned long currentMillis = millis();
   // Check to see if it is time to publish MQTT
   if (currentMillis - previousMillis >= interval){

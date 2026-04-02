@@ -86,6 +86,8 @@ void reconnectWiFi() {
   Serial.println("Connected to the WiFi network");
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
+  String WiFiRSSI = String(WiFi.RSSI());
+  Serial.printf("The client RSSI is %s\n",WiFiRSSI.c_str());
 }
 
 void setup() { 

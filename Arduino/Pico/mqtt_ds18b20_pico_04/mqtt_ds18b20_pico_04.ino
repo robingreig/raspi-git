@@ -1,11 +1,11 @@
-/* mqtt_da18b20_pico_03.ino
+/* mqtt_da18b20_pico_04.ino
  *  Robin Greig
- *  2026.03.28
+ *  2026.04.01
  *  Found the microDS18B20 library from Random Nerd Tutorials
  *  used dtosstrf to convert float to char
  *  Using GPIO00 as the DS18B20 data input
  */
-
+#include "calalta_secrets.h"
 #include <WiFi.h> 
 #include <PubSubClient.h>
 #include <microDS18B20.h>
@@ -18,8 +18,8 @@ MicroDS18B20<00> sensor;
 
 // WiFi 
 
-const char *ssid = "Calalta02"; // House & WiFi
-const char *password = "Micr0s0ft2018";  // Enter WiFi password 
+//const char *ssid = "Calalta02"; // House & WiFi
+//const char *password = "Micr0s0ft2018";  // Enter WiFi password 
 
 //const char *ssid = "Calalta03"; // Enter your WiFi name 
 //const char *password = "Micr0$0ft2024";  // Enter WiFi password 
@@ -31,8 +31,8 @@ const char *password = "Micr0s0ft2018";  // Enter WiFi password
 
 const char *mqtt_broker = "192.168.200.143"; 
 
-const char *topic = "pico/03/Temp";
-const char *rssi = "pico/03/RSSI";
+const char *topic = "pico/04/Temp";
+const char *rssi = "pico/04/RSSI";
 
 const int mqtt_port = 1883; 
 
@@ -54,7 +54,7 @@ char tempTest [8];
 
 void reconnectMQTT() {
   while (!client.connected()) { 
-    String client_id = "pico-00 > "; 
+    String client_id = "pico-04 > "; 
     client_id += String(WiFi.macAddress());
     Serial.printf("The client %s is connecting to the mqtt broker\n", client_id.c_str()); 
     if (client.connect(client_id.c_str())) { 
@@ -72,7 +72,8 @@ void reconnectMQTT() {
 }
 
 void reconnectWiFi() {
-  WiFi.begin(ssid, password); // connecting to the WiFi network 
+//  WiFi.begin(ssid, password); // connecting to the WiFi network 
+  WiFi.begin(SECRET_SSID, SECRET_PASS); // connecting to the WiFi network 
 
   while (WiFi.status() != WL_CONNECTED) { 
     delay(500); 
