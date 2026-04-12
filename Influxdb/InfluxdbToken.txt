@@ -1,0 +1,6 @@
+
+influx config create --config-name onboarding \
+    --host-url "http://192.168.200.43:8086" \
+    --org "7512cf9b48f5285e" \
+    --token "B7hazXnw564ZaSE9qglmP2uSKLXZTryVVEtRCTWbCeSYbowXrP7ZxCUauy9p9EUpc-gD9F89qVEZ4_uShichIQ==" \
+    --active

@@ -81,8 +81,6 @@ void setup() {
   
 }
 
- 
-
 void loop() { 
   
   // Connect to WiFi if not connected

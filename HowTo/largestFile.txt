@@ -1,0 +1,2 @@
+
+sudo du -ah / 2>/dev/null | sort -hr | head -n 10

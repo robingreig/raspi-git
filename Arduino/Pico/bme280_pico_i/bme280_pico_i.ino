@@ -12,15 +12,15 @@
  * Robin Greig
  * 2025.06.21
  ******/
- 
-#include <WiFi.h> 
-#include <PubSubClient.h>
-#include <microDS18B20.h>
-#include <string.h>
 
-#include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+#include <microDS18B20.h>
+#include <PubSubClient.h>
+#include <Secrets.h>
+#include <string.h>
+#include <WiFi.h> 
+#include <Wire.h>
 
 /*#include <SPI.h>
 #define BME_SCK 18
@@ -35,19 +35,6 @@
 Adafruit_BME280 bme; // I2C (default pins for Raspberry Pi Pico: GPIO 4 (SDA), GPIO 5(SCL)
 //Adafruit_BME280 bme(BME_CS); // hardware SPI
 //Adafruit_BME280 bme(BME_CS, BME_MOSI, BME_MISO, BME_SCK); // software SPI
-
-// WiFi 
-
-
-
-const char *ssid = "Calalta02"; // Enter your WiFi name 
-const char *password = "Micr0s0ft2018";  // Enter WiFi password 
-
-//const char *ssid = "Calalta03"; // Enter your WiFi name 
-//const char *password = "Micr0$0ft2024";  // Enter WiFi password 
-
-//const char *ssid = "Telus2547"; // Enter your WiFi name 
-//const char *password = "g2299sjk6p";  // Enter WiFi password 
 
 // MQTT Broker 
 
@@ -85,7 +72,6 @@ char tempAlt [8];
 float bme280Hum = 0;
 char tempHum [8];
 
-
 void reconnectMQTT() {
   while (!client.connected()) { 
     String client_id = "pico-00 > "; 
@@ -102,23 +88,20 @@ void reconnectMQTT() {
         Serial.print(client.state()); 
         delay(1000); 
     } 
-
   } 
 }
 
-
 void reconnectWiFi() {
-  WiFi.begin(ssid, password); // connecting to the WiFi network 
+  WiFi.begin(SECRET_SSID_02, SECRET_PASS_02); // connecting to the WiFi network 
 
   while (WiFi.status() != WL_CONNECTED) { 
     delay(500); 
     Serial.println("Connecting to WiFi.."); 
   } 
-  Serial.println("Connected to the WiFi network");
+  Serial.println("Connected to "SECRET_SSID_02);
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
 }
-
 
 void setup() {
   Serial.begin(115200);
