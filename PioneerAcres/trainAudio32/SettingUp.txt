@@ -1,0 +1,6 @@
+
+sudo nano /boot/firmware/config.txt
+Add ,noaudio to dtoverlay-vc4-kms-v3d (HDMI Audio output)
+
+# Enable DRM VC4 V3D driver
+dtoverlay=vc4-kms-v3d,noaudio

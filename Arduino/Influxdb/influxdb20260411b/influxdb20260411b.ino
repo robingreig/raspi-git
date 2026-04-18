@@ -1,13 +1,13 @@
 /* influxdb20260411b
- *  11 April 2026
+ *  16 April 2026
  *  Robin Greig
  *  Connecting to the Influxdb on mqtt43
  *  And uploading RSSI data to RainGauge bucket
+ *  2026.04.16
+ *  ESP8266 Influxdb was upgraded to 3.13.2
+ *  For board: ESP32 Dev Module
  *  
 */
-
-
-
 
 #if defined(ESP32)
   #include <WiFiMulti.h>
@@ -33,7 +33,8 @@
   #define INFLUXDB_BUCKET "RainGauge"
   
   // Time zone info
-  #define TZ_INFO "UTC-6"
+//  #define TZ_INFO "UTC-6"
+  #define TZ_INFO "MST7MDT,M3.2.0,M11.1.0"
   
   // Declare InfluxDB client instance with preconfigured InfluxCloud certificate
   InfluxDBClient client(INFLUXDB_URL, INFLUXDB_ORG, INFLUXDB_BUCKET, INFLUXDB_TOKEN, InfluxDbCloud2CACert);
@@ -80,6 +81,9 @@
     // Store measured value into point
     // Report RSSI of currently connected network
     sensor.addField("rssi", WiFi.RSSI());
+    Serial.println();
+    Serial.println();
+    timeSync(TZ_INFO, "pool.ntp.org", "time.nis.gov");
   
     // Print what are we exactly writing
     Serial.print("Writing: ");
